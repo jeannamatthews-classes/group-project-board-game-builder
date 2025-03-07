@@ -49,14 +49,16 @@ class ScriptingRule {
                 if (obj == null) throw new Error(["getObject_fail", "Object of ID " + arr[1] + " not found."]);
                 return obj.publicVars[arr[2]];
             }
-            // "objectScript" as arr[0] means to go to the object of ID arr[1] and execute its script of index arr[2] (arr[3] is whether or not that should be considered "final") and return its return value.
+            // "objectScript" as arr[0] means to go to the object of ID arr[1] and execute its script of type index arr[2], script index arr[3] (arr[4] is whether or not that should be considered "final") and return its return value.
             else if (arr[0] == "objectScript") {
                 let obj = getObject(arr[1]);
                 if (obj == null) throw new Error(["getObject_fail", "Object of ID " + arr[1] + " not found."]);
-                let script = obj.type.scripts[arr[2]]
-                if (script === undefined) throw new Error(["objectScript_fail", "Object of ID " + arr[1] + " does not have a script of ID " + arr[2] + "."]);
+                let type = obj.types[arr[2]];
+                if (type === undefined) throw new Error(["objectScript_fail", "Object of ID " + arr[1] + " does not have a type of ID " + arr[2] + "."]);
+                let script = type.scripts[arr[3]];
+                if (script === undefined) throw new Error(["objectScript_fail", "Object type of ID " + arr[2] + " does not have a script of ID " + arr[3] + "."]);
                 else {
-                    result = script.check(arr[3]);
+                    result = script.check(arr[4]);
                     if (!final) return result;
                     else if (result == true) return new ScriptingRule("pass", result);
                     else return new ScriptingRule("fail", result);
