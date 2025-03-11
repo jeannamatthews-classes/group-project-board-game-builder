@@ -1,0 +1,2 @@
+So far, I have created our class diagram and our object diagram, and I created the first drafts of the class files,
+including an outdated draft of the ScriptingRule.js file that I will later be redoing in a different format.
