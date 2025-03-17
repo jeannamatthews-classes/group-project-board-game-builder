@@ -13,5 +13,3 @@ class PieceType {
         this.typeSprite = sprite;
     }
 }
-
-// [ActionRule, condition, condition]

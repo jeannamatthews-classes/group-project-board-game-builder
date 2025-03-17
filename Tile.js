@@ -3,10 +3,10 @@ class Tile {
     objectID = -1;
     xCoordinate = -1; yCoordinate = -1;
     playerOwnerID = -1;
-    publicVars = [];
+    publicVars = []; // An array of name-value pairs
 
-    constructor(type, xStart, yStart, owner) {
-        this.type = type;
+    constructor(types, xStart, yStart, owner) {
+        this.types = types;
         this.objectID = assignObjectID();
         this.xCoordinate = xStart;
         this.yCoordinate = yStart;

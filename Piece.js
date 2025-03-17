@@ -5,8 +5,8 @@ class Piece {
     playerOwnerID = -1;
     publicVars = [];
 
-    constructor(type, xStart, yStart, owner) {
-        this.type = type;
+    constructor(types, xStart, yStart, owner) {
+        this.types = types;
         this.objectID = assignObjectID();
         this.xCoordinate = xStart;
         this.yCoordinate = yStart;
@@ -20,5 +20,17 @@ class Piece {
         let tile = row[this.xCoordinate];
         if (tile === undefined) return null;
         return tile;
+    }
+
+    movePiece(xChange, yChange) {
+
+    }
+
+    removePiece() {
+
+    }
+
+    changeOwner(playerID) {
+
     }
 }

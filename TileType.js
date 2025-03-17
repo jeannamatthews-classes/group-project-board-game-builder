@@ -3,7 +3,7 @@ class TileType {
     typeID = -1;
     typeName = "";
     typeSprite;
-    publicVars = [];
+    publicVars = []; // An array of name-value pairs
     buttonsToShow = [];
 
     constructor(id, name, sprite) {

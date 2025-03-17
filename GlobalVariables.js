@@ -1,9 +1,9 @@
-currentGameState; // The game state after the last valid move
-activeGameState; // The game state currently being edited
-tileTypesList; // An array of the created tile types
-pieceTypesList; // An array of the created tile types
-otherGlobalVariables = [];
-nextObjectID = 0;
+let currentGameState; // The game state after the last valid move
+let activeGameState; // The game state currently being edited
+let tileTypesList; // An array of the created tile types
+let pieceTypesList; // An array of the created piece types
+let otherGlobalVariables = [];
+let nextObjectID = 0;
 
 function getObject(id) {
     let boardTiles = activeGameState.board.tileArray;
@@ -22,4 +22,9 @@ function getObject(id) {
 function assignObjectID() {
     nextObjectID++;
     return (nextObjectID - 1);
+}
+
+// A variant of structuredClone that will preserve types like Pieces and Tiles. Haven't implemented that functionality yet
+function BGBStructuredClone(argument) {
+    return structuredClone(argument);
 }

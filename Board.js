@@ -18,4 +18,13 @@ class Board {
             throw new Error("Invalid board shape");
         }
     }
+
+    getTile(x, y) {
+        if (y >= 0 && y < this.tileArray.length && y % 1 == 0) {
+            if (x >= 0 && x < this.tileArray[y].length && x % 1 == 0) {
+                return this.tileArray[y][x];
+            }
+        }
+        return undefined;
+    }
 }
