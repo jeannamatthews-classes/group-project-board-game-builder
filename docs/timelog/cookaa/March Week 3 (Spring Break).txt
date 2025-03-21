@@ -1,0 +1,10 @@
+On Friday, March 14, I spent around 1 hour making some examples of what scripting rules would look like
+for some key interactions in our milestone games, such as moving a rook in chess.
+
+On Monday, March 17, I spent around 1 hour and 50 minutes writing my second version of the ScriptingRule class.
+
+March 19: 57 minutes (3:09 PM to 4:06 PM) were spent doing the start of testing the code I've made so far.
+Most of it was spent setting up the testing, not quite doing the testing yet.
+
+March 21: About an hour and a half was spent. Today, I made BGBStructuredClone, made TileType and PieceType actually do things,
+added the first four "triggers" for scripts, and tested those triggers by making a piece type that can only move orthogonally.

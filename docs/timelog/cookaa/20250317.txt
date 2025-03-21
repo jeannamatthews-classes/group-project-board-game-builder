@@ -1,4 +1,0 @@
-On Friday, March 14, I spent around 1 hour making some examples of what scripting rules would look like
-for some key interactions in our milestone games, such as moving a rook in chess.
-
-On Monday, March 17, I spent around 1 hour and 50 minutes writing my second version of the ScriptingRule class.

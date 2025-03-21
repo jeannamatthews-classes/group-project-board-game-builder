@@ -1,13 +1,14 @@
 class TileType {
-    scripts = []; // Each entry here is itself an array: the 0th entry is a scripting rule, the rest of the entries control when the rule triggers
+    scripts = []; 
     typeID = -1;
     typeName = "";
     typeSprite;
     publicVars = []; // An array of name-value pairs
     buttonsToShow = [];
 
-    constructor(id, name, sprite) {
-        this.typeID = id;
+    constructor(name, scripts, sprite, id = undefined) {
+        this.typeID = (id !== undefined) ? id : assignTypeID();
+        this.scripts = scripts;
         this.typeName = name;
         this.typeSprite = sprite;
     }
