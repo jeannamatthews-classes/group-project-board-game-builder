@@ -24,7 +24,7 @@ class Piece {
         return tile;
     }
 
-    movePiece(xChange, yChange) {
+    movePiece(xChange, yChange, topCall = true) {
         let newX = this.xCoordinate + xChange;
         let newY = this.yCoordinate + yChange;
         let tileLanded = activeGameState.board.tileArray[newY];
@@ -50,16 +50,17 @@ class Piece {
         let scriptResult;
         for (let s = 0; s < scriptsToExecute.length; s++) {
             scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
+            console.log(scriptResult);
             if (scriptResult === false) {
-                gameStateRevert();
-                return;
+                if (topCall) gameStateRevert();
+                return false;
             }
         }
-        gameStateValid();
-        return;
+        if (topCall) gameStateValid();
+        return true;
     }
 
-    removePiece() {
+    removePiece(topCall = true) {
         let boardPieces = activeGameState.pieceArray;
         for (let p = 0; p < boardPieces.length; p++) {
             if (boardPieces[p].objectID === this.objectID) {
@@ -78,17 +79,17 @@ class Piece {
         for (let s = 0; s < scriptsToExecute.length; s++) {
             scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
             if (scriptResult === false) {
-                gameStateRevert();
-                return;
+                if (topCall) gameStateRevert();
+                return false;
             }
         }
-        gameStateValid();
-        return;
+        if (topCall) gameStateValid();
+        return true;
     }
 
-    changeOwner(playerID) {
+    changeOwner(playerID, topCall = true) {
         this.playerID = playerID;
-        gameStateValid();
-        return;
+        if (topCall) gameStateValid();
+        return true;
     }
 }

@@ -1,4 +1,5 @@
-let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "+", "-", "*", "/", "%"];
+let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**"];
+let oneArgOperators = ["!", "abs"];
 
 // A single rule for scripting.
 class ScriptingRule {
@@ -40,6 +41,9 @@ class ScriptingRule {
         else if (this.type === "Change Turn Phase") {
             this.phase = args[0];
         }
+        else if (this.type === "Change Piece Sprite") {
+            this.newSprite = args[0];
+        }
         
         // Reporters
         else if (this.type === "Tile at Coordinates") {
@@ -64,6 +68,9 @@ class ScriptingRule {
             this.then = args[1];
             this.else = args[2];
         }
+        else if (this.type === "Return at End") {
+            this.scriptsToRun = args;
+        }
         else if (type == "Repeat While") {
             this.repeatCheck = args[0];
             this.repeatScript = args[1];
@@ -72,7 +79,7 @@ class ScriptingRule {
             this.leftArg = args[0];
             this.rightArg = args[1];
         }
-        else if (type == "!") {
+        else if (oneArgOperators.indexOf(type) != -1) {
             this.argument = args[0];
         }
         else if (type == "Array Length" || type == "Remove Last Element of Array") {
@@ -106,20 +113,20 @@ class ScriptingRule {
         // Actions
         else if (this.type === "Remove Piece") {
             if (caller instanceof Piece) {
-                caller.removePiece();
+                return caller.removePiece(false);
             }
         }
         else if (this.type === "Move Piece") {
             if (caller instanceof Piece) {
                 let moveX = (this.moveX instanceof ScriptingRule) ? this.moveX.portVariables(this).run(caller, ...args) : this.moveX;
                 let moveY = (this.moveY instanceof ScriptingRule) ? this.moveY.portVariables(this).run(caller, ...args) : this.moveY;
-                caller.movePiece(moveX, moveY);
+                return caller.movePiece(moveX, moveY, false);
             }
         }
         else if (this.type === "Change Piece Owner") {
             if (caller instanceof Piece) {
                 let playerID = (this.playerID instanceof ScriptingRule) ? this.playerID.portVariables(this).run(caller, ...args) : this.playerID;
-                caller.changeOwner(playerID);
+                return caller.changeOwner(playerID, false);
             }
         }
         else if (this.type === "Move Piece to Inventory") {
@@ -132,9 +139,10 @@ class ScriptingRule {
             let typesList = caller.types;
             if (typesList === undefined) return; // Throw error?
             for (let t = 0; t < typesList.length; t++) {
-                if (typesList[t].typeID === typeToEdit.typeID) return;
+                if (typesList[t].typeID === typeToEdit.typeID) return false;
             }
             caller.types.push(typeToEdit);
+            return true;
         }
         else if (this.type === "Remove Type") { // A piece or tile shouldn't have multiple copies of the same type, but I'm handling that possibility just in case.
             let typeToEdit = (this.typeToEdit instanceof ScriptingRule) ? this.typeToEdit.portVariables(this).run(caller, ...args) : this.typeToEdit;
@@ -146,19 +154,28 @@ class ScriptingRule {
                     t--;
                 }
             }
+            return true;
         }
         else if (this.type === "Add Piece") {
             let newPieceTypes = (this.newPieceTypes instanceof ScriptingRule) ? this.newPieceTypes.portVariables(this).run(caller, ...args) : this.newPieceTypes;
             let newPieceX = (this.newPieceX instanceof ScriptingRule) ? this.newPieceX.portVariables(this).run(caller, ...args) : this.newPieceX;
             let newPieceY = (this.newPieceY instanceof ScriptingRule) ? this.newPieceY.portVariables(this).run(caller, ...args) : this.newPieceY;
             let newPieceOwner = (this.newPieceOwner instanceof ScriptingRule) ? this.newPieceOwner.portVariables(this).run(caller, ...args) : this.newPieceOwner;
-            activeGameState.pieceArray.push(new Piece(newPieceTypes, newPieceX, newPieceY, newPieceOwner))
+            activeGameState.pieceArray.push(new Piece(newPieceTypes, newPieceX, newPieceY, newPieceOwner));
+            return true;
         }
         else if (this.type === "Change Turn Phase") {
             // To be implemented later
         }
         else if (this.type === "End Game") {
             // To be implemented later
+        }
+        else if (this.type === "Change Piece Sprite") {
+            let newSprite = (this.newSprite instanceof ScriptingRule) ? this.newSprite.portVariables(this).run(caller, ...args) : this.newSprite;
+            if (caller instanceof Piece) {
+                caller.sprite = newSprite;
+            }
+            return true;
         }
         // else if (this.type === "Valid Game State") {
         //     gameStateValid();
@@ -217,7 +234,17 @@ class ScriptingRule {
         }
         else if (this.type === "Pieces on Tile") {
             let tileToCheck = (this.tileToCheck instanceof ScriptingRule) ? this.tileToCheck.portVariables(this).run(caller, ...args) : this.tileToCheck;
-            return tileToCheck.getPieces();
+            let pieces = tileToCheck.getPieces();
+            if (caller instanceof Piece) {
+            // If the caller is a piece, that piece always comes first in this list
+                for (let p = 0; p < pieces.length; p++) {
+                    if (pieces[p].objectID === caller.objectID) {
+                        pieces.splice(p, 1);
+                        pieces.unshift(caller);
+                    }
+                }
+            }
+            return pieces;
         }
         else if (this.type === "Tile Here") {
             if (caller instanceof Piece) {
@@ -226,7 +253,13 @@ class ScriptingRule {
             else if (caller instanceof Tile) {
                 return caller;
             }
-            return undefined; // throw error?
+            return false; // throw error?
+        }
+        else if (this.type === "Object ID") {
+            return caller.objectID;
+        }
+        else if (this.type === "Caller") {
+            return caller;
         }
 
         // Control
@@ -250,11 +283,19 @@ class ScriptingRule {
         }
         else if (this.type === "if-then-else") {
             if (this.if.portVariables(this).run(caller, ...args) === true) {
-                return this.then.portVariables(this).run(caller, ...args);
+                let result = this.then.portVariables(this).run(caller, ...args);
+                return result;
             }
             else {
                 return this.else.portVariables(this).run(caller, ...args);
             }
+        }
+        else if (this.type === "Return at End") { // Runs multiple ScriptingRules in a row, returns the result of the last one
+            let result;
+            for (let s = 0; s < this.scriptsToRun.length; s++) {
+                result = this.scriptsToRun[s].portVariables(this).run(caller, ...args);
+            }
+            return result;
         }
         else if (this.type === "Repeat While") {
             while (this.repeatCheck.portVariables(this).run(caller, ...args) === true) {
@@ -266,6 +307,8 @@ class ScriptingRule {
             let rightArg = (this.rightArg instanceof ScriptingRule) ? this.rightArg.portVariables(this).run(caller, ...args) : this.rightArg;
             switch (this.type) {
                 case "==":
+                    if ((leftArg instanceof Piece || leftArg instanceof Tile) && (rightArg instanceof Piece || rightArg instanceof Tile)) return (leftArg.objectID === rightArg.objectID);
+                    if ((leftArg instanceof PieceType && rightArg instanceof PieceType) || (leftArg instanceof TileType && rightArg instanceof TileType)) return (leftArg.typeID === rightArg.typeID);
                     return (leftArg === rightArg);
                 case ">":
                     return (leftArg > rightArg);
@@ -276,11 +319,15 @@ class ScriptingRule {
                 case "<=":
                     return (leftArg <= rightArg);
                 case "!=":
+                    if ((leftArg instanceof Piece || leftArg instanceof Tile) && (rightArg instanceof Piece || rightArg instanceof Tile)) return (leftArg.objectID !== rightArg.objectID);
+                    if ((leftArg instanceof PieceType && rightArg instanceof PieceType) || (leftArg instanceof TileType && rightArg instanceof TileType)) return (leftArg.typeID !== rightArg.typeID);
                     return (leftArg !== rightArg);
                 case "&&":
                     return (leftArg && rightArg);
                 case "||":
                     return (leftArg || rightArg);
+                case "XOR":
+                    return (Boolean(leftArg) != Boolean(rightArg))
                 case "+":
                     return (leftArg + rightArg);
                 case "-":
@@ -291,37 +338,45 @@ class ScriptingRule {
                     return (leftArg / rightArg);
                 case "%": // Might change this one later to use floored modulo instead of JS modulo
                     return (leftArg % rightArg);
+                case "**":
+                    return (leftArg ** rightArg);
             }
         }
-        else if (this.type === "!") {
+        else if (oneArgOperators.indexOf(this.type) != -1) {
             let argument = (this.argument instanceof ScriptingRule) ? this.argument.portVariables(this).run(caller, ...args) : this.argument;
-            return !argument;
+            switch (this.type) {
+                case "!": // Might change this one later to use floored modulo instead of JS modulo
+                    return !argument;
+                case "abs":
+                    return Math.abs(argument);
+            }
         }
-        else if (type == "Array Length" || type == "Remove Last Element of Array") {
+        else if (this.type === "Array Length") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             return array.length;
         }
-        else if (type == "Array Length") {
+        else if (this.type == "Remove Last Element of Array") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
-            return array.pop();
+            array.pop();
+            return array;
         }
-        else if (type == "Array Index Of Element" || type == "Add to Array") {
+        else if (this.type == "Array Index Of Element") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let element = (this.element instanceof ScriptingRule) ? this.element.portVariables(this).run(caller, ...args) : this.element;
             return array.indexOf(element);
         }
-        else if (type == "Array Index Of Element") {
+        else if (this.type == "Add to Array") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let element = (this.element instanceof ScriptingRule) ? this.element.portVariables(this).run(caller, ...args) : this.element;
-            return array.push(element);
+            array.push(element);
+            return array;
         }
-        else if (type == "Array Element at Index") {
+        else if (this.type == "Array Element at Index") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let index = (this.index instanceof ScriptingRule) ? this.index.portVariables(this).run(caller, ...args) : this.index;
             return array[index];
         }
-
-        else if (type == "Other Caller") {
+        else if (this.type == "Other Caller") {
             let otherCaller = (this.otherCaller instanceof ScriptingRule) ? this.otherCaller.portVariables(this).run(caller, ...args) : this.otherCaller;
             return this.otherScript.portVariables(this).run(otherCaller, ...args);
         }
