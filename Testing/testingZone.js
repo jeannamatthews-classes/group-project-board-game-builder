@@ -112,6 +112,138 @@ let typeKnight = new PieceType("Knight", [ // Checks that the absolute values of
         new ScriptingRule("None", "Value", false)
     )
 ], undefined);
+let typeWhitePawn = new PieceType("White Pawn", [
+    new ScriptingRule("Piece Moves", "if-then-else", // Checks that either the move is straight down one space and not a capture, or diagonal-down one space and a capture. Does not include moving two spaces on its first move.
+        new ScriptingRule("None", "||",
+            new ScriptingRule("None", "&&",
+                new ScriptingRule("None", "&&", 
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Argument", 0),
+                        new ScriptingRule("None", "Value", 0)
+                    ),
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Argument", 1),
+                        new ScriptingRule("None", "Value", 1)
+                    )
+                ),
+                new ScriptingRule("None", "==",
+                    new ScriptingRule("None", "Array Length",
+                        new ScriptingRule("None", "Pieces on Tile",
+                            new ScriptingRule("None", "Tile Here")
+                        )
+                    ),
+                    new ScriptingRule("None", "Value", 1)
+                )
+            ),
+            new ScriptingRule("None", "&&",
+                new ScriptingRule("None", "&&", 
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "abs", new ScriptingRule("None", "Argument", 0)),
+                        new ScriptingRule("None", "Value", 1)
+                    ),
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Argument", 1),
+                        new ScriptingRule("None", "Value", 1)
+                    )
+                ),
+                new ScriptingRule("None", "==",
+                    new ScriptingRule("None", "Array Length",
+                        new ScriptingRule("None", "Pieces on Tile",
+                            new ScriptingRule("None", "Tile Here")
+                        )
+                    ),
+                    new ScriptingRule("None", "Value", 2)
+                )
+            )
+        ),
+        new ScriptingRule("None", "Value", true),
+        new ScriptingRule("None", "Value", false)
+    ),
+    new ScriptingRule("Piece Lands on Tile", "if-then-else", // Promotes to queen if it reaches the other end of the board
+        new ScriptingRule("None", "==",
+            new ScriptingRule("None", "Y Coordinate"),
+            new ScriptingRule("None", "Value", 7)
+        ),
+        new ScriptingRule("None", "Return at End",
+            new ScriptingRule("None", "Remove Type",
+                new ScriptingRule("None", "Array Element at Index",
+                    new ScriptingRule("None", "Object Types"),
+                    new ScriptingRule("None", "Value", 1)
+                )
+            ),
+            new ScriptingRule("None", "Add Type", typeQueen, 1),
+            new ScriptingRule("None", "Change Sprite", new Sprite("#ddd", "#222", "Queen")),
+            new ScriptingRule("None", "Value", true)
+        ),
+        new ScriptingRule("None", "Value", true)
+    ),
+], undefined)
+let typeBlackPawn = new PieceType("Black Pawn", [
+    new ScriptingRule("Piece Moves", "if-then-else", // Checks that either the move is straight up and not a capture, or diagonal-up and a capture. Does not include moving two spaces on its first move.
+        new ScriptingRule("None", "||",
+            new ScriptingRule("None", "&&",
+                new ScriptingRule("None", "&&", 
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Argument", 0),
+                        new ScriptingRule("None", "Value", 0)
+                    ),
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Argument", 1),
+                        new ScriptingRule("None", "Value", -1)
+                    )
+                ),
+                new ScriptingRule("None", "==",
+                    new ScriptingRule("None", "Array Length",
+                        new ScriptingRule("None", "Pieces on Tile",
+                            new ScriptingRule("None", "Tile Here")
+                        )
+                    ),
+                    new ScriptingRule("None", "Value", 1)
+                )
+            ),
+            new ScriptingRule("None", "&&",
+                new ScriptingRule("None", "&&", 
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "abs", new ScriptingRule("None", "Argument", 0)),
+                        new ScriptingRule("None", "Value", 1)
+                    ),
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Argument", 1),
+                        new ScriptingRule("None", "Value", -1)
+                    )
+                ),
+                new ScriptingRule("None", "==",
+                    new ScriptingRule("None", "Array Length",
+                        new ScriptingRule("None", "Pieces on Tile",
+                            new ScriptingRule("None", "Tile Here")
+                        )
+                    ),
+                    new ScriptingRule("None", "Value", 2)
+                )
+            )
+        ),
+        new ScriptingRule("None", "Value", true),
+        new ScriptingRule("None", "Value", false)
+    ),
+    new ScriptingRule("Piece Lands on Tile", "if-then-else", // Promotes to queen if it reaches the other end of the board
+        new ScriptingRule("None", "==",
+            new ScriptingRule("None", "Y Coordinate"),
+            new ScriptingRule("None", "Value", 0)
+        ),
+        new ScriptingRule("None", "Return at End",
+            new ScriptingRule("None", "Remove Type",
+                new ScriptingRule("None", "Array Element at Index",
+                    new ScriptingRule("None", "Object Types"),
+                    new ScriptingRule("None", "Value", 1)
+                )
+            ),
+            new ScriptingRule("None", "Add Type", typeQueen, 1),
+            new ScriptingRule("None", "Change Sprite", new Sprite("#222", "#ddd", "Queen")),
+            new ScriptingRule("None", "Value", true)
+        ),
+        new ScriptingRule("None", "Value", true)
+    ),
+], undefined)
 let typeWhite = new PieceType("White", [], undefined);
 let typeBlack = new PieceType("Black", [], undefined);
 let typeChessCaptures = new PieceType("Capturing", [
@@ -166,8 +298,8 @@ let typeChessCaptures = new PieceType("Capturing", [
                         new ScriptingRule("None", "Value", 1)
                     )
                 ),
-                new ScriptingRule("None", "Remove Piece",
-                    new ScriptingRule("None", "Return Variable of Rule", "Other Piece")
+                new ScriptingRule("None", "Other Caller", new ScriptingRule("None", "Return Variable of Rule", "Other Piece"),
+                    new ScriptingRule("None", "Remove Piece")
                 ),
                 new ScriptingRule("None", "Value", true)
             ),
@@ -193,6 +325,22 @@ activeGameState.pieceArray.push(new Piece([typeBlack, typeKing, typeChessCapture
 activeGameState.pieceArray.push(new Piece([typeBlack, typeBishop, typeChessCaptures], 5, 7, 2));
 activeGameState.pieceArray.push(new Piece([typeBlack, typeKnight, typeChessCaptures], 6, 7, 2));
 activeGameState.pieceArray.push(new Piece([typeBlack, typeRook, typeChessCaptures], 7, 7, 2));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 0, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 1, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 2, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 3, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 4, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 5, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 6, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 7, 1, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 0, 6, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 1, 6, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 2, 6, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 3, 6, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 4, 6, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 5, 6, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 6, 6, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, typeChessCaptures], 7, 6, 1));
 for (let p of activeGameState.pieceArray) {
     if (p.types[0].typeName === "White") {
         p.sprite = new Sprite("#ddd", "#222", p.types[1].typeName + "\n" + p.objectID);

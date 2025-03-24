@@ -1,0 +1,3 @@
+March 24: Spent around 1 hour and 5 minutes finishing capturing and adding pawns to the chess testing example;
+no button support exists yet, so for now promotion is always into a queen.
+(this was probably the first item in my timelog that took a lot longer than I expected).

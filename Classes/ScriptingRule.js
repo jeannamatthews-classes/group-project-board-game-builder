@@ -31,6 +31,7 @@ class ScriptingRule {
         }
         else if (this.type === "Add Type" || this.type === "Remove Type") {
             this.typeToEdit = args[0];
+            this.index = args[1];
         }
         else if (this.type === "Add Piece") {
             this.newPieceTypes = args[0];
@@ -41,7 +42,7 @@ class ScriptingRule {
         else if (this.type === "Change Turn Phase") {
             this.phase = args[0];
         }
-        else if (this.type === "Change Piece Sprite") {
+        else if (this.type === "Change Sprite") {
             this.newSprite = args[0];
         }
         
@@ -53,15 +54,20 @@ class ScriptingRule {
         else if (this.type === "Pieces on Tile") {
             this.tileToCheck = args[0];
         }
+        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID") {
+            this.object = args[0];
+        }
 
         // Control
         else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
             this.variableName = args[0];
             this.variableValue = args[1];
+            if (this.type === "Edit Variable of Object") this.object = args[2];
         }
         else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule") {
             this.variableName = args[0];
             this.variableValue = args[1];
+            if (this.type === "Edit Variable of Object") this.object = args[2];
         }
         else if (this.type === "if-then-else") {
             this.if = args[0];
@@ -97,6 +103,9 @@ class ScriptingRule {
         else if (type == "Other Caller") {
             this.otherCaller = args[0];
             this.otherScript = args[1];
+        }
+        else if (type == "Console Log") {
+            this.toLog = args[0];
         }
     }
 
@@ -141,7 +150,9 @@ class ScriptingRule {
             for (let t = 0; t < typesList.length; t++) {
                 if (typesList[t].typeID === typeToEdit.typeID) return false;
             }
-            caller.types.push(typeToEdit);
+            let index = (this.index instanceof ScriptingRule) ? this.index.portVariables(this).run(caller, ...args) : this.index;
+            if (index === undefined) caller.types.push(typeToEdit);
+            else caller.types.splice(index, 0, typeToEdit);
             return true;
         }
         else if (this.type === "Remove Type") { // A piece or tile shouldn't have multiple copies of the same type, but I'm handling that possibility just in case.
@@ -170,7 +181,7 @@ class ScriptingRule {
         else if (this.type === "End Game") {
             // To be implemented later
         }
-        else if (this.type === "Change Piece Sprite") {
+        else if (this.type === "Change Sprite") {
             let newSprite = (this.newSprite instanceof ScriptingRule) ? this.newSprite.portVariables(this).run(caller, ...args) : this.newSprite;
             if (caller instanceof Piece) {
                 caller.sprite = newSprite;
@@ -186,13 +197,19 @@ class ScriptingRule {
 
         // Reporters
         else if (this.type === "X Coordinate") {
-            return caller.xCoordinate;
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            return object.xCoordinate;
         }
         else if (this.type === "Y Coordinate") {
-            return caller.yCoordinate;
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            return object.yCoordinate;
         }
         else if (this.type === "Object Types") {
-            return caller.types;
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            return object.types;
         }
         else if (this.type === "Turn Number") {
             return activeGameState.turnNumber;
@@ -204,7 +221,8 @@ class ScriptingRule {
             return activeGameState.turnPhase;
         }
         else if (this.type === "Return Variable of Rule") {
-            let index = this.variables.map(x => x[0]).indexOf(this.variableName);
+            let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
+            let index = this.variables.map(x => x[0]).indexOf(variableName);
             if (index === -1) {
                 return undefined;
             }
@@ -213,12 +231,15 @@ class ScriptingRule {
             }
         }
         else if (this.type === "Return Variable of Object") {
-            let index = caller.publicVars.map(x => x[0]).indexOf(this.variableName);
+            let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            let index = object.publicVars.map(x => x[0]).indexOf(variableName);
             if (index === -1) {
                 return undefined;
             }
             else {
-                return caller.publicVars[index][1];
+                return object.publicVars[index][1];
             }
         }
         else if (this.type === "Board Width") {
@@ -256,7 +277,9 @@ class ScriptingRule {
             return false; // throw error?
         }
         else if (this.type === "Object ID") {
-            return caller.objectID;
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            return object.objectID;
         }
         else if (this.type === "Caller") {
             return caller;
@@ -264,21 +287,27 @@ class ScriptingRule {
 
         // Control
         else if (this.type === "Edit Variable of Rule") {
-            let index = this.variables.map(x => x[0]).indexOf(this.variableName);
+            let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
+            let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
+            let index = this.variables.map(x => x[0]).indexOf(variableName);
             if (index === -1) {
-                this.variables.push([this.variableName, this.variableValue]);
+                this.variables.push([variableName, variableValue]);
             }
             else {
-                this.variables[index][1] = this.variableValue;
+                this.variables[index][1] = variableValue;
             }
         }
         else if (this.type === "Edit Variable of Object") { // Player variables, such as score, haven't been implemented yet, but this will probably be used for them too
-            let index = caller.publicVars.map(x => x[0]).indexOf(this.variableName);
+            let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
+            let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            let index = object.publicVars.map(x => x[0]).indexOf(variableName);
             if (index === -1) {
-                caller.publicVars.push([this.variableName, this.variableValue]);
+                object.publicVars.push([variableName, variableValue]);
             }
             else {
-                caller.publicVars[index][1] = this.variableValue;
+                object.publicVars[index][1] = variableValue;
             }
         }
         else if (this.type === "if-then-else") {
@@ -355,30 +384,36 @@ class ScriptingRule {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             return array.length;
         }
-        else if (this.type == "Remove Last Element of Array") {
+        else if (this.type === "Remove Last Element of Array") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             array.pop();
             return array;
         }
-        else if (this.type == "Array Index Of Element") {
+        else if (this.type === "Array Index Of Element") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let element = (this.element instanceof ScriptingRule) ? this.element.portVariables(this).run(caller, ...args) : this.element;
             return array.indexOf(element);
         }
-        else if (this.type == "Add to Array") {
+        else if (this.type === "Add to Array") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let element = (this.element instanceof ScriptingRule) ? this.element.portVariables(this).run(caller, ...args) : this.element;
             array.push(element);
             return array;
         }
-        else if (this.type == "Array Element at Index") {
+        else if (this.type === "Array Element at Index") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let index = (this.index instanceof ScriptingRule) ? this.index.portVariables(this).run(caller, ...args) : this.index;
             return array[index];
         }
-        else if (this.type == "Other Caller") {
+
+        else if (this.type === "Other Caller") {
             let otherCaller = (this.otherCaller instanceof ScriptingRule) ? this.otherCaller.portVariables(this).run(caller, ...args) : this.otherCaller;
             return this.otherScript.portVariables(this).run(otherCaller, ...args);
+        }
+        else if (this.type === "Console Log") {
+            let toLog = (this.toLog instanceof ScriptingRule) ? this.toLog.portVariables(this).run(caller, ...args) : this.toLog;
+            console.log(toLog);
+            return toLog;
         }
     }
 
