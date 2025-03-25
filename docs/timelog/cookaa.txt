@@ -1,3 +1,6 @@
+Before March 11: So far, I have created our class diagram and our object diagram, and I created the first drafts of the class files,
+including an outdated draft of the ScriptingRule.js file that I will later be redoing in a different format.
+
 On Friday, March 14, I spent around 1 hour making some examples of what scripting rules would look like
 for some key interactions in our milestone games, such as moving a rook in chess.
 
@@ -12,3 +15,8 @@ for the non-pawn chess pieces (no capturing or collisions yet, just the rules on
 
 March 23: Spent around one hour attempting to implement capturing into my testing script
 (making progress, but not finished yet)
+
+March 24: Spent around 1 hour and 40 minutes. 35 minutes of this were a group meeting.
+The remaining 1 hour and 5 minutes were spent finishing capturing and adding pawns to the chess testing example;
+no button support exists yet, so for now promotion is always into a queen.
+(this was probably the first item in my timelog that took a lot longer than I expected).
