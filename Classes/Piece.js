@@ -25,6 +25,7 @@ class Piece {
     }
 
     movePiece(xChange, yChange, topCall = true) {
+        if (!gameInProgress()) return true;
         let newX = this.xCoordinate + xChange;
         let newY = this.yCoordinate + yChange;
         let tileLanded = activeGameState.board.tileArray[newY];
@@ -56,11 +57,13 @@ class Piece {
                 return false;
             }
         }
-        if (topCall) gameStateValid();
-        return true;
+        scriptResult = globalScriptCheck();
+        if (scriptResult && topCall) gameStateValid();
+        return scriptResult;
     }
 
     removePiece(topCall = true) {
+        if (!gameInProgress()) return true;
         let boardPieces = activeGameState.pieceArray;
         for (let p = 0; p < boardPieces.length; p++) {
             if (boardPieces[p].objectID === this.objectID) {
@@ -83,13 +86,16 @@ class Piece {
                 return false;
             }
         }
-        if (topCall) gameStateValid();
-        return true;
+        scriptResult = globalScriptCheck();
+        if (scriptResult && topCall) gameStateValid();
+        return scriptResult;
     }
 
     changeOwner(playerID, topCall = true) {
+        if (!gameInProgress()) return true;
         this.playerID = playerID;
-        if (topCall) gameStateValid();
-        return true;
+        scriptResult = globalScriptCheck();
+        if (scriptResult && topCall) gameStateValid();
+        return scriptResult;
     }
 }

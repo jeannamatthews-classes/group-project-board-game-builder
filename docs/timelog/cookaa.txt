@@ -20,3 +20,6 @@ March 24: Spent around 1 hour and 40 minutes. 35 minutes of this were a group me
 The remaining 1 hour and 5 minutes were spent finishing capturing and adding pawns to the chess testing example;
 no button support exists yet, so for now promotion is always into a queen.
 (this was probably the first item in my timelog that took a lot longer than I expected).
+
+March 25: Spent around 50 minutes wrapping up my chess test example for now, by preventing pieces jumping
+and adding the turn structure (only one piece color moves at a time, game ends when a king is captured).

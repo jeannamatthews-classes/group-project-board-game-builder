@@ -46,7 +46,7 @@ function BGBStructuredClone(argument) {
     if (typeof argument !== "object") return argument; // primitive types are already cloned
     if (Array.isArray(argument)) return argument.map(BGBStructuredClone); // Copy each entry of the array
     if (argument instanceof ScriptingRule) return new ScriptingRule(...BGBStructuredClone(argument.constructorArgs));
-    if (argument instanceof GameState) return new GameState(BGBStructuredClone(argument.board), BGBStructuredClone(argument.pieceArray));
+    if (argument instanceof GameState) return new GameState(BGBStructuredClone(argument.board), BGBStructuredClone(argument.pieceArray), argument.playerAmount, argument.turnNumber, argument.playerTurn, argument.turnPhase);
     if (argument instanceof Board) {
         let result = new Board(argument.boardShape, argument.width, argument.height);
         result.tileArray = BGBStructuredClone(argument.tileArray);
@@ -57,4 +57,28 @@ function BGBStructuredClone(argument) {
     if (argument instanceof PieceType) return new PieceType(argument.typeName, BGBStructuredClone(argument.scripts), BGBStructuredClone(argument.sprite), argument.typeID);
     if (argument instanceof Piece) return new Piece(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
     if (argument instanceof Sprite) return new Sprite(argument.color, argument.textColor, argument.text);
+}
+
+function gameInProgress() {
+    return Number.isFinite(activeGameState.turnNumber);
+}
+
+function endGame(winner) {
+    activeGameState.turnNumber = Infinity;
+    activeGameState.playerTurn = winner;
+    activeGameState.turnPhase = Infinity;
+}
+
+// This function should be run whenever the game state changes, as it includes things like turn number changes
+function globalScriptCheck() {
+    if (!gameInProgress()) return;
+    if (!Number.isFinite(activeGameState.turnPhase)) {
+        activeGameState.turnPhase = 0;
+        activeGameState.playerTurn += 1;
+        if (activeGameState.playerTurn > activeGameState.playerAmount) {
+            activeGameState.playerTurn = 1;
+            activeGameState.turnNumber += 1;
+        }
+    }
+    return true;
 }

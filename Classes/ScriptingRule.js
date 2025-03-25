@@ -1,5 +1,5 @@
 let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**"];
-let oneArgOperators = ["!", "abs"];
+let oneArgOperators = ["!", "abs", "sign"];
 
 // A single rule for scripting.
 class ScriptingRule {
@@ -26,7 +26,7 @@ class ScriptingRule {
             this.moveX = args[0];
             this.moveY = args[1];
         }
-        else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory" || this.type === "End Game") {
+        else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
             this.playerID = args[0];
         }
         else if (this.type === "Add Type" || this.type === "Remove Type") {
@@ -41,6 +41,9 @@ class ScriptingRule {
         }
         else if (this.type === "Change Turn Phase") {
             this.phase = args[0];
+        }
+        else if (this.type === "End Game") {
+            this.winner = args[0];
         }
         else if (this.type === "Change Sprite") {
             this.newSprite = args[0];
@@ -176,10 +179,15 @@ class ScriptingRule {
             return true;
         }
         else if (this.type === "Change Turn Phase") {
-            // To be implemented later
+            // Finite phases keep the turn going. A non-finite phase ends the turn.
+            let phase = (this.phase instanceof ScriptingRule) ? this.phase.portVariables(this).run(caller, ...args) : this.phase;
+            activeGameState.turnPhase = phase;
+            return true;
         }
         else if (this.type === "End Game") {
-            // To be implemented later
+            let winner = (this.winner instanceof ScriptingRule) ? this.winner.portVariables(this).run(caller, ...args) : this.winner;
+            endGame(winner);
+            return true;
         }
         else if (this.type === "Change Sprite") {
             let newSprite = (this.newSprite instanceof ScriptingRule) ? this.newSprite.portVariables(this).run(caller, ...args) : this.newSprite;
@@ -378,6 +386,8 @@ class ScriptingRule {
                     return !argument;
                 case "abs":
                     return Math.abs(argument);
+                case "sign":
+                    return Math.sign(argument);
             }
         }
         else if (this.type === "Array Length") {

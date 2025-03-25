@@ -1,17 +1,19 @@
 class GameState {
     board;
     pieceArray;
+    playerAmount;
     turnNumber;
     playerTurn;
     turnPhase;
     inventories;
 
-    constructor(board, pieces) {
+    constructor(board, pieces, playerAmount, turnNumber = 1, playerTurn = 1, turnPhase = 0) {
         this.board = board;
         this.pieceArray = pieces;
-        this.turnNumber = 1;
-        this.playerTurn = 1;
-        this.turnPhase = 0;
+        this.playerAmount = playerAmount;
+        this.turnNumber = turnNumber;
+        this.playerTurn = playerTurn;
+        this.turnPhase = turnPhase;
         this.inventories = [];
     }
 }

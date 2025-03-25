@@ -244,8 +244,18 @@ let typeBlackPawn = new PieceType("Black Pawn", [
         new ScriptingRule("None", "Value", true)
     ),
 ], undefined)
-let typeWhite = new PieceType("White", [], undefined);
-let typeBlack = new PieceType("Black", [], undefined);
+let typeWhite = new PieceType("White", [
+    new ScriptingRule("Piece Moves", "==",
+        new ScriptingRule("None", "Player Turn"),
+        new ScriptingRule("None", "Value", 1)
+    )
+], undefined);
+let typeBlack = new PieceType("Black", [
+    new ScriptingRule("Piece Moves", "==",
+        new ScriptingRule("None", "Player Turn"),
+        new ScriptingRule("None", "Value", 2)
+    )
+], undefined);
 let typeChessCaptures = new PieceType("Capturing", [
     new ScriptingRule(
         "Piece Lands on Tile", "if-then-else", // If the piece is alone, lands safely
@@ -257,7 +267,10 @@ let typeChessCaptures = new PieceType("Capturing", [
             ),
             new ScriptingRule("None", "Value", 1)
         ),
-        new ScriptingRule("None", "Value", true),
+        new ScriptingRule("None", "Return at End",
+            new ScriptingRule("None", "Change Turn Phase", Infinity),
+            new ScriptingRule("None", "Value", true)
+        ),
         new ScriptingRule("None", "if-then-else", // If there's another piece on that tile, ensure they're opposite colors
             new ScriptingRule("None", "&&",
                 new ScriptingRule("None", "==",
@@ -301,30 +314,127 @@ let typeChessCaptures = new PieceType("Capturing", [
                 new ScriptingRule("None", "Other Caller", new ScriptingRule("None", "Return Variable of Rule", "Other Piece"),
                     new ScriptingRule("None", "Remove Piece")
                 ),
+                new ScriptingRule("None", "if-then-else",
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Array Element at Index",
+                            new ScriptingRule("None", "Object Types",
+                                new ScriptingRule("None", "Return Variable of Rule", "Other Piece")
+                            ),
+                            new ScriptingRule("None", "Value", 1)
+                        ),
+                        typeKing
+                    ),
+                    new ScriptingRule("None", "End Game", new ScriptingRule("None", "Player Turn")),
+                    new ScriptingRule("None", "Value", true)
+                ),
+                new ScriptingRule("None", "Change Turn Phase", Infinity),
                 new ScriptingRule("None", "Value", true)
             ),
             new ScriptingRule("None", "Value", false)
         )
     )
 ], undefined)
+let typeNoJumps = new PieceType("No Jumps", [ // This script prevents rooks, bishops, and queens from jumping over other pieces. Since knights ARE allowed to jump, only straight-line moves need be considered here.
+    new ScriptingRule("Piece Moves", "Return at End",
+        new ScriptingRule("None", "Edit Variable of Rule", "X Remaining",
+            new ScriptingRule("None", "*",
+                new ScriptingRule("None", "Argument", 0),
+                new ScriptingRule("None", "Value", -1)
+            )
+        ),
+        new ScriptingRule("None", "Edit Variable of Rule", "Y Remaining",
+            new ScriptingRule("None", "*",
+                new ScriptingRule("None", "Argument", 1),
+                new ScriptingRule("None", "Value", -1)
+            )
+        ),
+        new ScriptingRule("None", "Edit Variable of Rule", "X Coordinate",
+            new ScriptingRule("None", "X Coordinate")
+        ),
+        new ScriptingRule("None", "Edit Variable of Rule", "Y Coordinate",
+            new ScriptingRule("None", "Y Coordinate")
+        ),
+        new ScriptingRule("None", "Edit Variable of Rule", "Return Value",
+            new ScriptingRule("None", "Value", true)
+        ),
+        new ScriptingRule("None", "Repeat While",
+            new ScriptingRule("None", "&&",
+                new ScriptingRule("None", "||",
+                    new ScriptingRule("None", "!=",
+                        new ScriptingRule("None", "Return Variable of Rule", "X Remaining"),
+                        new ScriptingRule("None", "Value", 0)
+                    ),
+                    new ScriptingRule("None", "!=",
+                        new ScriptingRule("None", "Return Variable of Rule", "Y Remaining"),
+                        new ScriptingRule("None", "Value", 0)
+                    )
+                ),
+                new ScriptingRule("None", "==",
+                    new ScriptingRule("None", "Return Variable of Rule", "Return Value"),
+                    new ScriptingRule("None", "Value", true)
+                )
+            ),
+            new ScriptingRule("None", "Return at End",
+                new ScriptingRule("None", "Edit Variable of Rule", "X Coordinate",
+                    new ScriptingRule("None", "+",
+                        new ScriptingRule("None", "Return Variable of Rule", "X Coordinate"),
+                        new ScriptingRule("None", "sign", new ScriptingRule("None", "Return Variable of Rule", "X Remaining"))
+                    )
+                ),
+                new ScriptingRule("None", "Edit Variable of Rule", "X Remaining",
+                    new ScriptingRule("None", "-",
+                        new ScriptingRule("None", "Return Variable of Rule", "X Remaining"),
+                        new ScriptingRule("None", "sign", new ScriptingRule("None", "Return Variable of Rule", "X Remaining"))
+                    )
+                ),
+                new ScriptingRule("None", "Edit Variable of Rule", "Y Coordinate",
+                    new ScriptingRule("None", "+",
+                        new ScriptingRule("None", "Return Variable of Rule", "Y Coordinate"),
+                        new ScriptingRule("None", "sign", new ScriptingRule("None", "Return Variable of Rule", "Y Remaining"))
+                    )
+                ),
+                new ScriptingRule("None", "Edit Variable of Rule", "Y Remaining",
+                    new ScriptingRule("None", "-",
+                        new ScriptingRule("None", "Return Variable of Rule", "Y Remaining"),
+                        new ScriptingRule("None", "sign", new ScriptingRule("None", "Return Variable of Rule", "Y Remaining"))
+                    )
+                ),
+                new ScriptingRule("None", "Edit Variable of Rule", "Return Value",
+                    new ScriptingRule("None", "==",
+                        new ScriptingRule("None", "Array Length",
+                            new ScriptingRule("None", "Pieces on Tile",
+                                new ScriptingRule("None", "Tile at Coordinates",
+                                    new ScriptingRule("None", "Return Variable of Rule", "X Coordinate"),
+                                    new ScriptingRule("None", "Return Variable of Rule", "Y Coordinate")
+                                )
+                            )
+                        ),
+                        new ScriptingRule("None", "Value", 0)
+                    )
+                )
+            )
+        ),
+        new ScriptingRule("None", "Return Variable of Rule", "Return Value")
+    )
+], undefined)
 
-activeGameState = new GameState(new Board("Square", 8, 8), []);
-activeGameState.pieceArray.push(new Piece([typeWhite, typeRook, typeChessCaptures], 0, 0, 1));
+activeGameState = new GameState(new Board("Square", 8, 8), [], 2);
+activeGameState.pieceArray.push(new Piece([typeWhite, typeRook, typeChessCaptures, typeNoJumps], 0, 0, 1));
 activeGameState.pieceArray.push(new Piece([typeWhite, typeKnight, typeChessCaptures], 1, 0, 1));
-activeGameState.pieceArray.push(new Piece([typeWhite, typeBishop, typeChessCaptures], 2, 0, 1));
-activeGameState.pieceArray.push(new Piece([typeWhite, typeQueen, typeChessCaptures], 3, 0, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeBishop, typeChessCaptures, typeNoJumps], 2, 0, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeQueen, typeChessCaptures, typeNoJumps], 3, 0, 1));
 activeGameState.pieceArray.push(new Piece([typeWhite, typeKing, typeChessCaptures], 4, 0, 1));
-activeGameState.pieceArray.push(new Piece([typeWhite, typeBishop, typeChessCaptures], 5, 0, 1));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeBishop, typeChessCaptures, typeNoJumps], 5, 0, 1));
 activeGameState.pieceArray.push(new Piece([typeWhite, typeKnight, typeChessCaptures], 6, 0, 1));
-activeGameState.pieceArray.push(new Piece([typeWhite, typeRook, typeChessCaptures], 7, 0, 1));
-activeGameState.pieceArray.push(new Piece([typeBlack, typeRook, typeChessCaptures], 0, 7, 2));
+activeGameState.pieceArray.push(new Piece([typeWhite, typeRook, typeChessCaptures, typeNoJumps], 7, 0, 1));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeRook, typeChessCaptures, typeNoJumps], 0, 7, 2));
 activeGameState.pieceArray.push(new Piece([typeBlack, typeKnight, typeChessCaptures], 1, 7, 2));
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBishop, typeChessCaptures], 2, 7, 2));
-activeGameState.pieceArray.push(new Piece([typeBlack, typeQueen, typeChessCaptures], 3, 7, 2));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBishop, typeChessCaptures, typeNoJumps], 2, 7, 2));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeQueen, typeChessCaptures, typeNoJumps], 3, 7, 2));
 activeGameState.pieceArray.push(new Piece([typeBlack, typeKing, typeChessCaptures], 4, 7, 2));
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBishop, typeChessCaptures], 5, 7, 2));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeBishop, typeChessCaptures, typeNoJumps], 5, 7, 2));
 activeGameState.pieceArray.push(new Piece([typeBlack, typeKnight, typeChessCaptures], 6, 7, 2));
-activeGameState.pieceArray.push(new Piece([typeBlack, typeRook, typeChessCaptures], 7, 7, 2));
+activeGameState.pieceArray.push(new Piece([typeBlack, typeRook, typeChessCaptures, typeNoJumps], 7, 7, 2));
 activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 0, 1, 1));
 activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 1, 1, 1));
 activeGameState.pieceArray.push(new Piece([typeWhite, typeWhitePawn, typeChessCaptures], 2, 1, 1));
@@ -409,4 +519,6 @@ function displayTestingGrid() {
             }
         }
     }
+    if (Number.isFinite(activeGameState.turnNumber)) document.getElementById("turnText").innerHTML = "Turn #" + activeGameState.turnNumber + "<br>Player #" + activeGameState.playerTurn + "<br>Phase " + activeGameState.turnPhase;
+    else document.getElementById("turnText").innerHTML = "Player " + activeGameState.playerTurn + " wins!";
 }
