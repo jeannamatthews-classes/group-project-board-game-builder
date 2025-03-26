@@ -10,3 +10,4 @@ Meetings:
 Some meetings were shorter due to not everyone attending,
 I will document further meetings in more detail with what we talked about.
 3/24: Updated GANNT chart 30 minutes, plan on updating again this week.
+3/26: 1 hour meeting, updated GANNT chart again with all 4 people at meeting, discussed UI and next meeting time so we can properly divide the work for the next week or two.
