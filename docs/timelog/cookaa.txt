@@ -23,3 +23,5 @@ no button support exists yet, so for now promotion is always into a queen.
 
 March 25: Spent around 50 minutes wrapping up my chess test example for now, by preventing pieces jumping
 and adding the turn structure (only one piece color moves at a time, game ends when a king is captured).
+
+March 26: Group meeting for around 45 minutes, in which we discussed what we've done so far, updated our GANTT chart, and began plans for the UI.
