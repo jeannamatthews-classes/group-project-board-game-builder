@@ -1,0 +1,3 @@
+March 25 for 1 hour: Had a meeting with  Aaron and Jackson where we discussed what we are going to do after spring break, 
+  and which areas of the project (UI, Backend, etc) each member should be assigned.
+March 26 for 3 hours: Currently working on the sprite work for the board, peices, menu, etc. 
