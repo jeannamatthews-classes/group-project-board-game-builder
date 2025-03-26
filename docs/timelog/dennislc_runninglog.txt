@@ -1,5 +1,6 @@
 March 11 for 3 hours. For the design document, so far I have made the component diagram for the design document.
 March 12 for 1 hour: had a meeting with the team.
-March 25 for 1 hour: Had a meeting with  Aaron and Jackson where we discussed what we are going to do after spring break, 
+March 24 for 1 hour: Had a meeting with  Aaron and Jackson where we discussed what we are going to do after spring break, 
   and which areas of the project (UI, Backend, etc) each member should be assigned.
-March 26 for 3 hours: Currently working on the sprite work for the board, peices, menu, etc. 
+March 25 for 3 hours: Currently working on the sprite work for the board, peices, menu, etc. 
+March 26 for 1 hour: had a meeting with the team.
