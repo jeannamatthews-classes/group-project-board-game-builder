@@ -29,9 +29,12 @@ class ScriptingRule {
         else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
             this.playerID = args[0];
         }
-        else if (this.type === "Add Type" || this.type === "Remove Type") {
+        else if (this.type === "Add Type") {
             this.typeToEdit = args[0];
             this.index = args[1];
+        }
+        else if (this.type === "Remove Type") {
+            this.typeToEdit = args[0];
         }
         else if (this.type === "Add Piece") {
             this.newPieceTypes = args[0];
@@ -69,8 +72,7 @@ class ScriptingRule {
         }
         else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule") {
             this.variableName = args[0];
-            this.variableValue = args[1];
-            if (this.type === "Edit Variable of Object") this.object = args[2];
+            if (this.type === "Return Variable of Object") this.object = args[1];
         }
         else if (this.type === "if-then-else") {
             this.if = args[0];

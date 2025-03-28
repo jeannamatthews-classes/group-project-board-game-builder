@@ -1,0 +1,19 @@
+.scriptingRuleBox {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-style: solid;
+    border-width: 0.2vw;
+    flex-direction: column;
+    width: 90%;
+}
+
+.scriptingRuleBoxZebraDark {
+    background-color: #465b8d;
+}
+.scriptingRuleBoxZebraLight {
+    background-color: #7190db;
+}
