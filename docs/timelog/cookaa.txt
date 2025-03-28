@@ -28,5 +28,5 @@ March 26: Group meeting for around 45 minutes, in which we discussed what we've 
 
 March 27: Group meeting for around 1 hour and 25 minutes, in which we planned who would work on what for the next phase of the project, creating the UI for game creation. (My main task is the UI for creating scripting rules)
 
-March 28: Spent around 1 hour and 20 minutes making a first draft of how a scripting rule will be displayed for editing
-(just display for now, no editing it yet).
+March 28: Spent around 1 hour and 50 minutes making a first draft of how a scripting rule will be displayed for editing
+(just display for now, no editing it yet), and starting to add backend support for changing a ScriptingRule that's already made 

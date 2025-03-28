@@ -6,13 +6,11 @@ class ScriptingRule {
     trigger = "None";
     type = "None";
     variables = []; // Some scripts declare variables. Variables are local to the scripting rule.
-    constructorArgs; // This is needed for cloning
     
     constructor(trigger, type, ...args) {
         this.trigger = trigger;
         this.type = type;
         this.variables = [];
-        this.constructorArgs = Array.from(arguments);
         
         if (this.type === "Value") { // This type is for ScriptingRules that aren't actually rules, just storing a value, so that .run can be run on them and they'll just return that value.
             this.value = args[0];
@@ -82,7 +80,7 @@ class ScriptingRule {
         else if (this.type === "Return at End") {
             this.scriptsToRun = args;
         }
-        else if (type == "Repeat While") {
+        else if (this.type == "Repeat While") {
             this.repeatCheck = args[0];
             this.repeatScript = args[1];
         }
@@ -93,29 +91,29 @@ class ScriptingRule {
         else if (oneArgOperators.indexOf(type) != -1) {
             this.argument = args[0];
         }
-        else if (type == "Array Length" || type == "Remove Last Element of Array") {
+        else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
             this.array = args[0];
         }
-        else if (type == "Array Index Of Element" || type == "Add to Array") {
+        else if (this.type == "Array Index Of Element" || this.type == "Add to Array") {
             this.array = args[0];
             this.element = args[1];
         }
-        else if (type == "Array Element at Index") {
+        else if (this.type == "Array Element at Index") {
             this.array = args[0];
             this.index = args[1];
         }
 
-        else if (type == "Other Caller") {
+        else if (this.type == "Other Caller") {
             this.otherCaller = args[0];
             this.otherScript = args[1];
         }
-        else if (type == "Console Log") {
+        else if (this.type == "Console Log") {
             this.toLog = args[0];
         }
     }
 
     run(caller, ...args) {
-        console.log(this.constructorArgs, caller, args);
+        console.log(this.getConstructorArguments(), caller, args);
 
         if (this.type === "Value") {
             return this.value;
@@ -429,18 +427,124 @@ class ScriptingRule {
         }
     }
 
+    /*
+    List of triggers implemented:
+    "None": The rule is only called when some other scripting rule calls it.
+    "Piece Moves": Triggers when that piece moves. Arguments are the x-direction change and the y-direction change.
+    "Piece Lands on Tile": Triggers when that piece lands on any tile. Argument is the tile it landed on.
+    "Tile is Landed on": Triggers when that tile is landed on by a piece. Argument is the piece that landed on it.
+    "Piece is Removed": Triggers when that piece is removed. No arguments.
+    */
+
     // Gives this rule the same variables array as the other rule.
     portVariables(otherRule) {
         this.variables = otherRule.variables;
         return this;
     }
 
-    /*
-        List of triggers implemented:
-        "None": The rule is only called when some other scripting rule calls it.
-        "Piece Moves": Triggers when that piece moves. Arguments are the x-direction change and the y-direction change.
-        "Piece Lands on Tile": Triggers when that piece lands on any tile. Argument is the tile it landed on.
-        "Tile is Landed on": Triggers when that tile is landed on by a piece. Argument is the piece that landed on it.
-        "Piece is Removed": Triggers when that piece is removed. No arguments.
-    */
+    // This is used for cloning.
+    getConstructorArguments() {
+        let args = [this.trigger, this.type];
+
+        if (this.type === "Value") { // This type is for ScriptingRules that aren't actually rules, just storing a value, so that .run can be run on them and they'll just return that value.
+            args.push(this.value);
+        }
+        else if (this.type === "Argument") { // This type returns one of the arguments given from the rule call: for example
+            args.push(this.index)
+        }
+
+        // Actions
+        else if (this.type === "Move Piece") {
+            args.push(this.moveX)
+            args.push(this.moveY)
+        }
+        else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
+            args.push(this.playerID)
+        }
+        else if (this.type === "Add Type") {
+            args.push(this.typeToEdit)
+            args.push(this.index)
+        }
+        else if (this.type === "Remove Type") {
+            args.push(this.typeToEdit)
+        }
+        else if (this.type === "Add Piece") {
+            args.push(this.newPieceTypes)
+            args.push(this.newPieceX)
+            args.push(this.newPieceY)
+            args.push(this.newPieceOwner)
+        }
+        else if (this.type === "Change Turn Phase") {
+            args.push(this.phase)
+        }
+        else if (this.type === "End Game") {
+            args.push(this.winner)
+        }
+        else if (this.type === "Change Sprite") {
+            args.push(this.newSprite)
+        }
+        
+        // Reporters
+        else if (this.type === "Tile at Coordinates") {
+            args.push(this.XCoordinate)
+            args.push(this.YCoordinate)
+        }
+        else if (this.type === "Pieces on Tile") {
+            args.push(this.tileToCheck)
+        }
+        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID") {
+            args.push(this.object)
+        }
+
+        // Control
+        else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
+            args.push(this.variableName)
+            args.push(this.variableValue)
+            if (this.type === "Edit Variable of Object") args.push(this.object)
+        }
+        else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule") {
+            args.push(this.variableName)
+            if (this.type === "Return Variable of Object") args.push(this.object)
+        }
+        else if (this.type === "if-then-else") {
+            args.push(this.if)
+            args.push(this.then)
+            args.push(this.else)
+        }
+        else if (this.type === "Return at End") {
+            args.concat(this.scriptsToRun)
+        }
+        else if (this.type == "Repeat While") {
+            args.push(this.repeatCheck)
+            args.push(this.repeatScript)
+        }
+        else if (twoArgOperators.indexOf(this.type) != -1) {
+            args.push(this.leftArg)
+            args.push(this.rightArg)
+        }
+        else if (oneArgOperators.indexOf(this.type) != -1) {
+            args.push(this.argument)
+        }
+        else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
+            args.push(this.array)
+        }
+        else if (this.type == "Array Index Of Element" || this.type == "Add to Array") {
+            args.push(this.array)
+            args.push(this.element)
+        }
+        else if (this.type == "Array Element at Index") {
+            args.push(this.array)
+            args.push(this.index)
+        }
+
+        else if (this.type == "Other Caller") {
+            args.push(this.otherCaller)
+            args.push(this.otherScript)
+        }
+        else if (this.type == "Console Log") {
+            args.push(this.toLog)
+        }
+
+        return args;
+    }
 }

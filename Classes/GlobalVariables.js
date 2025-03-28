@@ -45,16 +45,16 @@ function gameStateRevert() {
 function BGBStructuredClone(argument) {
     if (typeof argument !== "object") return argument; // primitive types are already cloned
     if (Array.isArray(argument)) return argument.map(BGBStructuredClone); // Copy each entry of the array
-    if (argument instanceof ScriptingRule) return new ScriptingRule(...BGBStructuredClone(argument.constructorArgs));
+    if (argument instanceof ScriptingRule) return new ScriptingRule(...argument.getConstructorArguments());
     if (argument instanceof GameState) return new GameState(BGBStructuredClone(argument.board), BGBStructuredClone(argument.pieceArray), argument.playerAmount, argument.turnNumber, argument.playerTurn, argument.turnPhase);
     if (argument instanceof Board) {
         let result = new Board(argument.boardShape, argument.width, argument.height);
         result.tileArray = BGBStructuredClone(argument.tileArray);
         return result;
     }
-    if (argument instanceof TileType) return new TileType(argument.typeName, BGBStructuredClone(argument.scripts), BGBStructuredClone(argument.sprite), argument.typeID);
-    if (argument instanceof Tile) return new Tile(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, argument.objectID);
-    if (argument instanceof PieceType) return new PieceType(argument.typeName, BGBStructuredClone(argument.scripts), BGBStructuredClone(argument.sprite), argument.typeID);
+    if (argument instanceof TileType) return new TileType(argument.typeName, BGBStructuredClone(argument.scripts), argument.typeID);
+    if (argument instanceof Tile) return new Tile(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
+    if (argument instanceof PieceType) return new PieceType(argument.typeName, BGBStructuredClone(argument.scripts), argument.typeID);
     if (argument instanceof Piece) return new Piece(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
     if (argument instanceof Sprite) return new Sprite(argument.color, argument.textColor, argument.text);
 }
