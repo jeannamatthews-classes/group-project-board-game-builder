@@ -24,54 +24,8 @@
 <script src="Classes/PlayerInventory.js"></script>
 <script src="Classes/GlobalVariables.js"></script>
 <script src="scripts/scriptingRuleForm.js"></script>
+<script src="Testing/testingZone.js"></script> <!-- To be removed later -->
 <script>
-    let whitePawnMove = new ScriptingRule("Piece Moves", "if-then-else", // Checks that either the move is straight down one space and not a capture, or diagonal-down one space and a capture. Does not include moving two spaces on its first move.
-        new ScriptingRule("None", "||",
-            new ScriptingRule("None", "&&",
-                new ScriptingRule("None", "&&", 
-                    new ScriptingRule("None", "==",
-                        new ScriptingRule("None", "Argument", 0),
-                        new ScriptingRule("None", "Value", 0)
-                    ),
-                    new ScriptingRule("None", "==",
-                        new ScriptingRule("None", "Argument", 1),
-                        new ScriptingRule("None", "Value", 1)
-                    )
-                ),
-                new ScriptingRule("None", "==",
-                    new ScriptingRule("None", "Array Length",
-                        new ScriptingRule("None", "Pieces on Tile",
-                            new ScriptingRule("None", "Tile Here")
-                        )
-                    ),
-                    new ScriptingRule("None", "Value", 1)
-                )
-            ),
-            new ScriptingRule("None", "&&",
-                new ScriptingRule("None", "&&", 
-                    new ScriptingRule("None", "==",
-                        new ScriptingRule("None", "abs", new ScriptingRule("None", "Argument", 0)),
-                        new ScriptingRule("None", "Value", 1)
-                    ),
-                    new ScriptingRule("None", "==",
-                        new ScriptingRule("None", "Argument", 1),
-                        new ScriptingRule("None", "Value", 1)
-                    )
-                ),
-                new ScriptingRule("None", "==",
-                    new ScriptingRule("None", "Array Length",
-                        new ScriptingRule("None", "Pieces on Tile",
-                            new ScriptingRule("None", "Tile Here")
-                        )
-                    ),
-                    new ScriptingRule("None", "Value", 2)
-                )
-            )
-        ),
-        new ScriptingRule("None", "Value", true),
-        new ScriptingRule("None", "Value", false)
-    );
-
-    document.documentElement.appendChild(new ScriptingRuleForm(whitePawnMove).div);
+    document.documentElement.appendChild(new ScriptingRuleForm(typeChessCaptures.scripts[0]).div);
 </script>
 </html>

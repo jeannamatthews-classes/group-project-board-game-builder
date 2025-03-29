@@ -17,3 +17,13 @@
 .scriptingRuleBoxZebraLight {
     background-color: #7190db;
 }
+
+.SRFBooleanBox {
+    background-color: #3dae41;
+}
+.SRFButton {
+    min-width: 10vw;
+    padding: 0.5vw;
+    background-color: #003dcb;
+    border: 0.2vw solid black;
+}

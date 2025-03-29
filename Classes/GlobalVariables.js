@@ -1,7 +1,7 @@
 let currentGameState; // The game state after the last valid move
 let activeGameState; // The game state currently being edited
-let tileTypesList; // An array of the created tile types
-let pieceTypesList; // An array of the created piece types
+let tileTypesList = []; // An array of the created tile types
+let pieceTypesList = []; // An array of the created piece types
 let otherGlobalVariables = [];
 let nextObjectID = 0;
 let nextTypeID = 0;

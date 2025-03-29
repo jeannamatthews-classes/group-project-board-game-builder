@@ -418,6 +418,8 @@ let typeNoJumps = new PieceType("No Jumps", [ // This script prevents rooks, bis
     )
 ], undefined)
 
+pieceTypesList.push(typeWhite, typeBlack, typeWhitePawn, typeBlackPawn, typeRook, typeKnight, typeBishop, typeQueen, typeKing, typeChessCaptures, typeNoJumps);
+
 activeGameState = new GameState(new Board("Square", 8, 8), [], 2);
 activeGameState.pieceArray.push(new Piece([typeWhite, typeRook, typeChessCaptures, typeNoJumps], 0, 0, 1));
 activeGameState.pieceArray.push(new Piece([typeWhite, typeKnight, typeChessCaptures], 1, 0, 1));
@@ -461,7 +463,7 @@ for (let p of activeGameState.pieceArray) {
 }
 
 gameStateValid();
-generateTestingGrid(); displayTestingGrid();
+// generateTestingGrid(); displayTestingGrid();
 
 
 // The code below was copied from previous projects of mine
