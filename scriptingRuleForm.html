@@ -26,6 +26,7 @@
 <script src="scripts/scriptingRuleForm.js"></script>
 <script src="Testing/testingZone.js"></script> <!-- To be removed later -->
 <script>
-    document.documentElement.appendChild(new ScriptingRuleForm(typeChessCaptures.scripts[0]).div);
+    let formT = new ScriptingRuleForm(new ScriptingRule("Piece Moves", "Value", 0))
+    document.documentElement.appendChild(formT.div);
 </script>
 </html>

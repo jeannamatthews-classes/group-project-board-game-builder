@@ -8,84 +8,132 @@ class ScriptingRule {
     variables = []; // Some scripts declare variables. Variables are local to the scripting rule.
     
     constructor(trigger, type, ...args) {
+        this.resetScriptingRule(trigger, type, ...args);
+    }
+
+    resetScriptingRule(trigger, type, ...args) {
+        for (let p in this) if (this.hasOwnProperty(p)) delete this[p];
         this.trigger = trigger;
         this.type = type;
         this.variables = [];
         
         if (this.type === "Value") { // This type is for ScriptingRules that aren't actually rules, just storing a value, so that .run can be run on them and they'll just return that value.
+            if (args.length <= 0) args.push(0);
             this.value = args[0];
         }
-        else if (this.type === "Argument") { // This type returns one of the arguments given from the rule call: for example
+        else if (this.type === "Argument") { // This type returns one of the arguments given from the rule call, based on the trigger: for example, for a rule triggered by Piece Moves, the arguments are the x direction and y direction of its movement.
+            if (args.length <= 0) args.push(0);
             this.index = args[0];
         }
 
         // Actions
         else if (this.type === "Move Piece") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.moveX = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.moveY = args[1];
         }
         else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.playerID = args[0];
         }
         else if (this.type === "Add Type") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Array Element at Index", new ScriptingRule("None", "Object Types"), new ScriptingRule("None", "Value", 0)));
             this.typeToEdit = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", -1));
             this.index = args[1];
         }
         else if (this.type === "Remove Type") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Array Element at Index", new ScriptingRule("None", "Object Types"), new ScriptingRule("None", "Value", 0)));
             this.typeToEdit = args[0];
         }
         else if (this.type === "Add Piece") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.newPieceTypes = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.newPieceX = args[1];
+            if (args.length <= 2) args.push(new ScriptingRule("None", "Value", 0));
             this.newPieceY = args[2];
+            if (args.length <= 3) args.push(new ScriptingRule("None", "Value", 0));
             this.newPieceOwner = args[3];
         }
         else if (this.type === "Change Turn Phase") {
+            if (args.length <= 0) args.push(Infinity);
             this.phase = args[0];
         }
         else if (this.type === "End Game") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.winner = args[0];
         }
         else if (this.type === "Change Sprite") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create a Sprite"));
             this.newSprite = args[0];
         }
         
         // Reporters
         else if (this.type === "Tile at Coordinates") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.XCoordinate = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.YCoordinate = args[1];
         }
         else if (this.type === "Pieces on Tile") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Tile at Coordinates"));
             this.tileToCheck = args[0];
         }
         else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID") {
+            if (args.length <= 0) args.push(undefined);
             this.object = args[0];
+        }
+        else if (this.type === "Create a Sprite") {
+            if (args.length <= 0) args.push("#ffffff");
+            this.color = args[0];
+            if (args.length <= 1) args.push("#000000");
+            this.textColor = args[1];
+            if (args.length <= 2) args.push("");
+            this.text = args[2];
+        }
+        else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
+            if (args.length <= 0) args.push(0);
+            this.index = args[0];
         }
 
         // Control
         else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule" || this.type === "Edit Global Variable") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
+            if (args.length <= 0) args.push("Placeholder");
             this.variableName = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.variableValue = args[1];
+            if (args.length <= 2) args.push(undefined);
             if (this.type === "Edit Variable of Object") this.object = args[2];
         }
         else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule" || this.type === "Return Global Variable") {
+            if (args.length <= 0) args.push("Placeholder");
             this.variableName = args[0];
+            if (args.length <= 1) args.push(undefined);
             if (this.type === "Return Variable of Object") this.object = args[1];
         }
         else if (this.type === "if-then-else") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", true));
             this.if = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", true));
             this.then = args[1];
+            if (args.length <= 2) args.push(new ScriptingRule("None", "Value", true));
             this.else = args[2];
         }
         else if (this.type === "Return at End") {
             this.scriptsToRun = args;
         }
         else if (this.type == "Repeat While") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", false));
             this.repeatCheck = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", false));
             this.repeatScript = args[1];
         }
         else if (twoArgOperators.indexOf(type) != -1) {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.leftArg = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.rightArg = args[1];
         }
         else if (oneArgOperators.indexOf(type) != -1) {
@@ -97,22 +145,30 @@ class ScriptingRule {
             this.elements = args;
         }
         else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
         }
         else if (this.type == "Array Index Of Element" || this.type == "Add to Array") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.element = args[1];
         }
         else if (this.type == "Array Element at Index") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
+            if (args.length <= 1) args.push(0);
             this.index = args[1];
         }
 
         else if (this.type == "Other Caller") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.otherCaller = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.otherScript = args[1];
         }
         else if (this.type == "Console Log") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.toLog = args[0];
         }
     }
@@ -306,6 +362,18 @@ class ScriptingRule {
         }
         else if (this.type === "Caller") {
             return caller;
+        }
+        else if (this.type === "Create a Sprite") {
+            let color = (this.color instanceof ScriptingRule) ? this.color.portVariables(this).run(caller, ...args) : this.color;
+            let textColor = (this.textColor instanceof ScriptingRule) ? this.textColor.portVariables(this).run(caller, ...args) : this.textColor;
+            let text = (this.text instanceof ScriptingRule) ? this.text.portVariables(this).run(caller, ...args) : this.text;
+            return new Sprite(color, textColor, text);
+        }
+        else if (this.type === "Choose Piece Type") {
+            return pieceTypesList[this.index];
+        }
+        else if (this.type === "Choose Tile Type") {
+            return tileTypesList[this.index];
         }
 
         // Control
@@ -530,6 +598,14 @@ class ScriptingRule {
         else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID") {
             args.push(this.object)
         }
+        else if (this.type === "Create a Sprite") {
+            args.push(this.color);
+            args.push(this.textColor);
+            args.push(this.text);
+        }
+        else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
+            args.push(this.index);
+        }
 
         // Control
         else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule" || this.type === "Edit Global Variable") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
@@ -547,7 +623,7 @@ class ScriptingRule {
             args.push(this.else)
         }
         else if (this.type === "Return at End") {
-            args.concat(this.scriptsToRun)
+            args = args.concat(this.scriptsToRun)
         }
         else if (this.type == "Repeat While") {
             args.push(this.repeatCheck)
@@ -563,7 +639,7 @@ class ScriptingRule {
 
         // Arrays
         else if (this.type === "Create an Array") {
-            args.concat(this.elements);
+            args = args.concat(this.elements);
         }
         else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
             args.push(this.array)

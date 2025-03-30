@@ -32,20 +32,54 @@ class ScriptingRuleForm {
 
     modifyDIV(srdiv = this.div) {
         while (srdiv.firstElementChild) srdiv.removeChild(srdiv.lastElementChild);
+        let form = this;
         if (this.top) {
             this.topTrigger = this.rule.trigger;
             let srdtrigger = document.createElement("p");
-            if (this.topTrigger === "Piece Moves") srdtrigger.innerHTML = "Triggered when this piece moves.";
-            else if (this.topTrigger === "Piece Lands on Tile") srdtrigger.innerHTML = "Triggered when this piece lands on a tile."
-            else if (this.topTrigger === "Tile is Landed on") srdtrigger.innerHTML = "Triggered when this tile is landed on by a piece."
-            else if (this.topTrigger === "Piece is Removed") srdtrigger.innerHTML = "Triggered when this piece is removed."
-            else srdtrigger.innerHTML = "This script does not have an intrinsic trigger."
+            srdtrigger.innerHTML = "Trigger:";
+            let srdtriggerselect = document.createElement("select");
+            let srdtriggeroption;
+            if (true) {
+                srdtriggeroption = document.createElement("option");
+                srdtriggeroption.setAttribute("value", "Piece Moves");
+                srdtriggeroption.innerHTML = "When this piece moves";
+                srdtriggerselect.appendChild(srdtriggeroption);
+            }
+            if (true) {
+                srdtriggeroption = document.createElement("option");
+                srdtriggeroption.setAttribute("value", "Piece Lands on Tile");
+                srdtriggeroption.innerHTML = "When this piece lands on a tile";
+                srdtriggerselect.appendChild(srdtriggeroption);
+            }
+            if (true) {
+                srdtriggeroption = document.createElement("option");
+                srdtriggeroption.setAttribute("value", "Tile is Landed On");
+                srdtriggeroption.innerHTML = "When this tile is landed on";
+                srdtriggerselect.appendChild(srdtriggeroption);
+            }
+            if (true) {
+                srdtriggeroption = document.createElement("option");
+                srdtriggeroption.setAttribute("value", "Piece is Removed");
+                srdtriggeroption.innerHTML = "When this piece is removed";
+                srdtriggerselect.appendChild(srdtriggeroption);
+            }
+            // No need for an if here, "no trigger" is always an option
+            document.createElement("option");
+            srdtriggeroption.setAttribute("value", "None");
+            srdtriggeroption.innerHTML = "None";
+            srdtriggerselect.appendChild(srdtriggeroption);
+            srdtriggerselect.value = form.rule.trigger;
+            srdtriggerselect.addEventListener("change", function(){
+                form.rule.trigger = this.value;
+                form.modifyDIV();
+            })
+            srdtrigger.appendChild(srdtriggerselect);
             srdiv.appendChild(srdtrigger);
         }
         let srdtype = document.createElement("p");
-        srdtype.innerHTML = "Type: " + this.rule.type;
+        srdtype.innerHTML = "Type: ";
+        srdtype.appendChild(this.createTypeSelect());
         srdiv.appendChild(srdtype);
-        let form = this;
         let scriptingRuleChild = function(argToCheck) {
             if (argToCheck instanceof ScriptingRule) {
                 srdiv.appendChild(srdarg);
@@ -324,20 +358,20 @@ class ScriptingRuleForm {
         else if (this.rule.type === "Change Turn Phase") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Turn Phase:";
-            if (!scriptingRuleChild(this.rule.phase)) {
-                if (this.rule.phase === Infinity) {
-                    srdarg.innerHTML += " End Turn";
-                    srdiv.appendChild(srdarg);
-                    srdarg = document.createElement("button");
-                    srdarg.classList.add("SRFButton");
-                    srdarg.innerHTML = "Specify Phase";
-                    srdarg.addEventListener("click", function(){
-                        form.rule.phase = 0;
-                        form.modifyDIV();
-                    })
-                    srdiv.appendChild(srdarg);
-                }
-                else {
+            if (this.rule.phase === Infinity) {
+                srdarg.innerHTML += " End Turn";
+                srdiv.appendChild(srdarg);
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                srdarg.innerHTML = "Specify Phase";
+                srdarg.addEventListener("click", function(){
+                    form.rule.phase = new ScriptingRule("None", "Value", 0);
+                    form.modifyDIV();
+                })
+                srdiv.appendChild(srdarg);
+            }
+            else {
+                if (!scriptingRuleChild(this.rule.phase)) {
                     srdarg.innerHTML += " "
                     srdarg2 = document.createElement("input");
                     srdarg2.value = this.rule.phase;
@@ -348,15 +382,15 @@ class ScriptingRuleForm {
                     });
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
-                    srdarg = document.createElement("button");
-                    srdarg.classList.add("SRFButton");
-                    srdarg.innerHTML = "End Turn";
-                    srdarg.addEventListener("click", function(){
-                        form.rule.phase = Infinity;
-                        form.modifyDIV();
-                    })
-                    srdiv.appendChild(srdarg);
                 }
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                srdarg.innerHTML = "End Turn";
+                srdarg.addEventListener("click", function(){
+                    form.rule.phase = Infinity;
+                    form.modifyDIV();
+                })
+                srdiv.appendChild(srdarg);
             }
         }
         else if (this.rule.type === "End Game") {
@@ -427,9 +461,68 @@ class ScriptingRuleForm {
             srdarg.innerHTML = "Object:";
             if (!scriptingRuleChild(this.rule.object)) {
                 srdarg.innerHTML += " Caller";
+                srdiv.appendChild(srdarg);
+            }
+        }
+        else if (this.rule.type === "Create a Sprite") {
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Color:";
+            if (!scriptingRuleChild(this.rule.color)) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.color;
+                srdarg2.addEventListener("change", function(){
+                    form.rule.color = String(this.value);
+                    form.modifyDIV();
+                });
                 srdarg.appendChild(srdarg2);
                 srdiv.appendChild(srdarg);
             }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Text Color:";
+            if (!scriptingRuleChild(this.rule.textColor)) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.textColor;
+                srdarg2.addEventListener("change", function(){
+                    form.rule.textColor = String(this.value);
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Text:";
+            if (!scriptingRuleChild(this.rule.text)) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.text;
+                srdarg2.addEventListener("change", function(){
+                    form.rule.text = String(this.value);
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+        }
+        else if (this.rule.type === "Choose Piece Type" || this.rule.type === "Choose Tile Type") {
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Type: ";
+            srdarg2 = document.createElement("select");
+            let listToCheck = (this.rule.type === "Choose Tile Type" ? tileTypesList : pieceTypesList)
+            for (let t = 0; t < listToCheck.length; t++) {
+                srdarg3 = document.createElement("option");
+                srdarg3.setAttribute("value", t);
+                srdarg3.innerHTML = stringifyBGBObject(listToCheck[t]);
+                srdarg2.appendChild(srdarg3);
+            }
+            srdarg2.value = this.rule.index;
+            srdarg2.addEventListener("change", function(){
+                form.rule.index = this.value;
+                form.modifyDIV();
+            });
+            srdarg.appendChild(srdarg2);
+            srdiv.appendChild(srdarg);
         }
 
         // Control
@@ -826,6 +919,416 @@ class ScriptingRuleForm {
             srdarg.innerHTML = "Log the Result of";
             scriptingRuleChild(this.rule.toLog);
         }
+    }
+
+    createTypeSelect() {
+        let select, group, type;
+        select = document.createElement("select");
+
+        group = document.createElement("optgroup");
+        group.setAttribute("label", "Values");
+        // All these "if (true)'s are here because that "true" is going to be changed into more specific conditions later
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Value");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Argument");
+            type.innerHTML = "Trigger Argument";
+            group.appendChild(type);
+        }
+        select.appendChild(group);
+
+        group = document.createElement("optgroup");
+        group.setAttribute("label", "Actions");
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Remove Piece");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Move Piece");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Change Piece Owner");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Move Piece to Inventory");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Add Type");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Remove Type");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Add Piece");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Change Turn Phase");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "End Game");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Change Sprite");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        select.appendChild(group);
+
+        group = document.createElement("optgroup");
+        group.setAttribute("label", "Reporters");
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "X Coordinate");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Y Coordinate");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Object Types");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Turn Number");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Player Turn");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Turn Phase");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Return Variable of Rule");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Return Variable of Object");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Return Global Variable");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Board Width");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Board Height");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Tile at Coordinates");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Pieces on Tile");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Tile Here");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Object ID");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Caller");
+            type.innerHTML = "Owner of this Rule"
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Create a Sprite");
+            type.innerHTML = "New Sprite"
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Choose Piece Type");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Choose Tile Type");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        select.appendChild(group);
+
+        group = document.createElement("optgroup");
+        group.setAttribute("label", "Control");
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Edit Variable of Rule");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Edit Variable of Object");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Edit Global Variable");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "if-then-else");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Return at End");
+            type.innerHTML = "Run Multiple Scripts";
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Repeat While");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "==");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", ">");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "<");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", ">=");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "<=");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "!=");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "&&");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "||");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "XOR");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "+");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "-");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "*");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "/");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "%");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "**");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "!");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "abs");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "sign");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        select.appendChild(group);
+
+        group = document.createElement("optgroup");
+        group.setAttribute("label", "Arrays");
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Create an Array");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Array Length");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Remove Last Element of Array");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Array Index of Element");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Add to Array");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Array Element at Index");
+            type.innerHTML = type.getAttribute("value");
+            group.appendChild(type);
+        }
+        select.appendChild(group);
+
+        group = document.createElement("optgroup");
+        group.setAttribute("label", "Other");
+        if (true) {
+            type = document.createElement("option");
+            type.setAttribute("value", "Other Caller");
+            type.innerHTML = "Have Another Object Run a Script"
+            group.appendChild(type);
+        }
+        select.appendChild(group);
+        
+        select.value = this.rule.type;
+        let form = this;
+        select.addEventListener("change", function(){
+            form.rule.resetScriptingRule(form.rule.trigger, this.value);
+            form.modifyDIV();
+        })
+        return select;
     }
 }
 

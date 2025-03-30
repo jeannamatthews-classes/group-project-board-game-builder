@@ -35,3 +35,6 @@ March 28: Spent around 1 hour and 50 minutes making a first draft of how a scrip
 March 29: Spent around 2 hours and 10 minutes (of useful time, anyway; plenty of wasted time was mixed in) adding
 change-able inputs to the scripting rule visualizer (but not yet changing the types of scripting rules, that's what's next),
 during which I added a couple more rule types (Create an Array and two involving global variables).
+
+March 30: Spent around 1 hour and 35 minutes adding a type selector to the scripting rule visualizer (but it doesn't have a sense of context yet),
+and added a few more rule types to let you create sprites and select piece/tile types within a scripting rule.

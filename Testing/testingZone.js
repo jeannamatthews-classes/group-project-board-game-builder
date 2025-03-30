@@ -171,8 +171,8 @@ let typeWhitePawn = new PieceType("White Pawn", [
                     new ScriptingRule("None", "Value", 1)
                 )
             ),
-            new ScriptingRule("None", "Add Type", typeQueen, 1),
-            new ScriptingRule("None", "Change Sprite", new Sprite("#ddd", "#222", "Queen")),
+            new ScriptingRule("None", "Add Type", new ScriptingRule("None", "Choose Piece Type", 8), 1),
+            new ScriptingRule("None", "Change Sprite", new ScriptingRule("None", "Create a Sprite", "#ddd", "#222", "Queen")),
             new ScriptingRule("None", "Value", true)
         ),
         new ScriptingRule("None", "Value", true)
@@ -237,8 +237,8 @@ let typeBlackPawn = new PieceType("Black Pawn", [
                     new ScriptingRule("None", "Value", 1)
                 )
             ),
-            new ScriptingRule("None", "Add Type", typeQueen, 1),
-            new ScriptingRule("None", "Change Sprite", new Sprite("#222", "#ddd", "Queen")),
+            new ScriptingRule("None", "Add Type", new ScriptingRule("None", "Choose Piece Type", 7), 1),
+            new ScriptingRule("None", "Change Sprite", new ScriptingRule("None", "Create a Sprite", "#ddd", "#222", "Queen")),
             new ScriptingRule("None", "Value", true)
         ),
         new ScriptingRule("None", "Value", true)
@@ -322,7 +322,7 @@ let typeChessCaptures = new PieceType("Capturing", [
                             ),
                             new ScriptingRule("None", "Value", 1)
                         ),
-                        typeKing
+                        new ScriptingRule("None", "Choose Piece Type", 8)
                     ),
                     new ScriptingRule("None", "End Game", new ScriptingRule("None", "Player Turn")),
                     new ScriptingRule("None", "Value", true)
