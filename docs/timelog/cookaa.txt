@@ -32,5 +32,6 @@ creating the UI for game creation. (My main task is the UI for creating scriptin
 March 28: Spent around 1 hour and 50 minutes making a first draft of how a scripting rule will be displayed for editing
 (just display for now, no editing it yet), and starting to add backend support for changing a ScriptingRule that's already made 
 
-March 29: Spent around 1 hour and 35 minutes (of useful time, anyway; plenty of wasted time was mixed in) beginning to add
-change-able inputs to the scripting rule visualizer.
+March 29: Spent around 2 hours and 10 minutes (of useful time, anyway; plenty of wasted time was mixed in) adding
+change-able inputs to the scripting rule visualizer (but not yet changing the types of scripting rules, that's what's next),
+during which I added a couple more rule types (Create an Array and two involving global variables).

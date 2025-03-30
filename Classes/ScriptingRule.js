@@ -63,12 +63,12 @@ class ScriptingRule {
         }
 
         // Control
-        else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
+        else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule" || this.type === "Edit Global Variable") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
             this.variableName = args[0];
             this.variableValue = args[1];
             if (this.type === "Edit Variable of Object") this.object = args[2];
         }
-        else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule") {
+        else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule" || this.type === "Return Global Variable") {
             this.variableName = args[0];
             if (this.type === "Return Variable of Object") this.object = args[1];
         }
@@ -90,6 +90,11 @@ class ScriptingRule {
         }
         else if (oneArgOperators.indexOf(type) != -1) {
             this.argument = args[0];
+        }
+
+        // Arrays
+        else if (this.type === "Create an Array") {
+            this.elements = args;
         }
         else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
             this.array = args[0];
@@ -250,6 +255,16 @@ class ScriptingRule {
                 return object.publicVars[index][1];
             }
         }
+        else if (this.type === "Return Global Variable") {
+            let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
+            let index = otherGlobalVariables.map(x => x[0]).indexOf(variableName);
+            if (index === -1) {
+                return undefined;
+            }
+            else {
+                return otherGlobalVariables[index][1];
+            }
+        }
         else if (this.type === "Board Width") {
             return activeGameState.board.width;
         }
@@ -316,6 +331,17 @@ class ScriptingRule {
             }
             else {
                 object.publicVars[index][1] = variableValue;
+            }
+        }
+        else if (this.type === "Edit Global Variable") {
+            let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
+            let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
+            let index = otherGlobalVariables.map(x => x[0]).indexOf(variableName);
+            if (index === -1) {
+                otherGlobalVariables.push([variableName, variableValue]);
+            }
+            else {
+                otherGlobalVariables[index][1] = variableValue;
             }
         }
         else if (this.type === "if-then-else") {
@@ -389,6 +415,15 @@ class ScriptingRule {
                 case "sign":
                     return Math.sign(argument);
             }
+        }
+
+        // Arrays
+        else if (this.type === "Create an Array") {
+            let arr = [];
+            for (let e = 0; e < this.elements.length; e++) {
+                arr.push((this.elements[e] instanceof ScriptingRule) ? this.elements[e].portVariables(this).run(caller, ...args) : this.elements[e]);
+            }
+            return arr;
         }
         else if (this.type === "Array Length") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
@@ -497,12 +532,12 @@ class ScriptingRule {
         }
 
         // Control
-        else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
+        else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule" || this.type === "Edit Global Variable") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
             args.push(this.variableName)
             args.push(this.variableValue)
             if (this.type === "Edit Variable of Object") args.push(this.object)
         }
-        else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule") {
+        else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule" || this.type === "Return Global Variable") {
             args.push(this.variableName)
             if (this.type === "Return Variable of Object") args.push(this.object)
         }
@@ -524,6 +559,11 @@ class ScriptingRule {
         }
         else if (oneArgOperators.indexOf(this.type) != -1) {
             args.push(this.argument)
+        }
+
+        // Arrays
+        else if (this.type === "Create an Array") {
+            args.concat(this.elements);
         }
         else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
             args.push(this.array)

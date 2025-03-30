@@ -46,28 +46,6 @@ class ScriptingRuleForm {
         srdtype.innerHTML = "Type: " + this.rule.type;
         srdiv.appendChild(srdtype);
         let form = this;
-        let addArgHTML = function(argToCheck, text, specialStrings = []){
-            let srdarg = document.createElement("p");
-            srdarg.innerHTML = text;
-            for (let ss = 0; ss < specialStrings.length; ss++) {
-                if (argToCheck === specialStrings[ss][0]) {
-                    srdarg.innerHTML += " " + specialStrings[ss][1];
-                    srdiv.appendChild(srdarg);
-                    return;
-                }
-            }
-            if (argToCheck instanceof ScriptingRule) {
-                srdiv.appendChild(srdarg);
-                let newForm = new ScriptingRuleForm(argToCheck, false, form.topTrigger, !form.zebraDark);
-                form.childrenForms.push(newForm);
-                console.log(newForm);
-                srdiv.appendChild(newForm.div);
-            }
-            else {
-                srdarg.innerHTML += " " + stringifyBGBObject(argToCheck);
-                srdiv.appendChild(srdarg);
-            }
-        }
         let scriptingRuleChild = function(argToCheck) {
             if (argToCheck instanceof ScriptingRule) {
                 srdiv.appendChild(srdarg);
@@ -297,10 +275,51 @@ class ScriptingRuleForm {
             }
         }
         else if (this.rule.type === "Add Piece") {
-            addArgHTML(this.rule.newPieceTypes, "Array of Types:");
-            addArgHTML(this.rule.newPieceX, "X Coordinate:");
-            addArgHTML(this.rule.newPieceY, "Y Coordinate:");
-            addArgHTML(this.rule.newPieceOwner, "Player Number of Owner:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Array of Types:";
+            scriptingRuleChild(this.rule.newPieceTypes);
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "X Coordinate:";
+            if (!scriptingRuleChild(this.rule.newPieceX)) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.newPieceX;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (Number.isFinite(v)) form.rule.newPieceX = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Y Coordinate:";
+            if (!scriptingRuleChild(this.rule.newPieceY)) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.newPieceY;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (Number.isFinite(v)) form.rule.newPieceY = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Player Number of Owner:";
+            if (!scriptingRuleChild(this.rule.newPieceOwner)) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.newPieceOwner;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (v > 0 && v <= activeGameState.playerAmount && v % 1 == 0) form.rule.newPieceOwner = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
         }
         else if (this.rule.type === "Change Turn Phase") {
             srdarg = document.createElement("p");
@@ -356,8 +375,11 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
         }
+        // Change this later, it should have an option to edit the sprite directly rather than use a scripting rule
         else if (this.rule.type === "Change Sprite") {
-            addArgHTML(this.rule.sprite, "New Sprite:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "New Sprite:";
+            scriptingRuleChild(this.rule.sprite);
         }
         
         // Reporters
@@ -392,14 +414,26 @@ class ScriptingRuleForm {
             }
         }
         else if (this.rule.type === "Pieces on Tile") {
-            addArgHTML(this.rule.tileToCheck, "Tile:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Tile:";
+            if (!scriptingRuleChild(this.rule.tileToCheck)) {
+                srdarg.innerHTML = "Tile at x"
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
         }
         else if (this.rule.type === "X Coordinate" || this.rule.type === "Y Coordinate" || this.rule.type === "Object Types" || this.rule.type === "Object ID") {
-            addArgHTML(this.rule.object, "Object:", [[undefined, "Caller"]]);
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Object:";
+            if (!scriptingRuleChild(this.rule.object)) {
+                srdarg.innerHTML += " Caller";
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
         }
 
         // Control
-        else if (this.rule.type === "Edit Variable of Object" || this.rule.type === "Edit Variable of Rule") {
+        else if (this.rule.type === "Edit Variable of Object" || this.rule.type === "Edit Variable of Rule" || this.rule.type === "Edit Global Variable") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Variable Name:";
             if (!scriptingRuleChild(this.rule.variableName)) {
@@ -458,9 +492,17 @@ class ScriptingRuleForm {
                 })
                 srdiv.appendChild(srdarg);
             }
-            if (this.rule.type === "Edit Variable of Object") addArgHTML(this.rule.object, "Object:", [[undefined, "Caller"]]);
+            if (this.rule.type === "Edit Variable of Object") {
+                srdarg = document.createElement("p");
+                srdarg.innerHTML = "Object:";
+                if (!scriptingRuleChild(this.rule.object)) {
+                    srdarg.innerHTML += " Caller";
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+            }
         }
-        else if (this.rule.type === "Return Variable of Object" || this.rule.type === "Return Variable of Rule") {
+        else if (this.rule.type === "Return Variable of Object" || this.rule.type === "Return Variable of Rule" || this.rule.type === "Return Global Variable") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Variable Name:";
             if (!scriptingRuleChild(this.rule.variableName)) {
@@ -474,7 +516,15 @@ class ScriptingRuleForm {
                 srdarg.appendChild(srdarg2);
                 srdiv.appendChild(srdarg);
             }
-            if (this.rule.type === "Edit Variable of Object") addArgHTML(this.rule.object, "Object:", [[undefined, "Caller"]]);
+            if (this.rule.type === "Edit Variable of Object") {
+                srdarg = document.createElement("p");
+                srdarg.innerHTML = "Object:";
+                if (!scriptingRuleChild(this.rule.object)) {
+                    srdarg.innerHTML += " Caller";
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+            }
         }
         else if (this.rule.type === "if-then-else") {
             srdarg = document.createElement("p");
@@ -493,6 +543,24 @@ class ScriptingRuleForm {
                 srdarg.innerHTML = "Script #" + (s + 1);
                 scriptingRuleChild(this.rule.scriptsToRun[s]);
             }
+            srdarg = document.createElement("button");
+            srdarg.classList.add("SRFButton");
+            srdarg.innerHTML = "Add New Entry";
+            srdarg.addEventListener("click", function(){
+                form.rule.scriptsToRun.push(new ScriptingRule("None", "Value", 0));
+                form.modifyDIV();
+            })
+            srdiv.appendChild(srdarg);
+            if (this.rule.scriptsToRun.length > 0) {
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                srdarg.innerHTML = "Remove Last Entry";
+                srdarg.addEventListener("click", function(){
+                    form.rule.scriptsToRun.pop();
+                    form.modifyDIV();
+                })
+                srdiv.appendChild(srdarg);
+            }
         }
         else if (this.rule.type == "Repeat While") {
             srdarg = document.createElement("p");
@@ -503,21 +571,232 @@ class ScriptingRuleForm {
             scriptingRuleChild(this.rule.repeatScript);
         }
         else if (twoArgOperators.indexOf(this.rule.type) != -1) {
-            addArgHTML(this.rule.leftArg, "Left Argument:");
-            addArgHTML(this.rule.rightArg, "Right Argument:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Left Argument:";
+            if (!scriptingRuleChild(this.rule.leftArg)) {
+                if (typeof this.rule.leftArg === "number") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.leftArg = this.rule.leftArg;
+                    srdarg2.addEventListener("change", function(){
+                        let v = Number(this.value);
+                        if (Number.isFinite(v)) form.rule.leftArg = v;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+                else if (typeof this.rule.leftArg === "boolean") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("span");
+                    srdarg2.classList.add("SRFBooleanBox");
+                    srdarg2.innerHTML = this.rule.leftArg;
+                    srdarg2.addEventListener("click", function(){
+                        form.rule.leftArg = !form.rule.leftArg;
+                        form.modifyDIV();
+                    })
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+                else {
+                    srdarg.innerHTML += " " + stringifyBGBObject(this.rule.leftArg);
+                    srdiv.appendChild(srdarg);
+                }
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                srdarg.innerHTML = "Change Type";
+                srdarg.addEventListener("click", function(){
+                    if (typeof form.rule.leftArg === "number") {
+                        form.rule.leftArg = Boolean(form.rule.leftArg);
+                    }
+                    else {
+                        form.rule.leftArg = Number(form.rule.leftArg);
+                    }
+                    form.modifyDIV();
+                })
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Right Argument:";
+            if (!scriptingRuleChild(this.rule.rightArg)) {
+                if (typeof this.rule.rightArg === "number") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.rightArg = this.rule.rightArg;
+                    srdarg2.addEventListener("change", function(){
+                        let v = Number(this.value);
+                        if (Number.isFinite(v)) form.rule.rightArg = v;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+                else if (typeof this.rule.rightArg === "boolean") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("span");
+                    srdarg2.classList.add("SRFBooleanBox");
+                    srdarg2.innerHTML = this.rule.rightArg;
+                    srdarg2.addEventListener("click", function(){
+                        form.rule.rightArg = !form.rule.rightArg;
+                        form.modifyDIV();
+                    })
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+                else {
+                    srdarg.innerHTML += " " + stringifyBGBObject(this.rule.rightArg);
+                    srdiv.appendChild(srdarg);
+                }
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                srdarg.innerHTML = "Change Type";
+                srdarg.addEventListener("click", function(){
+                    if (typeof form.rule.rightArg === "number") {
+                        form.rule.rightArg = Boolean(form.rule.rightArg);
+                    }
+                    else {
+                        form.rule.rightArg = Number(form.rule.rightArg);
+                    }
+                    form.modifyDIV();
+                })
+                srdiv.appendChild(srdarg);
+            }
         }
         else if (oneArgOperators.indexOf(this.rule.type) != -1) {
-            addArgHTML(this.rule.argument, "Argument:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Left Argument:";
+            if (!scriptingRuleChild(this.rule.argument)) {
+                if (typeof this.rule.argument === "number") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.argument = this.rule.argument;
+                    srdarg2.addEventListener("change", function(){
+                        let v = Number(this.value);
+                        if (Number.isFinite(v)) form.rule.argument = v;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+                else if (typeof this.rule.argument === "boolean") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("span");
+                    srdarg2.classList.add("SRFBooleanBox");
+                    srdarg2.innerHTML = this.rule.argument;
+                    srdarg2.addEventListener("click", function(){
+                        form.rule.argument = !form.rule.argument;
+                        form.modifyDIV();
+                    })
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
+                else {
+                    srdarg.innerHTML += " " + stringifyBGBObject(this.rule.argument);
+                    srdiv.appendChild(srdarg);
+                }
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                srdarg.innerHTML = "Change Type";
+                srdarg.addEventListener("click", function(){
+                    if (typeof form.rule.argument === "number") {
+                        form.rule.argument = Boolean(form.rule.argument);
+                    }
+                    else {
+                        form.rule.argument = Number(form.rule.argument);
+                    }
+                    form.modifyDIV();
+                })
+                srdiv.appendChild(srdarg);
+            }
+        }
+
+        // Arrays
+        // I'm assuming for now that arrays are always generated via scripting rules.
+        // Should probably add a "create new array" rule later.
+        else if (this.rule.type === "Create an Array") {
+            for (let e = 0; e < this.rule.elements.length; e++) {
+                srdarg = document.createElement("p");
+                srdarg.innerHTML = "Element #" + (s + 1);
+                if (!scriptingRuleChild(this.rule.elements[e])) {
+                    if (typeof this.rule.elements[e] === "number") {
+                        srdarg.innerHTML += " "
+                        srdarg2 = document.createElement("input");
+                        srdarg2.elements[e] = this.rule.elements[e];
+                        srdarg2.addEventListener("change", function(){
+                            let v = Number(this.value);
+                            if (Number.isFinite(v)) form.rule.elements[e] = v;
+                            form.modifyDIV();
+                        });
+                        srdarg.appendChild(srdarg2);
+                        srdiv.appendChild(srdarg);
+                    }
+                    else if (typeof this.rule.elements[e] === "boolean") {
+                        srdarg.innerHTML += " "
+                        srdarg2 = document.createElement("span");
+                        srdarg2.classList.add("SRFBooleanBox");
+                        srdarg2.innerHTML = this.rule.elements[e];
+                        srdarg2.addEventListener("click", function(){
+                            form.rule.elements[e] = !form.rule.elements[e];
+                            form.modifyDIV();
+                        })
+                        srdarg.appendChild(srdarg2);
+                        srdiv.appendChild(srdarg);
+                    }
+                    else {
+                        srdarg.innerHTML += " " + stringifyBGBObject(this.rule.elements[e]);
+                        srdiv.appendChild(srdarg);
+                    }
+                    srdarg = document.createElement("button");
+                    srdarg.classList.add("SRFButton");
+                    srdarg.innerHTML = "Change Type";
+                    srdarg.addEventListener("click", function(){
+                        if (typeof form.rule.elements[e] === "number") {
+                            form.rule.elements[e] = Boolean(form.rule.elements[e]);
+                        }
+                        else {
+                            form.rule.elements[e] = Number(form.ruleelements[e]);
+                        }
+                        form.modifyDIV();
+                    })
+                    srdiv.appendChild(srdarg);
+                }
+            }
+            srdarg = document.createElement("button");
+            srdarg.classList.add("SRFButton");
+            srdarg.innerHTML = "Add New Entry";
+            srdarg.addEventListener("click", function(){
+                form.rule.elements.push(0);
+                form.modifyDIV();
+            })
+            srdiv.appendChild(srdarg);
+            if (this.rule.elements.length > 0) {
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                srdarg.innerHTML = "Remove Last Entry";
+                srdarg.addEventListener("click", function(){
+                    form.rule.elements.pop();
+                    form.modifyDIV();
+                })
+                srdiv.appendChild(srdarg);
+            }
         }
         else if (this.rule.type == "Array Length" || this.rule.type == "Remove Last Element of Array") {
-            addArgHTML(this.rule.array, "Array:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Array:";
+            scriptingRuleChild(this.rule.array);
         }
         else if (this.rule.type == "Array Index Of Element" || this.rule.type == "Add to Array") {
-            addArgHTML(this.rule.array, "Array:");
-            addArgHTML(this.rule.element, "Element:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Array:";
+            scriptingRuleChild(this.rule.array);
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Element:";
+            scriptingRuleChild(this.rule.element);
         }
         else if (this.rule.type == "Array Element at Index") {
-            addArgHTML(this.rule.array, "Array:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Array:";
+            scriptingRuleChild(this.rule.array);
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Index:";
             if (!scriptingRuleChild(this.rule.index)) {
@@ -535,11 +814,17 @@ class ScriptingRuleForm {
         }
 
         else if (this.rule.type == "Other Caller") {
-            addArgHTML(this.rule.otherCaller, "Object:");
-            addArgHTML(this.rule.otherScript, "Script:");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Object:";
+            scriptingRuleChild(this.rule.otherCaller);
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Script:";
+            scriptingRuleChild(this.rule.otherScript);
         }
         else if (this.rule.type == "Console Log") {
-            addArgHTML(this.rule.toLog, "Log the Result of");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Log the Result of";
+            scriptingRuleChild(this.rule.toLog);
         }
     }
 }
