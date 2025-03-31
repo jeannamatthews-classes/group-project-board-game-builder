@@ -4,3 +4,4 @@ March 24 for 1 hour: Had a meeting with  Aaron and Jackson where we discussed wh
   and which areas of the project (UI, Backend, etc) each member should be assigned.
 March 25 for 3 hours: Currently working on the sprite work for the board, peices, menu, etc. 
 March 26 for 1 hour: had a meeting with the team, discussed the UI and updated the GANTT chart.
+March 31 for 1 hour: had a meeting with the whole team.
