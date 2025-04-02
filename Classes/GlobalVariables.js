@@ -64,20 +64,63 @@ function gameInProgress() {
 }
 
 function endGame(winner) {
+    if (!gameInProgress()) return;
+    let scriptsToExecute = [];
+    for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
+        for (let t of p.types) {
+            for (let scriptToCheck of t.scripts) {
+                if (scriptToCheck.trigger === "End Game") scriptsToExecute.push([scriptToCheck, p, winner]);
+            }
+        }
+    }
+    let scriptResult;
+    for (let s = 0; s < scriptsToExecute.length; s++) {
+        scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
+        console.log(scriptResult);
+        if (scriptResult === false) {
+            return false;
+        }
+    }
     activeGameState.turnNumber = Infinity;
     activeGameState.playerTurn = winner;
     activeGameState.turnPhase = Infinity;
+    return true;
 }
 
 // This function should be run whenever the game state changes, as it includes things like turn number changes
 function globalScriptCheck() {
     if (!gameInProgress()) return;
     if (!Number.isFinite(activeGameState.turnPhase)) {
+        let scriptsToExecuteEnd = [];
+        let scriptsToExecuteStart = [];
+        for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
+            for (let t of p.types) {
+                for (let scriptToCheck of t.scripts) {
+                    if (scriptToCheck.trigger === "End Turn") scriptsToExecuteEnd.push([scriptToCheck, p]);
+                    if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteStart.push([scriptToCheck, p]);
+                }
+            }
+        }
+        let scriptResult;
+        for (let s = 0; s < scriptsToExecuteEnd.length; s++) {
+            scriptResult = scriptsToExecuteEnd[s][0].run(...scriptsToExecuteEnd[s].slice(1));
+            console.log(scriptResult);
+            if (scriptResult === false) {
+                return false;
+            }
+        }
         activeGameState.turnPhase = 0;
         activeGameState.playerTurn += 1;
         if (activeGameState.playerTurn > activeGameState.playerAmount) {
             activeGameState.playerTurn = 1;
             activeGameState.turnNumber += 1;
+        }
+        for (let s = 0; s < scriptsToExecuteEnd.length; s++) {
+            scriptResult = scriptsToExecuteStart[s][0].run(...scriptsToExecuteStart[s].slice(1));
+            console.log(scriptResult);
+            if (scriptResult === false) {
+                return false;
+            }
         }
     }
     return true;

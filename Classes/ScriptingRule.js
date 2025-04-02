@@ -1,5 +1,6 @@
 let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**"];
 let oneArgOperators = ["!", "abs", "sign"];
+let booleanOperators = ["&&", "||", "XOR", "!"];
 
 // A single rule for scripting.
 class ScriptingRule {
@@ -66,7 +67,7 @@ class ScriptingRule {
             this.winner = args[0];
         }
         else if (this.type === "Change Sprite") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Create a Sprite"));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create a Sprite", "#ffffff", "#000000", ""));
             this.newSprite = args[0];
         }
         
@@ -137,6 +138,7 @@ class ScriptingRule {
             this.rightArg = args[1];
         }
         else if (oneArgOperators.indexOf(type) != -1) {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.argument = args[0];
         }
 
@@ -148,7 +150,7 @@ class ScriptingRule {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
         }
-        else if (this.type == "Array Index Of Element" || this.type == "Add to Array") {
+        else if (this.type == "Array Index of Element" || this.type == "Add to Array") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
             if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
@@ -157,12 +159,12 @@ class ScriptingRule {
         else if (this.type == "Array Element at Index") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
-            if (args.length <= 1) args.push(0);
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.index = args[1];
         }
 
         else if (this.type == "Other Caller") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Caller"));
             this.otherCaller = args[0];
             if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.otherScript = args[1];
@@ -502,7 +504,7 @@ class ScriptingRule {
             array.pop();
             return array;
         }
-        else if (this.type === "Array Index Of Element") {
+        else if (this.type === "Array Index of Element") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let element = (this.element instanceof ScriptingRule) ? this.element.portVariables(this).run(caller, ...args) : this.element;
             return array.indexOf(element);
@@ -537,6 +539,8 @@ class ScriptingRule {
     "Piece Lands on Tile": Triggers when that piece lands on any tile. Argument is the tile it landed on.
     "Tile is Landed on": Triggers when that tile is landed on by a piece. Argument is the piece that landed on it.
     "Piece is Removed": Triggers when that piece is removed. No arguments.
+    "End Turn": Triggers at the end of a turn.
+    "Start Turn": Triggers at the start of a turn.
     */
 
     // Gives this rule the same variables array as the other rule.
@@ -644,7 +648,7 @@ class ScriptingRule {
         else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
             args.push(this.array)
         }
-        else if (this.type == "Array Index Of Element" || this.type == "Add to Array") {
+        else if (this.type == "Array Index of Element" || this.type == "Add to Array") {
             args.push(this.array)
             args.push(this.element)
         }

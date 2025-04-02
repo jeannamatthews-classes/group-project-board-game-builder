@@ -88,6 +88,7 @@ class Piece {
         }
         scriptResult = globalScriptCheck();
         if (scriptResult && topCall) gameStateValid();
+        else if (topCall) gameStateRevert();
         return scriptResult;
     }
 

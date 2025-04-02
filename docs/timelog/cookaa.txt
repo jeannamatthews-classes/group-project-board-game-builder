@@ -38,3 +38,9 @@ during which I added a couple more rule types (Create an Array and two involving
 
 March 30: Spent around 1 hour and 35 minutes adding a type selector to the scripting rule visualizer (but it doesn't have a sense of context yet),
 and added a few more rule types to let you create sprites and select piece/tile types within a scripting rule.
+
+March 31: Group meeting for around 35 minutes, where we discussed our progress on UI editors so far and what needs to be done next on them.
+Another 25 minutes or so spent fixing bugs with the scripting rule editor.
+
+April 2: Spent around 1 hour and 55 minutes adding "context" to the scripting rule editor, i.e. which rule types are available
+depends on the type of the parent rule, and adding Start Turn, End Turn, and End Game triggers for scripting rules.
