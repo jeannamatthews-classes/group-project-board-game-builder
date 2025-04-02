@@ -3,6 +3,7 @@ let activeGameState; // The game state currently being edited
 let tileTypesList = []; // An array of the created tile types
 let pieceTypesList = []; // An array of the created piece types
 let otherGlobalVariables = [];
+let globalScripts = [];
 let nextObjectID = 0;
 let nextTypeID = 0;
 
@@ -93,13 +94,17 @@ function globalScriptCheck() {
     if (!Number.isFinite(activeGameState.turnPhase)) {
         let scriptsToExecuteEnd = [];
         let scriptsToExecuteStart = [];
-        for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
+        for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1)).concat) {
             for (let t of p.types) {
                 for (let scriptToCheck of t.scripts) {
                     if (scriptToCheck.trigger === "End Turn") scriptsToExecuteEnd.push([scriptToCheck, p]);
                     if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteStart.push([scriptToCheck, p]);
                 }
             }
+        }
+        for (let scriptToCheck of globalScripts) {
+            if (scriptToCheck.trigger === "End Turn") scriptsToExecuteEnd.push([scriptToCheck, undefined]);
+            if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteStart.push([scriptToCheck, undefined]);
         }
         let scriptResult;
         for (let s = 0; s < scriptsToExecuteEnd.length; s++) {
