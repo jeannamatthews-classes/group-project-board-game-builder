@@ -48,3 +48,5 @@ and making the first draft of the UI for the global scripts editor.
 
 April 3: Group meeting for 1 hour and 10 minutes, in which we solidified some plans for UI editors we haven't finished yet, and discussed next steps, including
 plans for getting gameplay buttons and other interactive elements prepared for in the backend and combining UI editors together.
+
+April 4: Spent about 10 minutes properly starting the Button class so that a UI editor for it can be made.

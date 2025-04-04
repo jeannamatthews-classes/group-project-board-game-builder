@@ -59,6 +59,7 @@ class Piece {
         }
         scriptResult = globalScriptCheck();
         if (scriptResult && topCall) gameStateValid();
+        else if (topCall) gameStateRevert();
         return scriptResult;
     }
 
@@ -97,6 +98,7 @@ class Piece {
         this.playerID = playerID;
         scriptResult = globalScriptCheck();
         if (scriptResult && topCall) gameStateValid();
+        else if (topCall) gameStateRevert();
         return scriptResult;
     }
 }

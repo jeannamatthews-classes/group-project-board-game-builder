@@ -58,6 +58,7 @@ function BGBStructuredClone(argument) {
     if (argument instanceof PieceType) return new PieceType(argument.typeName, BGBStructuredClone(argument.scripts), argument.typeID);
     if (argument instanceof Piece) return new Piece(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
     if (argument instanceof Sprite) return new Sprite(argument.color, argument.textColor, argument.text);
+    if (argument instanceof Button) return new Button(BGBStructuredClone(argument.clickScripts), BGBStructuredClone(argument.visibleRules), argument.color, argument.textColor, argument.text, argument.width, argument.length);
 }
 
 function gameInProgress() {
