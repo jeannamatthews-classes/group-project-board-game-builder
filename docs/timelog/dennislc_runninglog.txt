@@ -6,3 +6,4 @@ March 25 for 3 hours: Currently working on the sprite work for the board, peices
 March 26 for 1 hour: had a meeting with the team, discussed the UI and updated the GANTT chart.
 March 31 for 1 hour: had a meeting with the whole team.
 April  1: currently working on the peice type and tile type editors for the game builder.
+April 3 for 1 hour: had a meeting with the team where we dicsussed who would handle the Buttons, UI and Scripting attatchment, RAPS presentation, and Buttons for the game maker.
