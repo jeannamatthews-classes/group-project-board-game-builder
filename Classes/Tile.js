@@ -3,16 +3,20 @@ class Tile {
     objectID = -1;
     xCoordinate = -1; yCoordinate = -1;
     playerOwnerID = -1;
+    enabled = true; 
+    
     publicVars = []; // An array of name-value pairs
-    sprite = new Sprite("#000000", "#ffffff", "");
+    sprite = {
+        fillColor: '#cccccc',
+        text: '',
+        textColor: '#000000'
+    };
 
-    constructor(types, xStart, yStart, owner, sprite, id = undefined) {
+    constructor(types, xStart, yStart, id = undefined) {
         this.types = types;
         this.objectID = (id !== undefined) ? id : assignObjectID();
         this.xCoordinate = xStart;
         this.yCoordinate = yStart;
-        this.playerOwnerID = owner;
-        this.sprite = sprite;
     }
 
     getPieces(active = true) {

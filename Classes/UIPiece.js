@@ -2,36 +2,45 @@ class UIPiece {
     constructor(piece, editor) {
         this.piece = piece;
         this.editor = editor;
-        this.container = this.createPieceElement();
+        this.container = null;
+        this.boardContainer = null;
+        this.editorWindow = null;
+        this.createPieceElement();
+        
     }
 
     createPieceElement() {
-        const pieceEl = document.createElement('div');
-        pieceEl.classList.add('piece-ui');
-        pieceEl.setAttribute('data-id', this.piece.objectID);
-        pieceEl.style.zIndex = '10';
-        pieceEl.style.position = 'relative';
-        pieceEl.style.width = '40px';
-        pieceEl.style.height = '40px';
-        pieceEl.style.display = 'flex';
-        pieceEl.style.alignItems = 'center';
-        pieceEl.style.justifyContent = 'center';
-        pieceEl.style.cursor = 'pointer';
-
-        this.updateSprite(pieceEl);
-
-        pieceEl.addEventListener('click', (e) => {
+        const create = () => {
+            const el = document.createElement('div');
+            el.classList.add('piece-ui');
+            el.setAttribute('data-id', this.piece.objectID);
+            el.style.width = '40px';
+            el.style.height = '40px';
+            el.style.position = 'relative';
+            el.style.display = 'flex';
+            el.style.alignItems = 'center';
+            el.style.justifyContent = 'center';
+            el.style.cursor = 'pointer';
+            return el;
+        };
+    
+        this.container = create();
+        this.boardContainer = create();
+        this.boardContainer.classList.add('board-piece')
+    
+        this.updateSprite();
+    
+        this.container.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (this.editor.activeTool === 'select') {
-                this.openEditorWindow();
-            }
+            this.openEditorWindow();
         });
-
-        return pieceEl;
     }
+    
 
-    updateSprite(el = this.container) {
-        const s = this.piece.sprite;
+
+updateSprite(sprite = this.piece.sprite) {
+    const renderTo = (el) => {
+        const s = sprite;
         el.innerHTML = '';
 
         const shape = document.createElement('div');
@@ -63,58 +72,92 @@ class UIPiece {
         }
 
         el.appendChild(shape);
-    }
+    };
+
+    renderTo(this.container);
+    renderTo(this.boardContainer);
+}
 
     openEditorWindow() {
-        const s = this.piece.sprite;
+        if (this.editorWindow && document.body.contains(this.editorWindow.container)) {
+            this.editorWindow.container.style.zIndex = ++__windowZIndex;
+            return;}
+    const temp = structuredClone ? structuredClone(this.piece.sprite) : JSON.parse(JSON.stringify(this.piece.sprite));
 
-        const win = new WindowContainer(`Piece (${this.piece.objectID})`, true, {
-            width: 300,
-            height: 250,
-            offsetTop: 100,
-            offsetLeft: 400
-        });
+    const win = new WindowContainer(`Piece (${this.piece.objectID})`, true, {
+        width: 300,
+        height: 300,
+        offsetTop: 100,
+        offsetLeft: 400
+    });
+    this.editorWindow=win;
 
-        const content = document.createElement('div');
-        content.innerHTML = `
-            <label>Shape:
-                <select id="shape">
-                    <option value="square">Square</option>
-                    <option value="circle">Circle</option>
-                    <option value="triangle">Triangle</option>
-                </select>
-            </label><br>
-            <label>Fill Color: <input type="color" id="fill-color" value="${s.fillColor}"></label><br>
-            <label>Stroke Color: <input type="color" id="stroke-color" value="${s.strokeColor}"></label><br>
-            <label>Text: <input type="text" id="piece-text" value="${s.text || ''}"></label><br>
-            <label>Text Color: <input type="color" id="text-color" value="${s.textColor || '#000000'}"></label>
-        `;
+    // TEMPORARY CONTENT TO EDIT
+    const content = document.createElement('div');
+    content.innerHTML = `
+        <label>Shape:
+            <select id="shape">
+                <option value="square">Square</option>
+                <option value="circle">Circle</option>
+                <option value="triangle">Triangle</option>
+            </select>
+        </label><br>
+        <label>Fill Color: <input type="color" id="fill-color"></label><br>
+        <label>Stroke Color: <input type="color" id="stroke-color"></label><br>
+        <label>Text: <input type="text" id="piece-text"></label><br>
+        <label>Text Color: <input type="color" id="text-color"></label><br>
+        <div style="text-align:center; margin-top:10px;">
+            <button id="save-btn">Save and Close</button>
+            <button id="cancel-btn">Cancel</button>
+        </div>
+    `;
 
-        const shape = content.querySelector('#shape');
-        const fill = content.querySelector('#fill-color');
-        const stroke = content.querySelector('#stroke-color');
-        const text = content.querySelector('#piece-text');
-        const textColor = content.querySelector('#text-color');
+    const shape = content.querySelector('#shape');
+    const fill = content.querySelector('#fill-color');
+    const stroke = content.querySelector('#stroke-color');
+    const text = content.querySelector('#piece-text');
+    const textColor = content.querySelector('#text-color');
 
-        // Set selector to match current value
-        shape.value = s.shape;
+    // Set initial values
+    shape.value = temp.shape;
+    fill.value = temp.fillColor;
+    stroke.value = temp.strokeColor;
+    text.value = temp.text;
+    textColor.value = temp.textColor;
 
-        const updateSprite = () => {
-            s.shape = shape.value;
-            s.fillColor = fill.value;
-            s.strokeColor = stroke.value;
-            s.text = text.value;
-            s.textColor = textColor.value;
-            this.updateSprite();
-        };
+    const updateTemp = () => {
+        temp.shape = shape.value;
+        temp.fillColor = fill.value;
+        temp.strokeColor = stroke.value;
+        temp.text = text.value;
+        temp.textColor = textColor.value;
+        this.updateSprite(temp);
+    };
 
-        // Attach listeners
-        shape.addEventListener('change', updateSprite);
-        fill.addEventListener('input', updateSprite);
-        stroke.addEventListener('input', updateSprite);
-        text.addEventListener('input', updateSprite);
-        textColor.addEventListener('input', updateSprite);
+    shape.addEventListener('change', updateTemp);
+    fill.addEventListener('input', updateTemp);
+    stroke.addEventListener('input', updateTemp);
+    text.addEventListener('input', updateTemp);
+    textColor.addEventListener('input', updateTemp);
 
-        win.appendContent(content);
-    }
+    // Save & Close
+    content.querySelector('#save-btn').addEventListener('click', () => {
+        this.piece.sprite = temp;
+        this.updateSprite();
+        win.close(); // triggers default close
+    });
+
+    // Cancel — revert to original
+    content.querySelector('#cancel-btn').addEventListener('click', () => {
+        this.updateSprite(); // redraw original
+        win.close(); 
+    });
+
+    // Hook into X close to also cancel
+    win.beforeClose = () => {
+        this.updateSprite();
+    };
+
+    win.appendContent(content);
+}
 }

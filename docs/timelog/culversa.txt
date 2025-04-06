@@ -1,0 +1,49 @@
+Before 3/14
+
+
+March 28th - I spent a bit over an hour planning and working on how I wanted the board to look.
+
+March 30th - We met on 
+
+April 2nd - I spent 2-3 hours working on the Main Screen UI Code 
+Added WindowContainer - A draggable, closable window to hold contents of the various Editors.
+Added Board Editor
+    Store Tile elements in a grid formation. Links to the logical Tile class.
+    Added Toolbar - A toolbar that allows tools to be selected within a target space. (the board)
+    Added Toolbuttons
+    -Added Select/Drag, Zoom In/Zoom Out, Paint, and Eyedropper
+        -Implemented Select - Opens Tile editor for Tile (x,y).
+        -Implemented Drag - Allows user to move the board around in the window (overflow hidden)
+        -Implemented Zoom In / Zoom Out - Allows user to grow/shrink the board within the window.
+    Added Tile UI and Tile Editor.
+    Tile UI - Displays Tile as div within the grid board.
+    Tile Editor - Background Color, Text, Text Color, Add Type (button + dropdown), Add Piece (dropdown)
+Added PieceEditor
+    Stores Piece Elements in rows of sprites. 
+    Added Select, Arrange, and AddPiece tools.
+        Implemented Select - Opens the piece Editor for Piece (id)
+        Implemented Arrange - Allows dragging to swap piecees around (some edge cases broken.)
+        Implemented AddPiece - Adds a new piece with a degault gray square sprite.
+    Piece Editor - Shape, Text, Text Color, AddType
+
+April 3rd - We met during class time for just under 90 minutes.
+During this time, I pushed the code I had completed so far.
+
+April 5th - I spent 6+ish hours working on the Main Screen UI Code.
+- Updated 
+- Added Save & Close / Cancel
+    -Save & Close - saves changes made to the tile.
+    -Cancel (or clicking x) does not save changes made to the tile. Reverts.
+- Implemented Eydropper Functionality (Copy Sprites)
+- Implemented Paint Functionality (Pastes Sprites to Tile)
+- Implemented Paint "Brush". - Paint tool can be dragged 
+Edited/Fixed Adding Pieces to the Board 
+    -Pieces no longer disappear from the Piece editor when they are placed on the Board 
+    -Pieces now split into a grid formation when more than 1 piece is placed on the same tile to show all.
+    -Implemented Right Click to Remove Piece from Board
+Added Disable, Show/Hide Pieces, Sprite Preview
+    -Implemented Disable - Marks a tile as disabled with a red/black X.
+    -Implemented Show/Hide Pieces - 
+
+
+

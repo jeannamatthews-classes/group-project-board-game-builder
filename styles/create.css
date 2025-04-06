@@ -172,6 +172,7 @@ transition: transform 0.2s ease;
     height: 40px;
     border: 1px solid #000;
     box-sizing: border-box;
+    position:relative;
 }
 
 .piece {
@@ -234,7 +235,7 @@ transition: transform 0.2s ease;
     background-color: #eee;
     border: 1px solid #aaa;
     padding: 4px;
-    gap: 10%;
+    gap: 2%;
     user-select: none;
 }
 
@@ -283,3 +284,89 @@ transition: transform 0.2s ease;
     background-color: white;
     margin-top:5vh;
 }
+
+
+
+
+
+
+
+.toolbar {
+    align-items: center;
+}
+
+.tool-button, .toggle-button {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+
+
+.sprite-preview {
+    min-width: 40px;
+}
+
+
+.tile,
+.tile *
+.piece
+.piece * {
+    user-select: none;
+}.tile-disabled-x {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
+    z-index: 2;
+  }
+  
+  .tile-disabled-x .line {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform-origin: center;
+  }
+  
+  .tile-disabled-x .line.black {
+    background: black;
+    transform: rotate(45deg);
+  }
+  
+  .tile-disabled-x .line.red {
+    background: red;
+    transform: rotate(-45deg);
+  }
+  
+  #control-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 9999;
+  }
+
+  .control-btn {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  .editor-launcher-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  

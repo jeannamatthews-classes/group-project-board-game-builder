@@ -10,8 +10,10 @@ const tileType = document.getElementById('tile-type');
 const boardTypeText = ["Square", "Hex", "Triangle"]
 const boardTypeSources = ["images/square.png","images/hexagon.png","images/triangle.png"];
 const TILE_TYPES = ['Grass', 'Water', 'Mountain', 'Road'];
-var gameBoard
-var editor
+var boardEditor;
+var pieceEditor;
+var typeEditor;
+var buttonEditor;
 
 
 var boardType = 0;
@@ -26,14 +28,14 @@ function changeBoardType(direction){
 }
 
 function submitBoard(){
-    gameBoard = new UIBoard(new Board(boardTypeText[boardType], parseInt(widthInput.value), parseInt(heightInput.value)))
+    boardEditor = new UIBoard(new Board(boardTypeText[boardType], parseInt(widthInput.value), parseInt(heightInput.value)))
+    pieceEditor = new UIPieceEditor();
+    typeEditor = new UITypeEditor();
+    
+    setUpButtons()
     boardCreator.remove();
-    editor = new UIPieceEditor();
-    const dummySprite = { shape: "square", fillColor: "#ccc", strokeColor: "#000", text: "", textColor: "#000" };
-    const piece = new Piece([], 0, 0, 0, dummySprite);
-    const piece2 = new Piece([], 0, 0, 0, dummySprite);
-    editor.addPiece(piece);
-    editor.addPiece(piece2);
+    
+
 
 
 }
@@ -59,4 +61,99 @@ heightInput.addEventListener('input', validateInputs);
 
 function saveFile(){
     return //dummy function to buff out later.
+}
+
+
+function setUpButtons(){
+    const controls = document.createElement('div');
+    controls.id = 'control-buttons';
+   
+    // --- Preview Toggle ---
+    let previewEnabled = true;
+    const previewBtn = document.createElement('div');
+    previewBtn.classList.add('control-btn');
+    previewBtn.style.backgroundImage = `url(images/preview_on.png)`;
+    previewBtn.title = 'Toggle Preview';
+    previewBtn.onclick = () => {
+        previewEnabled = !previewEnabled;
+        previewBtn.style.backgroundImage = `url(images/${previewEnabled ? 'preview_on' : 'preview_off'}.png)`;
+    };
+  
+    // --- Download Button ---
+    const downloadBtn = document.createElement('div');
+    downloadBtn.classList.add('control-btn');
+    downloadBtn.style.backgroundImage = `url(images/download.png)`;
+    downloadBtn.title = 'Download';
+    downloadBtn.onclick = () => saveCode();
+  
+    // --- Edit Button ---
+    const editBtn = document.createElement('div');
+    editBtn.classList.add('control-btn');
+    editBtn.style.backgroundImage = `url(images/edit.png)`;
+    editBtn.title = 'Open Editors';
+    editBtn.onclick = () => {
+        if (!window._editorLauncherWindow || !document.body.contains(window._editorLauncherWindow.container)) {
+            const win = new WindowContainer('Editor Launcher', true, {
+                width: 300,
+                height: 250,
+                offsetTop: 60,
+                offsetLeft: 500
+            });
+            win.setContent(`
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <div><strong>Board Editor</strong> <button onclick="openEditor('board')">Open</button></div>
+                    <div><strong>Pieces Editor</strong> <button onclick="openEditor('pieces')">Open</button></div>
+                    <div><strong>Buttons Editor</strong> <button onclick="openEditor('buttons')">Open</button></div>
+                    <div><strong>Types Editor</strong> <button onclick="openEditor('types')">Open</button></div>
+                    <div><strong>Global Editor</strong> <button onclick="openEditor('global')">Open</button></div>
+                </div>
+            `);
+            window._editorLauncherWindow = win;
+        } else {
+            window._editorLauncherWindow.container.style.zIndex = ++__windowZIndex;
+        }
+    };
+  
+    controls.appendChild(previewBtn);
+    controls.appendChild(downloadBtn);
+    controls.appendChild(editBtn);
+    document.body.appendChild(controls);
+}
+
+
+
+
+function openEditor(type) {
+    switch (type) {
+        case 'board':
+            if(!boardEditor.window)
+                boardEditor.createWindow();
+            else
+                boardEditor.window.container.style.zIndex = ++__windowZIndex;
+            break;
+        case 'pieces':
+            if(!pieceEditor.window)
+                pieceEditor.createWindow();
+            else 
+                pieceEditor.window.container.style.zIndex = ++__windowZIndex;
+            break;
+        case 'buttons':
+            if(!buttonEditor.window)
+                buttonEditor.createWindow();
+            break;
+        case 'types':
+            if (!typeEditor.window) 
+                typeEditor.createWindow();
+            else 
+                typeEditor.window.container.style.zIndex = ++__windowZIndex;
+            break;
+        case 'global':
+            if (!globalEditor.window)
+                globalEditor.createWindow();
+            break;
+        // Add stubs for other editors
+    }
+    if (window._typeEditor && window._typeEditor.window) {
+        window._typeEditor.window.container.style.zIndex = ++__windowZIndex;
+    }
 }

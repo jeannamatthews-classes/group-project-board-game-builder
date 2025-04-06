@@ -1,3 +1,4 @@
+let __windowZIndex = 1000;
 class WindowContainer {
     constructor(title = "Window", closeable = true, options = {}) {
         const {
@@ -9,6 +10,14 @@ class WindowContainer {
 
         this.container = document.createElement('div');
         this.container.classList.add('window-container');
+        // Initial z-index
+        this.container.style.zIndex = __windowZIndex++;
+
+        // Bring to front when clicked
+        this.container.addEventListener('mousedown', () => {
+            this.container.style.zIndex = ++__windowZIndex;
+        });
+
 
         // Optional size
         if (width) this.container.style.width = typeof width === 'number' ? `${width}px` : width;
@@ -26,7 +35,7 @@ class WindowContainer {
             const closeBtn = document.createElement('button');
             closeBtn.classList.add('window-close');
             closeBtn.innerHTML = '✕';
-            closeBtn.onclick = () => this.container.remove();
+            closeBtn.onclick = () => this.close();
             this.header.appendChild(closeBtn);
         }
 
@@ -72,5 +81,12 @@ class WindowContainer {
 
     appendContent(el) {
         this.content.appendChild(el);
+    }
+
+    close(){
+        if (typeof this.beforeClose === 'function') {
+            this.beforeClose();
+        }
+        this.container.remove()
     }
 }
