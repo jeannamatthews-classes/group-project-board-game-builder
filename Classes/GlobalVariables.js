@@ -46,8 +46,12 @@ function gameStateRevert() {
 function BGBStructuredClone(argument) {
     if (typeof argument !== "object") return argument; // primitive types are already cloned
     if (Array.isArray(argument)) return argument.map(BGBStructuredClone); // Copy each entry of the array
-    if (argument instanceof ScriptingRule) return new ScriptingRule(...argument.getConstructorArguments());
-    if (argument instanceof GameState) return new GameState(BGBStructuredClone(argument.board), BGBStructuredClone(argument.pieceArray), argument.playerAmount, argument.turnNumber, argument.playerTurn, argument.turnPhase);
+    if (argument instanceof ScriptingRule) {
+        let result = new ScriptingRule(...argument.getConstructorArguments());
+        result.name = argument.name;
+        return result;
+    }
+    if (argument instanceof GameState) return new GameState(BGBStructuredClone(argument.board), BGBStructuredClone(argument.pieceArray), argument.playerAmount, argument.turnNumber, argument.playerTurn, argument.turnPhase, BGBStructuredClone(argument.selectedObjects));
     if (argument instanceof Board) {
         let result = new Board(argument.boardShape, argument.width, argument.height);
         result.tileArray = BGBStructuredClone(argument.tileArray);
@@ -58,7 +62,31 @@ function BGBStructuredClone(argument) {
     if (argument instanceof PieceType) return new PieceType(argument.typeName, BGBStructuredClone(argument.scripts), argument.typeID);
     if (argument instanceof Piece) return new Piece(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
     if (argument instanceof Sprite) return new Sprite(argument.color, argument.textColor, argument.text);
-    if (argument instanceof Button) return new Button(BGBStructuredClone(argument.clickScripts), BGBStructuredClone(argument.visibleRules), argument.color, argument.textColor, argument.text, argument.width, argument.length);
+    if (argument instanceof Button) {
+        let result = new Button(BGBStructuredClone(argument.clickScripts), BGBStructuredClone(argument.visibleRules), argument.color, argument.textColor, argument.text, argument.width, argument.length);
+        result.name = argument.name;
+    }
+}
+
+// Checks if two things are equal, including working on types like Pieces and Tiles.
+function BGBEquals(leftArg, rightArg) {
+    if ((leftArg instanceof Piece || leftArg instanceof Tile) && (rightArg instanceof Piece || rightArg instanceof Tile)) return (leftArg.objectID === rightArg.objectID);
+    if ((leftArg instanceof PieceType && rightArg instanceof PieceType) || (leftArg instanceof TileType && rightArg instanceof TileType)) return (leftArg.typeID === rightArg.typeID);
+    if (Array.isArray(leftArg) && Array.isArray(rightArg)) {
+        if (leftArg.length != rightArg.length) return false;
+        for (let i = 0; i < leftArg.length; i++) {
+            if (!BGBEquals(leftArg[i], rightArg[i])) return false;
+        }
+        return true;
+    }
+    return (leftArg === rightArg);
+}
+
+function BGBIndexOf(array, element) {
+    for (i = 0; i < array.length; i++) {
+        if (BGBEquals(array[i], element)) return i;
+    }
+    return -1;
 }
 
 function gameInProgress() {
@@ -93,6 +121,7 @@ function endGame(winner) {
 function globalScriptCheck() {
     if (!gameInProgress()) return;
     if (!Number.isFinite(activeGameState.turnPhase)) {
+        activeGameState.selectedObjects = []; // Selected objects are reset between turns
         let scriptsToExecuteEnd = [];
         let scriptsToExecuteStart = [];
         for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1)).concat) {

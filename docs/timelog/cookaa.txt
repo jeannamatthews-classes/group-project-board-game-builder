@@ -50,3 +50,8 @@ April 3: Group meeting for 1 hour and 10 minutes, in which we solidified some pl
 plans for getting gameplay buttons and other interactive elements prepared for in the backend and combining UI editors together.
 
 April 4: Spent about 10 minutes properly starting the Button class so that a UI editor for it can be made.
+
+April 5: Spent around 25 minutes working on adding object selecting (for gameplay) to the scripting rules.
+
+April 6: Spent around 20 minutes adding names to ScriptingRules and editing globalScripts.html to reflect this, and adding a
+property to scriptingRuleForm where the type of the caller can be stored.

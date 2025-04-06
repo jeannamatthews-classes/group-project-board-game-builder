@@ -4,6 +4,7 @@ class Button {
     color = "#000000";
     textColor = "#ffffff";
     text = "";
+    name; // This starts out undefined but can be changed to a string
     // I don't know what units the width and height should be in, but I imagine that having these variables will be useful
     width = 0;
     height = 0;
