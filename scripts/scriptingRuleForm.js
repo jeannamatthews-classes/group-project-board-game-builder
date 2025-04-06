@@ -1,19 +1,19 @@
 class ScriptingRuleForm {
     rule;
     top;
-    topTrigger;
+    callerType = "None";
     zebraDark = false;
     parentType = "None";
     div;
     childrenForms = [];
 
-    constructor(rule, top = true, topTrigger = undefined, zebraDark = false, parentType = "None") {
+    constructor(rule, top = true, callerType = "None", zebraDark = false, parentType = "None") {
         this.rule = rule;
         this.top = top;
-        if (this.top && this.topTrigger === undefined) this.topTrigger = this.rule.trigger;
-        else if (this.topTrigger === undefined) this.topTrigger = topTrigger;
+        this.callerType = callerType;
         this.zebraDark = zebraDark;
         this.parentType = parentType;
+        this.callerType = callerType;
         this.createDIV();
     }
 
@@ -36,30 +36,29 @@ class ScriptingRuleForm {
         while (srdiv.firstElementChild) srdiv.removeChild(srdiv.lastElementChild);
         let form = this;
         if (this.top) {
-            this.topTrigger = this.rule.trigger;
             let srdtrigger = document.createElement("p");
             srdtrigger.innerHTML = "Trigger:";
             let srdtriggerselect = document.createElement("select");
             let srdtriggeroption;
-            if (true) {
+            if (this.callerType === "Any" || this.callerType === "Piece") {
                 srdtriggeroption = document.createElement("option");
                 srdtriggeroption.setAttribute("value", "Piece Moves");
                 srdtriggeroption.innerHTML = "When this piece moves";
                 srdtriggerselect.appendChild(srdtriggeroption);
             }
-            if (true) {
+            if (this.callerType === "Any" || this.callerType === "Piece") {
                 srdtriggeroption = document.createElement("option");
                 srdtriggeroption.setAttribute("value", "Piece Lands on Tile");
                 srdtriggeroption.innerHTML = "When this piece lands on a tile";
                 srdtriggerselect.appendChild(srdtriggeroption);
             }
-            if (true) {
+            if (this.callerType === "Any" || this.callerType === "Tile") {
                 srdtriggeroption = document.createElement("option");
                 srdtriggeroption.setAttribute("value", "Tile is Landed On");
                 srdtriggeroption.innerHTML = "When this tile is landed on";
                 srdtriggerselect.appendChild(srdtriggeroption);
             }
-            if (true) {
+            if (this.callerType === "Any" || this.callerType === "Piece") {
                 srdtriggeroption = document.createElement("option");
                 srdtriggeroption.setAttribute("value", "Piece is Removed");
                 srdtriggeroption.innerHTML = "When this piece is removed";
@@ -83,6 +82,12 @@ class ScriptingRuleForm {
                 srdtriggeroption.innerHTML = "When the game ends";
                 srdtriggerselect.appendChild(srdtriggeroption);
             }
+            if (this.callerType === "Any" || this.callerType === "Piece" || this.callerType === "Tile") {
+                srdtriggeroption = document.createElement("option");
+                srdtriggeroption.setAttribute("value", "Object Clicked");
+                srdtriggeroption.innerHTML = "When this object is clicked";
+                srdtriggerselect.appendChild(srdtriggeroption);
+            }
             // No need for an if here, "no trigger" is always an option
             srdtriggeroption = document.createElement("option");
             srdtriggeroption.setAttribute("value", "None");
@@ -103,7 +108,7 @@ class ScriptingRuleForm {
         let scriptingRuleChild = function(argToCheck, parentType = "None") {
             if (argToCheck instanceof ScriptingRule) {
                 srdiv.appendChild(srdarg);
-                let newForm = new ScriptingRuleForm(argToCheck, false, form.topTrigger, !form.zebraDark, parentType);
+                let newForm = new ScriptingRuleForm(argToCheck, false, form.callerType, !form.zebraDark, parentType);
                 form.childrenForms.push(newForm);
                 console.log(newForm);
                 srdiv.appendChild(newForm.div);
@@ -165,7 +170,7 @@ class ScriptingRuleForm {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Argument: ";
             srdarg2 = document.createElement("select");
-            if (this.topTrigger === "Piece Moves") {
+            if (this.callerType === "Piece Moves") {
                 srdarg3 = document.createElement("option");
                 srdarg3.setAttribute("value", 0);
                 srdarg3.innerHTML = "X Movement";
@@ -175,13 +180,13 @@ class ScriptingRuleForm {
                 srdarg3.innerHTML = "Y Movement";
                 srdarg2.appendChild(srdarg3);
             }
-            else if (this.topTrigger === "Piece Lands on Tile") {
+            else if (this.callerType === "Piece Lands on Tile") {
                 srdarg3 = document.createElement("option");
                 srdarg3.setAttribute("value", 0);
                 srdarg3.innerHTML = "The tile this piece landed on";
                 srdarg2.appendChild(srdarg3);
             }
-            else if (this.topTrigger === "Tile is Landed On") {
+            else if (this.callerType === "Tile is Landed On") {
                 srdarg3 = document.createElement("option");
                 srdarg3.setAttribute("value", 0);
                 srdarg3.innerHTML = "The piece that landed on this tile";
@@ -479,7 +484,7 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
         }
-        else if (this.rule.type === "X Coordinate" || this.rule.type === "Y Coordinate" || this.rule.type === "Object Types" || this.rule.type === "Object ID") {
+        else if (this.rule.type === "X Coordinate" || this.rule.type === "Y Coordinate" || this.rule.type === "Object Types" || this.rule.type === "Object ID" || this.rule.type === "Select Object" || this.rule.type === "Deselect Object") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Object:";
             if (!scriptingRuleChild(this.rule.object, "Object")) {
@@ -1044,6 +1049,7 @@ let SRF_AllRuleTypes = [
     "Choose Tile Type", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "if-then-else", "Return at End",
     "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "!", "abs", "sign", "Create an Array",
     "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index", "Other Caller",
+    "Select Object", "Deselect Object", "Selected Objects"
 ]
 
 // These can go in for any scripting rule argument since we don't know what type they'll return
@@ -1087,7 +1093,7 @@ let SRF_RType_Sprite = [
 ]
 // Scripting rules of these types return an array with unknown entry types.
 let SRF_RType_ArrayAny = [
-    "Create an Array", "Object Types", "Pieces on Tile"
+    "Create an Array", "Object Types", "Pieces on Tile", "Selected Objects"
 ]
 // I'll handle these next three later.
 // Scripting rules of these types return an array of PieceTypes or TileTypes.
@@ -1103,7 +1109,7 @@ let SRF_RType_ArrayOfTiles = [
 let SRF_RType_Action = [
     "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type", "Add Piece", "Change Turn Phase",
     "End Game", "Change Sprite", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "Repeat While",
-    "Remove Last Element of Array", "Add to Array"
+    "Remove Last Element of Array", "Add to Array", "Select Object", "Deselect Object"
 ]
 // Any scripting rule type that does return something, i.e. is not an action
 let SRF_RType_Returns = SRF_AllRuleTypes.filter(e => (SRF_RType_Action.indexOf(e) === -1));
@@ -1113,13 +1119,13 @@ let SRF_RGroup_Basics = [
 ]
 let SRF_RGroup_Actions = [
     "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
-    "Add Piece", "Change Turn Phase", "End Game", "Change Sprite"
+    "Add Piece", "Change Turn Phase", "End Game", "Change Sprite", "Select Object", "Deselect Object"
 ]
 let SRF_RGroup_Reporters = [
     "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
     "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "Object ID", "Caller", "Create a Sprite", "Choose Piece Type",
-    "Choose Tile Type"
+    "Choose Tile Type", "Selected Objects"
 ]
 let SRF_RGroup_Operators = [
     "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "!", "abs", "sign",

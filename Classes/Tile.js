@@ -27,4 +27,27 @@ class Tile {
         }
         return result;
     }
+
+    clickObject(topCall = true) {
+        if (!gameInProgress()) return true;
+        let scriptsToExecute = [];
+        for (let t = 0; t < this.types.length; t++) {
+            for (let s = 0; s < this.types[t].scripts.length; s++) {
+                let scriptToCheck = this.types[t].scripts[s];
+                if (scriptToCheck.trigger === "Object Clicked") scriptsToExecute.push([scriptToCheck, this]);
+            }
+        }
+        let scriptResult;
+        for (let s = 0; s < scriptsToExecute.length; s++) {
+            scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
+            if (scriptResult === false) {
+                if (topCall) gameStateRevert();
+                return false;
+            }
+        }
+        scriptResult = globalScriptCheck();
+        if (scriptResult && topCall) gameStateValid();
+        else if (topCall) gameStateRevert();
+        return scriptResult;
+    }
 }

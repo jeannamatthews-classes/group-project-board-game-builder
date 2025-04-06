@@ -45,3 +45,13 @@ Another 25 minutes or so spent fixing bugs with the scripting rule editor.
 April 2: Spent around 2 hours and 20 minutes adding "context" to the scripting rule editor (i.e. which rule types are available
 depends on the type of the parent rule), adding new trigger types (Start Turn, End Turn, End Game) for scripting rules,
 and making the first draft of the UI for the global scripts editor.
+
+April 3: Group meeting for 1 hour and 10 minutes, in which we solidified some plans for UI editors we haven't finished yet, and discussed next steps, including
+plans for getting gameplay buttons and other interactive elements prepared for in the backend and combining UI editors together.
+
+April 4: Spent about 10 minutes properly starting the Button class so that a UI editor for it can be made.
+
+April 5: Spent around 25 minutes working on adding object selecting (for gameplay) to the scripting rules.
+
+April 6: Spent around 20 minutes adding names to ScriptingRules and editing globalScripts.html to reflect this, and adding a
+property to scriptingRuleForm where the type of the caller can be stored.
