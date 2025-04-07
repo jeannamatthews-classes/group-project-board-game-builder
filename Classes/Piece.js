@@ -14,6 +14,22 @@ class Piece {
         this.playerOwnerID = owner;
         this.sprite = sprite;
     }
+saveCode() {
+        return {
+            objectID: this.objectID,
+            xCoordinate: this.xCoordinate,
+            yCoordinate: this.yCoordinate,
+            playerOwnerID: this.playerOwnerID,
+            publicVars: this.publicVars,
+            sprite: {
+                fillColor: this.sprite.fillColor,
+                textColor: this.sprite.textColor,
+                text: this.sprite.text
+            },
+            types: this.types.map(t => t.saveCode ? t.saveCode() : null)
+        };
+    }
+    
 
     getTile(active = true) {
         let boardTiles = (active ? activeGameState : currentGameState).board.tileArray;
