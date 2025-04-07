@@ -9,7 +9,6 @@ class PieceType {
         this.typeName = name;
         this.scripts = scripts;
     }
-        }
 
     saveCode() {
         return {
@@ -17,4 +16,6 @@ class PieceType {
             typeName: this.typeName,
             publicVars: this.publicVars,
             scripts: this.scripts.map(s => s.saveCode?.() ?? null)
+        }
+    }
 }

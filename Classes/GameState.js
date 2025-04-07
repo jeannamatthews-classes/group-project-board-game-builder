@@ -28,5 +28,5 @@ class GameState {
             turnPhase: this.turnPhase,
             selectedObjects: this.selectedObjects.map(o => o.objectID ?? null),
         };
-    
+   }
 }
