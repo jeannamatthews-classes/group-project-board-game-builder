@@ -9,4 +9,12 @@ class PieceType {
         this.typeName = name;
         this.scripts = scripts;
     }
+        }
+
+    saveCode() {
+        return {
+            typeID: this.typeID,
+            typeName: this.typeName,
+            publicVars: this.publicVars,
+            scripts: this.scripts.map(s => s.saveCode?.() ?? null)
 }
