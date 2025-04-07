@@ -7,7 +7,6 @@ class ScriptingRule {
     trigger = "None";
     type = "None";
     variables = []; // Some scripts declare variables. Variables are local to the scripting rule.
-    name; // This starts out undefined but can be changed to a string
     
     constructor(trigger, type, ...args) {
         this.resetScriptingRule(trigger, type, ...args);

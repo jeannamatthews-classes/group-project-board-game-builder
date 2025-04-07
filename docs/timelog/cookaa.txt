@@ -55,3 +55,6 @@ April 5: Spent around 25 minutes working on adding object selecting (for gamepla
 
 April 6: Spent around 20 minutes adding names to ScriptingRules and editing globalScripts.html to reflect this, and adding a
 property to scriptingRuleForm where the type of the caller can be stored.
+
+April 7: Group meetings for around 1 hour and 5 minutes, showing each other the editors we had made and discussing what should
+be added to them next, then another 30 minutes or so spent implementing some changes discussed in that meeting.

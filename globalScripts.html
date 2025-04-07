@@ -111,9 +111,9 @@
             btnContainer.classList.add("btn-container");
             indexText = document.createElement("input");
             indexText.classList.add("scriptTitle");
-            indexText.value = globalScripts[s].name;
+            indexText.value = ruleForms[s].name;
             indexText.addEventListener("change", function(){
-                globalScripts[s].name = this.value;
+                ruleForms[s].name = this.value;
                 displayBtnContainers();
             })
             btnContainer.appendChild(indexText);
@@ -127,6 +127,7 @@
             btnRemove.classList.add("btn-pixel", "btn-removeRule");
             btnRemove.addEventListener("click", function(){
                 globalScripts.splice(s, 1);
+                ruleForms.splice(s, 1);
                 displayBtnContainers();
             })
             btnContainer.appendChild(btnRemove);
@@ -136,11 +137,14 @@
         function displayBtnContainers() {
             while (document.getElementById("outer-container").firstElementChild) document.getElementById("outer-container").removeChild(document.getElementById("outer-container").lastElementChild);
             for (let s = 0; s < globalScripts.length; s++) {
-                if (globalScripts[s].name === undefined) globalScripts[s].name = "Script #" + (s + 1);
                 document.getElementById("outer-container").appendChild(createBtnContainer(s));
             }
         }
 
+        let ruleForms = []; // In theory the forms made here should be the ones opened in the Scripting Rule Editor
+        for (let s = 0; s < globalScripts.length; s++) {
+            ruleForms.push(new ScriptingRuleForm(globalScripts[s]));
+        }
         displayBtnContainers();
         btnContainer = document.createElement("div");
         btnContainer.classList.add("btn-container");
@@ -150,7 +154,9 @@
         btnContainer.appendChild(btnAdd);
         document.getElementById("global-container").appendChild(btnContainer);
         btnAdd.addEventListener("click", function(){
-            globalScripts.push(new ScriptingRule("None", "Value", 0));
+            let newRule = new ScriptingRule("None", "Value", true)
+            globalScripts.push(newRule);
+            ruleForms.push(new ScriptingRuleForm(newRule));
             displayBtnContainers();
         })
         
