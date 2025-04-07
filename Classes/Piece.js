@@ -4,7 +4,7 @@ class Piece {
     objectID = -1;
     playerOwnerID = -1;
     publicVars = [];
-    sprite = new Sprite("#000000", "#ffffff", "")
+    sprite;
 
     constructor(types, xStart, yStart, owner, sprite, id = undefined) {
         this.types = types;
@@ -14,6 +14,22 @@ class Piece {
         this.playerOwnerID = owner;
         this.sprite = sprite;
     }
+saveCode() {
+        return {
+            objectID: this.objectID,
+            xCoordinate: this.xCoordinate,
+            yCoordinate: this.yCoordinate,
+            playerOwnerID: this.playerOwnerID,
+            publicVars: this.publicVars,
+            sprite: {
+                fillColor: this.sprite.fillColor,
+                textColor: this.sprite.textColor,
+                text: this.sprite.text
+            },
+            types: this.types.map(t => t.saveCode ? t.saveCode() : null)
+        };
+    }
+    
 
     getTile(active = true) {
         let boardTiles = (active ? activeGameState : currentGameState).board.tileArray;
@@ -59,6 +75,7 @@ class Piece {
         }
         scriptResult = globalScriptCheck();
         if (scriptResult && topCall) gameStateValid();
+        else if (topCall) gameStateRevert();
         return scriptResult;
     }
 
@@ -97,6 +114,30 @@ class Piece {
         this.playerID = playerID;
         scriptResult = globalScriptCheck();
         if (scriptResult && topCall) gameStateValid();
+        else if (topCall) gameStateRevert();
+        return scriptResult;
+    }
+
+    clickObject(topCall = true) {
+        if (!gameInProgress()) return true;
+        let scriptsToExecute = [];
+        for (let t = 0; t < this.types.length; t++) {
+            for (let s = 0; s < this.types[t].scripts.length; s++) {
+                let scriptToCheck = this.types[t].scripts[s];
+                if (scriptToCheck.trigger === "Object Clicked") scriptsToExecute.push([scriptToCheck, this]);
+            }
+        }
+        let scriptResult;
+        for (let s = 0; s < scriptsToExecute.length; s++) {
+            scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
+            if (scriptResult === false) {
+                if (topCall) gameStateRevert();
+                return false;
+            }
+        }
+        scriptResult = globalScriptCheck();
+        if (scriptResult && topCall) gameStateValid();
+        else if (topCall) gameStateRevert();
         return scriptResult;
     }
 }

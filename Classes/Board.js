@@ -30,4 +30,15 @@ class Board {
         }
         return undefined;
     }
+
+      saveCode() {
+        return {
+            boardShape: this.boardShape,
+            width: this.width,
+            height: this.height,
+            tileArray: this.tileArray.map(row =>
+                row.map(tile => tile.saveCode()) 
+            )
+        };
+    }
 }

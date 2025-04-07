@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Create Game</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/create.css">
 </head>
 <body>
-
-    <div class="container-main text-center">
+    <div id = "board-creator" class="container-main text-center">
         <div class="header">SELECT YOUR BOARD</div>
     
         <div class = "creation-form">
@@ -23,7 +23,7 @@
                 <img id="tile-right" src="images/triangle.png">
             </div>
             
-
+            
 
             <div class="tile-selector">
                 <div class="arrow-btn left" onclick="changeBoardType(-1)"></div>
@@ -44,148 +44,29 @@
                 </div>
             </div>
 
-            <button class="btn btn-secondary" id="done-btn" disabled onclick="submitBoard()">Done</button>
+            <button class="btn btn-secondary" id="done-btn" style = 'height:10%; width: 80%;' disabled onclick="submitBoard()">Done</button>
         </div>
        
     </div>
 
 
-
-
-<script>
-
-    const centerTile = document.getElementById("tile-center")
-    const leftTIle = document.getElementById("tile-left")
-    const rightTile = document.getElementById("tile-right")
-    const widthInput = document.getElementById('board-width');
-    const heightInput = document.getElementById('board-height');
-    const doneButton = document.getElementById('done-btn');
-    const tileType = document.getElementById('tile-type');
-    const boardTypeText = ["Square", "Hex", "Triangle"]
-    const boardTypeSources = ["images/square.png","images/hexagon.png","images/triangle.png"
-
-    ];
-
-    
-    var boardType = 0;
-    
-    function changeBoardType(direction){
-        boardType = (boardType + direction + 3) % 3
-        tileType.innerHTML = boardTypeText[boardType];
-        document.getElementById("tile-center").src = boardTypeSources[boardType];
-        document.getElementById("tile-right").src = boardTypeSources[(boardType - 1 + boardTypeSources.length) % boardTypeSources.length];
-        document.getElementById("tile-left").src = boardTypeSources[(boardType + 1) % boardTypeSources.length];
-
-        
-    }
-
-    function submitBoard(){
-        new UIBoard(new Board(boardTypeText[boardType], parseInt(width.Input.value), parseInt(height.Input.value)))
-    }
-
-
-    function validateInputs() { //THIS DETERMINES WHETHER THE DONE BUTTON IS ABAILABLE 
-        const widthValid = widthInput.checkValidity() && parseInt(widthInput.value) > 0 && parseInt(widthInput.value) < 999;
-        const heightValid = heightInput.checkValidity() && parseInt(heightInput.value) > 0 && parseInt(heightInput.value) < 999;
-
-        doneButton.disabled = !(widthValid && heightValid && boardType==0); // FOR NOW WE ONLY ALLOW BOARD TYPE SQUARE.
-    }
-
-    //Check everytime the input is changed.
-    widthInput.addEventListener('input', validateInputs);
-    heightInput.addEventListener('input', validateInputs);
-
-
-
-
-
-
-
-
-
-class UIBoard {
-    constructor(board) {
-        this.board = board;
-        this.boardContainer = null;
-        this.container = null;
-        this.tileElements = [];
-
-        this.createBoard();
-    }
-
-    createBoard() { //Board Creation should use its logical board counterpart to determine the look of the UI
-        this.boardContainer = document.createElement('div')
-        this.boardContainer.innerHTML = '';
-        this.boardContainer.classList.add('board');
-
-        this.tileElements = [];
-        for (let y = 0; y < this.board.height; y++) {
-            const row = document.createElement('div');
-            row.classList.add('tile-row');
-            
-            let tileRow = [];
-            for (let x = 0; x < this.board.width; x++) {
-                const tile = new UITile(this.board.getTile(x, y));
-                row.appendChild(tile.element);
-                tileRow.push(tile);
-            }
-            this.boardContainer.appendChild(row);
-            this.tileElements.push(tileRow);
-        }
-    }
-
-}
-
-class UITile {
-    constructor(tile) {
-        this.tile = tile;
-        this.element = document.createElement('div');
-        this.element.classList.add('tile');
-        this.element.setAttribute('data-id', this.tile.objectID);
-
-        this.updateTile();
-
-        this.element.addEventListener('click', () => {
-            this.selectTile();
-        });
-    }
-
-
-    selectTile() {
-        console.log("Tile selected:", this.tile);
-    }
-}
-
-
-class UIPiece {
-    constructor(piece, boardElement) {
-        this.piece = piece;
-        this.boardElement = boardElement; 
-        this.element = document.createElement('div');
-        this.element.classList.add('piece');
-        this.element.setAttribute('data-id', this.piece.objectID);
-
-        this.updatePiece();
-
-        this.element.addEventListener('click', () => {
-            this.selectPiece();
-        });
-
-        this.boardElement.appendChild(this.element);
-    }
-
-
-    selectPiece() {
-        console.log("Piece selected:", this.piece);
-    }
-
-    
-}
-
-
-
-
-</script>
+<script src="Classes/GlobalVariables.js"></script>
+<script src="Classes/Board.js"></script>
+<script src="Classes/Tile.js"></script>
+<script src="Classes/UIBoard.js"></script>
+<script src="Classes/UITile.js"></script>
+<script src="Classes/WindowContainer.js"></script>
+<script src = "Classes/ToolButton.js"></script>
+<script src = "Classes/Toolbar.js"></script>
+<script src="Classes/Sprite.js"></script>
+<script src="Classes/Piece.js"></script>
+<script src="Classes/PieceType.js"></script>
+<script src="Classes/TileType.js"></script>
+<script src="Classes/UIPiece.js"></script>
+<script src="Classes/UIPieceEditor.js"></script>
+<script src="Classes/UITypeEditor.js"></script>
+<script src="Classes/UIType.js"></script>
+<script src="scripts/create.js"></script>
 
 
 

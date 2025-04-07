@@ -1,0 +1,7 @@
+So far, much of the backend code for the way pieces move, rules are triggered, and so on has been made.
+We're now mainly focused on the UI: Aaron has made UI for editing scripting rules,
+Sophia has made good progress on the UI for the central editor for things like the board and pieces,
+Jackson is working on UI for editing buttons, and Landon is working on UI for making types of pieces and tiles.
+Next, we'll finish those items, Aaron will add the ability for scripting rules to control what happens
+when a piece or tile is selected during gameplay, Sophia will take the UI pages we've made so far and connect them together,
+Jackson will start making the code to save game rules in a file, and Landon will make our presentation slides for RAPS.

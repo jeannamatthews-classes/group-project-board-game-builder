@@ -7,6 +7,7 @@ class ScriptingRule {
     trigger = "None";
     type = "None";
     variables = []; // Some scripts declare variables. Variables are local to the scripting rule.
+    name; // This starts out undefined but can be changed to a string
     
     constructor(trigger, type, ...args) {
         this.resetScriptingRule(trigger, type, ...args);
@@ -82,7 +83,7 @@ class ScriptingRule {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Tile at Coordinates"));
             this.tileToCheck = args[0];
         }
-        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID") {
+        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID" || this.type === "Select Object" || this.type === "Deselect Object") {
             if (args.length <= 0) args.push(undefined);
             this.object = args[0];
         }
@@ -259,6 +260,18 @@ class ScriptingRule {
             }
             return true;
         }
+        else if (this.type === "Select Object") {
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            if (BGBIndexOf(activeGameState.selectedObjects, object) === -1) activeGameState.selectedObjects.push(object);
+            return true;
+        }
+        else if (this.type === "Deselect Object") {
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            if (BGBIndexOf(activeGameState.selectedObjects, object) != -1) activeGameState.selectedObjects.splice(BGBIndexOf(activeGameState.selectedObjects, object), 1);
+            return true;
+        }
         // else if (this.type === "Valid Game State") {
         //     gameStateValid();
         // }
@@ -377,6 +390,9 @@ class ScriptingRule {
         else if (this.type === "Choose Tile Type") {
             return tileTypesList[this.index];
         }
+        else if (this.type === "Selected Objects") {
+            return activeGameState.selectedObjects;
+        }
 
         // Control
         else if (this.type === "Edit Variable of Rule") {
@@ -440,9 +456,7 @@ class ScriptingRule {
             let rightArg = (this.rightArg instanceof ScriptingRule) ? this.rightArg.portVariables(this).run(caller, ...args) : this.rightArg;
             switch (this.type) {
                 case "==":
-                    if ((leftArg instanceof Piece || leftArg instanceof Tile) && (rightArg instanceof Piece || rightArg instanceof Tile)) return (leftArg.objectID === rightArg.objectID);
-                    if ((leftArg instanceof PieceType && rightArg instanceof PieceType) || (leftArg instanceof TileType && rightArg instanceof TileType)) return (leftArg.typeID === rightArg.typeID);
-                    return (leftArg === rightArg);
+                    return BGBEquals(leftArg, rightArg);
                 case ">":
                     return (leftArg > rightArg);
                 case "<":
@@ -452,9 +466,7 @@ class ScriptingRule {
                 case "<=":
                     return (leftArg <= rightArg);
                 case "!=":
-                    if ((leftArg instanceof Piece || leftArg instanceof Tile) && (rightArg instanceof Piece || rightArg instanceof Tile)) return (leftArg.objectID !== rightArg.objectID);
-                    if ((leftArg instanceof PieceType && rightArg instanceof PieceType) || (leftArg instanceof TileType && rightArg instanceof TileType)) return (leftArg.typeID !== rightArg.typeID);
-                    return (leftArg !== rightArg);
+                    return !BGBEquals(leftArg, rightArg);
                 case "&&":
                     return (leftArg && rightArg);
                 case "||":
@@ -478,7 +490,7 @@ class ScriptingRule {
         else if (oneArgOperators.indexOf(this.type) != -1) {
             let argument = (this.argument instanceof ScriptingRule) ? this.argument.portVariables(this).run(caller, ...args) : this.argument;
             switch (this.type) {
-                case "!": // Might change this one later to use floored modulo instead of JS modulo
+                case "!":
                     return !argument;
                 case "abs":
                     return Math.abs(argument);
@@ -507,7 +519,7 @@ class ScriptingRule {
         else if (this.type === "Array Index of Element") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let element = (this.element instanceof ScriptingRule) ? this.element.portVariables(this).run(caller, ...args) : this.element;
-            return array.indexOf(element);
+            return BGBIndexOf(array, element);
         }
         else if (this.type === "Add to Array") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
@@ -539,8 +551,9 @@ class ScriptingRule {
     "Piece Lands on Tile": Triggers when that piece lands on any tile. Argument is the tile it landed on.
     "Tile is Landed on": Triggers when that tile is landed on by a piece. Argument is the piece that landed on it.
     "Piece is Removed": Triggers when that piece is removed. No arguments.
-    "End Turn": Triggers at the end of a turn.
-    "Start Turn": Triggers at the start of a turn.
+    "End Turn": Triggers at the end of a turn. No arguments.
+    "Start Turn": Triggers at the start of a turn. No arguments.
+    "Object Clicked": Triggers when this object is clicked. No arguments.
     */
 
     // Gives this rule the same variables array as the other rule.
@@ -599,7 +612,7 @@ class ScriptingRule {
         else if (this.type === "Pieces on Tile") {
             args.push(this.tileToCheck)
         }
-        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID") {
+        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID" || this.type === "Select Object" || this.type === "Deselect Object") {
             args.push(this.object)
         }
         else if (this.type === "Create a Sprite") {

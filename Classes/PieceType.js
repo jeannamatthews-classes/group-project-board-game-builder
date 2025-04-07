@@ -3,11 +3,18 @@ class PieceType {
     typeID = -1;
     typeName = "";
     publicVars = [];
-    buttonsToShow = [];
 
     constructor(name, scripts, id = undefined) {
         this.typeID = (id !== undefined) ? id : assignTypeID();
         this.typeName = name;
         this.scripts = scripts;
     }
+        }
+
+    saveCode() {
+        return {
+            typeID: this.typeID,
+            typeName: this.typeName,
+            publicVars: this.publicVars,
+            scripts: this.scripts.map(s => s.saveCode?.() ?? null)
 }

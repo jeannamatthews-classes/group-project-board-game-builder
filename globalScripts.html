@@ -109,9 +109,13 @@
         function createBtnContainer(s) {
             btnContainer = document.createElement("div");
             btnContainer.classList.add("btn-container");
-            indexText = document.createElement("p");
+            indexText = document.createElement("input");
             indexText.classList.add("scriptTitle");
-            indexText.innerHTML = "Script #" + (s + 1);
+            indexText.value = globalScripts[s].name;
+            indexText.addEventListener("change", function(){
+                globalScripts[s].name = this.value;
+                displayBtnContainers();
+            })
             btnContainer.appendChild(indexText);
             btnEdit = document.createElement("button");
             btnEdit.classList.add("btn-pixel", "btn-editRule");
@@ -132,6 +136,7 @@
         function displayBtnContainers() {
             while (document.getElementById("outer-container").firstElementChild) document.getElementById("outer-container").removeChild(document.getElementById("outer-container").lastElementChild);
             for (let s = 0; s < globalScripts.length; s++) {
+                if (globalScripts[s].name === undefined) globalScripts[s].name = "Script #" + (s + 1);
                 document.getElementById("outer-container").appendChild(createBtnContainer(s));
             }
         }
