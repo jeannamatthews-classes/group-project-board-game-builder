@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>`
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peice Type Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #94bcf8;
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+        .form-box, .saved-box {
+            width: 45%;
+        }
+        .saved-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        .save-box {
+            width: 45%;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            scroll-behavior: smooth;
+            background-color: #fff;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #d40000;
+        }
+        .edit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Peice Type Editor</h2>
+        <label for="ruleName">Piece Name:</label><br>
+        <input type="text" id="ruleName" placeholder="Enter name"><br><br>
+    
+        <button onclick="goToScriptingRuleForm()" class="edit-btn">Edit Scripting Rules</button><br><br>
+
+        <label for="ruleScript">Scripting Rules (Placeholder):</label><br>
+        <textarea id="ruleScript" rows="6" cols="40">placeholder_script()</textarea><br><br>
+    
+        <button onclick="createPieceType()">Create Piece</button>
+      </div>
+    
+      <div class="saved-box">
+        <h2>Saved Piece Types</h2>
+        <div id="savedRules"></div>
+    </div>
+
+    <script>
+        let pieceTypes = [];
+        let typeIDCounter = 0;
+
+        function assignTypeID() {
+        return typeIDCounter++;
+        }
+
+        class PieceType {
+            scripts = [];
+            typeID = -1;
+            typeName = "";
+            publicVars = [];
+            buttonsToShow = [];
+
+            constructor(name, scripts, id = undefined) {
+                this.typeID = (id !== undefined) ? id : assignTypeID();
+                this.typeName = name;
+                this.scripts = scripts;
+            }
+        }
+
+        function createPieceType() {
+            const name = document.getElementById('ruleName').value.trim();
+            const scriptText = document.getElementById('ruleScript').value.trim();
+            const scriptLines = scriptText.split('\n').filter(line => line.trim() !== '');
+
+            if (name && scriptLines.length > 0) {
+                const newPiece = new PieceType(name, scriptLines);
+                pieceTypes.push(newPiece);
+                displayPieceType();
+                document.getElementById('ruleName').value = '';
+                document.getElementById('ruleScript').value = 'placeholder_script()'; // Reset to placeholder
+            } else {
+                alert("Please enter a piece name and have at least one scripting rule.");
+            }
+        }
+
+        function displayPieceType(piece) {
+            const container = document.getElementById('savedRules');
+            container.innerHTML = ''; // Clear previous content
+
+            pieceTypes.forEach((piece, index) => {
+                const ruleDiv = document.createElement('div');
+                ruleDiv.className = 'saved-item';
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.textContent = '×';
+                deleteBtn.title = 'Delete this piece';
+                deleteBtn.onclick = () => deletePieceType(index);
+
+                ruleDiv.innerHTML = `<strong>${piece.typeName}</strong> (ID: ${piece.typeID})<ul>${
+                piece.scripts.map(s => `<li>${s}</li>`).join('')
+                }</ul>`;
+
+                ruleDiv.appendChild(deleteBtn);
+                container.appendChild(ruleDiv);
+            });
+        }
+        function deletePieceType(index) {
+        pieceTypes.splice(index, 1);
+        displayPieceType(); // Refresh the list
+        }
+        function goToScriptingRuleForm() {
+        // Placeholder for now – no real redirect
+        alert("This would go to the scriptingRuleForm");
+        }
+    </script>
+</body>
+</html>
