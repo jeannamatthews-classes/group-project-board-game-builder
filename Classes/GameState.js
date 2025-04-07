@@ -18,4 +18,15 @@ class GameState {
         this.selectedObjects = selectedObjects;
         this.inventories = [];
     }
+   saveCode() {
+        return {
+            board: this.board.saveCode(),
+            pieceArray: this.pieceArray.map(p => p.saveCode ? p.saveCode() : null),
+            playerAmount: this.playerAmount,
+            turnNumber: this.turnNumber,
+            playerTurn: this.playerTurn,
+            turnPhase: this.turnPhase,
+            selectedObjects: this.selectedObjects.map(o => o.objectID ?? null),
+        };
+    
 }
