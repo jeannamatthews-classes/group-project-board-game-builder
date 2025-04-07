@@ -19,7 +19,7 @@
         .form-box, .saved-box {
             width: 45%;
         }
-        .saved-item {
+        .saved-item, .script-item {
             border: 1px solid #ccc;
             padding: 10px;
             margin-top: 10px;
@@ -27,9 +27,9 @@
             background-color: #f9f9f9;
             position: relative;
         }
-        .save-box {
+        .script-box {
             width: 45%;
-            max-height: 600px;
+            max-height: 200px;
             overflow-y: auto;
             padding-right: 10px;
             border: 1px solid #ccc;
@@ -53,8 +53,8 @@
         .delete-btn:hover {
             background-color: #d40000;
         }
-        .edit-btn {
-            background-color: #007bff;
+        .create-btn {
+            background-color: #31df0e;
             color: white;
             border: none;
             padding: 6px 12px;
@@ -62,26 +62,66 @@
             cursor: pointer;
             margin-left: 5px;
         }
+        .create-btn:hover {
+            background-color: #1d6e04;
+        }
+        .edit-btn {
+            position: absolute;
+            top: 8px;
+            right: 40px;
+            background-color: #05b6fc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            padding: 2px 8px;
+            cursor: pointer;
+        }
         .edit-btn:hover {
             background-color: #0056b3;
+        }
+        .add-script-btn {
+            background-color: #8400ff;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .add-script-btn:hover {
+            background-color: #3b055a;
+        }
+        .scroll-box {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        .section-title {
+            margin-bottom: 5px;
+            margin-top: 15px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="form-box">
         <h2>Tile Type Editor</h2>
+
         <label for="ruleName">Tile Name:</label><br>
         <input type="text" id="ruleName" placeholder="Enter name"><br><br>
-    
-        <button onclick="goToScriptingRuleForm()" class="edit-btn">Edit Scripting Rules</button><br><br>
 
-        <label for="ruleScript">Scripting Rules (Placeholder):</label><br>
-        <textarea id="ruleScript" rows="6" cols="40">placeholder_script()</textarea><br><br>
-    
-        <button onclick="createTileType()">Create Tile</button>
+        <div class="section-title">Scripting Rules</div>
+        <button onclick = "addScript()" class="add-script-btn">Add Scripting Rule</button><br><br>
+        <div id="scriptList" class="scroll-box" style="max-height: 200px; min-height: 50px; border: 1px solid #ccc;"></div>
+        
+        <button onclick = "createTileType()" class="create-btn">Create Tile</button>
       </div>
     
-      <div class="saved-box">
+      <div class="saved-box scroll-box">
         <h2>Saved Tile Types</h2>
         <div id="savedRules"></div>
     </div>
@@ -89,6 +129,8 @@
     <script>
         let tileTypes = [];
         let typeIDCounter = 0;
+        let scriptCounter = 1;
+        let currentScripts = [];
 
         function assignTypeID() {
         return typeIDCounter++;
@@ -110,17 +152,18 @@
 
         function createTileType() {
             const name = document.getElementById('ruleName').value.trim();
-            const scriptText = document.getElementById('ruleScript').value.trim();
-            const scriptLines = scriptText.split('\n').filter(line => line.trim() !== '');
 
-            if (name && scriptLines.length > 0) {
-                const newTile = new TileType(name, scriptLines);
+            if (name && currentScripts.length > 0) {
+                const newTile = new TileType(name, [...currentScripts]);
                 tileTypes.push(newTile);
                 displayTileType();
+
                 document.getElementById('ruleName').value = '';
-                document.getElementById('ruleScript').value = 'placeholder_script()'; // Reset to placeholder
+                currentScripts = [];
+                scriptCounter = 1;
+                updateScriptDisplay();
             } else {
-                alert("Please enter a tile name and have at least one scripting rule.");
+                alert("Please enter a tile name and have at least one scripting script.");
             }
         }
 
@@ -146,6 +189,34 @@
                 container.appendChild(ruleDiv);
             });
         }
+        function updateScriptDisplay() {
+            const scriptList = document.getElementById('scriptList');
+            scriptList.innerHTML = '';
+            currentScripts.forEach((script, index) => {
+                const scriptDiv = document.createElement('div');
+                scriptDiv.className = 'script-item';
+                scriptDiv.textContent = script;
+
+                //edit button
+                const editBtn = document.createElement('button');
+                editBtn.className = 'edit-btn';
+                editBtn.textContent = 'Edit';
+                editBtn.onclick = () => goToScriptingRuleForm();
+            
+            //delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.textContent = '×';
+            deleteBtn.title = 'Delete this script';
+            deleteBtn.onclick = () => {
+                currentScripts.splice(index, 1);
+                updateScriptDisplay();
+            };
+            scriptDiv.appendChild(editBtn);
+            scriptDiv.appendChild(deleteBtn);
+            scriptList.appendChild(scriptDiv);
+            });
+        }
         function deleteTileType(index) {
         tileTypes.splice(index, 1);
         displayTileType(); // Refresh the list
@@ -153,6 +224,11 @@
         function goToScriptingRuleForm() {
         // Placeholder for now – no real redirect
         alert("This would go to the scriptingRuleForm");
+        }
+        function addScript() {
+        const newScript = `script_${scriptCounter++}`;
+        currentScripts.push(newScript);
+        updateScriptDisplay();
         }
     </script>
 </body>
