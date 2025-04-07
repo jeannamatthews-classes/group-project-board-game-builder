@@ -15,3 +15,4 @@ I will document further meetings in more detail with what we talked about.
 4/2: 1.5-2.0 hours, made the number of players html doc, submitted into github as numberOfPlayers.html
 4/3 1.25 hour meeting, discussed how we will get done what we need to before raps, start gameplay UI, finish other UI, I will be doing save codes and finishing off the button editor, and will also be adding to our powerpoint presentation.
 4/6 3 Hours, did save codes for Piece, PieceType, Tile, TileType, and Board. Going to do gamestate savecode and button editor before tomorrows meeting hopefully.
+4/7 2 hours, finished save code for gamestate and finished first version of button editor.
