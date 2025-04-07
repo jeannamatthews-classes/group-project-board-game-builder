@@ -4,7 +4,7 @@ class Piece {
     objectID = -1;
     playerOwnerID = -1;
     publicVars = [];
-    sprite = new Sprite("#000000", "#ffffff", "")
+    sprite;
 
     constructor(types, xStart, yStart, owner, sprite, id = undefined) {
         this.types = types;

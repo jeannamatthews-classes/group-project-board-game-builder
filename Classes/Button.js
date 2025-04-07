@@ -1,15 +1,21 @@
 class Button {
     clickScripts = [];
     visibleRules = [];
-    color = "#000000";
-    textColor = "#ffffff";
-    text = "";
+    enabled = true;
+    sprite = 
+    {
+        fillColor:  "#0f0f0f",
+        text: "",
+        textColor: "FFFFFF",
+        borderColor: "#000000",
+        borderRadius: "5px",
+        width: "300px",
+        height: "200px"
+    }
     name; // This starts out undefined but can be changed to a string
-    // I don't know what units the width and height should be in, but I imagine that having these variables will be useful
-    width = 0;
-    height = 0;
     // Do all the buttons go in one place in the UI, or can they be put in different places? If they can go in
     // different places, we'll need parameters here for that too.
+    
 
     constructor(clickScripts = [], visibleRules = [], color = "#000000", textColor = "#ffffff", text = "", width = 0, height = 0) {
         this.clickScripts = clickScripts;

@@ -1,16 +1,31 @@
-Before 3/14
+March 11 - I spent about 3 hours working on the design document and the github README.
+I completed the entirety of the Technology Stack, Expected Users, Risks & Mitigations, the Wireframe UI for the Creation Screen, the Mockup UI in Canvas, the Sequence Diagram, and the Testing Plan
+The design document was very messy, so I organized it with plenty of headers.
+I cleaned up the Project Overview and some other text.
 
+March 12 - 1 Hour meeting with the team in which we discussed our plans to potentially meet over spring break. (this did not really come to fruition)
 
-March 28th - I spent a bit over an hour planning and working on how I wanted the board to look.
+Over Spring Break - Cumulatively, probably an hour or so was spent making the stubs of the HTML pages, including the index page.
 
-March 30th - We met on 
+March 26 - Hour long meeting with the team where we discussed our plans for the UI involving our plans for and updated the GANTT chart.
+March 31 for 1 hour: had a meeting with the whole team.
+April  1: currently working on the peice type and tile type editors for the game builder.
+April 3 for 1 hour: had a meeting with the team where we dicsussed how we should split up the editing forms in the creation UI phase.
+    I ended up taking on the bulk of the main screen forms and agreed to be the one to connect all of them together.
+
+March 28th - I spent a bit over an hour planning and working on how I wanted the board itself to look. (In a separate file)
+
+March 30th - We met on Zoom for about an hour. We talked about what we had gotten done so far in terms of the Scripting Forms, and I inquired as to whether my way of doing the board would be expandable. 
+    Decided to continue with what I had.
+
+--This is when more serious work on the code starts to be completed.--
 
 April 2nd - I spent 2-3 hours working on the Main Screen UI Code 
 Added WindowContainer - A draggable, closable window to hold contents of the various Editors.
 Added Board Editor
     Store Tile elements in a grid formation. Links to the logical Tile class.
     Added Toolbar - A toolbar that allows tools to be selected within a target space. (the board)
-    Added Toolbuttons
+    Added Toolbuttons - Can right click to access alternate tools. Clicking on a tool changes the cursor within the target area to that tool.
     -Added Select/Drag, Zoom In/Zoom Out, Paint, and Eyedropper
         -Implemented Select - Opens Tile editor for Tile (x,y).
         -Implemented Drag - Allows user to move the board around in the window (overflow hidden)
@@ -26,24 +41,71 @@ Added PieceEditor
         Implemented AddPiece - Adds a new piece with a degault gray square sprite.
     Piece Editor - Shape, Text, Text Color, AddType
 
-April 3rd - We met during class time for just under 90 minutes.
-During this time, I pushed the code I had completed so far.
 
-April 5th - I spent 6+ish hours working on the Main Screen UI Code.
-- Updated 
-- Added Save & Close / Cancel
+
+April 3rd - We met during class time for just under 90 minutes.
+During this time, I pushed the code I had completed so far. having the main screen and most of the scripting rules done was good progress.
+
+April 5th - I spent 5+ish hours working on the Main Screen UI Code.
+- Added Save & Close / Cancel (ends up being removed on April 6th)
     -Save & Close - saves changes made to the tile.
     -Cancel (or clicking x) does not save changes made to the tile. Reverts.
 - Implemented Eydropper Functionality (Copy Sprites)
 - Implemented Paint Functionality (Pastes Sprites to Tile)
 - Implemented Paint "Brush". - Paint tool can be dragged 
-Edited/Fixed Adding Pieces to the Board 
-    -Pieces no longer disappear from the Piece editor when they are placed on the Board 
-    -Pieces now split into a grid formation when more than 1 piece is placed on the same tile to show all.
-    -Implemented Right Click to Remove Piece from Board
 Added Disable, Show/Hide Pieces, Sprite Preview
     -Implemented Disable - Marks a tile as disabled with a red/black X.
     -Implemented Show/Hide Pieces - 
+Right Click to Duplicate / Delete Pieces in the Piece Editor.
+Removed Select and Arrange. - Simply differentiates between clicking and dragging.
+Fixed Tile Edit Window 
+    - Edits to the Tile are now properly saved in the internal logic.
+    - You can now add multiple pieces, and the UI copies that of adding Types. 
+        -Pieces now split into a grid formation when more than 1 piece is placed on the same tile to show all.
+    - You can now properly remove Pieces from the board. (becoming inaccessible)
+    - Adding Pieces to the Board no longer takes them from the Piece Editor.
+    -Implemented Right Click to Remove Piece from Board
+Fixed a lot of other Miscellaneous Bugs, both visible and otherwise.
 
 
+April 6th - I spent most of the day working on the code with scattered focus (probably cumulatively about 5 or so hours)
+Added Control Buttons (Preview On/Off, Save Code, Edit)
+    First two are currently Dummy functions.
+    Edit brings up the Editors Menu.
+        Editors Menu - Allows user to Reopen editors after they've been closed. 
+    Enforced NO duplicate names within a category. 
+Added TypesEditor - Stores Type Elements in Rows
+    Added Categories to sort Types by Element (Tile,Piece,Button)
+    Added Type UI and Type Edit Window
+    Type Editor - Change name, add scripting rules, add type variables (of string, int, or bool) with names and values.
+        Clicking the Row opens Type Edit Window
+    Type UI - Name, Up Button, Down Button, Duplicate Button, Remove Button.
+        Implemented Up Button - Moves type up in category.
+        Implemented Down Button - Moves type down in category.
+        Implemented Duplicate - Duplicates type (new name given)
+        Implemented Remove -Removes type from list and internal storage. 
+    Type Edit Window - Add Rules, Add Public Variables (both buttons to dropdown)
+        ADD RULES YET TO BE LINKED TO SCRIPTING RULES
+Added Buttons Editor.
+    Added Scrolling div to allow viewing of all buttons
+    Stacked Vertically.
+    Added Button Edit Window 
+    Button Editor - Name, Button Preview.
+        Clicking the Button opens Button Edit Window 
+    Button UI - Up, Down, Duplicate, Remove
+        Implemented Up Button - Moves Button Up in category.
+        Implemented Down Button - Moves Button Down in Category.
+        Implemented Duplicate - Duplicates Button (new name given)
+        Implemented Remove - Removes type from list and internal storage. 
+    Button Edit Sprite Window -  Name, Fill Color, Border Color, Border Radius, Text, Text Color, Click Rules, Visibility Rules
+Fixed PiecesEditor.
+    Fixed swapping Mechanism to account for edge cases.
+    Added Type assignment to Piece Edit Window.
+Removed Save/Close and Cancel 
+    After a lot of fussing with this mechanic, I decided it caused more trouble than it was worth.
+    It would likely not be applied consistently across remaining windows (Types, Globals, etc), 
+    so I decided to remove the functionality for now.
 
+Fixed Swapping Mechanism in PieceEditor.
+Allow Assignment of Piece Types.
+Fixed Types so that the Rows would show up. 

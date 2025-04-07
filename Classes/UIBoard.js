@@ -2,7 +2,8 @@
 class UIBoard {
     constructor(board) {
         this.board = board;
-        this.tiles = [];
+        this.tiles = Array.from({ length: this.board.height }, () => []);
+
         this.container = this.createBoard();
         this.window;
         this.toolbar;
@@ -57,10 +58,11 @@ class UIBoard {
                 const tile = this.board.getTile(x, y);
                 const uiTile = new UITile(tile, this);
                 this.container.appendChild(uiTile.container);
-                this.tiles.push(uiTile);
+                this.tiles[y][x] = uiTile;
             }
         }
     }
+    
 
     resize(scaleFactor) {
         this.scale *= scaleFactor;
