@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Button Editor</title>
+  <style>
+    .editor {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      font-family: sans-serif;
+    }
+    .controls {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .preview {
+      flex: 1;
+    }
+    .button-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+    }
+    .script-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="editor">
+  <div class="controls">
+    <h2>Button Editor</h2>
+    <label>
+      Name:
+      <input type="text" id="btnName" placeholder="Button name" />
+    </label>
+    <label>
+      Text:
+      <input type="text" id="btnText" />
+    </label>
+    <label>
+      Fill Color:
+      <input type="color" id="fillColor" />
+    </label>
+    <label>
+      Text Color:
+      <input type="color" id="textColor" />
+    </label>
+    <label>
+      Border Color:
+      <input type="color" id="borderColor" />
+    </label>
+    <label>
+      Border Radius (px):
+      <input type="number" id="borderRadius" min="0" />
+    </label>
+    <label>
+      Width (px):
+      <input type="number" id="btnWidth" />
+    </label>
+    <label>
+      Height (px):
+      <input type="number" id="btnHeight" />
+    </label>
+
+    <h3>Click Scripts</h3>
+    <div id="scriptsContainer"></div>
+    <button onclick="addScript()">+ Add Script</button>
+    <br><br>
+    <button onclick="updatePreview()">Update Preview</button>
+  </div>
+
+  <div class="preview">
+    <h2>Live Preview</h2>
+    <div id="buttonPreview" class="button-preview">Button</div>
+  </div>
+</div>
+
+<script>
+  function addScript() {
+    const container = document.getElementById("scriptsContainer");
+    const div = document.createElement("div");
+    div.className = "script-row";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Enter script name";
+    
+    const removeBtn = document.createElement("button");
+    removeBtn.innerText = "Remove";
+    removeBtn.onclick = () => div.remove();
+
+    div.appendChild(input);
+    div.appendChild(removeBtn);
+    container.appendChild(div);
+  }
+
+ function updatePreview() {
+    const text = document.getElementById("btnText").value;
+    const fillColor = document.getElementById("fillColor").value;
+    const textColor = document.getElementById("textColor").value;
+    const borderColor = document.getElementById("borderColor").value;
+    const borderRadius = document.getElementById("borderRadius").value + "px";
+    const width = document.getElementById("btnWidth").value + "px";
+    const height = document.getElementById("btnHeight").value + "px";
+
+    const buttonPreview = document.getElementById("buttonPreview");
+    buttonPreview.textContent = text || "";  
+    Object.assign(buttonPreview.style, {
+        backgroundColor: fillColor,
+        color: textColor,
+        border: `2px solid ${borderColor}`,
+        borderRadius,
+        width,
+        height
+    });
+ }
+  // Initial setup
+  updatePreview();
+</script>
+
+</body>
+</html>

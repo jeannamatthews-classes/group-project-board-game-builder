@@ -31,7 +31,7 @@ class Board {
         return undefined;
     }
 
-      saveCode() {
+    saveCode() {
         return {
             boardShape: this.boardShape,
             width: this.width,

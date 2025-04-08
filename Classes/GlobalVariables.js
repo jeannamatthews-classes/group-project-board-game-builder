@@ -6,6 +6,7 @@ let otherGlobalVariables = [];
 let globalScripts = [];
 let nextObjectID = 0;
 let nextTypeID = 0;
+let nextRuleID = 0;
 
 function getObject(id, active = true) {
     let gs = (active) ? activeGameState : currentGameState;
@@ -33,6 +34,12 @@ function assignTypeID() {
     return (nextTypeID - 1);
 }
 
+// Returns the current available rule ID and increments to the next one
+function assignRuleID() {
+    nextRuleID++;
+    return (nextRuleID - 1);
+}
+
 function gameStateValid() {
     currentGameState = BGBStructuredClone(activeGameState);
 }
@@ -48,7 +55,6 @@ function BGBStructuredClone(argument) {
     if (Array.isArray(argument)) return argument.map(BGBStructuredClone); // Copy each entry of the array
     if (argument instanceof ScriptingRule) {
         let result = new ScriptingRule(...argument.getConstructorArguments());
-        result.name = argument.name;
         return result;
     }
     if (argument instanceof GameState) return new GameState(BGBStructuredClone(argument.board), BGBStructuredClone(argument.pieceArray), argument.playerAmount, argument.turnNumber, argument.playerTurn, argument.turnPhase, BGBStructuredClone(argument.selectedObjects));
@@ -66,6 +72,7 @@ function BGBStructuredClone(argument) {
         let result = new Button(BGBStructuredClone(argument.clickScripts), BGBStructuredClone(argument.visibleRules), argument.color, argument.textColor, argument.text, argument.width, argument.length);
         result.name = argument.name;
     }
+    if (argument instanceof ScriptingRuleForm) return new ScriptingRuleForm(BGBStructuredClone(argument.rule), argument.top, argument.callerType, argument.zebraDark, argument.parentType, argument.name, argument.ruleID);
 }
 
 // Checks if two things are equal, including working on types like Pieces and Tiles.

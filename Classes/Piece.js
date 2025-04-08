@@ -14,7 +14,8 @@ class Piece {
         this.playerOwnerID = owner;
         this.sprite = sprite;
     }
-saveCode() {
+    
+    saveCode() {
         return {
             objectID: this.objectID,
             xCoordinate: this.xCoordinate,
@@ -45,9 +46,10 @@ saveCode() {
         let newX = this.xCoordinate + xChange;
         let newY = this.yCoordinate + yChange;
         let tileLanded = activeGameState.board.tileArray[newY];
-        if (tileLanded === undefined) return;
+        if (tileLanded === undefined) return false;
         tileLanded = tileLanded[newX];
-        if (tileLanded === undefined) return;
+        if (tileLanded === undefined) return false;
+        if (!tileLanded.enabled) return false;
         this.xCoordinate = newX;
         this.yCoordinate = newY;
         let scriptsToExecute = [];

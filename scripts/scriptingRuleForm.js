@@ -4,16 +4,28 @@ class ScriptingRuleForm {
     callerType = "None";
     zebraDark = false;
     parentType = "None";
+    name = "";
+    ruleID = -1;
     div;
     childrenForms = [];
 
-    constructor(rule, top = true, callerType = "None", zebraDark = false, parentType = "None") {
+    constructor(rule, top = true, callerType = "None", zebraDark = false, parentType = "None", name = undefined, ruleID = undefined) {
         this.rule = rule;
         this.top = top;
         this.callerType = callerType;
         this.zebraDark = zebraDark;
         this.parentType = parentType;
         this.callerType = callerType;
+        if (this.top) {
+            if (ruleID !== undefined) this.ruleID = ruleID;
+            else this.ruleID = assignRuleID();
+            if (name === undefined) this.name = "Script #" + this.ruleID;
+            else this.name = name;
+        }
+        else {
+            this.name = "";
+            this.ruleID = -1;
+        }
         this.createDIV();
     }
 
@@ -36,6 +48,16 @@ class ScriptingRuleForm {
         while (srdiv.firstElementChild) srdiv.removeChild(srdiv.lastElementChild);
         let form = this;
         if (this.top) {
+            let srdname = document.createElement("p");
+            srdname.innerHTML = "Rule Name: ";
+            let srdnameinput = document.createElement("input");
+            srdnameinput.value = this.name;
+            srdnameinput.addEventListener("change", function(){
+                form.name = this.value;
+                form.modifyDIV();
+            })
+            srdname.appendChild(srdnameinput);
+            srdiv.appendChild(srdname);
             let srdtrigger = document.createElement("p");
             srdtrigger.innerHTML = "Trigger:";
             let srdtriggerselect = document.createElement("select");
