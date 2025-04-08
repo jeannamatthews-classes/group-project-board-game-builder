@@ -50,4 +50,16 @@ class Tile {
         else if (topCall) gameStateRevert();
         return scriptResult;
     }
+    saveCode() {
+        return {
+            objectID: this.objectID,
+            xCoordinate: this.xCoordinate,
+            yCoordinate: this.yCoordinate,
+            playerOwnerID: this.playerOwnerID,
+            enabled: this.enabled,
+            publicVars: this.publicVars,
+            sprite: this.sprite,
+            types: this.types.map(t => t.saveCode ? t.saveCode() : null)
+        };
+    }
 }
