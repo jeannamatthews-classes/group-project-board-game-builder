@@ -68,7 +68,7 @@ Fixed Tile Edit Window
 Fixed a lot of other Miscellaneous Bugs, both visible and otherwise.
 
 
-April 6th - I spent most of the day working on the code with scattered focus (probably cumulatively about 5 or so hours)
+April 6th - I spent probably cumulatively about 4-5 hours
 Added Control Buttons (Preview On/Off, Save Code, Edit)
     First two are currently Dummy functions.
     Edit brings up the Editors Menu.

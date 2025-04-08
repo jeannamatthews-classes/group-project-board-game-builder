@@ -8,6 +8,7 @@ class TileType {
         this.typeID = (id !== undefined) ? id : assignTypeID();
         this.scripts = scripts;
         this.typeName = name;
+    }
         
     saveCode() {
         return {
