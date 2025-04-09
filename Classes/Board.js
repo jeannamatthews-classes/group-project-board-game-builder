@@ -12,7 +12,7 @@ class Board {
             for (let y = 0; y < height; y++) {
                 ta.push([]);
                 for (let x = 0; x < width; x++) {
-                    ta[y].push(new Tile([], x, y, 0));
+                    ta[y].push(new Tile([], x, y, -1));
                 }
             }
             this.tileArray = ta;
