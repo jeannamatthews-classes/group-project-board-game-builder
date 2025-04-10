@@ -58,3 +58,8 @@ property to scriptingRuleForm where the type of the caller can be stored.
 
 April 7: Group meetings for around 1 hour and 5 minutes, showing each other the editors we had made and discussing what should
 be added to them next, then another 30 minutes or so spent implementing some changes discussed in that meeting.
+
+April 9: Spent around 1 hour and 20 minutes adding the object selection stuff to my chess testing example
+(and added a couple new scripting rule types).
+
+April 10: Group meeting for around 50 minutes (updated GANTT chart, discussed transition into making the gameplay UI)

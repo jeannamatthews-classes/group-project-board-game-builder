@@ -1,4 +1,4 @@
-let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**"];
+let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Random Integer", "Random Decimal"];
 let oneArgOperators = ["!", "abs", "sign"];
 let booleanOperators = ["&&", "||", "XOR", "!"];
 
@@ -28,7 +28,7 @@ class ScriptingRule {
         }
 
         // Actions
-        else if (this.type === "Move Piece") {
+        else if (this.type === "Move Piece" || this.type === "Move Piece to Coordinates") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.moveX = args[0];
             if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
@@ -208,6 +208,13 @@ class ScriptingRule {
                 return caller.movePiece(moveX, moveY, false);
             }
         }
+        else if (this.type === "Move Piece to Coordinates") {
+            if (caller instanceof Piece) {
+                let moveX = (this.moveX instanceof ScriptingRule) ? this.moveX.portVariables(this).run(caller, ...args) : this.moveX;
+                let moveY = (this.moveY instanceof ScriptingRule) ? this.moveY.portVariables(this).run(caller, ...args) : this.moveY;
+                return caller.movePiece(moveX - caller.xCoordinate, moveY - caller.yCoordinate, false);
+            }
+        }
         else if (this.type === "Change Piece Owner") {
             if (caller instanceof Piece) {
                 let playerID = (this.playerID instanceof ScriptingRule) ? this.playerID.portVariables(this).run(caller, ...args) : this.playerID;
@@ -285,6 +292,10 @@ class ScriptingRule {
             let object = caller;
             if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
             if (BGBIndexOf(activeGameState.selectedObjects, object) != -1) activeGameState.selectedObjects.splice(BGBIndexOf(activeGameState.selectedObjects, object), 1);
+            return true;
+        }
+        else if (this.type === "Clear Selected Objects") {
+            activeGameState.selectedObjects = [];
             return true;
         }
         // else if (this.type === "Valid Game State") {
@@ -511,6 +522,10 @@ class ScriptingRule {
                     return (leftArg % rightArg);
                 case "**":
                     return (leftArg ** rightArg);
+                case "Random Integer":
+                    return Math.floor(Math.random() * (rightArg - leftArg + 1) + leftArg);
+                case "Random Decimal":
+                    return Math.random() * (rightArg - leftArg) + leftArg;
             }
         }
         else if (oneArgOperators.indexOf(this.type) != -1) {
@@ -600,7 +615,7 @@ class ScriptingRule {
         }
 
         // Actions
-        else if (this.type === "Move Piece") {
+        else if (this.type === "Move Piece" || this.type === "Move Piece to Coordinates") {
             args.push(this.moveX)
             args.push(this.moveY)
         }

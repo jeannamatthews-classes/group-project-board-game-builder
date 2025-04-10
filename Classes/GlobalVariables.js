@@ -101,7 +101,7 @@ function gameInProgress() {
 }
 
 function endGame(winner) {
-    if (!gameInProgress()) return;
+    if (!gameInProgress()) return true;
     let scriptsToExecute = [];
     for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
         for (let t of p.types) {
@@ -126,12 +126,12 @@ function endGame(winner) {
 
 // This function should be run whenever the game state changes, as it includes things like turn number changes
 function globalScriptCheck() {
-    if (!gameInProgress()) return;
+    if (!gameInProgress()) return true;
     if (!Number.isFinite(activeGameState.turnPhase)) {
         activeGameState.selectedObjects = []; // Selected objects are reset between turns
         let scriptsToExecuteEnd = [];
         let scriptsToExecuteStart = [];
-        for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1)).concat) {
+        for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
             for (let t of p.types) {
                 for (let scriptToCheck of t.scripts) {
                     if (scriptToCheck.trigger === "End Turn") scriptsToExecuteEnd.push([scriptToCheck, p]);

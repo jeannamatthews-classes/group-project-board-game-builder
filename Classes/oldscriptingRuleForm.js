@@ -255,6 +255,36 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
         }
+        else if (this.rule.type === "Move Piece to Coordinates") {
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "X Coordinate:";
+            if (!scriptingRuleChild(this.rule.moveX, "Number")) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.moveX;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (Number.isFinite(v)) form.rule.moveX = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Y Coordinate:";
+            if (!scriptingRuleChild(this.rule.moveY, "Number")) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.moveY;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (Number.isFinite(v)) form.rule.moveY = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+        }
         else if (this.rule.type === "Change Piece Owner" || this.rule.type === "Move Piece to Inventory") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Player Number:";
@@ -678,7 +708,7 @@ class ScriptingRuleForm {
             srdarg.innerHTML = "Then:";
             scriptingRuleChild(this.rule.then, "None");
             srdarg = document.createElement("p");
-            srdarg.innerHTML = "Then:";
+            srdarg.innerHTML = "Else:";
             scriptingRuleChild(this.rule.else, "None");
         }
         else if (this.rule.type === "Return at End") {
@@ -720,7 +750,8 @@ class ScriptingRuleForm {
             else if (["&&", "||", "XOR"].indexOf(this.rule.type) !== -1) argumentType = "Boolean";
             else argumentType = "Number";
             srdarg = document.createElement("p");
-            srdarg.innerHTML = "Left Argument:";
+            if (this.rule.type === "Random Integer" || this.rule.type === "Random Decimal") srdarg.innerHTML = "Left Bound:";
+            else srdarg.innerHTML = "Left Argument:";
             if (!scriptingRuleChild(this.rule.leftArg, argumentType)) {
                 if (typeof this.rule.leftArg === "number") {
                     srdarg.innerHTML += " "
@@ -765,7 +796,8 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
             srdarg = document.createElement("p");
-            srdarg.innerHTML = "Right Argument:";
+            if (this.rule.type === "Random Integer" || this.rule.type === "Random Decimal") srdarg.innerHTML = "Right Bound:";
+            else srdarg.innerHTML = "Right Argument:";
             if (!scriptingRuleChild(this.rule.rightArg, argumentType)) {
                 if (typeof this.rule.rightArg === "number") {
                     srdarg.innerHTML += " "
@@ -1064,14 +1096,14 @@ function stringifyBGBObject(obj) {
 }
 
 let SRF_AllRuleTypes = [
-    "Value", "Argument", "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
+    "Value", "Argument", "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
     "Add Piece", "Change Turn Phase", "End Game", "Change Sprite", "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
     "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "Object ID", "Caller", "Create a Sprite", "Choose Piece Type",
     "Choose Tile Type", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "if-then-else", "Return at End",
-    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "!", "abs", "sign", "Create an Array",
-    "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index", "Other Caller",
-    "Select Object", "Deselect Object", "Selected Objects"
+    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Random Integer", "Random Decimal",
+    "!", "abs", "sign", "Create an Array", "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array",
+    "Array Element at Index", "Other Caller", "Select Object", "Deselect Object", "Selected Objects", "Clear Selected Objects"
 ]
 
 // These can go in for any scripting rule argument since we don't know what type they'll return
@@ -1083,7 +1115,7 @@ let SRF_RType_Anywhere = [
 // Scripting rules of these types return numbers.
 let SRF_RType_Number = [
     "X Coordinate", "Y Coordinate", "Turn Number", "Player Turn", "Turn Phase", "Board Width", "Board Height", "Object ID",
-    "+", "-", "*", "/", "%", "**", "abs", "sign", "Array Length", "Array Index of Element"
+    "+", "-", "*", "/", "%", "**", "Random Integer", "Random Decimal", "abs", "sign", "Array Length", "Array Index of Element"
 ]
 // Scripting rules of these types return booleans.
 let SRF_RType_Boolean = [
@@ -1129,9 +1161,9 @@ let SRF_RType_ArrayOfTiles = [
 ]
 // These are actions to perform, not things that return something (they typically return true, though)
 let SRF_RType_Action = [
-    "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type", "Add Piece", "Change Turn Phase",
+    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type", "Add Piece", "Change Turn Phase",
     "End Game", "Change Sprite", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "Repeat While",
-    "Remove Last Element of Array", "Add to Array", "Select Object", "Deselect Object"
+    "Remove Last Element of Array", "Add to Array", "Select Object", "Deselect Object", "Clear Selected Objects"
 ]
 // Any scripting rule type that does return something, i.e. is not an action
 let SRF_RType_Returns = SRF_AllRuleTypes.filter(e => (SRF_RType_Action.indexOf(e) === -1));
@@ -1140,8 +1172,8 @@ let SRF_RGroup_Basics = [
     "Value", "Argument", "if-then-else", "Return at End"
 ]
 let SRF_RGroup_Actions = [
-    "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
-    "Add Piece", "Change Turn Phase", "End Game", "Change Sprite", "Select Object", "Deselect Object"
+    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
+    "Add Piece", "Change Turn Phase", "End Game", "Change Sprite", "Select Object", "Deselect Object", "Clear Selected Objects"
 ]
 let SRF_RGroup_Reporters = [
     "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
@@ -1150,8 +1182,8 @@ let SRF_RGroup_Reporters = [
     "Choose Tile Type", "Selected Objects"
 ]
 let SRF_RGroup_Operators = [
-    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "!", "abs", "sign",
-    "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable"
+    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Random Integer",
+    "Random Decimal", "!", "abs", "sign", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable"
 ]
 let SRF_RGroup_Arrays = [
     "Create an Array", "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index"

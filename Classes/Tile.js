@@ -40,6 +40,7 @@ class Tile {
         let scriptResult;
         for (let s = 0; s < scriptsToExecute.length; s++) {
             scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
+            console.log(scriptResult);
             if (scriptResult === false) {
                 if (topCall) gameStateRevert();
                 return false;
@@ -49,5 +50,18 @@ class Tile {
         if (scriptResult && topCall) gameStateValid();
         else if (topCall) gameStateRevert();
         return scriptResult;
+    }
+
+    saveCode() {
+        return {
+            objectID: this.objectID,
+            xCoordinate: this.xCoordinate,
+            yCoordinate: this.yCoordinate,
+            playerOwnerID: this.playerOwnerID,
+            enabled: this.enabled,
+            publicVars: this.publicVars,
+            sprite: this.sprite,
+            types: this.types.map(t => t.saveCode ? t.saveCode() : null)
+        };
     }
 }

@@ -102,6 +102,7 @@ class Piece {
         let scriptResult;
         for (let s = 0; s < scriptsToExecute.length; s++) {
             scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
+            console.log(scriptResult);
             if (scriptResult === false) {
                 if (topCall) gameStateRevert();
                 return false;
@@ -134,6 +135,7 @@ class Piece {
         let scriptResult;
         for (let s = 0; s < scriptsToExecute.length; s++) {
             scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
+            console.log(scriptResult);
             if (scriptResult === false) {
                 if (topCall) gameStateRevert();
                 return false;
