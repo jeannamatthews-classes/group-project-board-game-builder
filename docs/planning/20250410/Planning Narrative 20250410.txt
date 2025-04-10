@@ -1,0 +1,6 @@
+The UI editors have been finished at this point, and Sophia has just about finished merging those together.
+Aaron has tested the object clicking/selection scripting rules, we've made a presentation for RAPS, and Jackson has been working
+on the save codes.
+Next week, we will begin making the gameplay side of the UI (probably mainly led by Sophia),
+and Jackson will finish the save codes. Aaron will be taking a backseat to the gameplay UI
+and will instead start making the scripting for some example games.
