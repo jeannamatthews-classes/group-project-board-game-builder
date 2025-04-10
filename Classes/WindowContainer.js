@@ -7,6 +7,8 @@ class WindowContainer {
             offsetTop,
             offsetLeft
         } = options;
+        this.onMouseDown = null;
+        this.beforeClose = null;
 
         this.container = document.createElement('div');
         this.container.classList.add('window-container');
@@ -15,6 +17,9 @@ class WindowContainer {
 
         // Bring to front when clicked
         this.container.addEventListener('mousedown', () => {
+            if (typeof this.onMouseDown === 'function') {
+                this.onMouseDown();
+            }
             this.container.style.zIndex = ++__windowZIndex;
         });
 

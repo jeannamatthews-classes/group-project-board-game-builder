@@ -6,27 +6,43 @@ class UIPiece {
         this.boardContainer = null;
         this.editorWindow = null;
         this.refreshEditorWindowContent = null;
-        this.createPieceElement();
+
+        this.createPiece();
     }
 
-    createPieceElement() {
+    createPiece() {
         const create = () => {
-            const el = document.createElement('div');
-            el.classList.add('piece-ui');
-            el.setAttribute('data-id', this.piece.objectID);
-            el.style.width = '40px';
-            el.style.height = '40px';
-            el.style.position = 'relative';
-            el.style.display = 'flex';
-            el.style.alignItems = 'center';
-            el.style.justifyContent = 'center';
-            el.style.cursor = 'pointer';
-            return el;
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('piece-ui');
+            wrapper.setAttribute('data-id', this.piece.objectID);
+            wrapper.style.width = '40px';
+            wrapper.style.height = '40px';
+            wrapper.style.position = 'relative';
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = 'column';
+            wrapper.style.alignItems = 'center';
+            wrapper.style.justifyContent = 'center';        
+            wrapper.style.cursor = 'pointer';       
+
+            const icon = document.createElement('div');
+            icon.style.width = '40px';
+            icon.style.height = '40px';
+            wrapper.appendChild(icon);
+
+            wrapper._icon = icon;
+            return wrapper;
         };
 
         this.container = create();
-        this.boardContainer = create();
+        this.boardContainer = document.createElement('div');
         this.boardContainer.classList.add('board-piece');
+        this.boardContainer.style.width = '40px';
+        this.boardContainer.style.height = '40px';
+        this.boardContainer.style.position = 'relative';
+        this.boardContainer.style.display = 'flex';
+        this.boardContainer.style.alignItems = 'center';
+        this.boardContainer.style.justifyContent = 'center';
+        this.boardContainer.style.cursor = 'pointer';
 
         this.updateSprite();
 
@@ -38,7 +54,8 @@ class UIPiece {
 
     updateSprite(sprite = this.piece.sprite) {
         const renderTo = (el) => {
-            el.innerHTML = '';
+            const target = el._icon || el;
+            target.innerHTML = '';
 
             const s = sprite;
             const shape = document.createElement('div');
@@ -67,11 +84,12 @@ class UIPiece {
                 shape.innerText = s.text || '';
             }
 
-            el.appendChild(shape);
+            target.appendChild(shape);
         };
 
         renderTo(this.container);
         renderTo(this.boardContainer);
+
     }
 
     openEditorWindow() {
@@ -81,9 +99,9 @@ class UIPiece {
             return;
         }
 
-        const win = new WindowContainer(`Piece (${this.piece.objectID})`, true, {
+        const win = new WindowContainer(`Piece: ${this.piece.name}`, true, {
             width: 320,
-            height: 420,
+            height: 440,
             offsetTop: 100,
             offsetLeft: 400
         });
@@ -95,6 +113,7 @@ class UIPiece {
         content.style.gap = '6px';
 
         content.innerHTML = `
+            <label>Name: <input type="text" id="piece-name" /></label>
             <label>Shape:
                 <select id="shape">
                     <option value="square">Square</option>
@@ -113,6 +132,7 @@ class UIPiece {
             <div id="location-controls"></div>
         `;
 
+        const nameInput = content.querySelector('#piece-name');
         const shape = content.querySelector('#shape');
         const fill = content.querySelector('#fill-color');
         const stroke = content.querySelector('#stroke-color');
@@ -183,7 +203,7 @@ class UIPiece {
                 removeBtn.onclick = () => {
                     this.piece.xCoordinate = -1;
                     this.piece.yCoordinate = -1;
-                    boardEditor.tiles[x][y].updatePieceDisplay();
+                    boardEditor.tiles[y][x].updatePieceDisplay();
                     updateLocationDisplay();
                 };
                 locationControls.appendChild(removeBtn);
@@ -215,26 +235,38 @@ class UIPiece {
                         newY >= 0 && newY < boardEditor.board.height) {
                         this.piece.xCoordinate = newX;
                         this.piece.yCoordinate = newY;
-
-                        const override = {};
-                        override[this.piece.objectID] = { x: newX, y: newY };
-                        boardEditor.tiles[newX][newY].updatePieceDisplay(override);
+                        boardEditor.tiles[newY][newX].updatePieceDisplay();
                         updateLocationDisplay();
                     }
                 };
 
-                locationControls.appendChild(xInput);
-                locationControls.appendChild(yInput);
-                locationControls.appendChild(placeBtn);
+                locationControls.append(xInput, yInput, placeBtn);
             }
         };
 
         const wireInputs = () => {
+            nameInput.value = this.piece.name;
             shape.value = this.piece.sprite.shape;
             fill.value = this.piece.sprite.fillColor;
             stroke.value = this.piece.sprite.strokeColor;
             text.value = this.piece.sprite.text;
             textColor.value = this.piece.sprite.textColor;
+
+            nameInput.addEventListener('input', (e) => {
+                const newName = e.target.value.trim();
+                const isDuplicate = pieceEditor.pieces.some(p =>
+                    p !== this && p.piece.name === newName
+                );
+
+                if (!newName || isDuplicate) {
+                    nameInput.style.borderColor = 'red';
+                    return;
+                }
+
+                nameInput.style.borderColor = '';
+                this.piece.name = newName;
+                win.header.querySelector('span').textContent = `Piece: ${newName}`;
+            });
 
             const update = () => {
                 this.piece.sprite.shape = shape.value;
@@ -259,6 +291,10 @@ class UIPiece {
         };
 
         this.refreshEditorWindowContent();
+        win.onMouseDown = () => {
+            if (__windowZIndex != win.container.style.zIndex)
+                this.refreshEditorWindowContent();
+        };
         win.appendContent(content);
     }
 }

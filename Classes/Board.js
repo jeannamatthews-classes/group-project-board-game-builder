@@ -2,8 +2,16 @@ class Board {
     boardShape = "Square"; // The shape of the board
     width; height; // The dimensions of the board
     tileArray; // A 2D array of Tiles
-
+        
     constructor(boardShape, width, height) {
+        this.containerWidth = -1;
+        this.containerHeight = -1;
+        this.containerTop = -1;
+        this.containerLeft = -1;
+        this.borderColor = 'black';
+        this.borderWidth='2px';
+        this.backgroundColor ='white';
+
         if (boardShape === "Square") {
             this.boardShape = "Square";
             this.width = width;
@@ -12,7 +20,7 @@ class Board {
             for (let y = 0; y < height; y++) {
                 ta.push([]);
                 for (let x = 0; x < width; x++) {
-                    ta[y].push(new Tile([], x, y, 0));
+                    ta[y].push(new Tile([], x, y));
                 }
             }
             this.tileArray = ta;

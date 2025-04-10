@@ -370,3 +370,49 @@ transition: transform 0.2s ease;
     gap: 6px;
   }
   
+
+
+.scriptingRuleBox {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-style: solid;
+    border-width: 0.2vw;
+    flex-direction: column;
+    width: 90%;
+}
+
+.scriptingRuleBoxZebraDark {
+    background-color: #465b8d;
+}
+.scriptingRuleBoxZebraLight {
+    background-color: #7190db;
+}
+
+.SRFBooleanBox {
+    background-color: #3dae41;
+}
+.SRFButton {
+    min-width: 10vw;
+    padding: 0.5vw;
+    background-color: #003dcb;
+    border: 0.2vw solid black;
+}
+.ui-layout-box-label {
+    font-family: sans-serif;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.ui-layout-box-close:hover {
+    opacity: 1 !important;
+}
+.player-selector {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* optional: controls distance between inputs */
+    margin-top: 10px; /* optional: spacing from the size selector */
+}

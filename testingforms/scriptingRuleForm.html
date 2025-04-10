@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scripting Rule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/scriptingRuleForm.css">
+</head>
+<body>
+    
+</body>
+<script src="Classes/ScriptingRule.js"></script>
+<script src="Classes/GameState.js"></script>
+<script src="Classes/Board.js"></script>
+<script src="Classes/TileType.js"></script>
+<script src="Classes/Tile.js"></script>
+<script src="Classes/PieceType.js"></script>
+<script src="Classes/Piece.js"></script>
+<script src="Classes/Button.js"></script>
+<script src="Classes/Sprite.js"></script>
+<script src="Classes/PlayerInventory.js"></script>
+<script src="Classes/GlobalVariables.js"></script>
+<script src="scripts/scriptingRuleForm.js"></script>
+<!-- <script src="Testing/testingZone.js"></script>  -->
+<script>
+    let formT = new ScriptingRuleForm(new ScriptingRule("Piece Moves", "Value", 0), true, "Any")
+    document.documentElement.appendChild(formT.div);
+</script>
+</html>

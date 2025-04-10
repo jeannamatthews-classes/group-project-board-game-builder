@@ -4,6 +4,9 @@ class UIType {
         this.kind = kind;
         this.container = this.createContainer();
         this.window = null;
+        this.refreshEditorWindowContent = null;
+        this.rules = []
+        
         this.openEditorWindow();
     }
 
@@ -67,7 +70,7 @@ class UIType {
         removeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             row.remove();
-            typeEditor.removeType(this); // optional hook
+            typeEditor.removeType(this)
         });
     
         controls.appendChild(upBtn);
@@ -87,8 +90,10 @@ class UIType {
     openEditorWindow() {
         if (this.window && document.body.contains(this.window.container)) {
             this.window.container.style.zIndex = ++__windowZIndex;
+            this.refreshEditorWindowContent?.();
             return;
         }
+        
 
         const win = new WindowContainer(`Type: ${this.type.typeName}`, true, {
             width: 350,
@@ -111,7 +116,6 @@ class UIType {
             const list = {
                 tile: typeEditor.tileTypes,
                 piece: typeEditor.pieceTypes,
-                button: typeEditor.buttonTypes
             }[this.kind];
         
             const isDuplicate = list.some(t => t !== this && t.type.typeName === newName);
@@ -145,9 +149,9 @@ class UIType {
         const addRule = document.createElement('button');
         addRule.textContent = '+ Add Rule';
         addRule.addEventListener('click', () => {
-            const rule = document.createElement('div');
-            rule.textContent = '[new rule]';
-            rulesList.appendChild(rule);
+            var newRule = new UIScriptingRule(new ScriptingRuleForm(new ScriptingRule("Piece Moves", "Value", 0), true, String(this.kind).charAt(0).toUpperCase() + String(this.kind).slice(1)), (obj) => this.removeRule(obj) )
+            this.rules.push(newRule)
+            rulesList.appendChild(newRule.container);
         });
         content.appendChild(addRule);
 
@@ -162,60 +166,129 @@ class UIType {
 
         const renderVars = () => {
             varsList.innerHTML = '';
+            
             this.type.publicVars.forEach((v, index) => {
                 const row = document.createElement('div');
                 row.style.display = 'flex';
                 row.style.gap = '4px';
                 row.style.alignItems = 'center';
-
+        
                 const name = document.createElement('input');
                 name.value = v.name;
                 name.placeholder = 'name';
                 name.style.width = '75px';
-                name.addEventListener('input', e => v.name = e.target.value);
-
-                const value = document.createElement('input');
-                value.value = v.value;
-                value.placeholder = 'value';
-                value.style.width = '75px';
-                value.addEventListener('input', e => v.value = e.target.value);
-
-                const typeSelect = document.createElement('select');
-                ['string', 'boolean', 'number'].forEach(t => {
-                    const opt = document.createElement('option');
-                    opt.value = t;
-                    opt.textContent = t;
-                    if (v.type === t) opt.selected = true;
-                    typeSelect.appendChild(opt);
+                name.addEventListener('input', e => {
+                    v.name = e.target.value.trim();
                 });
-                typeSelect.addEventListener('change', e => v.type = e.target.value);
-
+        
+                // Dynamic Value Input based on typeof v.value
+                let valueInput;
+        
+                if (typeof v.value === 'boolean') {
+                    valueInput = document.createElement('button');
+                    valueInput.textContent = v.value;
+                    valueInput.addEventListener('click', () => {
+                        v.value = !v.value;
+                        valueInput.textContent = v.value;
+                    });
+                } else if (typeof v.value === 'number') {
+                    valueInput = document.createElement('input');
+                    valueInput.type = 'number';
+                    valueInput.value = v.value;
+                    valueInput.style.width = '75px';
+                    valueInput.addEventListener('input', e => {
+                        const parsed = Number(e.target.value);
+                        v.value = isNaN(parsed) ? 0 : parsed;
+                    });
+                } else {
+                    valueInput = document.createElement('input');
+                    valueInput.value = v.value;
+                    valueInput.style.width = '75px';
+                    valueInput.addEventListener('input', e => {
+                        v.value = e.target.value;
+                    });
+                }
+        
                 const remove = document.createElement('button');
                 remove.textContent = '✕';
                 remove.addEventListener('click', () => {
                     this.type.publicVars.splice(index, 1);
                     renderVars();
                 });
-
+        
                 row.appendChild(name);
-                row.appendChild(value);
-                row.appendChild(typeSelect);
+                row.appendChild(valueInput);
                 row.appendChild(remove);
                 varsList.appendChild(row);
             });
         };
+        
+        
+        
 
         const addVar = document.createElement('button');
         addVar.textContent = '+ Add Public Var';
         addVar.addEventListener('click', () => {
-            this.type.publicVars.push({ name: '', value: '', type: 'string' });
-            renderVars();
+            const chooser = document.createElement('div');
+            chooser.style.display = 'flex';
+            chooser.style.gap = '4px';
+        
+            const createBtn = (label, value) => {
+                const btn = document.createElement('button');
+                btn.textContent = label;
+                btn.addEventListener('click', () => {
+                    this.type.publicVars.push({ name: '', value });
+                    renderVars();
+                    chooser.remove();
+                });
+                return btn;
+            };
+        
+            chooser.appendChild(createBtn('String', ''));
+            chooser.appendChild(createBtn('Number', 0));
+            chooser.appendChild(createBtn('Boolean', false));
+        
+            varsList.appendChild(chooser);
         });
         content.appendChild(addVar);
+        
 
         renderVars();
 
         win.appendContent(content);
         this.window = win;
+
+        //UPDATES THE WIDNOW
+        this.refreshEditorWindowContent = () => {
+            console.log("refresh", this.type.typeName)
+            nameInput.value = this.type.typeName;
+            nameInput.dispatchEvent(new Event('input')); 
+            this.rules.forEach(rule => rule.updateName())
+            
+            renderVars();
+            win.header.querySelector('span').textContent = `Type: ${this.type.typeName}`;
+        };
+        
+        this.refreshEditorWindowContent();
+        win.onMouseDown = () => { 
+            if(__windowZIndex != win.container.style.zIndex)
+                this.refreshEditorWindowContent()}
+        
+        this.window = win;
+        win.appendContent(content);
+        //
     }
+
+    removeRule(rule) {
+        const index = this.rules.indexOf(rule);
+        if (index !== -1) {
+            // Remove from array
+            this.rules.splice(index, 1);
+            // Remove from DOM
+            if (rule.container && rule.container.parentElement) {
+                rule.container.parentElement.removeChild(rule.container);
+            }
+        }
+    }
+    
 }

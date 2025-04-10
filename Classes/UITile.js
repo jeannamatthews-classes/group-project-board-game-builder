@@ -263,7 +263,7 @@ class UITile {
             available.forEach(p => {
                 const opt = document.createElement('option');
                 opt.value = p.piece.objectID;
-                opt.textContent = `Piece ${p.piece.objectID}`;
+                opt.textContent = `Piece ${p.piece.name}`;
                 select.appendChild(opt);
             });
 
@@ -313,6 +313,9 @@ class UITile {
         };
 
         this.refreshEditorWindowContent();
+        win.onMouseDown = () => { 
+            if(__windowZIndex != win.container.style.zIndex)
+                this.refreshEditorWindowContent()}
         win.appendContent(content);
     }
 }

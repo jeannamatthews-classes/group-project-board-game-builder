@@ -66,10 +66,15 @@ class ScriptingRule {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
             this.winner = args[0];
         }
-        else if (this.type === "Change Sprite") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Create a Sprite", "#ffffff", "#000000", ""));
-            this.newSprite = args[0];
+        else if (this.type === "Change Piece Sprite") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create Piece Sprite", "square", "#cccccc", "#000000", "", "#000000"));
+            this.newPieceSprite = args[0];
         }
+        else if (this.type === "Change Tile Sprite") {
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Create Tile Sprite", "#cccccc", "", "#000000"));
+            this.newTileSprite = args[0];
+        }
+        
         
         // Reporters
         else if (this.type === "Tile at Coordinates") {
@@ -86,14 +91,19 @@ class ScriptingRule {
             if (args.length <= 0) args.push(undefined);
             this.object = args[0];
         }
-        else if (this.type === "Create a Sprite") {
-            if (args.length <= 0) args.push("#ffffff");
-            this.color = args[0];
-            if (args.length <= 1) args.push("#000000");
-            this.textColor = args[1];
-            if (args.length <= 2) args.push("");
-            this.text = args[2];
+        else if (this.type === "Create Piece Sprite") {
+            this.shape = args[0] ?? "square";
+            this.fillColor = args[1] ?? "#cccccc";
+            this.strokeColor = args[2] ?? "#000000";
+            this.text = args[3] ?? "";
+            this.textColor = args[4] ?? "#000000";
         }
+        else if (this.type === "Create Tile Sprite") {
+            this.fillColor = args[0] ?? "#cccccc";
+            this.text = args[1] ?? "";
+            this.textColor = args[2] ?? "#000000";
+        }
+        
         else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
             if (args.length <= 0) args.push(0);
             this.index = args[0];
@@ -252,13 +262,19 @@ class ScriptingRule {
             endGame(winner);
             return true;
         }
-        else if (this.type === "Change Sprite") {
-            let newSprite = (this.newSprite instanceof ScriptingRule) ? this.newSprite.portVariables(this).run(caller, ...args) : this.newSprite;
+        else if (this.type === "Change Piece Sprite") {
+            let sprite = (this.newPieceSprite instanceof ScriptingRule) ? this.newPieceSprite.portVariables(this).run(caller, ...args) : this.newPieceSprite;
             if (caller instanceof Piece) {
-                caller.sprite = newSprite;
+                caller.sprite = sprite;
             }
-            return true;
         }
+        else if (this.type === "Change Tile Sprite") {
+            let sprite = (this.newTileSprite instanceof ScriptingRule) ? this.newTileSprite.portVariables(this).run(caller, ...args) : this.newTileSprite;
+            if (caller instanceof Tile) {
+                caller.sprite = sprite;
+            }
+        }
+        
         else if (this.type === "Select Object") {
             let object = caller;
             if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
@@ -377,12 +393,23 @@ class ScriptingRule {
         else if (this.type === "Caller") {
             return caller;
         }
-        else if (this.type === "Create a Sprite") {
-            let color = (this.color instanceof ScriptingRule) ? this.color.portVariables(this).run(caller, ...args) : this.color;
-            let textColor = (this.textColor instanceof ScriptingRule) ? this.textColor.portVariables(this).run(caller, ...args) : this.textColor;
-            let text = (this.text instanceof ScriptingRule) ? this.text.portVariables(this).run(caller, ...args) : this.text;
-            return new Sprite(color, textColor, text);
+        else if (this.type === "Create Piece Sprite") {
+            return {
+                shape: (this.shape instanceof ScriptingRule) ? this.shape.portVariables(this).run(caller, ...args) : this.shape,
+                fillColor: (this.fillColor instanceof ScriptingRule) ? this.fillColor.portVariables(this).run(caller, ...args) : this.fillColor,
+                strokeColor: (this.strokeColor instanceof ScriptingRule) ? this.strokeColor.portVariables(this).run(caller, ...args) : this.strokeColor,
+                text: (this.text instanceof ScriptingRule) ? this.text.portVariables(this).run(caller, ...args) : this.text,
+                textColor: (this.textColor instanceof ScriptingRule) ? this.textColor.portVariables(this).run(caller, ...args) : this.textColor,
+            };
         }
+        else if (this.type === "Create Tile Sprite") {
+            return {
+                fillColor: (this.fillColor instanceof ScriptingRule) ? this.fillColor.portVariables(this).run(caller, ...args) : this.fillColor,
+                text: (this.text instanceof ScriptingRule) ? this.text.portVariables(this).run(caller, ...args) : this.text,
+                textColor: (this.textColor instanceof ScriptingRule) ? this.textColor.portVariables(this).run(caller, ...args) : this.textColor,
+            };
+        }
+        
         else if (this.type === "Choose Piece Type") {
             return pieceTypesList[this.index];
         }
@@ -599,8 +626,11 @@ class ScriptingRule {
         else if (this.type === "End Game") {
             args.push(this.winner)
         }
-        else if (this.type === "Change Sprite") {
-            args.push(this.newSprite)
+        else if (this.type === "Change Piece Sprite") {
+            args.push(this.newPieceSprite);
+        }
+        else if (this.type === "Change Tile Sprite") {
+            args.push(this.newTileSprite);
         }
         
         // Reporters
@@ -614,11 +644,19 @@ class ScriptingRule {
         else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID" || this.type === "Select Object" || this.type === "Deselect Object") {
             args.push(this.object)
         }
-        else if (this.type === "Create a Sprite") {
-            args.push(this.color);
-            args.push(this.textColor);
+        else if (this.type === "Create Piece Sprite") {
+            args.push(this.shape);
+            args.push(this.fillColor);
+            args.push(this.strokeColor);
             args.push(this.text);
+            args.push(this.textColor);
         }
+        else if (this.type === "Create Tile Sprite") {
+            args.push(this.fillColor);
+            args.push(this.text);
+            args.push(this.textColor);
+        }
+
         else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
             args.push(this.index);
         }

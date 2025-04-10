@@ -5,6 +5,7 @@ class Piece {
     playerOwnerID = -1;
     publicVars = [];
     sprite;
+    
 
     constructor(types, xStart, yStart, owner, sprite, id = undefined) {
         this.types = types;
@@ -13,6 +14,7 @@ class Piece {
         this.yCoordinate = yStart;
         this.playerOwnerID = owner;
         this.sprite = sprite;
+        this.name = '';
     }
     
     saveCode() {

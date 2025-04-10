@@ -9,15 +9,21 @@ class Button {
         textColor: "FFFFFF",
         borderColor: "#000000",
         borderRadius: "5px",
-        width: "300px",
-        height: "200px"
     }
-    name; // This starts out undefined but can be changed to a string
+    
+    // This starts out undefined but can be changed to a string
     // Do all the buttons go in one place in the UI, or can they be put in different places? If they can go in
     // different places, we'll need parameters here for that too.
     
 
     constructor(clickScripts = [], visibleRules = [], color = "#000000", textColor = "#ffffff", text = "", width = 0, height = 0) {
+        this.containerWidth = -1;
+        this.containerHeight = -1;
+        this.containerTop = -1;
+        this.containerLeft = -1;
+        this.borderColor = 'black';
+        this.borderWidth='2px';
+        this.backgroundColor ='white';
         this.clickScripts = clickScripts;
         this.visibleRules = visibleRules;
         this.color = color;
@@ -25,6 +31,7 @@ class Button {
         this.text = text;
         this.width = width;
         this.height = height;
+        
     }
 
     clickButton(topCall = true) {

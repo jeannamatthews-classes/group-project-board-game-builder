@@ -109,3 +109,33 @@ Removed Save/Close and Cancel
 Fixed Swapping Mechanism in PieceEditor.
 Allow Assignment of Piece Types.
 Fixed Types so that the Rows would show up. 
+
+
+DONE:
+Added ButtonEditor
+Added Buttons.
+Removed ButtonTypes from the UIType Editor
+Fixed UI of Type and Button Editors to align more with the Piece Editor with headers.
+Made Containers Properly Scrollable.
+Enforcing Unique and Non-Empty Names for Public Variables within a Type.
+Added a name field to piece
+Add an input in the editor window to edit the name.
+Update the window header to live update name changes.
+Show the name above the piece icon in the PieceEditor (but not the board)
+Enforce unique names (on rename and on duplicate)
+Auto-generate unique names when a piece is created/duplicated (same as other editors)
+Made the ScriptingRuleForm fully dynamic, and contained it within a WindowContainer.
+Made the UIScriptingRule to hold the row that opens the Scripting Rule Form.
+Fixed If Then Else Headers (incorrectly labeled If Then Then)
+Make sure canges to Rule names update in all windows / window headers.
+Create Callback for removing a rule.
+Clicking an unfocused window will update it.
+Connected Scripting Rules by creating a UIScriptingRule to hold  the scripting rule row.
+Put scripting rule form into a class that opens a WindowContainer.
+Edited ScriptingRule to account for the new Sprite format for tiles and pieces separately.
+Removed Sprite class, as it is no longer in use. 
+Rewrote the Global Scripts into a general Global Editor class that allows you to edit variables and scripting rules.
+Added the preview/layout editor thing that allows the user to move elements around
+and resize them on the gameplay screen. Works using percentages. 
+
+
