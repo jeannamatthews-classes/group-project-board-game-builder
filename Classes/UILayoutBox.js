@@ -93,9 +93,68 @@ class UILayoutBox {
             this.container.remove();
         });
 
-        headerTools.appendChild(bgColor);
-        headerTools.appendChild(borderColor);
-        headerTools.appendChild(borderWidth);
+
+
+        var openAppearanceWindow = function() {
+            const win = new WindowContainer(`Appearance: ${this.name}`, true, {
+                width: 220,
+                height: 180,
+                offsetTop: 100,
+                offsetLeft: 100
+            });
+        
+            const content = document.createElement('div');
+            content.style.display = 'flex';
+            content.style.flexDirection = 'column';
+            content.style.gap = '8px';
+        
+            content.innerHTML = `
+                <label>Background Color:</label>
+                <input type="color" value="${this.logic.backgroundColor || '#ffffff'}">
+                <label>Border Color:</label>
+                <input type="color" value="${this.logic.borderColor || '#000000'}">
+                <label>Border Width:</label>
+                <input type="number" value="${parseInt(this.logic.borderWidth) || 2}" min="0" style="width: 50px">
+            `;
+        
+            const [bgInput, borderInput, borderWidthInput] = content.querySelectorAll('input');
+        
+            bgInput.addEventListener('input', e => {
+                this.logic.backgroundColor = e.target.value;
+                this.updateStyles();
+            });
+        
+            borderInput.addEventListener('input', e => {
+                this.logic.borderColor = e.target.value;
+                this.updateStyles();
+            });
+        
+            borderWidthInput.addEventListener('input', e => {
+                this.logic.borderWidth = parseInt(e.target.value) || 0;
+                this.updateStyles();
+            });
+        
+            win.appendContent(content);
+        }
+        
+        const appearanceBtn = document.createElement('button');
+        appearanceBtn.textContent = '⚙️';
+        appearanceBtn.style.background = 'none';
+        appearanceBtn.style.border = 'none';
+        appearanceBtn.style.cursor = 'pointer';
+        appearanceBtn.style.opacity = '0.6';
+        appearanceBtn.style.fontSize = '12px';
+        appearanceBtn.title = 'Appearance Settings';
+        
+        appearanceBtn.addEventListener('mouseenter', () => appearanceBtn.style.opacity = '1');
+        appearanceBtn.addEventListener('mouseleave', () => appearanceBtn.style.opacity = '0.6');
+        appearanceBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openAppearanceWindow();
+        });
+        
+        headerTools.appendChild(appearanceBtn);
+        
         headerTools.appendChild(closeBtn);
 
         header.appendChild(label);

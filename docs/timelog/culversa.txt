@@ -111,7 +111,7 @@ Allow Assignment of Piece Types.
 Fixed Types so that the Rows would show up. 
 
 
-DONE:
+April 8th
 Added ButtonEditor
 Added Buttons.
 Removed ButtonTypes from the UIType Editor
@@ -139,3 +139,11 @@ Added the preview/layout editor thing that allows the user to move elements arou
 and resize them on the gameplay screen. Works using percentages. 
 
 
+
+
+April 11th
+Fixed the LayoutEditor to remove faulty call. 
+Fixed the Board and Piece Editors to link them to the actual types class
+Created the overarching save code function. 
+Fix the Globalwindow in the Layout Editor to properly save an ordered list of variables to display. 
+Fixed the Layout editor window editing features to be clearer.

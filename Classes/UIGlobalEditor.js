@@ -1,7 +1,7 @@
 class UIGlobalEditor {
     constructor() {
-        this.globalVariables = []; // { name: string, value: any, type: 'string' | 'number' | 'boolean' }
-        this.globalScripts = [];   // Array of UIScriptingRule
+        this.globalVariables = []; 
+        this.globalScripts = [];   
 
         this.container = null;
         this.window = null;
@@ -55,7 +55,7 @@ class UIGlobalEditor {
                 const btn = document.createElement('button');
                 btn.textContent = label;
                 btn.addEventListener('click', () => {
-                    this.globalVariables.push({ name: '', value: defaultValue });
+                    this.globalVariables.push({ name: '', value: defaultValue, display:false });
                     this.refreshVariableList();
                     chooser.remove();
                 });

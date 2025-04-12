@@ -44,6 +44,13 @@ class Board {
             boardShape: this.boardShape,
             width: this.width,
             height: this.height,
+            containerWidth:this.containerWidth,
+            containerHeight:this.containerHeight,
+            containerTop:this.containerTop,
+            containerLeft:this.containerLeft,
+            borderColor:this.borderColor,
+            borderWidth:this.borderWidth,
+            backgroundColor : this.backgroundColor,
             tileArray: this.tileArray.map(row =>
                 row.map(tile => tile.saveCode()) 
             )

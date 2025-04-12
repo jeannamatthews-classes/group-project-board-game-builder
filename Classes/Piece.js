@@ -146,4 +146,17 @@ class Piece {
         else if (topCall) gameStateRevert();
         return scriptResult;
     }
+
+    saveCode(){
+        return {
+            types: this.types,
+            id: this.objectID,
+            x: this.xCoordinate,
+            y: this.yCoordinate,
+            owner: this.playerOwnerID,
+            sprite: this.sprite,
+            name: this.name,
+        };
+    }
+
 }

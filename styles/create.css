@@ -3,11 +3,12 @@ body {
 }
 
 html, body {
-    height: 100vw;
-    width: 100vh;
+    height: 100vh;
+    width: 100vw;
     margin: 0;
     padding: 0;
 }
+
 
 .main-screen {
     width:100vw;
@@ -19,10 +20,9 @@ html, body {
 .container-main {
     background-color: white;
     width: 75vw;
-    height: 50vw;
+    height: 80vh;
     border-radius: 5%;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    margin-top: 50px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -33,11 +33,11 @@ html, body {
 
 .header {
     width:100%;
-    height:5%;
+    height:3%;
     background-color: #001f4d;
     color: white;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     border-radius: 15px 15px 0 0;
     text-align: center;
     font-size: 24px;
@@ -48,18 +48,15 @@ html, body {
     width:80%;
     margin: auto;
     height:75%;
-    padding:5%;
 
 }
 
 .tile-images{
     display:flex;
     width:100%;
-    height:20%;
     justify-content: space-between;
     align-items: center;    
     overflow-x: hidden;
-    margin-bottom:5%;
     border:none;
 }
 
@@ -69,13 +66,12 @@ html, body {
 }
 
 .tile-selector{
+    
     display: flex;
-    height:10%;
     justify-content: space-between; 
     align-items: center;          
     padding-left: 30%;
     padding-right: 30%;
-    margin-bottom:5%;
 }
 
 
@@ -92,14 +88,9 @@ html, body {
 
 .size-selector{
     display: flex;
-    height:10%;
     justify-content: space-between; 
     align-items: center;          
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-bottom:5%;
-    border-bottom:1px solid black;
-    padding-bottom:10%;
+
 }
 
 
@@ -111,7 +102,6 @@ html, body {
 
 .labeled-input{
     width:30%;
-    height:100%;
 }
 
 .labeled-input label{
@@ -413,6 +403,82 @@ transition: transform 0.2s ease;
 .player-selector {
     display: flex;
     justify-content: space-between;
-    gap: 20px; /* optional: controls distance between inputs */
-    margin-top: 10px; /* optional: spacing from the size selector */
+}
+
+.creation-form {
+    box-sizing: border-box;
+    width: 70%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tile-images {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:80px;
+    overflow-x: hidden;
+}
+
+.tile-images img {
+    width: 80px;
+    height: 80px;
+}
+
+.tile-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1px solid gray;
+}
+
+.size-selector,
+.player-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1px solid gray;
+}
+
+.labels {
+    text-align: center;
+    font-size: 1.5vw;
+    color: #001f4d;
+    font-weight: bold;
+}
+
+#done-btn {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;       
+    width: 80%;
+    height:10%;
+    font-size: 1.3vw;
+}
+.done-selector{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;      
+
+}
+
+.creation-form {
+    box-sizing: border-box;
+    width: 70%;
+    margin: auto;
+    height: 90%;  /* more breathing room */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;  /* even spacing */
+}
+
+#done-btn {
+    display: block;
+    margin: 0 auto;
+    height:30px;
+    font-size: 1.3vw;
+    width: 80%;
 }

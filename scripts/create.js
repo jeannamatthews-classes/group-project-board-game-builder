@@ -12,17 +12,15 @@ const maxPlayersInput = document.getElementById('max-players');
 
 const boardTypeText = ["Square", "Hex", "Triangle"]
 const boardTypeSources = ["images/square.png","images/hexagon.png","images/triangle.png"];
-const TILE_TYPES = ['Grass', 'Water', 'Mountain', 'Road'];
 var boardEditor;
 var pieceEditor;
 var typeEditor;
 var buttonEditor;
 var globalEditor;
-var publicVars;
 var minPlayers;
 var maxPlayers;
 var playerInventories = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'black', borderWidth:'2px', backgroundColor:'white' }
-var globals = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'black', borderWidth:'2px', backgroundColor:'white' }
+var globals = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'black', borderWidth:'2px', backgroundColor:'white', displayVariables:[]}
 var layoutEditor;
 
 
@@ -82,12 +80,6 @@ maxPlayersInput.addEventListener('input', validateInputs);
 
 
 
-
-
-
-function saveFile(){
-    return //dummy function to buff out later.
-}
 
 
 function setUpButtons(){
@@ -246,4 +238,41 @@ function openEditor(type) {
                 globalEditor.window.container.style.zIndex  = ++__windowZIndex;
             break;
     }
+}
+
+
+
+function saveCode() {
+    const game = {
+        minPlayers: minPlayers,
+        maxPlayers: maxPlayers,
+        board: boardEditor.board.saveCode(),
+        pieces: pieceEditor.pieces.map(pieceUI =>
+            pieceUI.piece.saveCode()
+        ),
+        pieceTypes: typeEditor.pieceTypes.map(typeUI => typeUI.type.saveCode()),
+        tileTypes: typeEditor.tileTypes.map(typeUI => typeUI.type.saveCode()),
+        buttons: buttonEditor.buttons.map(buttonUI => buttonUI.button.saveCode()),
+        globalVariables: globalEditor.globalVariables,
+        globalScripts: globalEditor.globalScripts.map(scriptUI => scriptUI.form.script.saveCode()),
+        inventoryLayout: playerInventories,
+        globalLayout: globals
+    };
+
+    const json = JSON.stringify(game, null, 4);  // Pretty print for humans
+    const blob = new Blob([json], { type: 'application/json' });
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    
+    const filename = prompt("Enter a filename for your game:", "myGame.json") || "game.json";
+    
+    a.download = filename.endsWith('.json') ? filename : filename + ".json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+function loadCode() {
+
 }

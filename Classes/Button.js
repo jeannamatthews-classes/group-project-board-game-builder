@@ -1,7 +1,6 @@
 class Button {
     clickScripts = [];
     visibleRules = [];
-    enabled = true;
     sprite = 
     {
         fillColor:  "#0f0f0f",
@@ -55,5 +54,25 @@ class Button {
             if (!(this.visibleRules[s].run())) return false;
         }
         return true;
+    }
+
+    saveCode() {
+        return {
+            
+            containerWidth:this.containerWidth,
+            containerHeight:this.containerHeight,
+            containerTop:this.containerTop,
+            containerLeft:this.containerLeft,
+            borderColor:this.borderColor,
+            borderWidth:this.borderWidth,
+            backgroundColor : this.backgroundColor,
+            clickScripts: this.clickScripts.map(script =>
+                script.saveCode()
+            ),
+            visibleRules: this.visibleRules.map(script =>
+                script.saveCode()
+            ),
+            sprite: this.sprite
+        };
     }
 }

@@ -167,11 +167,12 @@ class UIPiece {
 
         addTypeBtn.onclick = () => {
             const select = document.createElement('select');
-            TILE_TYPES.forEach(type => {
-                if (!this.piece.types.includes(type)) {
+            typeEditor.pieceTypes.forEach(typeUI => {
+                let type = typeUI.type
+                if (!this.piece.types.includes(type.typeID)) {
                     const opt = document.createElement('option');
-                    opt.value = type;
-                    opt.textContent = type;
+                    opt.value = type.typeID;
+                    opt.textContent = type.typeName;
                     select.appendChild(opt);
                 }
             });
