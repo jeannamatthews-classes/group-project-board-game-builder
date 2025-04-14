@@ -25,6 +25,35 @@ class Board {
             }
             this.tileArray = ta;
         }
+        else if (boardShape === "Hexagon") {
+            this.boardShape = "Hexagon";
+            this.width = width;
+            this.height = height;
+            let ta = [];
+            for (let y = 0; y < height; y++) {
+                ta.push([]);
+                for (let x = 0; x < width; x++) {
+                    ta[y].push(new Tile([], x, y));
+                }
+                if (y < Math.floor((height - 1) / 2)) width++;
+                else if (y >= Math.ceil((height - 1) / 2)) width--;
+            }
+            this.tileArray = ta;
+        }
+        else if (boardShape === "Triangle") {
+            this.boardShape = "Triangle";
+            this.width = width;
+            this.height = height;
+            let ta = [];
+            for (let y = 0; y < height; y++) {
+                ta.push([]);
+                for (let x = 0; x < width; x++) {
+                    ta[y].push(new Tile([], x, y));
+                }
+                width += 2;
+            }
+            this.tileArray = ta;
+        }
         else {
             throw new Error("Invalid board shape");
         }

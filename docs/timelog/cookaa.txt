@@ -65,3 +65,5 @@ April 9: Spent around 1 hour and 20 minutes adding the object selection stuff to
 April 10: Group meeting for around 50 minutes (updated GANTT chart, discussed transition into making the gameplay UI)
 
 April 13: Spent about 40 minutes adding strings as a supported data type into the scripting rules.
+
+April 14: Spent about 40 minutes adding (or at least starting to add?) backend support for hexagonal and triangular boards.
