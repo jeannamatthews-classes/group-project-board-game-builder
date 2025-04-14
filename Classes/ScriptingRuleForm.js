@@ -171,14 +171,13 @@ class ScriptingRuleForm {
                 srdiv.appendChild(newForm.div);
                 return true;
             }
-            else 
-            {console.log("fuck"); return false};
+            else return false;
         }
         let srdarg, srdarg2, srdarg3, srdarg4;
         if (this.rule.type === "Value") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Value:";
-            if (!scriptingRuleChild(this.rule.value, "Number or Boolean")) {
+            if (!scriptingRuleChild(this.rule.value, "Value Types")) {
                 if (typeof this.rule.value === "number") {
                     srdarg.innerHTML += " "
                     srdarg2 = document.createElement("input");
@@ -203,20 +202,34 @@ class ScriptingRuleForm {
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
+                else if (typeof this.rule.value === "string") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.value = this.rule.value;
+                    srdarg2.addEventListener("change", function(){
+                        form.rule.value = this.value;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
                 else {
                     srdarg.innerHTML += " " + stringifyBGBObject(this.rule.value);
                     srdiv.appendChild(srdarg);
                 }
-                if (this.parentType !== "Number" && this.parentType !== "Boolean") {
+                if (this.parentType !== "Number" && this.parentType !== "Boolean" && this.parentType !== "String") {
                     srdarg = document.createElement("button");
                     srdarg.classList.add("SRFButton");
                     srdarg.innerHTML = "Change Type";
                     srdarg.addEventListener("click", function(){
                         if (typeof form.rule.value === "number") {
-                            form.rule.value = Boolean(form.rule.value);
+                            form.rule.value = true;
+                        }
+                        else if (typeof form.rule.value === "boolean") {
+                            form.rule.value = "";
                         }
                         else {
-                            form.rule.value = Number(form.rule.value);
+                            form.rule.value = 0;
                         }
                         form.modifyDIV();
                     })
@@ -748,6 +761,17 @@ class ScriptingRuleForm {
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
+                else if (typeof this.rule.variableValue === "string") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.variableValue = this.rule.variableValue;
+                    srdarg2.addEventListener("change", function(){
+                        form.rule.variableValue = this.value;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
                 else {
                     srdarg.innerHTML += " " + stringifyBGBObject(this.rule.variableValue);
                     srdiv.appendChild(srdarg);
@@ -757,10 +781,13 @@ class ScriptingRuleForm {
                 srdarg.innerHTML = "Change Type";
                 srdarg.addEventListener("click", function(){
                     if (typeof form.rule.variableValue === "number") {
-                        form.rule.variableValue = Boolean(form.rule.variableValue);
+                        form.rule.variableValue = true;
+                    }
+                    else if (typeof form.rule.variableValue === "boolean") {
+                        form.rule.variableValue = "";
                     }
                     else {
-                        form.rule.variableValue = Number(form.rule.variableValue);
+                        form.rule.variableValue = 0;
                     }
                     form.modifyDIV();
                 })
@@ -848,6 +875,7 @@ class ScriptingRuleForm {
             let argumentType;
             if (this.rule.type === "==" || this.rule.type === "!=") argumentType = "None";
             else if (["&&", "||", "XOR"].indexOf(this.rule.type) !== -1) argumentType = "Boolean";
+            else if (["Concatenate Strings", "Character of Strings"].indexOf(this.rule.type) !== -1) argumentType = "String";
             else argumentType = "Number";
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Left Argument:";
@@ -876,6 +904,17 @@ class ScriptingRuleForm {
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
+                else if (typeof this.rule.leftArg === "string") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.leftArg = this.rule.leftArg;
+                    srdarg2.addEventListener("change", function(){
+                        form.rule.leftArg = this.value;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
                 else {
                     srdarg.innerHTML += " " + stringifyBGBObject(this.rule.leftArg);
                     srdiv.appendChild(srdarg);
@@ -885,10 +924,13 @@ class ScriptingRuleForm {
                 srdarg.innerHTML = "Change Type";
                 srdarg.addEventListener("click", function(){
                     if (typeof form.rule.leftArg === "number") {
-                        form.rule.leftArg = Boolean(form.rule.leftArg);
+                        form.rule.leftArg = true;
+                    }
+                    else if (typeof form.rule.leftArg === "boolean") {
+                        form.rule.leftArg = "";
                     }
                     else {
-                        form.rule.leftArg = Number(form.rule.leftArg);
+                        form.rule.leftArg = 0;
                     }
                     form.modifyDIV();
                 })
@@ -921,6 +963,17 @@ class ScriptingRuleForm {
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
+                else if (typeof this.rule.rightArg === "string") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.rightArg = this.rule.rightArg;
+                    srdarg2.addEventListener("change", function(){
+                        form.rule.rightArg = this.value;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
                 else {
                     srdarg.innerHTML += " " + stringifyBGBObject(this.rule.rightArg);
                     srdiv.appendChild(srdarg);
@@ -930,10 +983,13 @@ class ScriptingRuleForm {
                 srdarg.innerHTML = "Change Type";
                 srdarg.addEventListener("click", function(){
                     if (typeof form.rule.rightArg === "number") {
-                        form.rule.rightArg = Boolean(form.rule.rightArg);
+                        form.rule.rightArg = true;
+                    }
+                    else if (typeof form.rule.rightArg === "boolean") {
+                        form.rule.rightArg = "";
                     }
                     else {
-                        form.rule.rightArg = Number(form.rule.rightArg);
+                        form.rule.rightArg = 0;
                     }
                     form.modifyDIV();
                 })
@@ -971,6 +1027,17 @@ class ScriptingRuleForm {
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
+                else if (typeof this.rule.argument === "string") {
+                    srdarg.innerHTML += " "
+                    srdarg2 = document.createElement("input");
+                    srdarg2.argument = this.rule.argument;
+                    srdarg2.addEventListener("change", function(){
+                        form.rule.argument = this.value;
+                        form.modifyDIV();
+                    });
+                    srdarg.appendChild(srdarg2);
+                    srdiv.appendChild(srdarg);
+                }
                 else {
                     srdarg.innerHTML += " " + stringifyBGBObject(this.rule.argument);
                     srdiv.appendChild(srdarg);
@@ -980,13 +1047,59 @@ class ScriptingRuleForm {
                 srdarg.innerHTML = "Change Type";
                 srdarg.addEventListener("click", function(){
                     if (typeof form.rule.argument === "number") {
-                        form.rule.argument = Boolean(form.rule.argument);
+                        form.rule.argument = true;
+                    }
+                    else if (typeof form.rule.argument === "boolean") {
+                        form.rule.argument = "";
                     }
                     else {
-                        form.rule.argument = Number(form.rule.argument);
+                        form.rule.argument = 0;
                     }
                     form.modifyDIV();
                 })
+                srdiv.appendChild(srdarg);
+            }
+        }
+        else if (this.rule.type == "Slice of String") {
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "String:";
+            if (!scriptingRuleChild(this.rule.outer, "String")) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.outer;
+                srdarg2.addEventListener("change", function(){
+                    form.rule.outer = this.value;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Left Index:";
+            if (!scriptingRuleChild(this.rule.leftIndex, "Number")) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.leftIndex;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (v >= 0 && v % 1 == 0) form.rule.leftIndex = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Right Index:";
+            if (!scriptingRuleChild(this.rule.rightIndex, "Number")) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.rightIndex;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (v >= 0 && v % 1 == 0) form.rule.rightIndex = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
                 srdiv.appendChild(srdarg);
             }
         }
@@ -1023,6 +1136,17 @@ class ScriptingRuleForm {
                         srdarg.appendChild(srdarg2);
                         srdiv.appendChild(srdarg);
                     }
+                    else if (typeof this.rule.elements[e] === "string") {
+                        srdarg.innerHTML += " "
+                        srdarg2 = document.createElement("input");
+                        srdarg2.value = this.rule.elements[e];
+                        srdarg2.addEventListener("change", function(){
+                            form.rule.elements[e] = this.value;
+                            form.modifyDIV();
+                        });
+                        srdarg.appendChild(srdarg2);
+                        srdiv.appendChild(srdarg);
+                    }
                     else {
                         srdarg.innerHTML += " " + stringifyBGBObject(this.rule.elements[e]);
                         srdiv.appendChild(srdarg);
@@ -1032,10 +1156,13 @@ class ScriptingRuleForm {
                     srdarg.innerHTML = "Change Type";
                     srdarg.addEventListener("click", function(){
                         if (typeof form.rule.elements[e] === "number") {
-                            form.rule.elements[e] = Boolean(form.rule.elements[e]);
+                            form.rule.elements[e] = true;
+                        }
+                        else if (typeof form.rule.elements[e] === "boolean") {
+                            form.rule.elements[e] = "";
                         }
                         else {
-                            form.rule.elements[e] = Number(form.ruleelements[e]);
+                            form.rule.elements[e] = 0;
                         }
                         form.modifyDIV();
                     })
@@ -1093,6 +1220,39 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
         }
+        else if (this.rule.type == "Slice of Array") {
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Array:";
+            scriptingRuleChild(this.rule.outer, "Array");
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Left Index:";
+            if (!scriptingRuleChild(this.rule.leftIndex, "Number")) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.leftIndex;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (v >= 0 && v % 1 == 0) form.rule.leftIndex = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Right Index:";
+            if (!scriptingRuleChild(this.rule.rightIndex, "Number")) {
+                srdarg.innerHTML += " "
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.rightIndex;
+                srdarg2.addEventListener("change", function(){
+                    let v = Number(this.value);
+                    if (v >= 0 && v % 1 == 0) form.rule.rightIndex = v;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+        }
 
         else if (this.rule.type == "Other Caller") {
             srdarg = document.createElement("p");
@@ -1143,7 +1303,8 @@ class ScriptingRuleForm {
         else {
             if (this.parentType === "Number") validTypesArray = SRF_RType_Number;
             if (this.parentType === "Boolean") validTypesArray = SRF_RType_Boolean;
-            if (this.parentType === "Number or Boolean") validTypesArray = SRF_RType_Number.concat(SRF_RType_Boolean);
+            if (this.parentType === "String") validTypesArray = SRF_RType_String;
+            if (this.parentType === "Value Types") validTypesArray = SRF_RType_Number.concat(SRF_RType_Boolean).concat(SRF_RType_String);
             if (this.parentType === "Type") validTypesArray = SRF_RType_Type;
             if (this.parentType === "Piece") validTypesArray = SRF_RType_Piece.concat(SRF_RType_PieceOrTile);
             if (this.parentType === "Tile") validTypesArray = SRF_RType_Tile.concat(SRF_RType_PieceOrTile);
@@ -1200,11 +1361,11 @@ let SRF_AllRuleTypes = [
     "Value", "Argument", "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
     "Add Piece", "Change Turn Phase", "End Game", "Change Tile Sprite", "Change Piece Sprite", "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
-    "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "Object ID", "Caller", "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type",
+    "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "All Pieces", "All Tiles", "Object ID", "Caller", "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type",
     "Choose Tile Type", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "if-then-else", "Return at End",
-    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "!", "abs", "sign", "Create an Array",
-    "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index", "Other Caller",
-    "Select Object", "Deselect Object", "Selected Objects"
+    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Concatenate Strings", "Character of String",
+    "!", "abs", "sign", "Create an Array", "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index",
+    "Slice of String", "Slice of Array", "Other Caller", "Select Object", "Deselect Object", "Selected Objects"
 ]
 
 // These can go in for any scripting rule argument since we don't know what type they'll return
@@ -1224,7 +1385,7 @@ let SRF_RType_Boolean = [
 ]
 // Scripting rules of these types return strings.
 let SRF_RType_String = [
-
+    "Concatenate Strings", "Character of String", "Slice of String"
 ]
 // Scripting rules of these types return a PieceType or a TileType.
 let SRF_RType_Type = [
@@ -1251,7 +1412,7 @@ let SRF_RType_PieceSprite = [
 ]
 // Scripting rules of these types return an array with unknown entry types.
 let SRF_RType_ArrayAny = [
-    "Create an Array", "Object Types", "Pieces on Tile", "Selected Objects"
+    "Create an Array", "Object Types", "Pieces on Tile", "Selected Objects", "Slice of Array", "All Pieces", "All Tiles"
 ]
 // I'll handle these next three later.
 // Scripting rules of these types return an array of PieceTypes or TileTypes.
@@ -1282,15 +1443,17 @@ let SRF_RGroup_Actions = [
 let SRF_RGroup_Reporters = [
     "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
-    "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "Object ID", "Caller", "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type",
-    "Choose Tile Type", "Selected Objects"
+    "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "All Pieces", "All Tiles", "Object ID", "Caller",
+    "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type", "Choose Tile Type", "Selected Objects"
 ]
 let SRF_RGroup_Operators = [
     "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "!", "abs", "sign",
+    "Concatenate Strings", "Character of String", "Slice of String",
     "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable"
 ]
 let SRF_RGroup_Arrays = [
-    "Create an Array", "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index"
+    "Create an Array", "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array",
+    "Array Element at Index", "Slice of Array"
 ]
 let SRF_RGroup_Other = [
     "Repeat While", "Other Caller"

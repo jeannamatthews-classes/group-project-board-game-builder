@@ -1,6 +1,7 @@
-let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Random Integer", "Random Decimal"];
+let twoArgOperators = ["==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Random Integer", "Random Decimal", "Concatenate Strings", "Character of String"];
 let oneArgOperators = ["!", "abs", "sign"];
 let booleanOperators = ["&&", "||", "XOR", "!"];
+let stringOperators = ["Concatenate Strings", "Character of String"]
 
 // A single rule for scripting.
 class ScriptingRule {
@@ -142,9 +143,13 @@ class ScriptingRule {
             this.repeatScript = args[1];
         }
         else if (twoArgOperators.indexOf(type) != -1) {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
+            let typeDefault;
+            if (booleanOperators.indexOf(type) != -1) typeDefault = new ScriptingRule("None", "Value", true);
+            else if (stringOperators.indexOf(type) != -1) typeDefault = new ScriptingRule("None", "Value", "");
+            else typeDefault = new ScriptingRule("None", "Value", 0);
+            if (args.length <= 0) args.push(typeDefault);
             this.leftArg = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push((type === "Character of String") ? new ScriptingRule("None", "Value", 0) : typeDefault);
             this.rightArg = args[1];
         }
         else if (oneArgOperators.indexOf(type) != -1) {
@@ -171,6 +176,14 @@ class ScriptingRule {
             this.array = args[0];
             if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
             this.index = args[1];
+        }
+        else if (this.type == "Slice of String" || this.type == "Slice of Array") {
+            if (args.length <= 0) args.push(this.type == "Slice of String" ? new ScriptingRule("None", "Value", "") : new ScriptingRule("None", "Create an Array"));
+            this.outer = args[0];
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            this.leftIndex = args[1];
+            if (args.length <= 2) args.push(new ScriptingRule("None", "Value", 0));
+            this.rightIndex = args[1];
         }
 
         else if (this.type == "Other Caller") {
@@ -396,6 +409,22 @@ class ScriptingRule {
             }
             return false; // throw error?
         }
+        else if (this.type === "All Pieces") {
+            let pieces = Array(...activeGameState.pieceArray);
+            if (caller instanceof Piece) {
+                // If the caller is a piece, that piece always comes first in this list
+                    for (let p = 0; p < pieces.length; p++) {
+                        if (pieces[p].objectID === caller.objectID) {
+                            pieces.splice(p, 1);
+                            pieces.unshift(caller);
+                        }
+                    }
+                }
+            return pieces;
+        }
+        else if (this.type === "All Tiles") {
+            return Array(activeGameState.board.tileArray);
+        }
         else if (this.type === "Object ID") {
             let object = caller;
             if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
@@ -511,6 +540,7 @@ class ScriptingRule {
                 case "XOR":
                     return (Boolean(leftArg) != Boolean(rightArg))
                 case "+":
+                case "Concatenate Strings":
                     return (leftArg + rightArg);
                 case "-":
                     return (leftArg - rightArg);
@@ -526,6 +556,8 @@ class ScriptingRule {
                     return Math.floor(Math.random() * (rightArg - leftArg + 1) + leftArg);
                 case "Random Decimal":
                     return Math.random() * (rightArg - leftArg) + leftArg;
+                case "Character of String":
+                    return leftArg.at(rightArg);
             }
         }
         else if (oneArgOperators.indexOf(this.type) != -1) {
@@ -571,7 +603,13 @@ class ScriptingRule {
         else if (this.type === "Array Element at Index") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let index = (this.index instanceof ScriptingRule) ? this.index.portVariables(this).run(caller, ...args) : this.index;
-            return array[index];
+            return array.at[index];
+        }
+        else if (this.type === "Slice of String" || this.type === "Slice of Array") {
+            let outer = (this.outer instanceof ScriptingRule) ? this.outer.portVariables(this).run(caller, ...args) : this.outer;
+            let leftIndex = (this.leftIndex instanceof ScriptingRule) ? this.leftIndex.portVariables(this).run(caller, ...args) : this.leftIndex;
+            let rightIndex = (this.rightIndex instanceof ScriptingRule) ? this.rightIndex.portVariables(this).run(caller, ...args) : this.rightIndex;
+            return outer.slice(leftIndex, rightIndex + 1);
         }
 
         else if (this.type === "Other Caller") {
@@ -720,6 +758,11 @@ class ScriptingRule {
         else if (this.type == "Array Element at Index") {
             args.push(this.array)
             args.push(this.index)
+        }
+        else if (this.type == "Slice of String" || this.type == "Slice of Array") {
+            args.push(this.outer)
+            args.push(this.leftIndex)
+            args.push(this.rightIndex)
         }
 
         else if (this.type == "Other Caller") {
