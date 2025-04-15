@@ -165,14 +165,15 @@ let typeWhitePawn = new PieceType("White Pawn", [
             new ScriptingRule("None", "Value", 7)
         ),
         new ScriptingRule("None", "Return at End",
+            new ScriptingRule("None", "Console Log", "White pawn promotion"),
             new ScriptingRule("None", "Remove Type",
                 new ScriptingRule("None", "Array Element at Index",
                     new ScriptingRule("None", "Object Types"),
                     new ScriptingRule("None", "Value", 1)
                 )
             ),
-            new ScriptingRule("None", "Add Type", new ScriptingRule("None", "Choose Piece Type", 8), 1),
-            new ScriptingRule("None", "Change Sprite", new ScriptingRule("None", "Create a Sprite", "#ddd", "#222", "Queen")),
+            new ScriptingRule("None", "Add Type", new ScriptingRule("None", "Choose Piece Type", 7), 1),
+            new ScriptingRule("None", "Change Piece Sprite", new ScriptingRule("None", "Create Piece Sprite", "square", "#ddd", "#222", "Queen", "#222")),
             new ScriptingRule("None", "Value", true)
         ),
         new ScriptingRule("None", "Value", true)
@@ -231,6 +232,7 @@ let typeBlackPawn = new PieceType("Black Pawn", [
             new ScriptingRule("None", "Value", 0)
         ),
         new ScriptingRule("None", "Return at End",
+            new ScriptingRule("None", "Console Log", "Black pawn promotion"),
             new ScriptingRule("None", "Remove Type",
                 new ScriptingRule("None", "Array Element at Index",
                     new ScriptingRule("None", "Object Types"),
@@ -238,7 +240,7 @@ let typeBlackPawn = new PieceType("Black Pawn", [
                 )
             ),
             new ScriptingRule("None", "Add Type", new ScriptingRule("None", "Choose Piece Type", 7), 1),
-            new ScriptingRule("None", "Change Sprite", new ScriptingRule("None", "Create a Sprite", "#ddd", "#222", "Queen")),
+            new ScriptingRule("None", "Change Piece Sprite", new ScriptingRule("None", "Create Piece Sprite", "square", "#222", "#ddd", "Queen", "#ddd")),
             new ScriptingRule("None", "Value", true)
         ),
         new ScriptingRule("None", "Value", true)
@@ -451,6 +453,7 @@ let typeNoJumps = new PieceType("No Jumps", [ // This script prevents rooks, bis
 ])
 
 pieceTypesList.push(typeWhite, typeBlack, typeWhitePawn, typeBlackPawn, typeRook, typeKnight, typeBishop, typeQueen, typeKing, typeChessCaptures, typeNoJumps);
+tileTypesList.push(tileClick);
 
 activeGameState = new GameState(new Board("Square", 8, 8), [], 2);
 activeGameState.pieceArray.push(new Piece([typeWhite, typeRook, pieceClick, typeChessCaptures, typeNoJumps], 0, 0, 1));
@@ -487,10 +490,10 @@ activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, pieceClick,
 activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackPawn, pieceClick, typeChessCaptures], 7, 6, 1));
 for (let p of activeGameState.pieceArray) {
     if (p.types[0].typeName === "White") {
-        p.sprite = new Sprite("#ddd", "#222", p.types[1].typeName + "\n" + p.objectID);
+        p.sprite = new ScriptingRule("None", "Create Piece Sprite", "square", "#ddd", "#222", p.types[1].typeName, "#222").run()
     }
     else {
-        p.sprite = new Sprite("#222", "#ddd", p.types[1].typeName + "\n" + p.objectID);
+        p.sprite = new ScriptingRule("None", "Create Piece Sprite", "square", "#222", "#ddd", p.types[1].typeName, "#ddd").run()
     }
 }
 for (let y = 0; y < activeGameState.board.tileArray.length; y++) {
@@ -563,7 +566,7 @@ function displayTestingGrid() {
             let exGrid = currentGameState.board.tileArray;
             if (exGrid[y][x].getPieces(false).length > 0) {
                 let firstPieceSprite = exGrid[y][x].getPieces(false)[0].sprite;
-                document.getElementById("tile_" + x + "_" + y).style.setProperty("background-color", firstPieceSprite.color);
+                document.getElementById("tile_" + x + "_" + y).style.setProperty("background-color", firstPieceSprite.fillColor);
                 document.getElementById("tile_" + x + "_" + y).style.setProperty("color", firstPieceSprite.textColor);
                 document.getElementById("tile_" + x + "_" + y).firstElementChild.innerHTML = firstPieceSprite.text;
             }

@@ -58,6 +58,8 @@ class ScriptingRule {
             this.newPieceY = args[2];
             if (args.length <= 3) args.push(new ScriptingRule("None", "Value", 0));
             this.newPieceOwner = args[3];
+            if (args.length <= 4) args.push(new ScriptingRule("None", "Create Piece Sprite"));
+            this.newPieceSprite = args[4];
         }
         else if (this.type === "Change Turn Phase") {
             if (args.length <= 0) args.push(Infinity);
@@ -603,7 +605,7 @@ class ScriptingRule {
         else if (this.type === "Array Element at Index") {
             let array = (this.array instanceof ScriptingRule) ? this.array.portVariables(this).run(caller, ...args) : this.array;
             let index = (this.index instanceof ScriptingRule) ? this.index.portVariables(this).run(caller, ...args) : this.index;
-            return array.at[index];
+            return array.at(index);
         }
         else if (this.type === "Slice of String" || this.type === "Slice of Array") {
             let outer = (this.outer instanceof ScriptingRule) ? this.outer.portVariables(this).run(caller, ...args) : this.outer;
@@ -672,6 +674,7 @@ class ScriptingRule {
             args.push(this.newPieceX)
             args.push(this.newPieceY)
             args.push(this.newPieceOwner)
+            args.push(this.newPieceSprite)
         }
         else if (this.type === "Change Turn Phase") {
             args.push(this.phase)

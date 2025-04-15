@@ -37,7 +37,7 @@ class Tile {
                 if (scriptToCheck.trigger === "Object Clicked") scriptsToExecute.push([scriptToCheck, this]);
             }
         }
-        let scriptResult;
+        let scriptResult = true;
         for (let s = 0; s < scriptsToExecute.length; s++) {
             scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
             console.log(scriptResult);

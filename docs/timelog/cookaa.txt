@@ -67,3 +67,6 @@ April 10: Group meeting for around 50 minutes (updated GANTT chart, discussed tr
 April 13: Spent about 40 minutes adding strings as a supported data type into the scripting rules.
 
 April 14: Spent about 40 minutes adding (or at least starting to add?) backend support for hexagonal and triangular boards.
+
+April 15: Spent around 50 minutes: around 10 minutes adding a sprite option to the Add Piece scripting rule,
+around 40 minutes ironing out some kinks with the chess testing example that had been created by other updates.

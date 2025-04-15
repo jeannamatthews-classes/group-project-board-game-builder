@@ -7,24 +7,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/scriptingRuleForm.css">
+    <style>
+        .scriptingRuleBox {
+            display: flex;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+            padding-top: 2vh;
+            padding-bottom: 2vh;
+            border-style: solid;
+            border-width: 0.2vw;
+            flex-direction: column;
+            width: 90%;
+        }
+
+        .scriptingRuleBoxZebraDark {
+            background-color: #465b8d;
+        }
+        .scriptingRuleBoxZebraLight {
+            background-color: #7190db;
+        }
+
+        .SRFBooleanBox {
+            background-color: #3dae41;
+        }
+        .SRFButton {
+            min-width: 10vw;
+            padding: 0.5vw;
+            background-color: #003dcb;
+            border: 0.2vw solid black;
+        }
+    </style>
 </head>
 <body>
     
 </body>
-<script src="Classes/ScriptingRule.js"></script>
-<script src="Classes/GameState.js"></script>
-<script src="Classes/Board.js"></script>
-<script src="Classes/TileType.js"></script>
-<script src="Classes/Tile.js"></script>
-<script src="Classes/PieceType.js"></script>
-<script src="Classes/Piece.js"></script>
-<script src="Classes/Button.js"></script>
-<script src="Classes/Sprite.js"></script>
-<script src="Classes/PlayerInventory.js"></script>
-<script src="Classes/GlobalVariables.js"></script>
-<script src="scripts/scriptingRuleForm.js"></script>
-<!-- <script src="Testing/testingZone.js"></script>  -->
+<script src="../Classes/ScriptingRule.js"></script>
+<script src="../Classes/GameState.js"></script>
+<script src="../Classes/Board.js"></script>
+<script src="../Classes/TileType.js"></script>
+<script src="../Classes/Tile.js"></script>
+<script src="../Classes/PieceType.js"></script>
+<script src="../Classes/Piece.js"></script>
+<script src="../Classes/Button.js"></script>
+<script src="../Classes/PlayerInventory.js"></script>
+<script src="../Classes/GlobalVariables.js"></script>
+<script src="../Classes/scriptingRuleForm.js"></script>
+<script src="../Classes/WindowContainer.js"></script>
+<script src="../Testing/testingZone.js"></script> 
 <script>
     let formT = new ScriptingRuleForm(new ScriptingRule("Piece Moves", "Value", 0), true, "Any")
     document.documentElement.appendChild(formT.div);

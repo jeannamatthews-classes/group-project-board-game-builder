@@ -67,12 +67,12 @@ function BGBStructuredClone(argument) {
     if (argument instanceof Tile) return new Tile(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
     if (argument instanceof PieceType) return new PieceType(argument.typeName, BGBStructuredClone(argument.scripts), argument.typeID);
     if (argument instanceof Piece) return new Piece(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
-    if (argument instanceof Sprite) return new Sprite(argument.color, argument.textColor, argument.text);
     if (argument instanceof Button) {
         let result = new Button(BGBStructuredClone(argument.clickScripts), BGBStructuredClone(argument.visibleRules), argument.color, argument.textColor, argument.text, argument.width, argument.length);
         result.name = argument.name;
     }
     if (argument instanceof ScriptingRuleForm) return new ScriptingRuleForm(BGBStructuredClone(argument.rule), argument.top, argument.callerType, argument.zebraDark, argument.parentType, argument.name, argument.ruleID);
+    return structuredClone(argument); // Sprites are non-instance objects, so we just call the usual structuredClone on them
 }
 
 // Checks if two things are equal, including working on types like Pieces and Tiles.

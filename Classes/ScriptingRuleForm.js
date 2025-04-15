@@ -452,6 +452,9 @@ class ScriptingRuleForm {
                 srdarg.appendChild(srdarg2);
                 srdiv.appendChild(srdarg);
             }
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Sprite:";
+            scriptingRuleChild(this.rule.newPieceSprite, "PieceSprite")
         }
         else if (this.rule.type === "Change Turn Phase") {
             srdarg = document.createElement("p");
