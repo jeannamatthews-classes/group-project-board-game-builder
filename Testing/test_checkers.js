@@ -56,9 +56,8 @@ let typeBlackRegular = new PieceType("Regular Black", [
             new ScriptingRule("None", "Add Type",
                 new ScriptingRule("None", "Choose Piece Type", 4),
                 new ScriptingRule("None", "Value", 1),
-                new ScriptingRule("None", "Change Piece Sprite", new ScriptingRule("None", "Create Piece Sprite", "square", "#000000", "#ffffff", "Black King", "#ffffff")),
-                new ScriptingRule("None", "Value", true)
             ),
+            new ScriptingRule("None", "Change Piece Sprite", new ScriptingRule("None", "Create Piece Sprite", "square", "#000000", "#ffffff", "Black King", "#ffffff")),
             new ScriptingRule("None", "Value", true)
         ),
         new ScriptingRule("None", "Value", true)
