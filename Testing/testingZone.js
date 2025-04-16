@@ -49,6 +49,21 @@ function generateTestingGrid() {
             document.getElementById("testingGrid").appendChild(newTile);
         }
     }
+    for (let b = 0; b < buttonsList.length; b++) {
+        let buttonH = document.createElement("button");
+        buttonH.id = "button_" + b;
+        buttonH.style.setProperty("background-color", buttonsList[b].sprite.fillColor);
+        buttonH.style.setProperty("color", buttonsList[b].sprite.textColor);
+        buttonH.style.setProperty("border-style", "solid");
+        buttonH.style.setProperty("border-color", buttonsList[b].sprite.borderColor);
+        buttonH.style.setProperty("border-radius", buttonsList[b].sprite.borderRadius);
+        buttonH.innerHTML = buttonsList[b].sprite.text;
+        buttonH.addEventListener("click", function(){
+            buttonsList[b].clickButton();
+            displayTestingGrid();
+        });
+        document.getElementById("buttonsBox").appendChild(buttonH);
+    }
     document.getElementById("clickChange").addEventListener("click", function(){
         clickingPieces = !clickingPieces;
         displayTestingGrid();
@@ -71,6 +86,10 @@ function displayTestingGrid() {
                 document.getElementById("tile_" + x + "_" + y).firstElementChild.innerHTML = "";
             }
         }
+    }
+    for (let b = 0; b < buttonsList.length; b++) {
+        if (buttonsList[b].buttonVisible()) document.getElementById("button_" + b).style.setProperty("display", "inline-block");
+        else document.getElementById("button_" + b).style.setProperty("display", "none");
     }
     if (Number.isFinite(activeGameState.turnNumber)) document.getElementById("turnText").innerHTML = "Turn #" + activeGameState.turnNumber + "<br>Player #" + activeGameState.playerTurn + "<br>Phase " + activeGameState.turnPhase;
     else if (activeGameState.playerTurn === 0) document.getElementById("turnText").innerHTML = "It's a draw!";

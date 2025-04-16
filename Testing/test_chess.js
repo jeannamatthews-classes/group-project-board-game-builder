@@ -165,7 +165,6 @@ let typeWhitePawn = new PieceType("White Pawn", [
             new ScriptingRule("None", "Value", 7)
         ),
         new ScriptingRule("None", "Return at End",
-            new ScriptingRule("None", "Console Log", "White pawn promotion"),
             new ScriptingRule("None", "Remove Type",
                 new ScriptingRule("None", "Array Element at Index",
                     new ScriptingRule("None", "Object Types"),
@@ -232,7 +231,6 @@ let typeBlackPawn = new PieceType("Black Pawn", [
             new ScriptingRule("None", "Value", 0)
         ),
         new ScriptingRule("None", "Return at End",
-            new ScriptingRule("None", "Console Log", "Black pawn promotion"),
             new ScriptingRule("None", "Remove Type",
                 new ScriptingRule("None", "Array Element at Index",
                     new ScriptingRule("None", "Object Types"),

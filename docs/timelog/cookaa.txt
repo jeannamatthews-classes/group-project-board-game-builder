@@ -71,4 +71,4 @@ April 14: Spent about 40 minutes adding (or at least starting to add?) backend s
 April 15: Spent around 50 minutes: around 10 minutes adding a sprite option to the Add Piece scripting rule,
 around 40 minutes ironing out some kinks with the chess testing example that had been created by other updates.
 
-April 16: Spent around 2 hours making scripting rules for Tic-Tac-Toe and Connect Four examples.
+April 16: Spent around 2 hours and 45 minutes making scripting rules for Tic-Tac-Toe, Connect Four, and Checkers examples.
