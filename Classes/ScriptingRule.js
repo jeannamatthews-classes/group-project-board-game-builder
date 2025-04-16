@@ -778,4 +778,18 @@ class ScriptingRule {
 
         return args;
     }
+    saveCode() {
+    const serialize = (value) => {
+        if (value instanceof ScriptingRule) return value.saveCode();
+        if (Array.isArray(value)) return value.map(serialize);
+        return value;
+    };
+
+    return {
+        trigger: this.trigger,
+        type: this.type,
+        args: this.getConstructorArguments().slice(2).map(serialize),
+        variables: this.variables.map(([name, value]) => [name, value])
+    };
+}
 }
