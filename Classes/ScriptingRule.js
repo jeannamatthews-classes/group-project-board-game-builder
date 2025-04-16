@@ -201,7 +201,7 @@ class ScriptingRule {
     }
 
     run(caller, ...args) {
-        console.log(this.getConstructorArguments(), caller, args);
+        // console.log(this.getConstructorArguments(), caller, args);
 
         if (this.type === "Value") {
             return this.value;
@@ -270,7 +270,8 @@ class ScriptingRule {
             let newPieceX = (this.newPieceX instanceof ScriptingRule) ? this.newPieceX.portVariables(this).run(caller, ...args) : this.newPieceX;
             let newPieceY = (this.newPieceY instanceof ScriptingRule) ? this.newPieceY.portVariables(this).run(caller, ...args) : this.newPieceY;
             let newPieceOwner = (this.newPieceOwner instanceof ScriptingRule) ? this.newPieceOwner.portVariables(this).run(caller, ...args) : this.newPieceOwner;
-            activeGameState.pieceArray.push(new Piece(newPieceTypes, newPieceX, newPieceY, newPieceOwner));
+            let newPieceSprite = (this.newPieceSprite instanceof ScriptingRule) ? this.newPieceSprite.portVariables(this).run(caller, ...args) : this.newPieceSprite;
+            activeGameState.pieceArray.push(new Piece(newPieceTypes, newPieceX, newPieceY, newPieceOwner, newPieceSprite));
             return true;
         }
         else if (this.type === "Change Turn Phase") {
@@ -521,6 +522,9 @@ class ScriptingRule {
         }
         else if (twoArgOperators.indexOf(this.type) != -1) {
             let leftArg = (this.leftArg instanceof ScriptingRule) ? this.leftArg.portVariables(this).run(caller, ...args) : this.leftArg;
+            //shortcut evaluation
+            if (this.type === "&&" && leftArg == false) return false;
+            if (this.type === "||" && leftArg == true) return true;
             let rightArg = (this.rightArg instanceof ScriptingRule) ? this.rightArg.portVariables(this).run(caller, ...args) : this.rightArg;
             switch (this.type) {
                 case "==":
@@ -778,18 +782,19 @@ class ScriptingRule {
 
         return args;
     }
-    saveCode() {
-    const serialize = (value) => {
-        if (value instanceof ScriptingRule) return value.saveCode();
-        if (Array.isArray(value)) return value.map(serialize);
-        return value;
-    };
 
-    return {
-        trigger: this.trigger,
-        type: this.type,
-        args: this.getConstructorArguments().slice(2).map(serialize),
-        variables: this.variables.map(([name, value]) => [name, value])
-    };
-}
+    saveCode() {
+        const serialize = (value) => {
+            if (value instanceof ScriptingRule) return value.saveCode();
+            if (Array.isArray(value)) return value.map(serialize);
+            return value;
+        };
+    
+        return {
+            trigger: this.trigger,
+            type: this.type,
+            args: this.getConstructorArguments().slice(2).map(serialize),
+            variables: this.variables.map(([name, value]) => [name, value])
+        };
+    }
 }
