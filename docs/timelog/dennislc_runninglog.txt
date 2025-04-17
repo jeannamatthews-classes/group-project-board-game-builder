@@ -13,3 +13,4 @@ April 6 for 4 hours 30 mins: finished working on the tileTypeEditorForm and the 
 April 7 for 1 hour: had a meeting where we discussed the next steps of this project, such as RAPS and the gameplay UI. Also updated the tileTypeEditorForm and pieceTypeEditorForm.
 April 8 for 1 hour: worked on slides for our RAPS presentaion, and updated the pieceType and tileType editor forms.
 April 10 for 1 hour 30 mins: Meeting with the team to talk about the RAPS presentation and getting started on the Gameplay for the game builder.
+April 17 for 1 hour: Met with Aaron and Jackson to talk about the gameplay UI, the demo for our project, and to update the GANTT chart
