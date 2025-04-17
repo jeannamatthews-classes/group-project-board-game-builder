@@ -18,3 +18,5 @@ I will document further meetings in more detail with what we talked about.
 4/7 2 hours, finished save code for gamestate and finished first version of button editor.
 4/8 1 Hour, working on RAPS presentation
 4/15 3 hours, the pause in me working was because I had 2 exams thursday, raps friday and I was in Rhode Island all weekend for a rugby tournament. added save code for scripting rule class, and created gameSaver.js combining all of the save codes to print to a text file using JSON
+4/16 2 Hours, added load codes to all classes with save codes, and added load code to gameSaver.js
+4/17 45 minutes, updated gantt chart, talked about how we will have a demo before the 22nd.
