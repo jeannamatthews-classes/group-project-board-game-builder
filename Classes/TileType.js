@@ -18,4 +18,9 @@ class TileType {
             scripts: this.scripts.map(s => s.saveCode ? s.saveCode() : null)
         };
     }
+    static loadCode(data) {
+    const tileType = new TileType(data.typeName, data.scripts.map(ScriptingRule.loadCode), data.typeID);
+    tileType.publicVars = data.publicVars ?? [];
+    return tileType;
+}
 }
