@@ -64,4 +64,12 @@ class Tile {
             types: this.types.map(t => t.saveCode ? t.saveCode() : null)
         };
     }
+    static loadCode(data) {
+    const tile = new Tile(data.types.map(TileType.loadCode), data.xCoordinate, data.yCoordinate, data.objectID);
+    tile.playerOwnerID = data.playerOwnerID;
+    tile.enabled = data.enabled;
+    tile.publicVars = data.publicVars;
+    tile.sprite = data.sprite;
+    return tile;
+}
 }
