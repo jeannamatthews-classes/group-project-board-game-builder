@@ -30,4 +30,14 @@ class GameState {
             selectedObjects: this.selectedObjects.map(o => o.objectID ?? null),
         };
    }
+
+    static loadCode(data) {
+    const board = Board.loadCode(data.board);
+    const pieces = data.pieceArray.map(Piece.loadCode);
+    const gameState = new GameState(board, pieces, data.playerAmount, data.turnNumber, data.playerTurn, data.turnPhase, []);
+    gameState.selectedObjects = data.selectedObjects ?? [];
+    gameState.inventories = data.inventories ?? [];
+    return gameState;
+}
+
 }
