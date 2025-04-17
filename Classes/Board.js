@@ -85,4 +85,12 @@ class Board {
             )
         };
     }
+    static loadCode(data) {
+    const board = new Board(data.boardShape, data.width, data.height);
+    board.tileArray = data.tileArray.map(row =>
+        row.map(tileData => Tile.loadCode(tileData))
+    );
+    return board;
+}
+
 }
