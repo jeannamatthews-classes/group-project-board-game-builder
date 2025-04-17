@@ -18,5 +18,10 @@ class PieceType {
             scripts: this.scripts.map(s => s.saveCode?.() ?? null)
         }
     }
-            
+     static loadCode(data) {
+    const pieceType = new PieceType(data.typeName, data.scripts.map(ScriptingRule.loadCode), data.typeID);
+    pieceType.publicVars = data.publicVars ?? [];
+    return pieceType;
+}
+       
 }
