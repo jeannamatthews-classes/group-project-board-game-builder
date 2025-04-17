@@ -46,3 +46,17 @@ class GameSaveManager {
         a.click();
         URL.revokeObjectURL(url);
     }
+
+    static loadFromData(data) {
+        return {
+            gameState: GameState.loadCode(data.gameState),
+            tileTypes: data.tileTypes.map(TileType.loadCode),
+            pieceTypes: data.pieceTypes.map(PieceType.loadCode),
+            pieces: data.pieces.map(Piece.loadCode),
+            tiles: data.tiles.map(Tile.loadCode),
+            board: Board.loadCode(data.board),
+            scriptingRules: data.scriptingRules.map(ScriptingRule.loadCode),
+            buttons: data.buttons.map(Button.loadCode)
+        };
+    }
+}
