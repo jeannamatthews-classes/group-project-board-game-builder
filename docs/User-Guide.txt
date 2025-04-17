@@ -1,0 +1,32 @@
+Welcome to the The Board Game Builder.
+This program will allow you to create your own board game using the editors that are
+provided. To start creating your own board game, you want to press the create button
+on the home menu screen, this will take you to the create menu where you can
+determine the board shape, hieght, and length. The create menu will be explained 
+futher later on. Once youve done that, you can start 
+creating the scripting rules for specific events, tiles, pieces, and buttons using 
+the if-then-else psuedo language that is in the scripting rules editor. In this 
+editor you can select the certain properties, events, and rules for a certain 
+object, like a tile or a button. You have a lot of control over the rules and 
+scripting in this editor. 
+The Edtitors:
+Once you have added some scripting rules and given them names, they can be used in 
+the TileType, PieceType and Button editors, in these editors, you can add one or more 
+scripting rules that you have made into a piece or tile type, or button and give that 
+type a name. You can go to the scripting tule editor by clicking the "edit button"  on
+the selected scripting rule. You are able to delete the added scripting rules or saved
+types by clicking the 'x' button beside them. After you have made all of the types and
+buttons you need, you can use them in the create menu.
+The Create Menu:
+The create menu is where you can assign tiles, pieces, and buttons there types and functionality.
+This is where you determined the board size and shape and the number of players ealier.
+This is where you will take the pieces, tiles, and buttons you have made place them on the
+board to determine the starting position of the board game with however many active pieces,
+tiles and buttons that you want. This menu has many tools for you to use, there is the copy,
+paste, zoom in, select, and toggle piece visability. On this menu you will be able to save the
+board game 
+GamePlay:
+Now that you have created and saved your board game, you can head to the main menu and click play,
+this will ask you to upload your json file that you saved. After you do, you can begin the 
+gameplay. This will play however you created it and follow all the rules that you made. Once the game
+over condition is met winner screen and will be prompted to play again or head back to the main menu. 
