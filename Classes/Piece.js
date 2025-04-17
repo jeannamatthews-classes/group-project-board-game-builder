@@ -32,6 +32,14 @@ class Piece {
             types: this.types.map(t => t.saveCode ? t.saveCode() : null)
         };
     }
+
+    static loadCode(data) {
+    const sprite = new Sprite(data.sprite.fillColor, data.sprite.textColor, data.sprite.text);
+    const piece = new Piece(data.types.map(PieceType.loadCode), data.xCoordinate, data.yCoordinate, data.playerOwnerID, sprite, data.objectID);
+    piece.publicVars = data.publicVars;
+    return piece;
+}
+
     
 
     getTile(active = true) {
