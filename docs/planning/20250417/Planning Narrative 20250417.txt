@@ -1,0 +1,3 @@
+We're falling way behind on the gameplay UI. Jackson has been working on save codes, Aaron has made a couple backend touch-ups and has made some example games to test
+the scripting rules code more (and to demo), Sophia hasn't been in good communication with us, and we haven't found much for Landon to do because we don't know how to start
+the gameplay UI without Sophia's input.

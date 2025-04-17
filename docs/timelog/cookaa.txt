@@ -72,3 +72,6 @@ April 15: Spent around 50 minutes: around 10 minutes adding a sprite option to t
 around 40 minutes ironing out some kinks with the chess testing example that had been created by other updates.
 
 April 16: Spent around 2 hours and 45 minutes making scripting rules for Tic-Tac-Toe, Connect Four, and Checkers examples.
+
+April 17: Group meeting for around 40 minutes, making plans for how we might move forward with the gameplay UI
+(though Sophia not being here made this difficult)
