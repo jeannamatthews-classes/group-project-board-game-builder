@@ -16,7 +16,7 @@ const gameSaver = new GameSaver({
     pieces: [],   
     tiles: [],      
     board: {},    
-    scriptingRules: globalScripts,
+    scriptingRules: globalEditor.globalScripts.map(ui => ui.rule),
     buttons: buttonsList
 });
 
