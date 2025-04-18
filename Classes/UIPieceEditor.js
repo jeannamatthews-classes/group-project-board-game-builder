@@ -31,9 +31,8 @@ class UIPieceEditor {
         btn.onclick = () => {
             const name = this.generateUniqueName("New Piece");
             const sprite = {
-                shape: 'square',
-                fillColor: '#cccccc',
-                strokeColor: '#000000',
+                imageName: 'pawn',
+                fillColor: '#FF0000',
                 text: '',
                 textColor: '#000000'
             };
@@ -55,6 +54,29 @@ class UIPieceEditor {
         container.style.display = 'flex';
         container.style.flexWrap = 'wrap';
         container.style.gap = '5px';
+        let draggedEl = null;
+
+        container.addEventListener('dragstart', (e) => {
+            draggedEl = e.target;
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        container.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const dropTarget = e.target.closest('.piece-ui');
+            if (draggedEl && dropTarget && draggedEl !== dropTarget) {
+                const ui1 = this.pieces.find(p => p.container === draggedEl);
+                const ui2 = this.pieces.find(p => p.container === dropTarget);
+                if (ui1 && ui2) {
+                    this.swapPieces(ui1, ui2);
+                }
+            }
+        });
+
         return container;
     }
 
@@ -71,7 +93,7 @@ class UIPieceEditor {
         const original = uiPiece.piece;
         const clone = structuredClone ? structuredClone(original) : JSON.parse(JSON.stringify(original));
         clone.name = this.generateUniqueName(clone.name + " Copy");
-        const newPiece = new Piece([...clone.types], clone.xCoordinate, clone.yCoordinate, clone.playerOwnerID, clone.sprite);
+        const newPiece = new Piece([...clone.types], -1, -1, clone.playerOwnerID, clone.sprite);
         newPiece.name = clone.name;
         this.addPiece(newPiece);
     }
@@ -134,5 +156,29 @@ class UIPieceEditor {
     deletePiece(uiPiece) {
         this.pieces = this.pieces.filter(p => p !== uiPiece);
         if (uiPiece.container?.parentElement) uiPiece.container.remove();
+        if(uiPiece.boardContainer?.parentElement) uiPiece.boardContainer.remove();
+    
+    
     }
+
+
+    swapPieces(ui1, ui2) {
+        const el1 = ui1.container;
+        const el2 = ui2.container;
+        const parent = el1.parentElement;
+    
+        const el1Next = el1.nextElementSibling;
+        const el2Next = el2.nextElementSibling;
+    
+        parent.insertBefore(el2, el1Next);
+        parent.insertBefore(el1, el2Next);
+    
+        // Update internal order
+        const index1 = this.pieces.indexOf(ui1);
+        const index2 = this.pieces.indexOf(ui2);
+        if (index1 > -1 && index2 > -1) {
+            [this.pieces[index1], this.pieces[index2]] = [this.pieces[index2], this.pieces[index1]];
+        }
+    }
+    
 }

@@ -8,9 +8,9 @@ class Board {
         this.containerHeight = -1;
         this.containerTop = -1;
         this.containerLeft = -1;
-        this.borderColor = 'black';
+        this.borderColor = 'rgba(0, 0, 0, 0.9)';
         this.borderWidth='2px';
-        this.backgroundColor ='white';
+        this.backgroundColor ='rgba(255, 255, 255, 0.9)';
 
         if (boardShape === "Square") {
             this.boardShape = "Square";

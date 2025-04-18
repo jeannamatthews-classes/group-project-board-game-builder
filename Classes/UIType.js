@@ -5,7 +5,9 @@ class UIType {
         this.container = this.createContainer();
         this.window = null;
         this.refreshEditorWindowContent = null;
-        this.rules = []
+        this.rules = this.type.scripts.map(script =>
+            new UIScriptingRule(new ScriptingRuleForm(script, true, this.kind[0].toUpperCase() + this.kind.slice(1)), obj => this.removeRule(obj))
+        );
         
         this.openEditorWindow();
     }
@@ -151,6 +153,7 @@ class UIType {
         addRule.addEventListener('click', () => {
             var newRule = new UIScriptingRule(new ScriptingRuleForm(new ScriptingRule("Piece Moves", "Value", 0), true, String(this.kind).charAt(0).toUpperCase() + String(this.kind).slice(1)), (obj) => this.removeRule(obj) )
             this.rules.push(newRule)
+            this.type.scripts.push(newRule.form.rule); // now syncs with logic
             rulesList.appendChild(newRule.container);
         });
         content.appendChild(addRule);
@@ -282,13 +285,17 @@ class UIType {
     removeRule(rule) {
         const index = this.rules.indexOf(rule);
         if (index !== -1) {
-            // Remove from array
             this.rules.splice(index, 1);
-            // Remove from DOM
             if (rule.container && rule.container.parentElement) {
-                rule.container.parentElement.removeChild(rule.container);
+                rule.container.remove();
             }
         }
+    
+        const logicIndex = this.type.scripts.indexOf(rule.form.rule);
+        if (logicIndex !== -1) {
+            this.type.scripts.splice(logicIndex, 1);
+        }
     }
+    
     
 }

@@ -797,21 +797,21 @@ class ScriptingRule {
             variables: this.variables.map(([name, value]) => [name, value])
         };
     }
-
     static loadCode(data) {
-    const deserialize = (val) => {
-        if (val && typeof val === 'object' && val.type && Array.isArray(val.args)) {
-            return ScriptingRule.loadCode(val);
-        } else if (Array.isArray(val)) {
-            return val.map(deserialize);
-        }
-        return val;
-    };
-
-    const args = data.args.map(deserialize);
-    const rule = new ScriptingRule(data.trigger, data.type, ...args);
-    rule.variables = data.variables ?? [];
-    return rule;
-}
+        const deserialize = (val) => {
+            if (val && typeof val === 'object' && val.type && Array.isArray(val.args)) {
+                return ScriptingRule.loadCode(val);
+            } else if (Array.isArray(val)) {
+                return val.map(deserialize);
+            }
+            return val;
+        };
+    
+        const args = Array.isArray(data.args) ? data.args.map(deserialize) : [];
+        const rule = new ScriptingRule(data.trigger, data.type, ...args);
+        rule.variables = Array.isArray(data.variables) ? data.variables : [];
+        return rule;
+    }
+    
 
 }

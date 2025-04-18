@@ -56,41 +56,54 @@ class UIPiece {
         const renderTo = (el) => {
             const target = el._icon || el;
             target.innerHTML = '';
-
+    
             const s = sprite;
-            const shape = document.createElement('div');
-            shape.classList.add('sprite-shape');
-            shape.style.backgroundColor = s.fillColor;
-            shape.style.border = `2px solid ${s.strokeColor}`;
-            shape.style.width = '80%';
-            shape.style.height = '80%';
-            shape.style.display = 'flex';
-            shape.style.alignItems = 'center';
-            shape.style.justifyContent = 'center';
-            shape.style.color = s.textColor || '#000';
-            shape.style.fontSize = '10px';
-
-            if (s.shape === 'circle') {
-                shape.style.borderRadius = '50%';
-            } else if (s.shape === 'triangle') {
-                shape.style.width = '0';
-                shape.style.height = '0';
-                shape.style.border = 'none';
-                shape.style.borderLeft = '10px solid transparent';
-                shape.style.borderRight = '10px solid transparent';
-                shape.style.borderBottom = `20px solid ${s.fillColor}`;
-                shape.innerHTML = '';
-            } else {
-                shape.innerText = s.text || '';
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            wrapper.style.width = '100%';
+            wrapper.style.height = '100%';
+    
+            // Create SVG element from library
+            const temp = document.createElement('div');
+            temp.innerHTML = SPRITE_LIBRARY[s.imageName] || '';
+            const svg = temp.querySelector('svg');
+    
+            if (svg) {
+                svg.setAttribute('width', '100%');
+                svg.setAttribute('height', '100%');
+                svg.style.display = 'block';
+    
+                svg.querySelectorAll('[fill]').forEach(el => {
+                    el.setAttribute('fill', s.fillColor || '#000');
+                });
+    
+                wrapper.appendChild(svg);
             }
-
-            target.appendChild(shape);
+    
+            // Text overlay
+            if (s.text) {
+                const textOverlay = document.createElement('div');
+                textOverlay.textContent = s.text;
+                textOverlay.style.position = 'absolute';
+                textOverlay.style.top = '50%';
+                textOverlay.style.left = '50%';
+                textOverlay.style.transform = 'translate(-50%, -50%)';
+                textOverlay.style.color = s.textColor || '#000';
+                textOverlay.style.fontSize = '12px';
+                textOverlay.style.fontWeight = 'bold';
+                textOverlay.style.pointerEvents = 'none';
+                wrapper.appendChild(textOverlay);
+            }
+    
+            target.appendChild(wrapper);
         };
-
+    
         renderTo(this.container);
         renderTo(this.boardContainer);
-
     }
+    
+    
+    
 
     openEditorWindow() {
         if (this.editorWindow && document.body.contains(this.editorWindow.container)) {
@@ -114,15 +127,12 @@ class UIPiece {
 
         content.innerHTML = `
             <label>Name: <input type="text" id="piece-name" /></label>
-            <label>Shape:
-                <select id="shape">
-                    <option value="square">Square</option>
-                    <option value="circle">Circle</option>
-                    <option value="triangle">Triangle</option>
-                </select>
-            </label>
+            <div id="sprite-picker" style="display: flex; align-items: center; gap: 8px;">
+                <button type="button" id="sprite-left">◀</button>
+                <div id="sprite-preview" style="width: 40px; height: 40px;"></div>
+                <button type="button" id="sprite-right">▶</button>
+            </div>
             <label>Fill Color: <input type="color" id="fill-color"></label>
-            <label>Stroke Color: <input type="color" id="stroke-color"></label>
             <label>Text: <input type="text" id="piece-text"></label>
             <label>Text Color: <input type="color" id="text-color"></label>
             <hr>
@@ -130,6 +140,11 @@ class UIPiece {
             <div id="type-list"></div>
             <hr>
             <div id="location-controls"></div>
+
+
+
+
+
         `;
 
         const nameInput = content.querySelector('#piece-name');
@@ -244,46 +259,90 @@ class UIPiece {
                 locationControls.append(xInput, yInput, placeBtn);
             }
         };
-
         const wireInputs = () => {
+            const nameInput = content.querySelector('#piece-name');
+            const fill = content.querySelector('#fill-color');
+            const text = content.querySelector('#piece-text');
+            const textColor = content.querySelector('#text-color');
+            const leftBtn = content.querySelector('#sprite-left');
+            const rightBtn = content.querySelector('#sprite-right');
+            const spritePreview = content.querySelector('#sprite-preview');
+        
+            const spriteNames = Object.keys(SPRITE_LIBRARY);
+            let currentIndex = Math.max(0, spriteNames.indexOf(this.piece.sprite.imageName));
+            if (currentIndex === -1) currentIndex = 0;
+        
+            const updateSpriteChoice = () => {
+                const name = spriteNames[currentIndex];
+                this.piece.sprite.imageName = name;
+        
+                const temp = document.createElement('div');
+                temp.innerHTML = SPRITE_LIBRARY[name];
+                const svg = temp.querySelector('svg');
+        
+                svg.setAttribute('width', '100%');
+                svg.setAttribute('height', '100%');
+                svg.setAttribute('draggable', 'false'); // Prevent native drag
+                svg.style.display = 'block';
+        
+                // Apply fill color to all fillable parts of the SVG
+                svg.querySelectorAll('[fill]').forEach(el => {
+                    el.setAttribute('fill', this.piece.sprite.fillColor || '#000');
+                });
+        
+                spritePreview.innerHTML = '';
+                spritePreview.appendChild(svg);
+                this.updateSprite();
+            };
+        
+            leftBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + spriteNames.length) % spriteNames.length;
+                updateSpriteChoice();
+            });
+        
+            rightBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % spriteNames.length;
+                updateSpriteChoice();
+            });
+        
+            fill.value = this.piece.sprite.fillColor || '#000';
+            fill.addEventListener('input', () => {
+                this.piece.sprite.fillColor = fill.value;
+                updateSpriteChoice(); // Update the preview too
+            });
+        
+            text.value = this.piece.sprite.text || '';
+            text.addEventListener('input', () => {
+                this.piece.sprite.text = text.value;
+                this.updateSprite();
+            });
+        
+            textColor.value = this.piece.sprite.textColor || '#000';
+            textColor.addEventListener('input', () => {
+                this.piece.sprite.textColor = textColor.value;
+                this.updateSprite();
+            });
+        
             nameInput.value = this.piece.name;
-            shape.value = this.piece.sprite.shape;
-            fill.value = this.piece.sprite.fillColor;
-            stroke.value = this.piece.sprite.strokeColor;
-            text.value = this.piece.sprite.text;
-            textColor.value = this.piece.sprite.textColor;
-
             nameInput.addEventListener('input', (e) => {
                 const newName = e.target.value.trim();
                 const isDuplicate = pieceEditor.pieces.some(p =>
                     p !== this && p.piece.name === newName
                 );
-
+        
                 if (!newName || isDuplicate) {
                     nameInput.style.borderColor = 'red';
                     return;
                 }
-
+        
                 nameInput.style.borderColor = '';
                 this.piece.name = newName;
                 win.header.querySelector('span').textContent = `Piece: ${newName}`;
             });
-
-            const update = () => {
-                this.piece.sprite.shape = shape.value;
-                this.piece.sprite.fillColor = fill.value;
-                this.piece.sprite.strokeColor = stroke.value;
-                this.piece.sprite.text = text.value;
-                this.piece.sprite.textColor = textColor.value;
-                this.updateSprite();
-            };
-
-            shape.addEventListener('change', update);
-            fill.addEventListener('input', update);
-            stroke.addEventListener('input', update);
-            text.addEventListener('input', update);
-            textColor.addEventListener('input', update);
+        
+            updateSpriteChoice(); // Initial preview on open
         };
+        
 
         this.refreshEditorWindowContent = () => {
             wireInputs();

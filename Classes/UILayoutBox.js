@@ -74,28 +74,9 @@ class UILayoutBox {
             this.updateStyles();
         });
 
-        // Close Button
-        const closeBtn = document.createElement('button');
-        closeBtn.textContent = '✕';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.opacity = '0.6';
-        closeBtn.style.fontSize = '12px';
-        closeBtn.addEventListener('mouseenter', () => closeBtn.style.opacity = '1');
-        closeBtn.addEventListener('mouseleave', () => closeBtn.style.opacity = '0.6');
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.logic.containerWidth = -1;
-            this.logic.containerHeight = -1;
-            this.logic.containerTop = -1;
-            this.logic.containerLeft = -1;
-            this.container.remove();
-        });
 
 
-
-        var openAppearanceWindow = function() {
+        var openAppearanceWindow = () => {
             const win = new WindowContainer(`Appearance: ${this.name}`, true, {
                 width: 220,
                 height: 180,
@@ -154,8 +135,6 @@ class UILayoutBox {
         });
         
         headerTools.appendChild(appearanceBtn);
-        
-        headerTools.appendChild(closeBtn);
 
         header.appendChild(label);
         header.appendChild(headerTools);

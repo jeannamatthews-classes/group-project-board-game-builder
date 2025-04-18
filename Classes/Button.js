@@ -75,4 +75,28 @@ class Button {
             sprite: this.sprite
         };
     }
+
+    loadCode(code) {
+        this.containerWidth = code.containerWidth ?? this.containerWidth;
+        this.containerHeight = code.containerHeight ?? this.containerHeight;
+        this.containerTop = code.containerTop ?? this.containerTop;
+        this.containerLeft = code.containerLeft ?? this.containerLeft;
+        this.borderColor = code.borderColor ?? this.borderColor;
+        this.borderWidth = code.borderWidth ?? this.borderWidth;
+        this.backgroundColor = code.backgroundColor ?? this.backgroundColor;
+        this.sprite = code.sprite ?? this.sprite;
+    
+        this.clickScripts = (code.clickScripts || []).map(data => {
+            const script = new ScriptingRule(); 
+            script.loadCode(data);
+            return script;
+        });
+    
+        this.visibleRules = (code.visibleRules || []).map(data => {
+            const script = new ScriptingRule();
+            script.loadCode(data);
+            return script;
+        });
+    }
+    
 }

@@ -7,6 +7,7 @@ class Piece {
     sprite;
     
 
+
     constructor(types, xStart, yStart, owner, sprite, id = undefined) {
         this.types = types;
         this.objectID = (id !== undefined) ? id : assignObjectID();
@@ -17,29 +18,6 @@ class Piece {
         this.name = '';
     }
     
-    saveCode() {
-        return {
-            objectID: this.objectID,
-            xCoordinate: this.xCoordinate,
-            yCoordinate: this.yCoordinate,
-            playerOwnerID: this.playerOwnerID,
-            publicVars: this.publicVars,
-            sprite: {
-                fillColor: this.sprite.fillColor,
-                textColor: this.sprite.textColor,
-                text: this.sprite.text
-            },
-            types: this.types.map(t => t.saveCode ? t.saveCode() : null)
-        };
-    }
-
-    static loadCode(data) {
-    const sprite = new Sprite(data.sprite.fillColor, data.sprite.textColor, data.sprite.text);
-    const piece = new Piece(data.types.map(PieceType.loadCode), data.xCoordinate, data.yCoordinate, data.playerOwnerID, sprite, data.objectID);
-    piece.publicVars = data.publicVars;
-    return piece;
-}
-
     
 
     getTile(active = true) {
@@ -158,13 +136,26 @@ class Piece {
     saveCode(){
         return {
             types: this.types,
-            id: this.objectID,
-            x: this.xCoordinate,
-            y: this.yCoordinate,
-            owner: this.playerOwnerID,
+            objectID: this.objectID,
+            xCoordinate: this.xCoordinate,
+            yCoordinate: this.yCoordinate,
+            playerOwnerID: this.playerOwnerID,
             sprite: this.sprite,
             name: this.name,
         };
     }
 
+
+    static loadCode(data) {
+        const piece = new Piece(); 
+        piece.types = data.types ?? [];
+        piece.objectID = data.objectID ?? -1;
+        piece.xCoordinate = data.xCoordinate ?? -1;
+        piece.yCoordinate = data.yCoordinate ?? -1;
+        piece.playerOwnerID = data.playerOwnerID ?? 1;
+        piece.sprite = data.sprite ?? {};
+        piece.name = data.name ?? "Unnamed Piece";
+        return piece;
+    }
+    
 }

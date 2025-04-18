@@ -146,62 +146,123 @@ class UIBoard {
       let spriteEditorPopup = null;
       
       spritePreview.addEventListener('click', () => {
-          if (spriteEditorPopup) {
-              spriteEditorPopup.remove();
-              spriteEditorPopup = null;
-              return;
-          }
-      
-          spriteEditorPopup = document.createElement('div');
-          spriteEditorPopup.style.position = 'absolute';
-          spriteEditorPopup.style.top = '45px';
-          spriteEditorPopup.style.right = '10px';
-          spriteEditorPopup.style.padding = '8px';
-          spriteEditorPopup.style.background = '#fff';
-          spriteEditorPopup.style.border = '1px solid #aaa';
-          spriteEditorPopup.style.boxShadow = '2px 2px 6px rgba(0,0,0,0.2)';
-          spriteEditorPopup.style.zIndex = '9999';
-          spriteEditorPopup.style.display = 'flex';
-          spriteEditorPopup.style.flexDirection = 'column';
-          spriteEditorPopup.style.gap = '4px';
-      
-          spriteEditorPopup.innerHTML = `
-              <label style="font-size:12px;">Fill: <input type="color" id="fill-color"></label>
-              <label style="font-size:12px;">Text: <input type="text" id="sprite-text" style="width: 100px;"></label>
-              <label style="font-size:12px;">Text Color: <input type="color" id="text-color"></label>
-              <button style="font-size:10px;">Close</button>
-          `;
-      
-          const fillInput = spriteEditorPopup.querySelector('#fill-color');
-          const textInput = spriteEditorPopup.querySelector('#sprite-text');
-          const textColorInput = spriteEditorPopup.querySelector('#text-color');
-      
-          fillInput.value = this.selectedSprite.fillColor;
-          textInput.value = this.selectedSprite.text;
-          textColorInput.value = this.selectedSprite.textColor;
-      
-          const update = () => {
-              this.selectedSprite.fillColor = fillInput.value;
-              this.selectedSprite.text = textInput.value;
-              this.selectedSprite.textColor = textColorInput.value;
-      
-              // Live update preview
-              spritePreview.style.backgroundColor = this.selectedSprite.fillColor;
-              spritePreview.style.color = this.selectedSprite.textColor;
-              spritePreview.innerText = this.selectedSprite.text || '';
-          };
-      
-          fillInput.addEventListener('input', update);
-          textInput.addEventListener('input', update);
-          textColorInput.addEventListener('input', update);
-      
-          spriteEditorPopup.querySelector('button').addEventListener('click', () => {
-              spriteEditorPopup.remove();
-              spriteEditorPopup = null;
-          });
-      
-          toolbar.container.appendChild(spriteEditorPopup);
-      });
+        if (spriteEditorPopup) {
+            spriteEditorPopup.remove();
+            spriteEditorPopup = null;
+            return;
+        }
+    
+        spriteEditorPopup = document.createElement('div');
+        spriteEditorPopup.style.position = 'absolute';
+        spriteEditorPopup.style.top = '45px';
+        spriteEditorPopup.style.right = '10px';
+        spriteEditorPopup.style.padding = '8px';
+        spriteEditorPopup.style.background = '#fff';
+        spriteEditorPopup.style.border = '1px solid #aaa';
+        spriteEditorPopup.style.boxShadow = '2px 2px 6px rgba(0,0,0,0.2)';
+        spriteEditorPopup.style.zIndex = '9999';
+        spriteEditorPopup.style.display = 'flex';
+        spriteEditorPopup.style.flexDirection = 'column';
+        spriteEditorPopup.style.gap = '4px';
+    
+        // Dynamically build dropdown
+        const overlayOptions = Object.keys(TILE_SPRITE_LIBRARY)
+            .map(name => `<option value="${name}">${name}</option>`)
+            .join('');
+    
+        spriteEditorPopup.innerHTML = `
+            <label style="font-size:12px;">Fill: <input type="color" id="fill-color"></label>
+            <label style="font-size:12px;">Text: <input type="text" id="sprite-text" style="width: 100px;"></label>
+            <label style="font-size:12px;">Text Color: <input type="color" id="text-color"></label>
+            <label style="font-size:12px;">Image Overlay:
+                <select id="sprite-image-name">
+                    ${overlayOptions}
+                </select>
+            </label>
+            <label style="font-size:12px;">Image Color: <input type="color" id="sprite-image-color"></label>
+            <button style="font-size:10px;">Close</button>
+        `;
+    
+        // Get input elements
+        const fillInput = spriteEditorPopup.querySelector('#fill-color');
+        const textInput = spriteEditorPopup.querySelector('#sprite-text');
+        const textColorInput = spriteEditorPopup.querySelector('#text-color');
+        const imageNameSelect = spriteEditorPopup.querySelector('#sprite-image-name');
+        const imageColorInput = spriteEditorPopup.querySelector('#sprite-image-color');
+    
+        // Populate current values
+        fillInput.value = this.selectedSprite.fillColor;
+        textInput.value = this.selectedSprite.text;
+        textColorInput.value = this.selectedSprite.textColor;
+        imageNameSelect.value = this.selectedSprite.imageName || '';
+        imageColorInput.value = this.selectedSprite.imageColor || '#000000';
+    
+        // Update preview logic
+        const update = () => {
+            this.selectedSprite.fillColor = fillInput.value;
+            this.selectedSprite.text = textInput.value;
+            this.selectedSprite.textColor = textColorInput.value;
+            this.selectedSprite.imageName = imageNameSelect.value || null;
+            this.selectedSprite.imageColor = imageColorInput.value;
+    
+            spritePreview.style.backgroundColor = this.selectedSprite.fillColor;
+            spritePreview.innerHTML = '';
+    
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            wrapper.style.width = '100%';
+            wrapper.style.height = '100%';
+    
+            // SVG overlay
+            if (this.selectedSprite.imageName && TILE_SPRITE_LIBRARY[this.selectedSprite.imageName]) {
+                const temp = document.createElement('div');
+                temp.innerHTML = TILE_SPRITE_LIBRARY[this.selectedSprite.imageName];
+                const svg = temp.querySelector('svg');
+    
+                if (svg) {
+                    svg.setAttribute('width', '100%');
+                    svg.setAttribute('height', '100%');
+                    svg.style.display = 'block';
+    
+                    svg.querySelectorAll('[fill]').forEach(el => {
+                        el.setAttribute('fill', this.selectedSprite.imageColor || '#000');
+                    });
+    
+                    wrapper.appendChild(svg);
+                }
+            }
+    
+            // Text overlay
+            const textEl = document.createElement('div');
+            textEl.innerText = this.selectedSprite.text || '';
+            textEl.style.position = 'absolute';
+            textEl.style.top = '50%';
+            textEl.style.left = '50%';
+            textEl.style.transform = 'translate(-50%, -50%)';
+            textEl.style.color = this.selectedSprite.textColor;
+            textEl.style.fontSize = '10px';
+            textEl.style.fontWeight = 'bold';
+            textEl.style.pointerEvents = 'none';
+            textEl.style.zIndex = 1;
+    
+            wrapper.appendChild(textEl);
+            spritePreview.appendChild(wrapper);
+        };
+    
+        fillInput.addEventListener('input', update);
+        textInput.addEventListener('input', update);
+        textColorInput.addEventListener('input', update);
+        imageNameSelect.addEventListener('change', update);
+        imageColorInput.addEventListener('input', update);
+    
+        spriteEditorPopup.querySelector('button').addEventListener('click', () => {
+            spriteEditorPopup.remove();
+            spriteEditorPopup = null;
+        });
+    
+        toolbar.container.appendChild(spriteEditorPopup);
+    });
+    
       
       
     }
@@ -232,4 +293,56 @@ class UIBoard {
             isDragging = false;
         });
     }
+
+
+    renderSpritePreview() {
+        const s = this.selectedSprite;
+        const preview = this.spritePreview;
+        preview.style.backgroundColor = s.fillColor || '#ccc';
+        preview.innerHTML = '';
+    
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.width = '100%';
+        wrapper.style.height = '100%';
+    
+        // Add SVG overlay
+        if (s.imageName && TILE_SPRITE_LIBRARY[s.imageName]) {
+            const temp = document.createElement('div');
+            temp.innerHTML = TILE_SPRITE_LIBRARY[s.imageName];
+            const svg = temp.querySelector('svg');
+    
+            if (svg) {
+                svg.setAttribute('width', '100%');
+                svg.setAttribute('height', '100%');
+                svg.style.display = 'block';
+    
+                svg.querySelectorAll('[fill]').forEach(el => {
+                    el.setAttribute('fill', s.imageColor || '#000');
+                });
+    
+                wrapper.appendChild(svg);
+            }
+        }
+    
+        // Add text
+        if (s.text) {
+            const text = document.createElement('div');
+            text.innerText = s.text;
+            text.style.position = 'absolute';
+            text.style.top = '50%';
+            text.style.left = '50%';
+            text.style.transform = 'translate(-50%, -50%)';
+            text.style.color = s.textColor || '#000';
+            text.style.fontSize = '10px';
+            text.style.fontWeight = 'bold';
+            text.style.pointerEvents = 'none';
+            text.style.zIndex = 1;
+    
+            wrapper.appendChild(text);
+        }
+    
+        preview.appendChild(wrapper);
+    }
+    
 }

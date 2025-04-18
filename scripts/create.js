@@ -19,8 +19,8 @@ var buttonEditor;
 var globalEditor;
 var minPlayers;
 var maxPlayers;
-var playerInventories = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'black', borderWidth:'2px', backgroundColor:'white' }
-var globals = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'black', borderWidth:'2px', backgroundColor:'white', displayVariables:[]}
+var playerInventories = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
+var globals = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)', displayVariables:[]}
 var layoutEditor;
 
 
@@ -276,3 +276,5 @@ function saveCode() {
 function loadCode() {
 
 }
+
+

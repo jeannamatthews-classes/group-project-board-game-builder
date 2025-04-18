@@ -122,7 +122,8 @@ class UILayoutEditor {
         });
     
         form.appendChild(displayList);
-        globalBox.container.appendChild(form);
+        globalBox.setContent(form);
+
     }
     
     open() {

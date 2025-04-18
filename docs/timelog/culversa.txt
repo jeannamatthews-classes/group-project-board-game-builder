@@ -147,3 +147,21 @@ Fixed the Board and Piece Editors to link them to the actual types class
 Created the overarching save code function. 
 Fix the Globalwindow in the Layout Editor to properly save an ordered list of variables to display. 
 Fixed the Layout editor window editing features to be clearer.
+
+
+April 18th - Spent a few hours fixing bugs with the main screen, as I was attempting to create Connect-4 and Chess
+Added Colorable SVGs to Piece and Tile Sprites. (Chess, Qwirkle, etc)
+Duplicating a Piece no longer copies the Piece location.
+Deleting a Piece now updates the Board to remove it from the DOM.
+Readded the drag to rearrange feature to the Piece Editor.
+Buttons now properly allow adding visibility and click scripts.
+Adding Rules to Piece types now actually adds the rules to the logic.
+Fixed loadcode functions. 
+Pieces on tiles are now listed by name rather than by ID.
+Add Copy / Paste functions to Scripting RUles 
+Fix Copy to deep-clone nested scripting rules.
+Fix a DOM error from trying to replaceChild when it shouldn't.
+Fixed Globals LayoutBox erasing innerHTML on resize. 
+Fixed default background and border colors to use rgba.
+Removed close button to avoid conflicts with the toggle button.
+
