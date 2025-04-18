@@ -14,7 +14,7 @@ class gameSaver {
         this.pieceTypes = pieceTypes;
         this.pieces = pieces;
         this.tiles = tiles;
-        this.boards = board;
+        this.board = board;
         this.scriptingRules = scriptingRules;
         this.buttons = buttons;
     }
