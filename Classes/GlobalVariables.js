@@ -20,7 +20,7 @@ const gameSaver = new GameSaver({
     buttons: buttonsList
 });
 
-gameSaver.attachDownloadButton();
+gameSaver.attachDownloadButton(".save-button", "game_save.json");
 
 
 function getObject(id, active = true) {
