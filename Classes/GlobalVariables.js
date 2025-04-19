@@ -9,6 +9,20 @@ let nextObjectID = 0;
 let nextTypeID = 0;
 let nextRuleID = 0;
 
+const gameSaver = new GameSaver({
+    gameState: currentGameState,
+    tileTypes: tileTypesList,
+    pieceTypes: pieceTypesList,
+    pieces: [],   
+    tiles: [],      
+    board: {},    
+    scriptingRules: globalEditor.globalScripts.map(ui => ui.form),
+    buttons: buttonsList
+});
+
+gameSaver.attachDownloadButton(".save-button", "game_save.json");
+
+
 function getObject(id, active = true) {
     let gs = (active) ? activeGameState : currentGameState;
     let boardTiles = gs.board.tileArray;

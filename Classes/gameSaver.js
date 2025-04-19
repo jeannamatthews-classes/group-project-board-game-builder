@@ -1,22 +1,22 @@
-class GameSaveManager {
+class gameSaver {
     constructor({
         gameState,
-        tileType,
-        pieceType,
-        piece,
-        tile,
+        tileTypes,
+        pieceTypes,
+        pieces,
+        tiles,
         board,
         scriptingRules,
-        button
+        buttons
     }) {
         this.gameState = gameState;
-        this.tileType = tileType;
-        this.pieceType = pieceType;
-        this.piece = piece;
-        this.tile = tile;
+        this.tileTypes = tileTypes;
+        this.pieceTypes = pieceTypes;
+        this.pieces = pieces;
+        this.tiles = tiles;
         this.board = board;
         this.scriptingRules = scriptingRules;
-        this.button = button;
+        this.buttons = buttons;
     }
 
     createSaveData() {
@@ -47,6 +47,18 @@ class GameSaveManager {
         URL.revokeObjectURL(url);
     }
 
+    attachDownloadButton(buttonSelector = ".save-button", filename = "game_save.json") {
+        const button = document.querySelector(buttonSelector);
+        if (!button) {
+            console.warn(`Download button with selector "${buttonSelector}" not found.`);
+            return;
+        }
+
+        button.addEventListener("click", () => {
+            this.saveToFile(filename);
+        });
+    }
+    
     static loadFromData(data) {
         return {
             gameState: GameState.loadCode(data.gameState),
