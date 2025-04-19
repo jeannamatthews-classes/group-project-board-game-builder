@@ -241,7 +241,7 @@ function saveCode() {
         tileTypes: typeEditor.tileTypes.map(typeUI => typeUI.type.saveCode()),
         buttons: buttonEditor.buttons.map(buttonUI => buttonUI.button.saveCode()),
         globalVariables: globalEditor.globalVariables,
-        globalScripts: globalEditor.globalScripts.map(scriptUI => scriptUI.form.script.saveCode()),
+        globalScripts: globalEditor.globalScripts.map(scriptUI => scriptUI.form.rule.saveCode()),
         inventoryLayout: playerInventories,
         globalLayout: globals
     };
