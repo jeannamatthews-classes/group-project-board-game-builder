@@ -154,13 +154,35 @@ class UIPiece {
 
         const renderTypes = () => {
             typeList.innerHTML = '';
-            this.piece.types.forEach((type, i) => {
+            this.piece.types.forEach((typeID, i) => {
                 const row = document.createElement('div');
                 row.style.display = 'flex';
                 row.style.justifyContent = 'space-between';
-
+                var nameToShow = "";
                 const span = document.createElement('span');
-                span.textContent = type;
+
+
+                console.log("Looking for typeID:", typeID);
+                console.log("FULL pieceTypes list:", typeEditor.pieceTypes);
+                
+                typeEditor.pieceTypes.forEach(pt => {
+                    console.log("Inspecting pt:", pt);
+                    console.log("pt.typeID:", pt?.typeID);
+                    console.log("pt.type?.typeID:", pt?.type?.typeID);
+                });
+                
+                let actualType = typeEditor.pieceTypes.find(pt => Number(pt.type.typeID) === Number(typeID));
+
+                console.log(actualType)
+                
+                if(actualType)
+                {
+                    nameToShow = actualType.type.typeName
+                    console.log("BLEASRHHASERH")
+
+                }
+                    
+                span.textContent = nameToShow;
 
                 const remove = document.createElement('button');
                 remove.textContent = '✕';
@@ -177,20 +199,32 @@ class UIPiece {
 
         addTypeBtn.onclick = () => {
             const select = document.createElement('select');
+
+            // Normalize piece.types to numbers just once
+            const existingTypeIDs = this.piece.types.map(id => Number(id));
+        
             typeEditor.pieceTypes.forEach(typeUI => {
-                let type = typeUI.type
-                if (!this.piece.types.includes(type.typeID)) {
+                const type = typeUI.type;
+                const typeID = Number(type.typeID); // normalize this too
+        
+                // ONLY include if it's NOT already in piece.types
+                if (!existingTypeIDs.includes(typeID)) {
                     const opt = document.createElement('option');
-                    opt.value = type.typeID;
+                    opt.value = typeID;
                     opt.textContent = type.typeName;
                     select.appendChild(opt);
                 }
             });
 
+            if (select.children.length === 0) {
+                return;
+            }
+
             const confirm = document.createElement('button');
             confirm.textContent = '✔';
             confirm.onclick = () => {
-                this.piece.types.push(select.value);
+                if (!this.piece.types.includes(select.value))
+                    this.piece.types.push(select.value);
                 renderTypes();
                 select.remove();
                 confirm.remove();

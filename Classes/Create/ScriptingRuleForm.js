@@ -29,9 +29,6 @@ class ScriptingRuleForm {
             this.ruleID = -1;
         }
         this.div = this.createDIV();
-
-        if(this.top)
-        {this.openEditorWindow();}
     }
 
     openEditorWindow() {

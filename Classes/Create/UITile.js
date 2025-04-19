@@ -239,28 +239,32 @@ overlayColor.addEventListener('input', () => {
 });
 
 
-        const renderTypes = () => {
-            typeList.innerHTML = '';
-            this.tile.types.forEach((type, i) => {
-                const row = document.createElement('div');
-                row.style.display = 'flex';
-                row.style.justifyContent = 'space-between';
+const renderTypes = () => {
+    typeList.innerHTML = '';
+    this.tile.types.forEach((typeRef, i) => {
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.justifyContent = 'space-between';
 
-                const span = document.createElement('span');
-                span.textContent = type;
+        const span = document.createElement('span');
 
-                const remove = document.createElement('button');
-                remove.textContent = '✕';
-                remove.onclick = () => {
-                    this.tile.types.splice(i, 1);
-                    renderTypes();
-                };
+        // Try to match by typeID to get the latest name
+        let matched = typeEditor.tileTypes.find(t => Number(t.type.typeID) === Number(typeRef.typeID));
+        span.textContent = matched ? matched.type.typeName : '(Unknown Type)';
 
-                row.appendChild(span);
-                row.appendChild(remove);
-                typeList.appendChild(row);
-            });
+        const remove = document.createElement('button');
+        remove.textContent = '✕';
+        remove.onclick = () => {
+            this.tile.types.splice(i, 1);
+            renderTypes();
         };
+
+        row.appendChild(span);
+        row.appendChild(remove);
+        typeList.appendChild(row);
+    });
+};
+
 
         const renderAvailablePieces = () => {
             pieceList.innerHTML = '';
@@ -295,27 +299,43 @@ overlayColor.addEventListener('input', () => {
 
         addTypeBtn.onclick = () => {
             const select = document.createElement('select');
-            TILE_TYPES.forEach(type => {
-                if (!this.tile.types.includes(type)) {
+            
+            // Normalize existing type IDs for comparison
+            const existingTypeIDs = this.tile.types.map(t => Number(t.typeID));
+            
+            typeEditor.tileTypes.forEach(typeUI => {
+                const type = typeUI.type;
+                const typeID = Number(type.typeID);
+                
+                if (!existingTypeIDs.includes(typeID)) {
                     const opt = document.createElement('option');
-                    opt.value = type;
-                    opt.textContent = type;
+                    opt.value = typeID;
+                    opt.textContent = type.typeName;
                     select.appendChild(opt);
                 }
             });
-
+        
+            // If no new types to add, do nothing
+            if (select.children.length === 0) return;
+        
             const confirm = document.createElement('button');
             confirm.textContent = '✔';
             confirm.onclick = () => {
-                this.tile.types.push(select.value);
-                renderTypes();
+                const chosenID = Number(select.value);
+                const selectedType = typeEditor.tileTypes.find(t => Number(t.type.typeID) === chosenID);
+                if (selectedType) {
+                    this.tile.types.push(selectedType.type);
+                    renderTypes();
+                }
+        
                 select.remove();
                 confirm.remove();
             };
-
+        
             content.insertBefore(select, typeList);
             content.insertBefore(confirm, typeList);
         };
+        
 
         addBtn.onclick = () => {
             const available = pieceEditor.pieces.filter(p =>

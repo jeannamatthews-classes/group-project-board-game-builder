@@ -184,3 +184,4 @@ More Bug fixes:
 Fixed it so that Rules show up properly on the Type Editor Window
 Fixed so that addPiece no longer attempts to access negative tile indexes.
 Constrained draggability of windows, so they can no longer be dragged off screen. 
+Rules no longer open automatically when created to prevemt rules from all showing up at once.
