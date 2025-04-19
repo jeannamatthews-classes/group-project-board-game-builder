@@ -1,6 +1,7 @@
 class UIButton {
     constructor(button) {
         this.button = button;
+        console.log(button)
         this.container = this.createContainer();
         this.editorWindow = null;
 
@@ -24,6 +25,7 @@ class UIButton {
 
         // Preview
         const preview = document.createElement('button');
+
         preview.textContent = this.button.sprite.text;
         preview.style.backgroundColor = this.button.sprite.fillColor;
         preview.style.color = this.button.sprite.textColor;

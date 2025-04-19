@@ -30,6 +30,7 @@ class Button {
         this.text = text;
         this.width = width;
         this.height = height;
+        this.name = "";
         
     }
 
@@ -58,7 +59,7 @@ class Button {
 
     saveCode() {
         return {
-            
+            name: this.name,
             containerWidth:this.containerWidth,
             containerHeight:this.containerHeight,
             containerTop:this.containerTop,
@@ -76,27 +77,38 @@ class Button {
         };
     }
 
-    loadCode(code) {
-        this.containerWidth = code.containerWidth ?? this.containerWidth;
-        this.containerHeight = code.containerHeight ?? this.containerHeight;
-        this.containerTop = code.containerTop ?? this.containerTop;
-        this.containerLeft = code.containerLeft ?? this.containerLeft;
-        this.borderColor = code.borderColor ?? this.borderColor;
-        this.borderWidth = code.borderWidth ?? this.borderWidth;
-        this.backgroundColor = code.backgroundColor ?? this.backgroundColor;
-        this.sprite = code.sprite ?? this.sprite;
+    static loadCode(code) {
+        const button = new Button();
+        button.name = code.name ?? "Unnamed";
+        button.containerWidth = code.containerWidth ?? -1;
+        button.containerHeight = code.containerHeight ?? -1;
+        button.containerTop = code.containerTop ?? -1;
+        button.containerLeft = code.containerLeft ?? -1;
+        button.borderColor = code.borderColor ?? 'black';
+        button.borderWidth = code.borderWidth ?? '2px';
+        button.backgroundColor = code.backgroundColor ?? 'white';
+        button.sprite = code.sprite ?? {
+            fillColor: "#0f0f0f",
+            text: "",
+            textColor: "FFFFFF",
+            borderColor: "#000000",
+            borderRadius: "5px",
+        };
     
-        this.clickScripts = (code.clickScripts || []).map(data => {
-            const script = new ScriptingRule(); 
-            script.loadCode(data);
-            return script;
-        });
-    
-        this.visibleRules = (code.visibleRules || []).map(data => {
+        button.clickScripts = (code.clickScripts || []).map(data => {
             const script = new ScriptingRule();
             script.loadCode(data);
             return script;
         });
+    
+        button.visibleRules = (code.visibleRules || []).map(data => {
+            const script = new ScriptingRule();
+            script.loadCode(data);
+            return script;
+        });
+    
+        return button;
     }
+    
     
 }

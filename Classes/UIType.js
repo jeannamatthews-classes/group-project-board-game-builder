@@ -8,8 +8,6 @@ class UIType {
         this.rules = this.type.scripts.map(script =>
             new UIScriptingRule(new ScriptingRuleForm(script, true, this.kind[0].toUpperCase() + this.kind.slice(1)), obj => this.removeRule(obj))
         );
-        
-        this.openEditorWindow();
     }
 
     createContainer() {
@@ -90,6 +88,7 @@ class UIType {
     
 
     openEditorWindow() {
+
         if (this.window && document.body.contains(this.window.container)) {
             this.window.container.style.zIndex = ++__windowZIndex;
             this.refreshEditorWindowContent?.();
@@ -263,7 +262,6 @@ class UIType {
 
         //UPDATES THE WIDNOW
         this.refreshEditorWindowContent = () => {
-            console.log("refresh", this.type.typeName)
             nameInput.value = this.type.typeName;
             nameInput.dispatchEvent(new Event('input')); 
             this.rules.forEach(rule => rule.updateName())

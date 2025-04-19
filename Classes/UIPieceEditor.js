@@ -36,7 +36,7 @@ class UIPieceEditor {
                 text: '',
                 textColor: '#000000'
             };
-            const piece = new Piece([], -1, -1, 0, sprite);
+            const piece = new Piece([], -1, -1, -1, sprite);
             piece.name = name;
             this.addPiece(piece);
         };
@@ -110,6 +110,9 @@ class UIPieceEditor {
 
         this.pieces.push(uiPiece);
         this.pieceContainer.appendChild(uiPiece.container);
+        var left = piece.xCoordinate;
+        var top = piece.yCoordinate;
+        boardEditor.tiles[top][left].updatePieceDisplay();
     }
 
     showContextMenu(x, y, uiPiece) {

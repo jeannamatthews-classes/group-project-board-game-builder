@@ -47,6 +47,7 @@ class UIPiece {
         this.updateSprite();
 
         this.container.addEventListener('click', (e) => {
+            if (!e.isTrusted) return;
             e.stopPropagation();
             this.openEditorWindow();
         });
@@ -147,12 +148,6 @@ class UIPiece {
 
         `;
 
-        const nameInput = content.querySelector('#piece-name');
-        const shape = content.querySelector('#shape');
-        const fill = content.querySelector('#fill-color');
-        const stroke = content.querySelector('#stroke-color');
-        const text = content.querySelector('#piece-text');
-        const textColor = content.querySelector('#text-color');
         const typeList = content.querySelector('#type-list');
         const addTypeBtn = content.querySelector('#add-type');
         const locationControls = content.querySelector('#location-controls');
@@ -259,6 +254,55 @@ class UIPiece {
                 locationControls.append(xInput, yInput, placeBtn);
             }
         };
+        const updateOwnerDisplay = () => {
+            const ownerControls = document.createElement('div');
+            ownerControls.id = 'owner-controls';
+            ownerControls.style.marginTop = '10px';
+        
+            const currentOwner = this.piece.playerOwnerID;
+        
+            const label = document.createElement('div');
+            label.textContent = currentOwner >= 0 
+                ? `Owned by Player ${currentOwner}` 
+                : 'No player assigned.';
+            ownerControls.appendChild(label);
+        
+            if (currentOwner >= 0) {
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove Owner';
+                removeBtn.onclick = () => {
+                    this.piece.playerOwnerID = -1;
+                    updateOwnerDisplay();
+                };
+                ownerControls.appendChild(removeBtn);
+            } else {
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.min = 0;
+                input.max = maxPlayers - 1;
+                input.placeholder = 'Player ID';
+                input.style.width = '80px';
+        
+                const assignBtn = document.createElement('button');
+                assignBtn.textContent = 'Assign';
+                assignBtn.onclick = () => {
+                    const val = parseInt(input.value);
+                    if (!isNaN(val) && val >= 0 && val < maxPlayers) {
+                        this.piece.playerOwnerID = val;
+                        updateOwnerDisplay();
+                    }
+                };
+        
+                ownerControls.appendChild(input);
+                ownerControls.appendChild(assignBtn);
+            }
+        
+            // Replace old controls
+            const existing = content.querySelector('#owner-controls');
+            if (existing) existing.replaceWith(ownerControls);
+            else content.appendChild(ownerControls);
+        };
+        
         const wireInputs = () => {
             const nameInput = content.querySelector('#piece-name');
             const fill = content.querySelector('#fill-color');
@@ -348,6 +392,7 @@ class UIPiece {
             wireInputs();
             renderTypes();
             updateLocationDisplay();
+            updateOwnerDisplay();
         };
 
         this.refreshEditorWindowContent();

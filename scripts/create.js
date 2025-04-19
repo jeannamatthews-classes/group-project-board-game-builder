@@ -1,14 +1,15 @@
 
-const boardCreator = document.getElementById("board-creator") 
-const centerTile = document.getElementById("tile-center") 
-const leftTile = document.getElementById("tile-left")
-const rightTile = document.getElementById("tile-right")
-const widthInput = document.getElementById('board-width');
-const heightInput = document.getElementById('board-height');
-const doneButton = document.getElementById('done-btn');
-const tileType = document.getElementById('tile-type');
-const minPlayersInput = document.getElementById('min-players');
-const maxPlayersInput = document.getElementById('max-players');
+var boardCreator;
+var centerTile;
+var leftTile;
+var rightTile;
+var widthInput;
+var heightInput;
+var doneButton;
+var tileType;
+var minPlayersInput;
+var maxPlayersInput;
+var boardType;
 
 const boardTypeText = ["Square", "Hex", "Triangle"]
 const boardTypeSources = ["images/square.png","images/hexagon.png","images/triangle.png"];
@@ -19,8 +20,8 @@ var buttonEditor;
 var globalEditor;
 var minPlayers;
 var maxPlayers;
-var playerInventories = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
-var globals = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)', displayVariables:[]}
+var playerInventories;
+var globals;
 var layoutEditor;
 
 
@@ -36,24 +37,19 @@ function changeBoardType(direction){
 }
 
 function submitBoard(){
+    playerInventories = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
+    globals = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)', displayVariables:[]}
     boardEditor = new UIBoard(new Board(boardTypeText[boardType], parseInt(widthInput.value), parseInt(heightInput.value)))
     pieceEditor = new UIPieceEditor();
     typeEditor = new UITypeEditor();
     buttonEditor = new UIButtonEditor();
     globalEditor = new UIGlobalEditor();
     minPlayers = parseInt(minPlayersInput.value);
-    maxPlayers = parseInt(maxPlayersInput.value);
-
-
-    
+    maxPlayers = parseInt(maxPlayersInput.value);    
     setUpButtons()
     typeEditor.window.close();
     buttonEditor.window.close();
-    boardCreator.remove();
-    
-
-
-
+    document.getElementById("main-screen").innerHTML = ''; 
 }
 
 
@@ -69,15 +65,6 @@ function validateInputs() {
 
     doneButton.disabled = !(widthValid && heightValid && minValid && maxValid && boardType==0);
 }
-
-
-//Check everytime the input is changed.
-widthInput.addEventListener('input', validateInputs);
-heightInput.addEventListener('input', validateInputs);
-minPlayersInput.addEventListener('input', validateInputs);
-maxPlayersInput.addEventListener('input', validateInputs);
-
-
 
 
 
@@ -273,8 +260,173 @@ function saveCode() {
     document.body.removeChild(a);
 }
 
-function loadCode() {
 
+function newGame() {
+    const container = document.createElement('div');
+    container.id = 'board-creator';
+    container.className = 'container-main text-center';
+    container.innerHTML = `
+        <div class="header">SELECT YOUR BOARD</div>
+        <div class="creation-form">
+            <div class="labels">Choose Board Type</div>
+            <div class="tile-images">
+                <img id="tile-left" src="images/hexagon.png">
+                <img id="tile-center" src="images/square.png">
+                <img id="tile-right" src="images/triangle.png">
+            </div>
+            <div class="tile-selector">
+                <div class="arrow-btn left" onclick="changeBoardType(-1)"></div>
+                <div id="tile-type" class="tile-type">SQUARE</div>
+                <div class="arrow-btn right" onclick="changeBoardType(1)"></div>
+            </div>
+            <div class="labels">Set Board Size</div>
+            <div class="size-selector">
+                <div class="labeled-input">
+                    <label class="required">* WIDTH</label><br>
+                    <input type="number" id="board-width" min="0" max="999" required>
+                </div>
+                <div class="labeled-input">
+                    <label class="required">* HEIGHT</label><br>
+                    <input type="number" id="board-height" min="0" max="999" required>
+                </div>
+            </div>
+            <div class="labels">Choose Number of Players</div>
+            <div class="player-selector">
+                <div class="labeled-input">
+                    <label class="required">* MIN PLAYERS</label><br>
+                    <input type="number" id="min-players" min="1" max="999" required>
+                </div>
+                <div class="labeled-input">
+                    <label class="required">* MAX PLAYERS</label><br>
+                    <input type="number" id="max-players" min="1" max="999" required>
+                </div>
+            </div>
+            <div class="done-selector">
+                <button id="done-btn" disabled>Done</button>
+            </div>
+        </div>
+    `;
+
+    const main = document.getElementById('main-screen');
+    main.innerHTML = '';
+    main.appendChild(container);
+
+    tileType = document.getElementById('tile-type');
+    leftTile = document.getElementById('tile-left');
+    centerTile = document.getElementById('tile-center');
+    rightTile = document.getElementById('tile-right');
+    tileType = document.getElementById('tile-type')
+
+    widthInput = document.getElementById('board-width');
+    heightInput = document.getElementById('board-height');
+    minPlayersInput = document.getElementById('min-players');
+    maxPlayersInput = document.getElementById('max-players');
+    doneButton = document.getElementById('done-btn');
+
+
+    widthInput.addEventListener('input', validateInputs);
+    heightInput.addEventListener('input', validateInputs);
+    minPlayersInput.addEventListener('input', validateInputs);
+    maxPlayersInput.addEventListener('input', validateInputs);
+    doneButton.addEventListener('click', submitBoard);
+
+    boardType = 0;
+    changeBoardType(0); // Reset to default
 }
 
 
+
+
+
+let game = null;
+
+function loadGame() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                game = JSON.parse(e.target.result);
+                console.log("Game loaded:", game);
+                alert("Game file loaded successfully!");
+                
+                game.inventoryLayout.containerWidth
+                playerInventories = {containerWidth: game.inventoryLayout.containerWidth, containerHeight: game.inventoryLayout.containerHeight, containerTop: game.inventoryLayout.containerTop, containerLeft:game.inventoryLayout.containerLeft, borderColor:game.inventoryLayout.borderColor, borderWidth:game.inventoryLayout.borderWidth, backgroundColor:game.inventoryLayout.backgroundColor}
+                globals = {containerWidth: game.globalLayout.containerWidth, containerHeight:  game.globalLayout.containerHeight, containerTop:  game.globalLayout.containerTop, containerLeft: game.globalLayout.containerLeft, borderColor: game.globalLayout.borderColor, borderWidth: game.globalLayout.borderWidth, backgroundColor: game.globalLayout.backgroundColor, displayVariables: game.globalLayout.displayVariables}
+                boardEditor = new UIBoard(Board.loadCode(game.board));
+                pieceEditor = new UIPieceEditor();
+                game.pieces.forEach( p => pieceEditor.addPiece(Piece.loadCode(p)) );
+                minPlayers = game.minPlayers;
+                maxPlayers = game.maxPlayers;    
+                typeEditor = new UITypeEditor();
+                game.tileTypes.forEach(t => typeEditor.addType(TileType.loadCode(t))) ;
+                game.pieceTypes.forEach(t => typeEditor.addType(PieceType.loadCode(t))) ;
+                buttonEditor = new UIButtonEditor();
+                game.buttons.forEach(b =>buttonEditor.addButton(Button.loadCode(b)));
+                globalScripts = game.globalScripts.map(script => ScriptingRule.loadCode(script))
+                globalEditor = new UIGlobalEditor(game.globalVariables,globalScripts);
+
+                setUpButtons()
+                typeEditor.window.close();
+                buttonEditor.window.close();
+                document.getElementById("main-screen").innerHTML = ''; 
+
+                
+            } catch (err) {
+                alert("Error parsing JSON: " + err.message);
+                console.error(err); // ← logs full stack trace
+            }
+        };
+        reader.readAsText(file);
+    });
+    input.click();
+}
+
+
+
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    showStartMenu();
+});
+
+function showStartMenu() {
+    const main = document.getElementById('main-screen');
+    main.innerHTML = '';
+
+    const wrapper = document.createElement('div');
+    wrapper.style.display = 'flex';
+    wrapper.style.justifyContent = 'center';
+    wrapper.style.alignItems = 'center';
+    wrapper.style.gap = '30px';
+    wrapper.style.height = '100vh';
+
+    const newGameBtn = document.createElement('button');
+    newGameBtn.textContent = 'New Game';
+    newGameBtn.style.padding = '16px 32px';
+    newGameBtn.style.fontSize = '18px';
+    newGameBtn.style.border = 'none';
+    newGameBtn.style.borderRadius = '8px';
+    newGameBtn.style.cursor = 'pointer';
+    newGameBtn.style.backgroundColor = '#dcdcdc';
+    newGameBtn.addEventListener('click', () => newGame());
+
+    const loadGameBtn = document.createElement('button');
+    loadGameBtn.textContent = 'Load Game';
+    loadGameBtn.style.padding = '16px 32px';
+    loadGameBtn.style.fontSize = '18px';
+    loadGameBtn.style.border = 'none';
+    loadGameBtn.style.borderRadius = '8px';
+    loadGameBtn.style.cursor = 'pointer';
+    loadGameBtn.style.backgroundColor = '#dcdcdc';
+    loadGameBtn.addEventListener('click', () => loadGame());
+
+    wrapper.appendChild(newGameBtn);
+    wrapper.appendChild(loadGameBtn);
+    main.appendChild(wrapper);
+}

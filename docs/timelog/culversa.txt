@@ -165,3 +165,17 @@ Fixed Globals LayoutBox erasing innerHTML on resize.
 Fixed default background and border colors to use rgba.
 Removed close button to avoid conflicts with the toggle button.
 
+
+
+April 19th - I spent 3 hours this morning working on the Load mechanism of creation.
+Made it so the Board creation screen is dynamically created. 
+New landing page allows New Game or Load Game.
+Linked up New Game function to old code (works as normal)
+Added Player Ownership to the Piece Editor Window
+Fixed Player Ownership being allocated set to 0 by default instead of -1.
+Setup the Load Game funciton.
+Fixed the Board and Button loadCode functions.
+Edited PieceEditor, TypeEditor, and ButtonEditor to all have add methods.
+Read the json into a variable called game and initialize all variables this way.
+Makes sure to refresh all elements.
+Yay.

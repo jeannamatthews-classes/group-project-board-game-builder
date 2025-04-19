@@ -1,7 +1,7 @@
 class UIGlobalEditor {
-    constructor() {
-        this.globalVariables = []; 
-        this.globalScripts = [];   
+    constructor(globalVariables = [], globalScripts = []) {
+        this.globalVariables = globalVariables; 
+        this.globalScripts = globalScripts;   
 
         this.container = null;
         this.window = null;

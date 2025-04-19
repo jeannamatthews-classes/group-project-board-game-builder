@@ -17,14 +17,12 @@ class UIButtonEditor {
         addBtn.textContent = 'Add Button';
         addBtn.onclick = () => {
             const newName = this.generateUniqueName("New Button");
-            const btn = new Button();
-            btn.name = newName;
-            const ui = new UIButton(btn);
-            this.buttons.push(ui);
-            this.buttonContainer.appendChild(ui.container);
+            const logical = new Button();
+            logical.name = newName;
+            this.addButton(logical);
         };
-        toolbar.appendChild(addBtn);
 
+        toolbar.appendChild(addBtn);
         return toolbar;
     }
 
@@ -41,7 +39,6 @@ class UIButtonEditor {
     }
 
     createWindow() {
-        console.log('what')
         const win = new WindowContainer("Button Editor", true, {
             width: 400,
             height: 400,
@@ -63,17 +60,24 @@ class UIButtonEditor {
         }
         return name;
     }
+    
+    addButton(logicalButton) {
+        const ui = new UIButton(logicalButton);
+        this.buttons.push(ui);
+        this.buttonContainer.appendChild(ui.container);
+    }
 
     duplicateButton(ui) {
         const newBtn = structuredClone(ui.button);
         newBtn.name = this.generateUniqueName(`${ui.button.name} Copy`);
-        const copy = new UIButton(newBtn);
-        this.buttons.push(copy);
-        this.buttonContainer.appendChild(copy.container);
+        this.addButton(newBtn);
     }
 
     removeButton(ui) {
         this.buttons = this.buttons.filter(b => b !== ui);
+        if (ui.container?.parentElement) {
+            ui.container.remove();
+        }
     }
 
     moveButtonUp(ui) {

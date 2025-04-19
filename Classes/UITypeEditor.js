@@ -5,6 +5,9 @@ class UITypeEditor {
         this.container = null;
         this.window = null;
 
+        this.tileListDiv = null;   // Will be set during makeSection
+        this.pieceListDiv = null;  // Will be set during makeSection
+
         this.createContainer();
         this.createWindow();
     }
@@ -35,15 +38,10 @@ class UITypeEditor {
             addBtn.textContent = '+ Add';
             addBtn.onclick = () => {
                 const newName = this.generateUniqueName("New Type", kind);
-                let newType;
-
-                if (kind === 'tile')
-                    newType = new UIType(new TileType(newName, []), kind);
-                else
-                    newType = new UIType(new PieceType(newName, []), kind);
-
-                list.push(newType);
-                listDiv.appendChild(newType.container);
+                const logicType = kind === 'tile'
+                    ? new TileType(newName, [])
+                    : new PieceType(newName, []);
+                this.addType(logicType);
             };
 
             toolbar.appendChild(title);
@@ -58,7 +56,8 @@ class UITypeEditor {
             listDiv.style.flexDirection = 'column';
             listDiv.style.gap = '5px';
 
-            list.forEach(t => listDiv.appendChild(t.container));
+            if (kind === 'tile') this.tileListDiv = listDiv;
+            if (kind === 'piece') this.pieceListDiv = listDiv;
 
             wrapper.appendChild(toolbar);
             wrapper.appendChild(listDiv);
@@ -85,52 +84,54 @@ class UITypeEditor {
     }
 
     generateUniqueName(base, kind) {
-        const list = {
-            tile: this.tileTypes,
-            piece: this.pieceTypes
-        }[kind];
-
+        const list = kind === 'tile' ? this.tileTypes : this.pieceTypes;
         let index = 1;
-        let newName = base;
-        const nameExists = (name) => list.some(t => t.type.typeName === name);
+        let name = base;
+        const exists = (n) => list.some(t => t.type.typeName === n);
+        while (exists(name)) name = `${base} ${index++}`;
+        return name;
+    }
 
-        while (nameExists(newName)) {
-            newName = base + index++;
+    /**
+     * Public method: Add a logical type (TileType or PieceType)
+     * Automatically detects and adds to the correct list, and refreshes UI
+     */
+    addType(logicalType) {
+        const isTile = logicalType instanceof TileType;
+        const kind = isTile ? 'tile' : 'piece';
+
+        const uiType = new UIType(logicalType, kind);
+
+        if (isTile) {
+            this.tileTypes.push(uiType);
+            this.refreshList(this.tileTypes, this.tileListDiv);
+        } else {
+            this.pieceTypes.push(uiType);
+            this.refreshList(this.pieceTypes, this.pieceListDiv);
         }
+    }
 
-        return newName;
+    refreshList(list, container) {
+        if (!container) return;
+        container.innerHTML = '';
+        list.forEach(t => container.appendChild(t.container));
     }
 
     duplicateType(original) {
         const clone = JSON.parse(JSON.stringify(original.type));
         clone.typeID = assignTypeID();
-        clone.typeName = this.generateUniqueName(clone.typeName+'_copy', original.kind);
-
-        const newUIType = new UIType(clone, original.kind);
-
-        const list = {
-            tile: this.tileTypes,
-            piece: this.pieceTypes
-        }[original.kind];
-
-        list.push(newUIType);
-
-        const parent = original.container.parentElement;
-        parent.insertBefore(newUIType.container, original.container.nextSibling);
-
-        return newUIType;
+        clone.typeName = this.generateUniqueName(clone.typeName + '_copy', original.kind);
+        this.addType(clone);
     }
 
     removeType(uiType) {
         const list = uiType.kind === 'tile' ? this.tileTypes : this.pieceTypes;
+        const div = uiType.kind === 'tile' ? this.tileListDiv : this.pieceListDiv;
+
         const index = list.indexOf(uiType);
-    
         if (index !== -1) {
-            list.splice(index, 1); // Remove from internal list
-            if (uiType.container && uiType.container.parentElement) {
-                uiType.container.parentElement.removeChild(uiType.container); // Remove from DOM
-            }
+            list.splice(index, 1);
+            this.refreshList(list, div);
         }
     }
-    
 }

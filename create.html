@@ -11,58 +11,8 @@
     <link rel="stylesheet" href="styles/create.css">
 </head>
 <body>
-    <div id = "board-creator" class="container-main text-center">
-        <div class="header">SELECT YOUR BOARD</div>
-
-<div class="creation-form">
-
-    <div class="labels">Choose Board Type</div>
-
-    <div class="tile-images">
-        <img id="tile-left" src="images/hexagon.png">
-        <img id="tile-center" src="images/square.png">
-        <img id="tile-right" src="images/triangle.png">
-    </div>
-
-    <div class="tile-selector">
-        <div class="arrow-btn left" onclick="changeBoardType(-1)"></div>
-        <div id="tile-type" class="tile-type">SQUARE</div>
-        <div class="arrow-btn right" onclick="changeBoardType(1)"></div>
-    </div>
-
-    <div class="labels">Set Board Size</div>
-
-    <div class="size-selector">
-        <div class="labeled-input">
-            <label class="required">* WIDTH</label><br>
-            <input type="number" id="board-width" min="0" max="999" required>
-        </div>
-        <div class="labeled-input">
-            <label class="required">* HEIGHT</label><br>
-            <input type="number" id="board-height" min="0" max="999" required>
-        </div>
-    </div>
-
-    <div class="labels">Choose Number of Players</div>
-
-    <div class="player-selector">
-        <div class="labeled-input">
-            <label class="required">* MIN PLAYERS</label><br>
-            <input type="number" id="min-players" min="1" max="999" required>
-        </div>
-        <div class="labeled-input">
-            <label class="required">* MAX PLAYERS</label><br>
-            <input type="number" id="max-players" min="1" max="999" required>
-        </div>
-    </div>
-
-    <div class = "done-selector">
-    <button id="done-btn" disabled onclick="submitBoard()">Done</button>
-</div>
-</div>
-
-       
-    </div>
+        <div id="main-screen"></div>
+    
 
 <script src="Classes/PlayerInventory.js"></script>
 <script src="Classes/GlobalVariables.js"></script>

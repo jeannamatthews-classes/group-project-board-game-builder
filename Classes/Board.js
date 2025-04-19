@@ -90,6 +90,13 @@ class Board {
     board.tileArray = data.tileArray.map(row =>
         row.map(tileData => Tile.loadCode(tileData))
     );
+    board.containerWidth = data.containerWidth ?? -1
+    board.containerHeight = data.containerHeight ?? -1
+    board.containerTop = data.containerTop ?? -1
+    board.containerLeft = data.containerLeft ?? -1
+    board.borderColor = data.borderColor ??'rgba(0, 0, 0, 0.9)';
+    board.borderWidth = data.borderWidth ?? '2px';
+    board.backgroundColor = data.backgroundColor ?? 'rgba(255, 255, 255, 0.9)';
     return board;
 }
 
