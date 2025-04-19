@@ -112,7 +112,8 @@ class UIPieceEditor {
         this.pieceContainer.appendChild(uiPiece.container);
         var left = piece.xCoordinate;
         var top = piece.yCoordinate;
-        boardEditor.tiles[top][left].updatePieceDisplay();
+        if(top!=-1 && left!=-1)
+            boardEditor.tiles[top][left].updatePieceDisplay();
     }
 
     showContextMenu(x, y, uiPiece) {

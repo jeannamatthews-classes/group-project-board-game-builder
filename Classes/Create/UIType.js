@@ -146,6 +146,8 @@ class UIType {
         const rulesList = document.createElement('div');
         rulesList.id = 'rules-list';
         content.appendChild(rulesList);
+        this.rules.forEach(rule => rulesList.appendChild(rule.container));
+
 
         const addRule = document.createElement('button');
         addRule.textContent = '+ Add Rule';

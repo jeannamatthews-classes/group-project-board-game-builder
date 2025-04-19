@@ -70,8 +70,29 @@ class WindowContainer {
 
         document.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
-            this.container.style.left = (e.clientX - offsetX) + 'px';
-            this.container.style.top = (e.clientY - offsetY) + 'px';
+            let newLeft = e.clientX - offsetX;
+            let newTop = e.clientY - offsetY;
+            
+            const containerWidth = this.container.offsetWidth;
+            const containerHeight = this.container.offsetHeight;
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            
+            // Prevent dragging too far up
+            if (newTop < 0) newTop = 0;
+            
+            // Prevent dragging too far down
+            if (newTop + 30 > screenHeight) newTop = screenHeight - 30; // still show header
+            
+            // Prevent dragging more than halfway off left/right
+            const maxLeft = screenWidth - containerWidth * 0.5;
+            const minLeft = -containerWidth * 0.5;
+            if (newLeft < minLeft) newLeft = minLeft;
+            if (newLeft > maxLeft) newLeft = maxLeft;
+            
+            this.container.style.left = `${newLeft}px`;
+            this.container.style.top = `${newTop}px`;
+            
         });
 
         document.addEventListener('mouseup', () => {

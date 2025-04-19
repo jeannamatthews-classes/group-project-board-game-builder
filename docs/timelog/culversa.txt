@@ -179,3 +179,8 @@ Edited PieceEditor, TypeEditor, and ButtonEditor to all have add methods.
 Read the json into a variable called game and initialize all variables this way.
 Makes sure to refresh all elements.
 Yay.
+
+More Bug fixes:
+Fixed it so that Rules show up properly on the Type Editor Window
+Fixed so that addPiece no longer attempts to access negative tile indexes.
+Constrained draggability of windows, so they can no longer be dragged off screen. 

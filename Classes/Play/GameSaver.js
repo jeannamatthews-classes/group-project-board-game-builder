@@ -1,4 +1,4 @@
-class gameSaver {
+class GameSaver {
     constructor({
         gameState,
         tileTypes,
