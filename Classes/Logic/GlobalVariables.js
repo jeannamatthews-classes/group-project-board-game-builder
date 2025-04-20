@@ -1,14 +1,6 @@
-let currentGameState = new GameState(); // The game state after the last valid move
-let activeGameState = new GameState(); // The game state currently being edited
-let tileTypesList = []; // An array of the created tile types
-let pieceTypesList = []; // An array of the created piece types
-let buttonsList = []; // An array of the created buttons
-let otherGlobalVariables = [];
-let globalScripts = [];
 let nextObjectID = 0;
 let nextTypeID = 0;
 let nextRuleID = 0;
-
 /*
 const gameSaver = new GameSaver({
     gameState: currentGameState,
@@ -57,15 +49,23 @@ function assignRuleID() {
 }
 
 function gameStateValid() {
-    currentGameState = BGBStructuredClone(activeGameState);
+    currentGameState = activeGameState.clone();
+    updateUI();
 }
 
 function gameStateRevert() {
-    activeGameState = BGBStructuredClone(currentGameState);
+    activeGameState = currentGameState.clone();
+    updateUI();
+}
+
+function updateUI(){
+    board.update();
+    globalViewer.refresh();
 }
 
 // A variant of structuredClone that will preserve types like Pieces and Tiles.
 // NOTE TO CODERS: If you ever change the arguments to a constructor of one of the classes this project defines, make the appropriate change here too!
+/*
 function BGBStructuredClone(argument) {
     if (typeof argument !== "object") return argument; // primitive types are already cloned
     if (Array.isArray(argument)) return argument.map(BGBStructuredClone); // Copy each entry of the array
@@ -90,6 +90,8 @@ function BGBStructuredClone(argument) {
     if (argument instanceof ScriptingRuleForm) return new ScriptingRuleForm(BGBStructuredClone(argument.rule), argument.top, argument.callerType, argument.zebraDark, argument.parentType, argument.name, argument.ruleID);
     return structuredClone(argument); // Sprites are non-instance objects, so we just call the usual structuredClone on them
 }
+    */
+// I don't think we need this because all objects have their own clone function. 
 
 // Checks if two things are equal, including working on types like Pieces and Tiles.
 function BGBEquals(leftArg, rightArg) {

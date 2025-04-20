@@ -797,6 +797,11 @@ class ScriptingRule {
             variables: this.variables.map(([name, value]) => [name, value])
         };
     }
+    clone(){
+        let saveCode = this.saveCode();
+        let newScriptingRule = ScriptingRule.loadCode(saveCode)
+        return newScriptingRule
+    }
     static loadCode(data) {
         const deserialize = (val) => {
             if (val && typeof val === 'object' && val.type && Array.isArray(val.args)) {

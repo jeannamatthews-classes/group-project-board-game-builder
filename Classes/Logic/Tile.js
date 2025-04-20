@@ -52,6 +52,11 @@ class Tile {
         return scriptResult;
     }
 
+    clone(){
+        let saveCode = this.saveCode();
+        let newTile = Tile.loadCode(saveCode)
+        return newTile
+    }
     saveCode() {
         return {
             objectID: this.objectID,

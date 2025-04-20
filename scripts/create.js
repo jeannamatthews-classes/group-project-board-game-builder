@@ -11,6 +11,7 @@ var minPlayersInput;
 var maxPlayersInput;
 var boardType;
 
+
 const boardTypeText = ["Square", "Hex", "Triangle"]
 const boardTypeSources = ["images/square.png","images/hexagon.png","images/triangle.png"];
 var boardEditor;
@@ -26,6 +27,7 @@ var layoutEditor;
 
 
 var boardType = 0;
+
 
 function changeBoardType(direction){
     boardType = (boardType + direction + 3) % 3

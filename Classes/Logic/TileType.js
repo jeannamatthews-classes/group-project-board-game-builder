@@ -9,6 +9,11 @@ class TileType {
         this.scripts = scripts;
         this.typeName = name;
     }
+    clone(){
+        let saveCode = this.saveCode();
+        let newTileType = TileType.loadCode(saveCode)
+        return newTileType
+    }
         
     saveCode() {
         return {

@@ -24,10 +24,9 @@ class GameElementContainer {
         this.inner = document.createElement('div');
         this.inner.style.width = '100%';
         this.inner.style.height = '100%';
-        this.inner.style.overflow = 'scroll';
+        this.inner.style.overflow = 'hidden';
         this.inner.style.position = 'relative';
         this.inner.style.boxSizing = 'border-box';
-        this.inner.classList.add('scroll-force-visible');
 
         // this gets scaled with zoom
         this.zoomedContent = document.createElement('div');

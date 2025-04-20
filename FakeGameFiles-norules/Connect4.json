@@ -1,0 +1,1414 @@
+{
+    "minPlayers": 2,
+    "maxPlayers": 2,
+    "board": {
+        "boardShape": "Square",
+        "width": 7,
+        "height": 7,
+        "containerWidth": 68.4757505773672,
+        "containerHeight": 87.6923076923077,
+        "containerTop": 3.546597633136095,
+        "containerLeft": 15.761222575057737,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)",
+        "tileArray": [
+            [
+                {
+                    "objectID": 0,
+                    "xCoordinate": 0,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#ffdbbd",
+                        "text": "A",
+                        "textColor": "#507a9b",
+                        "imageName": "none",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "objectID": 1,
+                    "xCoordinate": 1,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#ffdbbd",
+                        "text": "B",
+                        "textColor": "#507a9b",
+                        "imageName": "none",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "objectID": 2,
+                    "xCoordinate": 2,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#ffdbbd",
+                        "text": "C",
+                        "textColor": "#507a9b",
+                        "imageName": "none",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "objectID": 3,
+                    "xCoordinate": 3,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#ffdbbd",
+                        "text": "D",
+                        "textColor": "#507a9b",
+                        "imageName": "none",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "objectID": 4,
+                    "xCoordinate": 4,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#ffdbbd",
+                        "text": "E",
+                        "textColor": "#507a9b",
+                        "imageName": "none",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "objectID": 5,
+                    "xCoordinate": 5,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#ffdbbd",
+                        "text": "F",
+                        "textColor": "#507a9b",
+                        "imageName": "none",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "objectID": 6,
+                    "xCoordinate": 6,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#ffdbbd",
+                        "text": "G",
+                        "textColor": "#507a9b",
+                        "imageName": "none",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "objectID": 7,
+                    "xCoordinate": 0,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 8,
+                    "xCoordinate": 1,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 9,
+                    "xCoordinate": 2,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 10,
+                    "xCoordinate": 3,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 11,
+                    "xCoordinate": 4,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 12,
+                    "xCoordinate": 5,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": [
+                        {
+                            "typeID": 0,
+                            "typeName": "Drop",
+                            "publicVars": [
+                                {
+                                    "name": "checkX",
+                                    "value": 7
+                                }
+                            ],
+                            "scripts": [
+                                {
+                                    "trigger": "Object Clicked",
+                                    "type": "if-then-else",
+                                    "args": [
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                0
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        },
+                                        {
+                                            "trigger": "None",
+                                            "type": "Value",
+                                            "args": [
+                                                true
+                                            ],
+                                            "variables": []
+                                        }
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                },
+                                {
+                                    "trigger": "Piece Moves",
+                                    "type": "Value",
+                                    "args": [
+                                        0
+                                    ],
+                                    "variables": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "objectID": 13,
+                    "xCoordinate": 6,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 14,
+                    "xCoordinate": 0,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 15,
+                    "xCoordinate": 1,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 16,
+                    "xCoordinate": 2,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 17,
+                    "xCoordinate": 3,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 18,
+                    "xCoordinate": 4,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 19,
+                    "xCoordinate": 5,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 20,
+                    "xCoordinate": 6,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 21,
+                    "xCoordinate": 0,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 22,
+                    "xCoordinate": 1,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 23,
+                    "xCoordinate": 2,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 24,
+                    "xCoordinate": 3,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 25,
+                    "xCoordinate": 4,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 26,
+                    "xCoordinate": 5,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 27,
+                    "xCoordinate": 6,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 28,
+                    "xCoordinate": 0,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 29,
+                    "xCoordinate": 1,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 30,
+                    "xCoordinate": 2,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 31,
+                    "xCoordinate": 3,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 32,
+                    "xCoordinate": 4,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 33,
+                    "xCoordinate": 5,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 34,
+                    "xCoordinate": 6,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 35,
+                    "xCoordinate": 0,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 36,
+                    "xCoordinate": 1,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 37,
+                    "xCoordinate": 2,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 38,
+                    "xCoordinate": 3,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 39,
+                    "xCoordinate": 4,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 40,
+                    "xCoordinate": 5,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 41,
+                    "xCoordinate": 6,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 42,
+                    "xCoordinate": 0,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 43,
+                    "xCoordinate": 1,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 44,
+                    "xCoordinate": 2,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 45,
+                    "xCoordinate": 3,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 46,
+                    "xCoordinate": 4,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 47,
+                    "xCoordinate": 5,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 48,
+                    "xCoordinate": 6,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#6aa5d2",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": "circle",
+                        "imageColor": "#ffdbbd"
+                    },
+                    "types": []
+                }
+            ]
+        ]
+    },
+    "pieces": [],
+    "pieceTypes": [
+        {
+            "typeID": 1,
+            "typeName": "Connector",
+            "publicVars": [
+                {
+                    "name": "checkX",
+                    "value": 0
+                },
+                {
+                    "name": "checkY",
+                    "value": 0
+                }
+            ],
+            "scripts": [
+                {
+                    "trigger": "Piece Moves",
+                    "type": "Value",
+                    "args": [
+                        0
+                    ],
+                    "variables": []
+                }
+            ]
+        }
+    ],
+    "tileTypes": [
+        {
+            "typeID": 0,
+            "typeName": "Drop",
+            "publicVars": [
+                {
+                    "name": "checkX",
+                    "value": 7
+                }
+            ],
+            "scripts": [
+                {
+                    "trigger": "Object Clicked",
+                    "type": "if-then-else",
+                    "args": [
+                        {
+                            "trigger": "None",
+                            "type": "Value",
+                            "args": [
+                                0
+                            ],
+                            "variables": []
+                        },
+                        {
+                            "trigger": "None",
+                            "type": "Value",
+                            "args": [
+                                true
+                            ],
+                            "variables": []
+                        },
+                        {
+                            "trigger": "None",
+                            "type": "Value",
+                            "args": [
+                                true
+                            ],
+                            "variables": []
+                        }
+                    ],
+                    "variables": []
+                },
+                {
+                    "trigger": "Piece Moves",
+                    "type": "Value",
+                    "args": [
+                        0
+                    ],
+                    "variables": []
+                },
+                {
+                    "trigger": "Piece Moves",
+                    "type": "Value",
+                    "args": [
+                        0
+                    ],
+                    "variables": []
+                }
+            ]
+        }
+    ],
+    "buttons": [],
+    "globalVariables": [
+        {
+            "name": "WINNER:",
+            "value": -1,
+            "display": false
+        }
+    ],
+    "globalScripts": [],
+    "inventoryLayout": {
+        "containerWidth": -1,
+        "containerHeight": -1,
+        "containerTop": -1,
+        "containerLeft": -1,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)"
+    },
+    "globalLayout": {
+        "containerWidth": 13.394919168591224,
+        "containerHeight": 61.65680473372781,
+        "containerTop": 14.426775147928995,
+        "containerLeft": 0.6793086027713626,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)",
+        "displayVariables": [
+            "WINNER:"
+        ]
+    }
+}

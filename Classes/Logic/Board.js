@@ -12,9 +12,9 @@ class Board {
         this.borderColor = 'rgba(0, 0, 0, 0.9)';
         this.borderWidth = '2px';
         this.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+        this.boardShape = "Square";
 
         if (boardShape === "Square") {
-            this.boardShape = "Square";
             this.width = width;
             this.height = height;
             let ta = [];
@@ -27,7 +27,6 @@ class Board {
             this.tileArray = ta;
         }
         else if (boardShape === "Hexagon") {
-            this.boardShape = "Hexagon";
             this.width = width;
             this.height = height;
             let ta = [];
@@ -42,7 +41,6 @@ class Board {
             this.tileArray = ta;
         }
         else if (boardShape === "Triangle") {
-            this.boardShape = "Triangle";
             this.width = width;
             this.height = height;
             let ta = [];
@@ -85,6 +83,13 @@ class Board {
             )
         };
     }
+
+    clone(){
+        let saveCode = this.saveCode();
+        let newBoard = Board.loadCode(saveCode)
+        return newBoard
+    }
+
     static loadCode(data) {
         const board = new Board(data.boardShape, data.width, data.height);
         board.tileArray = data.tileArray.map(row => row.map(tileData => Tile.loadCode(tileData))
@@ -100,3 +105,4 @@ class Board {
     }
 
 }
+

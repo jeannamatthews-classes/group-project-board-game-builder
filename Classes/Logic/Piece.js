@@ -145,6 +145,11 @@ class Piece {
         };
     }
 
+    clone(){
+        let saveCode = this.saveCode();
+        let newPiece = Piece.loadCode(saveCode)
+        return newPiece
+    }
 
     static loadCode(data) {
         const piece = new Piece(); 

@@ -18,6 +18,11 @@ class PieceType {
             scripts: this.scripts.map(s => s.saveCode?.() ?? null)
         }
     }
+    clone(){
+        let saveCode = this.saveCode();
+        let newPieceType = PieceType.loadCode(saveCode)
+        return newPieceType
+    }
      static loadCode(data) {
     const pieceType = new PieceType(data.typeName, data.scripts.map(ScriptingRule.loadCode), data.typeID);
     pieceType.publicVars = data.publicVars ?? [];

@@ -1,0 +1,1603 @@
+{
+    "minPlayers": 2,
+    "maxPlayers": 2,
+    "board": {
+        "boardShape": "Square",
+        "width": 8,
+        "height": 8,
+        "containerWidth": 55.831739961759084,
+        "containerHeight": 72.94429708222812,
+        "containerTop": 7.153514588859417,
+        "containerLeft": 23.988706978967496,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)",
+        "tileArray": [
+            [
+                {
+                    "objectID": 0,
+                    "xCoordinate": 0,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 1,
+                    "xCoordinate": 1,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 2,
+                    "xCoordinate": 2,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 3,
+                    "xCoordinate": 3,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 4,
+                    "xCoordinate": 4,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 5,
+                    "xCoordinate": 5,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 6,
+                    "xCoordinate": 6,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 7,
+                    "xCoordinate": 7,
+                    "yCoordinate": 0,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 8,
+                    "xCoordinate": 0,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 9,
+                    "xCoordinate": 1,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 10,
+                    "xCoordinate": 2,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 11,
+                    "xCoordinate": 3,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 12,
+                    "xCoordinate": 4,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 13,
+                    "xCoordinate": 5,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 14,
+                    "xCoordinate": 6,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 15,
+                    "xCoordinate": 7,
+                    "yCoordinate": 1,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 16,
+                    "xCoordinate": 0,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 17,
+                    "xCoordinate": 1,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 18,
+                    "xCoordinate": 2,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 19,
+                    "xCoordinate": 3,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 20,
+                    "xCoordinate": 4,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 21,
+                    "xCoordinate": 5,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 22,
+                    "xCoordinate": 6,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 23,
+                    "xCoordinate": 7,
+                    "yCoordinate": 2,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 24,
+                    "xCoordinate": 0,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 25,
+                    "xCoordinate": 1,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 26,
+                    "xCoordinate": 2,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 27,
+                    "xCoordinate": 3,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 28,
+                    "xCoordinate": 4,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 29,
+                    "xCoordinate": 5,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 30,
+                    "xCoordinate": 6,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 31,
+                    "xCoordinate": 7,
+                    "yCoordinate": 3,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 32,
+                    "xCoordinate": 0,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 33,
+                    "xCoordinate": 1,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 34,
+                    "xCoordinate": 2,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 35,
+                    "xCoordinate": 3,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 36,
+                    "xCoordinate": 4,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 37,
+                    "xCoordinate": 5,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 38,
+                    "xCoordinate": 6,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 39,
+                    "xCoordinate": 7,
+                    "yCoordinate": 4,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 40,
+                    "xCoordinate": 0,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 41,
+                    "xCoordinate": 1,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 42,
+                    "xCoordinate": 2,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 43,
+                    "xCoordinate": 3,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 44,
+                    "xCoordinate": 4,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 45,
+                    "xCoordinate": 5,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 46,
+                    "xCoordinate": 6,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 47,
+                    "xCoordinate": 7,
+                    "yCoordinate": 5,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 48,
+                    "xCoordinate": 0,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 49,
+                    "xCoordinate": 1,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 50,
+                    "xCoordinate": 2,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 51,
+                    "xCoordinate": 3,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 52,
+                    "xCoordinate": 4,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 53,
+                    "xCoordinate": 5,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 54,
+                    "xCoordinate": 6,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 55,
+                    "xCoordinate": 7,
+                    "yCoordinate": 6,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ],
+            [
+                {
+                    "objectID": 56,
+                    "xCoordinate": 0,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 57,
+                    "xCoordinate": 1,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 58,
+                    "xCoordinate": 2,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 59,
+                    "xCoordinate": 3,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 60,
+                    "xCoordinate": 4,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 61,
+                    "xCoordinate": 5,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 62,
+                    "xCoordinate": 6,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#7d6c64",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                },
+                {
+                    "objectID": 63,
+                    "xCoordinate": 7,
+                    "yCoordinate": 7,
+                    "playerOwnerID": -1,
+                    "enabled": true,
+                    "publicVars": [],
+                    "sprite": {
+                        "fillColor": "#b0a282",
+                        "text": "",
+                        "textColor": "#000000",
+                        "imageName": null,
+                        "imageColor": "#000000"
+                    },
+                    "types": []
+                }
+            ]
+        ]
+    },
+    "pieces": [
+        {
+            "types": [],
+            "objectID": 70,
+            "xCoordinate": 6,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 2"
+        },
+        {
+            "types": [],
+            "objectID": 71,
+            "xCoordinate": 5,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 3"
+        },
+        {
+            "types": [],
+            "objectID": 72,
+            "xCoordinate": 4,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 4"
+        },
+        {
+            "types": [],
+            "objectID": 73,
+            "xCoordinate": 3,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 5"
+        },
+        {
+            "types": [],
+            "objectID": 74,
+            "xCoordinate": 2,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 6"
+        },
+        {
+            "types": [],
+            "objectID": 75,
+            "xCoordinate": 1,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 7"
+        },
+        {
+            "types": [],
+            "objectID": 76,
+            "xCoordinate": 0,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 8"
+        },
+        {
+            "types": [],
+            "objectID": 77,
+            "xCoordinate": 1,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "knight",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Knight 1"
+        },
+        {
+            "types": [],
+            "objectID": 78,
+            "xCoordinate": 6,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "knight",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Knight 2"
+        },
+        {
+            "types": [],
+            "objectID": 79,
+            "xCoordinate": 2,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "bishop",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Bishop 1"
+        },
+        {
+            "types": [],
+            "objectID": 80,
+            "xCoordinate": 5,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "bishop",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Bishop 2"
+        },
+        {
+            "types": [],
+            "objectID": 81,
+            "xCoordinate": 0,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "rook",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Rook 1"
+        },
+        {
+            "types": [],
+            "objectID": 82,
+            "xCoordinate": 7,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "rook",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Rook 2"
+        },
+        {
+            "types": [],
+            "objectID": 83,
+            "xCoordinate": 4,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "queen",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Queen"
+        },
+        {
+            "types": [],
+            "objectID": 84,
+            "xCoordinate": 3,
+            "yCoordinate": 7,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "king",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White King"
+        },
+        {
+            "types": [],
+            "objectID": 85,
+            "xCoordinate": 7,
+            "yCoordinate": 6,
+            "playerOwnerID": 0,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#eed8b9",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "White Pawn 1"
+        },
+        {
+            "types": [],
+            "objectID": 86,
+            "xCoordinate": 0,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 1"
+        },
+        {
+            "types": [],
+            "objectID": 87,
+            "xCoordinate": 1,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 2"
+        },
+        {
+            "types": [],
+            "objectID": 88,
+            "xCoordinate": 4,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 5"
+        },
+        {
+            "types": [],
+            "objectID": 89,
+            "xCoordinate": 3,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 4"
+        },
+        {
+            "types": [],
+            "objectID": 90,
+            "xCoordinate": 5,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 6"
+        },
+        {
+            "types": [],
+            "objectID": 91,
+            "xCoordinate": 2,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 3"
+        },
+        {
+            "types": [],
+            "objectID": 92,
+            "xCoordinate": 6,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 7"
+        },
+        {
+            "types": [],
+            "objectID": 93,
+            "xCoordinate": 7,
+            "yCoordinate": 1,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "pawn",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Pawn 8"
+        },
+        {
+            "types": [],
+            "objectID": 94,
+            "xCoordinate": 6,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "knight",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Knight 1"
+        },
+        {
+            "types": [],
+            "objectID": 95,
+            "xCoordinate": 1,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "knight",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Knight 2"
+        },
+        {
+            "types": [],
+            "objectID": 96,
+            "xCoordinate": 3,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "queen",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Queen"
+        },
+        {
+            "types": [],
+            "objectID": 97,
+            "xCoordinate": 4,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "king",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black King"
+        },
+        {
+            "types": [],
+            "objectID": 98,
+            "xCoordinate": 0,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "rook",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Rook 1"
+        },
+        {
+            "types": [],
+            "objectID": 99,
+            "xCoordinate": 7,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "rook",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Rook 2"
+        },
+        {
+            "types": [],
+            "objectID": 100,
+            "xCoordinate": 2,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "bishop",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Bishop 1"
+        },
+        {
+            "types": [],
+            "objectID": 101,
+            "xCoordinate": 5,
+            "yCoordinate": 0,
+            "playerOwnerID": 1,
+            "sprite": {
+                "imageName": "bishop",
+                "fillColor": "#241305",
+                "text": "",
+                "textColor": "#000000"
+            },
+            "name": "Black Bishop 2"
+        }
+    ],
+    "pieceTypes": [
+        {
+            "typeID": 0,
+            "typeName": "Pawn",
+            "publicVars": [],
+            "scripts": []
+        },
+        {
+            "typeID": 2,
+            "typeName": "Rook",
+            "publicVars": [],
+            "scripts": []
+        },
+        {
+            "typeID": 3,
+            "typeName": "Knight",
+            "publicVars": [],
+            "scripts": []
+        },
+        {
+            "typeID": 4,
+            "typeName": "Bishop",
+            "publicVars": [],
+            "scripts": []
+        },
+        {
+            "typeID": 5,
+            "typeName": "King",
+            "publicVars": [],
+            "scripts": []
+        },
+        {
+            "typeID": 6,
+            "typeName": "Queen",
+            "publicVars": [],
+            "scripts": []
+        }
+    ],
+    "tileTypes": [],
+    "buttons": [
+        {
+            "name": "End Turn",
+            "containerWidth": 16.764132553606238,
+            "containerHeight": 20.708446866485016,
+            "containerTop": 73.80790190735695,
+            "containerLeft": 80.69413986354775,
+            "borderColor": "black",
+            "borderWidth": "2px",
+            "backgroundColor": "white",
+            "clickScripts": [],
+            "visibleRules": [],
+            "sprite": {
+                "fillColor": "#433123",
+                "text": "End Turn",
+                "textColor": "#e1debc",
+                "borderColor": "#a8977a",
+                "borderRadius": "0px"
+            }
+        }
+    ],
+    "globalVariables": [
+        {
+            "name": "Test",
+            "value": "hi!",
+            "display": false
+        },
+        {
+            "name": "Counter",
+            "value": 0,
+            "display": false
+        }
+    ],
+    "globalScripts": [],
+    "inventoryLayout": {
+        "containerWidth": -1,
+        "containerHeight": -1,
+        "containerTop": -1,
+        "containerLeft": -1,
+        "borderColor": "black",
+        "borderWidth": "2px",
+        "backgroundColor": "white"
+    },
+    "globalLayout": {
+        "containerWidth": 19.883040935672515,
+        "containerHeight": 90.19073569482289,
+        "containerTop": 4.193630790190736,
+        "containerLeft": 1.7300194931773878,
+        "borderColor": "black",
+        "borderWidth": "2px",
+        "backgroundColor": "white",
+        "displayVariables": [
+            "Test",
+            "Counter"
+        ]
+    }
+}

@@ -185,3 +185,16 @@ Fixed it so that Rules show up properly on the Type Editor Window
 Fixed so that addPiece no longer attempts to access negative tile indexes.
 Constrained draggability of windows, so they can no longer be dragged off screen. 
 Rules no longer open automatically when created to prevemt rules from all showing up at once.
+
+
+April 20th - I spent several hours working on the Gameplay UI 
+Added Startup Screen which allows JSON upload.
+Added GameElementContainer - Provides an absolutely positioned container that uses layout variables to decide its appearance.
+Added Zoom scroller bar underneath the GameElementContainer...
+play.js now reads JSON uploads and constructs the major classes.
+Added GameBoard, GamePiece, GameTile, and GameGlobalVariables classes which visualize the logical side for the gameplay.
+Added clone() functions (using saveCode and loadCode) to each of the major logical components, so we don't need to use BGBClone (less things we need to manually synchronize on change)
+To be added: Drag / navigation features still pending. Zoom scrollbar should be toggladble depending on the object type.
+Connected click handlers to logical counterparts.
+Made sure pieces showed on board. (Pieces are being dynamically created by their containers when necessary)
+Question... shouldn't global variables be in the GameState if they can be modified by actions?

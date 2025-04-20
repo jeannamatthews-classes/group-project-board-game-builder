@@ -76,6 +76,11 @@ class Button {
             sprite: this.sprite
         };
     }
+    clone(){
+        let saveCode = this.saveCode();
+        newButton = Button.loadCode(saveCode)
+        return newButton;
+    }
 
     static loadCode(code) {
         const button = new Button();
