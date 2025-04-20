@@ -97,7 +97,7 @@ class ScriptingRule {
             if (this.object === null) this.object = undefined;
         }
         else if (this.type === "Create Piece Sprite") {
-            this.shape = args[0] ?? "square";
+            this.imageName = args[0] ?? "square";
             this.fillColor = args[1] ?? "#cccccc";
             this.strokeColor = args[2] ?? "#000000";
             this.text = args[3] ?? "";
@@ -376,12 +376,12 @@ class ScriptingRule {
         }
         else if (this.type === "Return Global Variable") {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
-            let index = otherGlobalVariables.map(x => x[0]).indexOf(variableName);
+            let index = activeGameState.globalVariables.map(x => x[0]).indexOf(variableName);
             if (index === -1) {
                 return undefined;
             }
             else {
-                return otherGlobalVariables[index][1];
+                return activeGameState.globalVariables[index][1];
             }
         }
         else if (this.type === "Board Width") {
@@ -444,7 +444,7 @@ class ScriptingRule {
         }
         else if (this.type === "Create Piece Sprite") {
             return {
-                shape: (this.shape instanceof ScriptingRule) ? this.shape.portVariables(this).run(caller, ...args) : this.shape,
+                imageName: (this.imageName instanceof ScriptingRule) ? this.imageName.portVariables(this).run(caller, ...args) : this.imageName,
                 fillColor: (this.fillColor instanceof ScriptingRule) ? this.fillColor.portVariables(this).run(caller, ...args) : this.fillColor,
                 strokeColor: (this.strokeColor instanceof ScriptingRule) ? this.strokeColor.portVariables(this).run(caller, ...args) : this.strokeColor,
                 text: (this.text instanceof ScriptingRule) ? this.text.portVariables(this).run(caller, ...args) : this.text,
@@ -497,12 +497,12 @@ class ScriptingRule {
         else if (this.type === "Edit Global Variable") {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
             let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
-            let index = otherGlobalVariables.map(x => x[0]).indexOf(variableName);
+            let index = activeGameState.globalVariables.map(x => x[0]).indexOf(variableName);
             if (index === -1) {
-                otherGlobalVariables.push([variableName, variableValue]);
+                activeGameState.globalVariables.push([variableName, variableValue]);
             }
             else {
-                otherGlobalVariables[index][1] = variableValue;
+                activeGameState.globalVariables[index][1] = variableValue;
             }
         }
         else if (this.type === "if-then-else") {

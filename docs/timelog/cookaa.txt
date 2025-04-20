@@ -78,5 +78,5 @@ April 17: Group meeting for around 40 minutes, making plans for how we might mov
 
 April 19: Spent around 35 minutes adding save code method equivalents to my testing zone.
 
-April 20: Spent around 1 hour and 35 minutes fixing various bugs that gameplay UI updates have created, and
-creating save codes for my testing examples.
+April 20: Spent around 2 hours and 10 minutes fixing various bugs that gameplay UI updates have created,
+creating save codes for my testing examples, and making it so global variables are now stored within the game state.

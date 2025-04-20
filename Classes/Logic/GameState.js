@@ -6,9 +6,10 @@ class GameState {
     playerTurn;
     turnPhase;
     selectedObjects;
+    globalVariables;
     inventories;
 
-    constructor(board, pieces, playerAmount, turnNumber = 1, playerTurn = 1, turnPhase = 0, selectedObjects = []) {
+    constructor(board, pieces, playerAmount, turnNumber = 1, playerTurn = 1, turnPhase = 0, selectedObjects = [], globalVariables = []) {
         this.board = board;
         this.pieceArray = pieces;
         this.playerAmount = playerAmount;
@@ -16,6 +17,7 @@ class GameState {
         this.playerTurn = playerTurn;
         this.turnPhase = turnPhase;
         this.selectedObjects = selectedObjects;
+        this.globalVariables = globalVariables;
         this.inventories = [];
     }
 saveCode() {
@@ -27,22 +29,17 @@ saveCode() {
         playerTurn: this.playerTurn,
         turnPhase: this.turnPhase,
         selectedObjects: this.selectedObjects.map(o => o?.objectID ?? null),
+        globalVariables: BGBStructuredClone(this.globalVariables),
         inventories: this.inventories?.map(inv => inv?.saveCode?.() ?? null) ?? [],
     };
 }
 
 clone(){
-    let newPieces = [];
-    this.pieceArray.forEach(p => newPieces.push(p.clone()))
-    let newBoard = this.board.clone();
-    let newSelectedObjects = []
-    this.selectedObjects.forEach(obj => newSelectedObjects.push(obj.clone()))
-    let newGame = new GameState(newBoard, newPieces, this.playerAmount, this.turnNumber, this.playerTurn, this.turnPhase,newSelectedObjects )
-    return newGame
+    return GameState.loadCode(this.saveCode());
 }
 
 static loadCode(data) {
-    const board = Board.loadCode(data);
+    const board = Board.loadCode(data.board);
     const pieces = data.pieceArray.map(p => p ? Piece.loadCode(p) : null);
 
     const gameState = new GameState(
@@ -52,7 +49,8 @@ static loadCode(data) {
         data.turnNumber,
         data.playerTurn,
         data.turnPhase,
-        [] // selectedObjects gets reassigned below
+        [], // selectedObjects gets reassigned below
+        data.globalVariables ?? []
     );
 
     // Reconstruct object references from board + pieces
