@@ -454,7 +454,7 @@ let typeNoJumps = new PieceType("No Jumps", [ // This script prevents rooks, bis
     )
 ])
 
-pieceTypesList.push(typeWhite, typeBlack, typeWhitePawn, typeBlackPawn, typeRook, typeKnight, typeBishop, typeQueen, typeKing, typeChessCaptures, typeNoJumps);
+pieceTypesList.push(typeWhite, typeBlack, typeWhitePawn, typeBlackPawn, typeRook, typeKnight, typeBishop, typeQueen, typeKing, typeChessCaptures, typeNoJumps, pieceClick);
 tileTypesList.push(tileClick);
 
 activeGameState = new GameState(new Board("Square", 8, 8), [], 2);

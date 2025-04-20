@@ -75,3 +75,5 @@ April 16: Spent around 2 hours and 45 minutes making scripting rules for Tic-Tac
 
 April 17: Group meeting for around 40 minutes, making plans for how we might move forward with the gameplay UI
 (though Sophia not being here made this difficult)
+
+April 19: Spent around 35 minutes adding save code method equivalents to my testing zone
