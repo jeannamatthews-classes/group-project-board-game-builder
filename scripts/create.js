@@ -361,17 +361,63 @@ function loadGame() {
                 playerInventories = {containerWidth: game.inventoryLayout.containerWidth, containerHeight: game.inventoryLayout.containerHeight, containerTop: game.inventoryLayout.containerTop, containerLeft:game.inventoryLayout.containerLeft, borderColor:game.inventoryLayout.borderColor, borderWidth:game.inventoryLayout.borderWidth, backgroundColor:game.inventoryLayout.backgroundColor}
                 globals = {containerWidth: game.globalLayout.containerWidth, containerHeight:  game.globalLayout.containerHeight, containerTop:  game.globalLayout.containerTop, containerLeft: game.globalLayout.containerLeft, borderColor: game.globalLayout.borderColor, borderWidth: game.globalLayout.borderWidth, backgroundColor: game.globalLayout.backgroundColor, displayVariables: game.globalLayout.displayVariables}
                 boardEditor = new UIBoard(Board.loadCode(game.board));
+                nextObjectID = game.board.width * game.board.height;
                 pieceEditor = new UIPieceEditor();
-                game.pieces.forEach( p => pieceEditor.addPiece(Piece.loadCode(p)) );
+                game.pieces.forEach( p => {
+                    let newPiece = Piece.loadCode(p);
+                    pieceEditor.addPiece(newPiece)
+                    if(newPiece.objectID >= nextObjectID)
+                        nextObjectID = newPiece.objectID+1
+                } );
                 minPlayers = game.minPlayers;
                 maxPlayers = game.maxPlayers;    
                 typeEditor = new UITypeEditor();
-                game.tileTypes.forEach(t => typeEditor.addType(TileType.loadCode(t))) ;
-                game.pieceTypes.forEach(t => typeEditor.addType(PieceType.loadCode(t))) ;
+                game.tileTypes.forEach(t => {
+                    let newType = TileType.loadCode(t);
+                    typeEditor.addType(newType)
+                    if(newType.typeID >= nextTypeID)
+                        nextTypeID = newType.typeID+1
+                    newType.scripts.forEach(s => {
+                        if(s.ruleID >= nextRuleID)
+                            nextRuleID = s.ruleID+1
+
+                    });
+                }) ;
+                game.pieceTypes.forEach(t => {
+                    let newType = PieceType.loadCode(t)
+                    typeEditor.addType(newType)
+                    if(newType.typeID >= nextTypeID)
+                        nextTypeID = newType.typeID+1
+                    newType.scripts.forEach(s => {
+                        if(s.ruleID >= nextRuleID)
+                            nextRuleID = s.ruleID+1;
+                    });
+                }) ;
+                
+                
+
                 buttonEditor = new UIButtonEditor();
-                game.buttons.forEach(b =>buttonEditor.addButton(Button.loadCode(b)));
+                game.buttons.forEach(b =>{
+                    let newButton  = Button.loadCode(b)
+                    buttonEditor.addButton(newButton)
+                    newButton.clickScripts.forEach(s=>{
+                        if(s.ruleID >=nextRuleID)
+                            nextRuleID = s.ruleID+1;
+                    })
+                    newButton.visibleRules.forEach(s=>{
+                        if(s.ruleID >=nextRuleID)
+                            nextRuleID = s.ruleID+1;
+                    })
+                });
+
                 globalScripts = game.globalScripts.map(script => ScriptingRule.loadCode(script))
                 globalEditor = new UIGlobalEditor(game.globalVariables,globalScripts);
+
+
+                globalScripts.forEach(s =>{
+                    if(s.ruleID >=nextRuleID)
+                        nextRuleID = s.ruleID+1;
+                })
 
                 setUpButtons()
                 typeEditor.window.close();

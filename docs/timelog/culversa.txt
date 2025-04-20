@@ -198,3 +198,10 @@ To be added: Drag / navigation features still pending. Zoom scrollbar should be 
 Connected click handlers to logical counterparts.
 Made sure pieces showed on board. (Pieces are being dynamically created by their containers when necessary)
 Question... shouldn't global variables be in the GameState if they can be modified by actions?
+Committed to Github 
+
+Bug Fixing 
+Fixed so that when loading a game to the creator, nextIDs are updated appropriately.
+Fixed UITile and Tile so that it no longer stores the entire Type classes. 
+Stores IDs only instead.
+have tmeporarilt removed the fake connect4 file because i need to reconfigure it due to changes in hwo tile types now work. 

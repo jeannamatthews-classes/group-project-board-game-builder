@@ -241,15 +241,13 @@ overlayColor.addEventListener('input', () => {
 
 const renderTypes = () => {
     typeList.innerHTML = '';
-    this.tile.types.forEach((typeRef, i) => {
+    this.tile.types.forEach((typeID, i) => {
         const row = document.createElement('div');
         row.style.display = 'flex';
         row.style.justifyContent = 'space-between';
 
         const span = document.createElement('span');
-
-        // Try to match by typeID to get the latest name
-        let matched = typeEditor.tileTypes.find(t => Number(t.type.typeID) === Number(typeRef.typeID));
+        const matched = typeEditor.tileTypes.find(t => Number(t.type.typeID) === Number(typeID));
         span.textContent = matched ? matched.type.typeName : '(Unknown Type)';
 
         const remove = document.createElement('button');
@@ -322,15 +320,14 @@ const renderTypes = () => {
             confirm.textContent = '✔';
             confirm.onclick = () => {
                 const chosenID = Number(select.value);
-                const selectedType = typeEditor.tileTypes.find(t => Number(t.type.typeID) === chosenID);
-                if (selectedType) {
-                    this.tile.types.push(selectedType.type);
+                if (!this.tile.types.includes(chosenID)) {
+                    this.tile.types.push(chosenID);
                     renderTypes();
                 }
-        
                 select.remove();
                 confirm.remove();
             };
+            
         
             content.insertBefore(select, typeList);
             content.insertBefore(confirm, typeList);
