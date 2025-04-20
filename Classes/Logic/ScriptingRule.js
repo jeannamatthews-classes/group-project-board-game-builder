@@ -64,6 +64,7 @@ class ScriptingRule {
         else if (this.type === "Change Turn Phase") {
             if (args.length <= 0) args.push(Infinity);
             this.phase = args[0];
+            if (this.phase === null) this.phase = Infinity;
         }
         else if (this.type === "End Game") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
@@ -250,8 +251,8 @@ class ScriptingRule {
                 if (typesList[t].typeID === typeToEdit.typeID) return false;
             }
             let index = (this.index instanceof ScriptingRule) ? this.index.portVariables(this).run(caller, ...args) : this.index;
-            if (index === undefined) caller.types.push(typeToEdit);
-            else caller.types.splice(index, 0, typeToEdit);
+            if (index === undefined) caller.types.push(typeToEdit.typeID);
+            else caller.types.splice(index, 0, typeToEdit.typeID);
             return true;
         }
         else if (this.type === "Remove Type") { // A piece or tile shouldn't have multiple copies of the same type, but I'm handling that possibility just in case.
@@ -268,6 +269,7 @@ class ScriptingRule {
         }
         else if (this.type === "Add Piece") {
             let newPieceTypes = (this.newPieceTypes instanceof ScriptingRule) ? this.newPieceTypes.portVariables(this).run(caller, ...args) : this.newPieceTypes;
+            newPieceTypes = newPieceTypes.map(t => t.typeID);
             let newPieceX = (this.newPieceX instanceof ScriptingRule) ? this.newPieceX.portVariables(this).run(caller, ...args) : this.newPieceX;
             let newPieceY = (this.newPieceY instanceof ScriptingRule) ? this.newPieceY.portVariables(this).run(caller, ...args) : this.newPieceY;
             let newPieceOwner = (this.newPieceOwner instanceof ScriptingRule) ? this.newPieceOwner.portVariables(this).run(caller, ...args) : this.newPieceOwner;
@@ -336,7 +338,7 @@ class ScriptingRule {
         else if (this.type === "Object Types") {
             let object = caller;
             if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
-            return object.types;
+            return object.getTypeObjects();
         }
         else if (this.type === "Turn Number") {
             return activeGameState.turnNumber;

@@ -9,7 +9,7 @@ let typeTileClick = new TileType("Clickable Tile", [
     new ScriptingRule("Object Clicked", "if-then-else",
         new ScriptingRule("None", "==",
             new ScriptingRule("None", "Array Length",
-                new ScriptingRule("None", "Pieces on Tile",
+                new ScriptingRule("None", "Pieces on Tile", 
                     new ScriptingRule("None", "Tile at Coordinates",
                         new ScriptingRule("None", "X Coordinate"),
                         new ScriptingRule("None", "Value", 0)
@@ -28,7 +28,7 @@ let typeTileClick = new TileType("Clickable Tile", [
                     ),
                     new ScriptingRule("None", "==",
                         new ScriptingRule("None", "Array Length",
-                            new ScriptingRule("None", "Pieces on Tile",
+                            new ScriptingRule("None", "Pieces on Tile", 
                                 new ScriptingRule("None", "Tile at Coordinates",
                                     new ScriptingRule("None", "X Coordinate"),
                                     new ScriptingRule("None", "Return Variable of Rule", "Column Y")
@@ -100,25 +100,25 @@ let typeTileClick = new TileType("Clickable Tile", [
                     )
                 )
             ),
-            new ScriptingRule("None", "Edit Variable of Rule", "Examined X", new ScriptingRule("None", "X Coordinate")), //7
-            new ScriptingRule("None", "Edit Variable of Rule", "Examined Y", new ScriptingRule("None", "Return Variable of Rule", "Column Y")), //8
-            new ScriptingRule("None", "Edit Variable of Rule", "Loop Going", new ScriptingRule("None", "Value", true)), //9 
-            new ScriptingRule("None", "Edit Variable of Rule", "Line Length", new ScriptingRule("None", "Value", 0)), //10
-            new ScriptingRule("None", "Edit Variable of Rule", "Direction Phase", new ScriptingRule("None", "Value", -1)), //11
-            new ScriptingRule("None", "Repeat While", //12
+            new ScriptingRule("None", "Edit Variable of Rule", "Examined X", new ScriptingRule("None", "X Coordinate")),
+            new ScriptingRule("None", "Edit Variable of Rule", "Examined Y", new ScriptingRule("None", "Return Variable of Rule", "Column Y")),
+            new ScriptingRule("None", "Edit Variable of Rule", "Loop Going", new ScriptingRule("None", "Value", true)),
+            new ScriptingRule("None", "Edit Variable of Rule", "Line Length", new ScriptingRule("None", "Value", 0)),
+            new ScriptingRule("None", "Edit Variable of Rule", "Direction Phase", new ScriptingRule("None", "Value", -1)),
+            new ScriptingRule("None", "Repeat While",
                 new ScriptingRule("None", "<",
                     new ScriptingRule("None", "Return Variable of Rule", "Direction Index"),
                     new ScriptingRule("None", "Value", 4)
                 ),
                 new ScriptingRule("None", "Return at End",
-                    new ScriptingRule("None", "Edit Variable of Rule", "Loop Going", new ScriptingRule("None", "Value", true)), //1
-                    new ScriptingRule("None", "Repeat While", //2
+                    new ScriptingRule("None", "Edit Variable of Rule", "Loop Going", new ScriptingRule("None", "Value", true)),
+                    new ScriptingRule("None", "Repeat While",
                         new ScriptingRule("None", "==",
                             new ScriptingRule("None", "Return Variable of Rule", "Loop Going"),
                             new ScriptingRule("None", "Value", true)
                         ),
                         new ScriptingRule("None", "Return at End",
-                            new ScriptingRule("None", "Edit Variable of Rule", "Examined X", //1
+                            new ScriptingRule("None", "Edit Variable of Rule", "Examined X",
                                 new ScriptingRule("None", "+",
                                     new ScriptingRule("None", "Return Variable of Rule", "Examined X"),
                                     new ScriptingRule("None", "*",
@@ -133,7 +133,7 @@ let typeTileClick = new TileType("Clickable Tile", [
                                     )
                                 )
                             ),
-                            new ScriptingRule("None", "Edit Variable of Rule", "Examined Y", //2
+                            new ScriptingRule("None", "Edit Variable of Rule", "Examined Y",
                                 new ScriptingRule("None", "+",
                                     new ScriptingRule("None", "Return Variable of Rule", "Examined Y"),
                                     new ScriptingRule("None", "*",
@@ -148,10 +148,10 @@ let typeTileClick = new TileType("Clickable Tile", [
                                     )
                                 )
                             ),
-                            new ScriptingRule("None", "if-then-else", //3
-                                new ScriptingRule("None", "||", //1 
-                                    new ScriptingRule("None", "||", //2 
-                                        new ScriptingRule("None", "||", //3 
+                            new ScriptingRule("None", "if-then-else",
+                                new ScriptingRule("None", "||",
+                                    new ScriptingRule("None", "||",
+                                        new ScriptingRule("None", "||",
                                             new ScriptingRule("None", "<",
                                                 new ScriptingRule("None", "Return Variable of Rule", "Examined X"),
                                                 new ScriptingRule("None", "Value", 0)
@@ -186,8 +186,8 @@ let typeTileClick = new TileType("Clickable Tile", [
                                         ),
                                         new ScriptingRule("None", "!=",
                                             new ScriptingRule("None", "Array Element at Index",
-                                                new ScriptingRule("None", "Object Types", //type of array 
-                                                    new ScriptingRule("None", "Array Element at Index", //WHAT
+                                                new ScriptingRule("None", "Object Types",
+                                                    new ScriptingRule("None", "Array Element at Index",
                                                         new ScriptingRule("None", "Pieces on Tile",
                                                             new ScriptingRule("None", "Tile at Coordinates",
                                                                 new ScriptingRule("None", "Return Variable of Rule", "Examined X"),
@@ -217,7 +217,7 @@ let typeTileClick = new TileType("Clickable Tile", [
                                     )
                                 ),
                                 new ScriptingRule("None", "Edit Variable of Rule", "Loop Going", new ScriptingRule("None", "Value", false)),
-                                new ScriptingRule("None", "if-then-else",
+                                new ScriptingRule("None", "if-then-else", 
                                     new ScriptingRule("None", "==",
                                         new ScriptingRule("None", "Return Variable of Rule", "Direction Phase"),
                                         new ScriptingRule("None", "Value", 1)
@@ -294,6 +294,6 @@ tileTypesList.push(typeTileClick);
 
 for (let y = 0; y < activeGameState.board.tileArray.length; y++) {
     for (let x = 0; x < activeGameState.board.tileArray[y].length; x++) {
-        activeGameState.board.tileArray[y][x].types.push(typeTileClick);
+        activeGameState.board.tileArray[y][x].types.push(2);
     }
 }

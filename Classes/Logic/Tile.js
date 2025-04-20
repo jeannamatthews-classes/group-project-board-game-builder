@@ -20,6 +20,13 @@ class Tile {
         this.yCoordinate = yStart;
     }
 
+    getTypeObjects() {
+        return this.types
+            .map(id => tileTypesList.find(t => Number(t.typeID) === Number(id)))
+            .filter(Boolean);
+    }
+
+
     getPieces(active = true) {
         const boardPieces = (active ? activeGameState : currentGameState).pieceArray;
         return boardPieces.filter(p =>
@@ -30,14 +37,11 @@ class Tile {
     clickObject(topCall = true) {
         if (!gameInProgress()) return true;
 
-        console.log(this.types)
-        const typeObjects = this.types
-            .map(id => tileTypesList.find(t => Number(t.typeID) === Number(id)))
-            .filter(t => t); // filter out nulls
+        console.log(this.getTypeObjects())
 
         const scriptsToExecute = [];
 
-        for (let type of typeObjects) {
+        for (let type of this.getTypeObjects()) {
             for (let script of type.scripts || []) {
                 if (script.trigger === "Object Clicked") {
                     scriptsToExecute.push([script, this]);

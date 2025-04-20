@@ -18,8 +18,6 @@ class Piece {
     }
 
     getTypeObjects() {
-        console.log(this.types)
-        console.log(pieceTypesList)
         return this.types
             .map(id => pieceTypesList.find(t => Number(t.typeID) === Number(id)))
             .filter(Boolean);
@@ -52,7 +50,7 @@ class Piece {
         }
 
         for (const t of tileLanded.types || []) {
-            const tileType = typeEditor.tileTypes.find(pt => Number(pt.type.typeID) === Number(t))?.type;
+            const tileType = tileTypesList.find(pt => Number(pt.typeID) === Number(t))?.type;
             for (const script of tileType?.scripts || []) {
                 if (script.trigger === "Tile is Landed on") scriptsToExecute.push([script, tileLanded, this]);
             }

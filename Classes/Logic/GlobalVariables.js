@@ -1,3 +1,11 @@
+let currentGameState; // The game state after the last valid move
+let activeGameState; // The game state currently being edited
+let tileTypesList = []; // An array of the created tile types
+let pieceTypesList = []; // An array of the created piece types
+let buttonsList = []; // An array of the created buttons
+let otherGlobalVariables = [];
+let globalScripts = [];
+
 let nextObjectID = 0;
 let nextTypeID = 0;
 let nextRuleID = 0;
@@ -50,12 +58,12 @@ function assignRuleID() {
 
 function gameStateValid() {
     currentGameState = activeGameState.clone();
-    updateUI();
+    // updateUI();
 }
 
 function gameStateRevert() {
     activeGameState = currentGameState.clone();
-    updateUI();
+    // updateUI();
 }
 
 function updateUI(){
@@ -122,7 +130,7 @@ function endGame(winner) {
     if (!gameInProgress()) return true;
     let scriptsToExecute = [];
     for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
-        for (let t of p.types) {
+        for (let t of p.getTypeObjects()) {
             for (let scriptToCheck of t.scripts) {
                 if (scriptToCheck.trigger === "End Game") scriptsToExecute.push([scriptToCheck, p, winner]);
             }
@@ -150,7 +158,7 @@ function globalScriptCheck() {
         let scriptsToExecuteEnd = [];
         let scriptsToExecuteStart = [];
         for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
-            for (let t of p.types) {
+            for (let t of p.getTypeObjects()) {
                 for (let scriptToCheck of t.scripts) {
                     if (scriptToCheck.trigger === "End Turn") scriptsToExecuteEnd.push([scriptToCheck, p]);
                     if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteStart.push([scriptToCheck, p]);

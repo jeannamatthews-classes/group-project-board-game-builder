@@ -67,7 +67,7 @@ let typeKing = new PieceType("King", [
     // No inherent restrictions that other types don't already accomplish
 ]);
 
-let typeCheckersMovement = new PieceType("Checkers Piece", [
+let checkersMovement = new PieceType("Checkers Piece", [
     new ScriptingRule("Piece Moves", "if-then-else",
         new ScriptingRule("Piece Moves", "&&",
             new ScriptingRule("None", "==",
@@ -251,45 +251,45 @@ let tileClick = new TileType("Clickable Tile", [
     )
 ]);
 
-pieceTypesList.push(typeRed, typeBlack, typeRedRegular, typeBlackRegular, typeKing, typeCheckersMovement);
+pieceTypesList.push(typeRed, typeBlack, typeRedRegular, typeBlackRegular, typeKing, checkersMovement, pieceClick);
 tileTypesList.push(tileClick);
 
 activeGameState = new GameState(new Board("Square", 8, 8), [], 2);
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 0, 7, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 2, 7, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 4, 7, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 6, 7, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 1, 6, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 3, 6, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 5, 6, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 7, 6, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 0, 5, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 2, 5, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 4, 5, 1))
-activeGameState.pieceArray.push(new Piece([typeRed, typeRedRegular, typeCheckersMovement, pieceClick], 6, 5, 1))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 1, 0, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 3, 0, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 5, 0, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 7, 0, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 0, 1, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 2, 1, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 4, 1, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 6, 1, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 1, 2, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 3, 2, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 5, 2, 2))
-activeGameState.pieceArray.push(new Piece([typeBlack, typeBlackRegular, typeCheckersMovement, pieceClick], 7, 2, 2))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 0, 7, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 2, 7, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 4, 7, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 6, 7, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 1, 6, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 3, 6, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 5, 6, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 7, 6, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 0, 5, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 2, 5, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 4, 5, 1))
+activeGameState.pieceArray.push(new Piece([0, 2, 5, 6], 6, 5, 1))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 1, 0, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 3, 0, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 5, 0, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 7, 0, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 0, 1, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 2, 1, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 4, 1, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 6, 1, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 1, 2, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 3, 2, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 5, 2, 2))
+activeGameState.pieceArray.push(new Piece([1, 3, 5, 6], 7, 2, 2))
 for (let p of activeGameState.pieceArray) {
-    if (p.types[0].typeName === "Red") {
-        p.sprite = new ScriptingRule("None", "Create Piece Sprite", "square", "#ff0000", "#000", p.types[1].typeName, "#000").run()
+    if (p.getTypeObjects()[0].typeName === "Red") {
+        p.sprite = new ScriptingRule("None", "Create Piece Sprite", "square", "#ff0000", "#000", p.getTypeObjects()[1].typeName, "#000").run()
     }
     else {
-        p.sprite = new ScriptingRule("None", "Create Piece Sprite", "square", "#000000", "#fff", p.types[1].typeName, "#fff").run()
+        p.sprite = new ScriptingRule("None", "Create Piece Sprite", "square", "#000000", "#fff", p.getTypeObjects()[1].typeName, "#fff").run()
     }
 }
 for (let y = 0; y < activeGameState.board.tileArray.length; y++) {
     for (let x = 0; x < activeGameState.board.tileArray[y].length; x++) {
-        activeGameState.board.tileArray[y][x].types.push(tileClick);
+        activeGameState.board.tileArray[y][x].types.push(7);
     }
 }
 otherGlobalVariables.push(["Red Pieces Remaining", 12], ["Black Pieces Remaining", 12])

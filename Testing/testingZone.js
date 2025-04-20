@@ -112,8 +112,8 @@ function saveCode() {
         buttons: buttonsList.map(button => button.saveCode()),
         globalVariables: otherGlobalVariables,
         globalScripts: globalScripts.map(rule => rule.saveCode()),
-        inventoryLayout: [],
-        globalLayout: {}
+        inventoryLayout: {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'},
+        globalLayout: {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)', displayVariables:[]}
     };
 
     const json = JSON.stringify(game, null, 4);  // Pretty print for humans
@@ -166,6 +166,9 @@ function loadGame() {
                 for (let s of game.globalScripts) {
                     globalScripts.push(ScriptingRule.loadCode(s))
                 }
+                
+                playerInventories = {containerWidth: game.inventoryLayout.containerWidth, containerHeight: game.inventoryLayout.containerHeight, containerTop: game.inventoryLayout.containerTop, containerLeft:game.inventoryLayout.containerLeft, borderColor:game.inventoryLayout.borderColor, borderWidth:game.inventoryLayout.borderWidth, backgroundColor:game.inventoryLayout.backgroundColor}
+                globals = {containerWidth: game.globalLayout.containerWidth, containerHeight:  game.globalLayout.containerHeight, containerTop:  game.globalLayout.containerTop, containerLeft: game.globalLayout.containerLeft, borderColor: game.globalLayout.borderColor, borderWidth: game.globalLayout.borderWidth, backgroundColor: game.globalLayout.backgroundColor, displayVariables: game.globalLayout.displayVariables}
 
                 gameStateValid();
                 generateTestingGrid();

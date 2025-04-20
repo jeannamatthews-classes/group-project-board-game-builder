@@ -2,7 +2,7 @@ activeGameState = new GameState(new Board("Square", 3, 3), [], 2);
 
 let typeX = new PieceType("X", [
 ]);
-let typeO = new PieceType("X", [
+let typeO = new PieceType("O", [
 ]);
 
 let typeTileClick = new TileType("Clickable Tile", [
@@ -253,6 +253,6 @@ tileTypesList.push(typeTileClick);
 
 for (let y = 0; y < activeGameState.board.tileArray.length; y++) {
     for (let x = 0; x < activeGameState.board.tileArray[y].length; x++) {
-        activeGameState.board.tileArray[y][x].types.push(typeTileClick);
+        activeGameState.board.tileArray[y][x].types.push(2);
     }
 }

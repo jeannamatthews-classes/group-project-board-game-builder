@@ -8,7 +8,7 @@ class GameState {
     selectedObjects;
     inventories;
 
-    constructor(board, pieces, playerAmount, turnNumber = 0, playerTurn = 0, turnPhase = 0, selectedObjects = []) {
+    constructor(board, pieces, playerAmount, turnNumber = 1, playerTurn = 1, turnPhase = 0, selectedObjects = []) {
         this.board = board;
         this.pieceArray = pieces;
         this.playerAmount = playerAmount;
@@ -36,8 +36,8 @@ clone(){
     this.pieceArray.forEach(p => newPieces.push(p.clone()))
     let newBoard = this.board.clone();
     let newSelectedObjects = []
-    this.selectedObjects.forEach(obg => newSelectedObjects.push(obj.clone()))
-    let newGame = new GameState(newPieces, newBoard, this.playerAmount, this.turnNumber, this.playerTurn, this.turnPhase,newSelectedObjects )
+    this.selectedObjects.forEach(obj => newSelectedObjects.push(obj.clone()))
+    let newGame = new GameState(newBoard, newPieces, this.playerAmount, this.turnNumber, this.playerTurn, this.turnPhase,newSelectedObjects )
     return newGame
 }
 
