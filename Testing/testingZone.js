@@ -31,7 +31,7 @@ function boxArrayString(arr) { // Turns an array into a string, but with bracket
 function generateTestingGrid() {
     document.getElementById("testingGrid").style.setProperty("--width", currentGameState.board.width);
     document.getElementById("testingGrid").style.setProperty("--height", currentGameState.board.height);
-    while (document.getElementById("testingGrid").lastElementChild) document.getElementById("grid").removeChild(document.getElementById("grid").lastElementChild);
+    while (document.getElementById("testingGrid").lastElementChild) document.getElementById("testingGrid").removeChild(document.getElementById("testingGrid").lastElementChild);
     for (let y = 0; y < currentGameState.board.height; y++) {
         for (let x = 0; x < currentGameState.board.width; x++) {
             let exGrid = activeGameState.board.tileArray;
