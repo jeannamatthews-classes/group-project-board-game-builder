@@ -94,6 +94,7 @@ class ScriptingRule {
         else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID" || this.type === "Select Object" || this.type === "Deselect Object") {
             if (args.length <= 0) args.push(undefined);
             this.object = args[0];
+            if (this.object === null) this.object = undefined;
         }
         else if (this.type === "Create Piece Sprite") {
             this.shape = args[0] ?? "square";
@@ -121,12 +122,14 @@ class ScriptingRule {
             this.variableValue = args[1];
             if (args.length <= 2) args.push(undefined);
             if (this.type === "Edit Variable of Object") this.object = args[2];
+            if (this.object === null) this.object = undefined;
         }
         else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule" || this.type === "Return Global Variable") {
             if (args.length <= 0) args.push("Placeholder");
             this.variableName = args[0];
             if (args.length <= 1) args.push(undefined);
             if (this.type === "Return Variable of Object") this.object = args[1];
+            if (this.object === null) this.object = undefined;
         }
         else if (this.type === "if-then-else") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Value", true));
@@ -260,7 +263,7 @@ class ScriptingRule {
             let typesList = caller.types;
             if (typesList === undefined) return; // Throw error?
             for (let t = 0; t < typesList.length; t++) {
-                if (typesList[t].typeID === typeToEdit.typeID) {
+                if (typesList[t] === typeToEdit.typeID) {
                     caller.types.splice(t, 1);
                     t--;
                 }

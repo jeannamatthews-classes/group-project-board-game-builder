@@ -2,6 +2,10 @@ if (activeGameState === undefined) activeGameState = new GameState(new Board("Sq
 gameStateValid();
 let clickingPieces = true;
 generateTestingGrid(); displayTestingGrid();
+document.getElementById("clickChange").addEventListener("click", function(){
+    clickingPieces = !clickingPieces;
+    displayTestingGrid();
+});
 
 
 // The code below was copied from previous projects of mine and edited
@@ -65,10 +69,6 @@ function generateTestingGrid() {
         });
         document.getElementById("buttonsBox").appendChild(buttonH);
     }
-    document.getElementById("clickChange").addEventListener("click", function(){
-        clickingPieces = !clickingPieces;
-        displayTestingGrid();
-    });
 }
 
 function displayTestingGrid() {
@@ -161,7 +161,7 @@ function loadGame() {
                     pieceTypesList.push(PieceType.loadCode(t))
                 }
                 for (let b of game.buttons) {
-                    pieceTypesList.push(Button.loadCode(b))
+                    buttonsList.push(Button.loadCode(b))
                 }
                 for (let s of game.globalScripts) {
                     globalScripts.push(ScriptingRule.loadCode(s))
