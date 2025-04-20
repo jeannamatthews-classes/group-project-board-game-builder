@@ -10,6 +10,8 @@ class GameButton {
             borderColor: logicalButton.borderColor,
             borderWidth: logicalButton.borderWidth,
             backgroundColor: logicalButton.backgroundColor,
+            enableScrollBars: false,
+            enableZoom: false
         });
 
         this.button = document.createElement('button');

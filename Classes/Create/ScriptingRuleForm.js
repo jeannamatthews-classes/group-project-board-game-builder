@@ -366,10 +366,10 @@ class ScriptingRuleForm {
                 srdarg2 = document.createElement("select");
                 srdarg3 = document.createElement("optgroup");
                 srdarg3.setAttribute("label", "Piece Types");
-                for (let t = 0; t < pieceTypesList.length; t++) {
+                for (let t = 0; t < typeEditor.pieceTypes.length; t++) {
                     srdarg4 = document.createElement("option");
                     srdarg4.setAttribute("value", "Piece Type " + t);
-                    srdarg4.innerHTML = stringifyBGBObject(pieceTypesList[t]);
+                    srdarg4.innerHTML = stringifyBGBObject(typeEditor.pieceTypes[t].type);
                     srdarg3.appendChild(srdarg4);
                 }
                 srdarg2.appendChild(srdarg3);
@@ -384,21 +384,23 @@ class ScriptingRuleForm {
                 srdarg2.appendChild(srdarg3);
                 if (this.rule.typeToEdit instanceof PieceType) {
                     let index = 0;
-                    for (index = 0; index < pieceTypesList.length; index++) {
-                        if (pieceTypesList[index].typeID === this.rule.typeToEdit.typeID) break;
+                    for (index = 0; index < typeEditor.pieceTypes.length; index++) {
+                        if (typeEditor.pieceTypes[index].type.typeID === this.rule.typeToEdit.typeID) break;
                     }
                     srdarg2.value = "Piece Type " + index;
+                    srdarg2.innerHTML = typeEditor.pieceTypes[index].type.typeName
                 }
                 else if (this.rule.typeToEdit instanceof TileType) {
                     let index = 0;
-                    for (index = 0; index < tileTypesList.length; index++) {
-                        if (tileTypesList[index].typeID === this.rule.typeToEdit.typeID) break;
+                    for (index = 0; index < typeEditor.tileTypes.length; index++) {
+                        if (typeEditor.tileTypes[index].type.typeID === this.rule.typeToEdit.typeID) break;
                     }
                     srdarg2.value = "Tile Type " + index;
+                    srdarg2.innerHTML = typeEditor.tileTypes[index].type.typeName
                 }
                 srdarg2.addEventListener("change", function(){
-                    if (this.value.includes("Piece Type")) form.rule.typeToEdit = pieceTypesList[this.value.slice(11)];
-                    else if (this.value.includes("Tile Type")) form.rule.typeToEdit = tileTypesList[this.value.slice(10)];
+                    if (this.value.includes("Piece Type")) form.rule.typeToEdit = typeEditor.pieceTypes.map(p=>p.type)[this.value.slice(11)];
+                    else if (this.value.includes("Tile Type")) form.rule.typeToEdit = tileEditor.tileTypes.map(p=>p.type)[this.value.slice(10)];
                     form.modifyDIV();
                 });
                 srdarg.appendChild(srdarg2);
@@ -826,7 +828,7 @@ else if (this.rule.type === "Create Tile Sprite") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Type: ";
             srdarg2 = document.createElement("select");
-            let listToCheck = (this.rule.type === "Choose Tile Type" ? tileTypesList : pieceTypesList)
+            let listToCheck = (this.rule.type === "Choose Tile Type" ? typeEditor.tileTypes.map(t=>t.type) : typeEditor.pieceTypes.map(p=>p.type))
             for (let t = 0; t < listToCheck.length; t++) {
                 srdarg3 = document.createElement("option");
                 srdarg3.setAttribute("value", t);
