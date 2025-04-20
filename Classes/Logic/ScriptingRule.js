@@ -201,6 +201,7 @@ class ScriptingRule {
     }
 
     run(caller, ...args) {
+
         console.log(this.getConstructorArguments(), caller, args);
 
         if (this.type === "Value") {

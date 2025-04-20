@@ -40,7 +40,7 @@ class GameButton {
         const s = this.logical.sprite;
 
         // Option A: Full hide (uncomment to hide instead of disable)
-        // this.container.getElement().style.display = visible ? 'block' : 'none';
+        this.container.getElement().style.display = visible ? 'block' : 'none';
 
         // Option B: Just disable and grey it out
         this.button.disabled = !visible;

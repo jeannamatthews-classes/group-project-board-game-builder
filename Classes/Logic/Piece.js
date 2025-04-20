@@ -18,8 +18,10 @@ class Piece {
     }
 
     getTypeObjects() {
+        console.log(this.types)
+        console.log(pieceTypesList)
         return this.types
-            .map(id => typeEditor.pieceTypes.find(t => Number(t.type.typeID) === Number(id))?.type)
+            .map(id => pieceTypesList.find(t => Number(t.typeID) === Number(id)))
             .filter(Boolean);
     }
 
@@ -94,11 +96,15 @@ class Piece {
     }
 
     clickObject(topCall = true) {
+        console.log("got here")
         if (!gameInProgress()) return true;
-
+        console.log("got hERE")
         for (const type of this.getTypeObjects()) {
+            console.log(type)
             for (const script of type.scripts || []) {
+                console.log(script)
                 if (script.trigger === "Object Clicked") {
+                    console.log("WHAT?????????AJDSF")
                     const result = script.run(this);
                     if (result === false) {
                         if (topCall) gameStateRevert();

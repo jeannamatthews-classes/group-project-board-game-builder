@@ -30,8 +30,9 @@ class Tile {
     clickObject(topCall = true) {
         if (!gameInProgress()) return true;
 
+        console.log(this.types)
         const typeObjects = this.types
-            .map(id => typeEditor.tileTypes.find(t => Number(t.type.typeID) === Number(id))?.type)
+            .map(id => tileTypesList.find(t => Number(t.typeID) === Number(id)))
             .filter(t => t); // filter out nulls
 
         const scriptsToExecute = [];

@@ -101,15 +101,13 @@ class Button {
         };
     
         button.clickScripts = (code.clickScripts || []).map(data => {
-            const script = new ScriptingRule();
-            script.loadCode(data);
-            return script;
+            let newScript = ScriptingRule.loadCode(data);
+            return newScript;
         });
     
         button.visibleRules = (code.visibleRules || []).map(data => {
-            const script = new ScriptingRule();
-            script.loadCode(data);
-            return script;
+            let newScript = ScriptingRule.loadCode(data);
+            return newScript;
         });
     
         return button;

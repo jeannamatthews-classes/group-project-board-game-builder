@@ -205,3 +205,11 @@ Fixed so that when loading a game to the creator, nextIDs are updated appropriat
 Fixed UITile and Tile so that it no longer stores the entire Type classes. 
 Stores IDs only instead.
 have tmeporarilt removed the fake connect4 file because i need to reconfigure it due to changes in hwo tile types now work. 
+Committed to Github.
+
+More Bug Fixing
+Fixed issue with Piece/Tile attempting to access editors in play mode.
+Bug fixed small errors until I got Button visibility scripts and Movepiece onclick scripts to work.
+Very simple....
+Need to do more testing.
+Committed fixes to github. 

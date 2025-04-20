@@ -8,7 +8,7 @@ class GameState {
     selectedObjects;
     inventories;
 
-    constructor(board, pieces, playerAmount, turnNumber = 1, playerTurn = 1, turnPhase = 0, selectedObjects = []) {
+    constructor(board, pieces, playerAmount, turnNumber = 0, playerTurn = 0, turnPhase = 0, selectedObjects = []) {
         this.board = board;
         this.pieceArray = pieces;
         this.playerAmount = playerAmount;

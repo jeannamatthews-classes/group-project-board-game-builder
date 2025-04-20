@@ -125,7 +125,6 @@ class GameBoard {
     update(){
         this.logical = activeGameState.board; 
         let flatTiles = this.tiles.flat();
-        console.log(flatTiles)
         flatTiles.forEach(tile => tile.update());
         activeGameState.pieceArray.forEach(p=> {
             if(p.xCoordinate != -1 && p.yCoordinate !=-1)
