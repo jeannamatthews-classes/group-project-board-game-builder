@@ -105,9 +105,11 @@ class ScriptingRule {
             this.textColor = args[4] ?? "#000000";
         }
         else if (this.type === "Create Tile Sprite") {
-            this.fillColor = args[0] ?? "#cccccc";
-            this.text = args[1] ?? "";
-            this.textColor = args[2] ?? "#000000";
+            this.imageName = args[0] ?? "none";
+            this.imageColor = args[1] ?? "#FFFFFF"
+            this.fillColor = args[2] ?? "#cccccc";
+            this.text = args[3] ?? "";
+            this.textColor = args[4] ?? "#000000";
         }
         
         else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
@@ -710,7 +712,7 @@ class ScriptingRule {
             args.push(cloneArg(this.object));
         } else if (this.type === "Create Piece Sprite") {
             args.push(
-                cloneArg(this.shape),
+                cloneArg(this.imageName),
                 cloneArg(this.fillColor),
                 cloneArg(this.strokeColor),
                 cloneArg(this.text),
@@ -718,6 +720,8 @@ class ScriptingRule {
             );
         } else if (this.type === "Create Tile Sprite") {
             args.push(
+                cloneArg(this.imageName),
+                cloneArg(this.imageColor),
                 cloneArg(this.fillColor),
                 cloneArg(this.text),
                 cloneArg(this.textColor)

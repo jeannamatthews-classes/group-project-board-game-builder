@@ -124,6 +124,19 @@
 
 const none = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"></svg>`
 
+const x = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <rect x="43" y="10" width="14" height="80" rx="7" ry="7" transform="rotate(45 50 50)" fill="black"/>
+  <rect x="43" y="10" width="14" height="80" rx="7" ry="7" transform="rotate(-45 50 50)" fill="black"/>
+</svg>`;
+
+
+const o = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <path d="M50,10
+           A40,40 0 1,1 49.99,10
+           M50,25
+           A25,25 0 1,0 50.01,25
+           Z" fill="white"/>
+</svg>`
 
 
 
@@ -139,7 +152,9 @@ const none = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" v
     star: star,
     circle: circle, 
     square: square,
-    sun: sun
+    sun: sun,
+    o: o,
+    x: x
   }
 
   const TILE_SPRITE_LIBRARY = {
@@ -149,7 +164,9 @@ const none = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" v
     star: star,
     circle: circle, 
     square: square,
-    sun: sun
+    sun: sun,
+    o: o,
+    x: x
   }
 
 

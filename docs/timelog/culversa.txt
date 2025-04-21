@@ -213,3 +213,7 @@ Bug fixed small errors until I got Button visibility scripts and Movepiece oncli
 Very simple....
 Need to do more testing.
 Committed fixes to github. 
+
+
+Fixed some scripting rule bugs regarding sprites.
+Fixed the preview / layout button. 

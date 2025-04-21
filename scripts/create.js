@@ -82,7 +82,7 @@ function setUpButtons(){
     // --- Preview Toggle ---
     const previewBtn = document.createElement('div');
     previewBtn.classList.add('control-btn');
-    previewBtn.style.backgroundImage = `url(images/preview_on.png)`;
+    previewBtn.style.backgroundImage = `url(images/preview_off.png)`;
     previewBtn.title = 'Toggle Layout Editor';
 
 
