@@ -2,7 +2,7 @@ var lastCopiedScriptingRule = null;
 
 class ScriptingRuleForm {
     rule;
-    top;
+    top; // true if this is a top-level script, otherwise stores the trigger of the topmost rule
     zebraDark = false;
     callerType = "None";
     parentType = "None";
@@ -19,7 +19,7 @@ class ScriptingRuleForm {
         this.parentType = parentType;
         this.container;
         this.div;
-        if (this.top) {
+        if (this.top === true) {
             if (ruleID !== undefined) this.ruleID = ruleID;
             else this.ruleID = assignRuleID();
             if (name === undefined) this.name = "Script #" + this.ruleID;
@@ -56,7 +56,7 @@ class ScriptingRuleForm {
         content.appendChild(ruleContentContainer);
 
 
-        if(this.top){
+        if(this.top === true){
             const actionsRow = document.createElement("div");
             actionsRow.style.display = "flex";
             actionsRow.style.gap = "8px";
@@ -116,7 +116,7 @@ class ScriptingRuleForm {
     modifyDIV(srdiv = this.div) {
         while (srdiv.firstElementChild) srdiv.removeChild(srdiv.lastElementChild);
         let form = this;
-        if (this.top) {
+        if (this.top === true) {
             let srdname = document.createElement("p");
             srdname.innerHTML = "Rule Name: ";
             let srdnameinput = document.createElement("input");
@@ -207,7 +207,7 @@ class ScriptingRuleForm {
         let scriptingRuleChild = function(argToCheck, parentType = "None") {
             if (argToCheck instanceof ScriptingRule) {
                 srdiv.appendChild(srdarg);
-                let newForm = new ScriptingRuleForm(argToCheck, false, form.callerType, !form.zebraDark, parentType);
+                let newForm = new ScriptingRuleForm(argToCheck, form.getTrigger(), form.callerType, !form.zebraDark, parentType);
                 form.childrenForms.push(newForm);
                 console.log(newForm);
                 srdiv.appendChild(newForm.div);
@@ -283,7 +283,7 @@ class ScriptingRuleForm {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Argument: ";
             srdarg2 = document.createElement("select");
-            if (this.callerType === "Piece Moves") {
+            if (this.getTrigger() === "Piece Moves") {
                 srdarg3 = document.createElement("option");
                 srdarg3.setAttribute("value", 0);
                 srdarg3.innerHTML = "X Movement";
@@ -293,13 +293,13 @@ class ScriptingRuleForm {
                 srdarg3.innerHTML = "Y Movement";
                 srdarg2.appendChild(srdarg3);
             }
-            else if (this.callerType === "Piece Lands on Tile") {
+            else if (this.getTrigger() === "Piece Lands on Tile") {
                 srdarg3 = document.createElement("option");
                 srdarg3.setAttribute("value", 0);
                 srdarg3.innerHTML = "The tile this piece landed on";
                 srdarg2.appendChild(srdarg3);
             }
-            else if (this.callerType === "Tile is Landed On") {
+            else if (this.getTrigger() === "Tile is Landed On") {
                 srdarg3 = document.createElement("option");
                 srdarg3.setAttribute("value", 0);
                 srdarg3.innerHTML = "The piece that landed on this tile";
@@ -316,9 +316,9 @@ class ScriptingRuleForm {
         }
 
         // Actions
-        else if (this.rule.type === "Move Piece") {
+        else if (this.rule.type === "Move Piece" || this.rule.type === "Move Piece to Coordinates") {
             srdarg = document.createElement("p");
-            srdarg.innerHTML = "X Movement:";
+            srdarg.innerHTML = (this.rule.type === "Move Piece to Coordinates") ? "X Coordinate" : "X Movement:";
             if (!scriptingRuleChild(this.rule.moveX, "Number")) {
                 srdarg.innerHTML += " "
                 srdarg2 = document.createElement("input");
@@ -332,7 +332,7 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
             srdarg = document.createElement("p");
-            srdarg.innerHTML = "Y Movement:";
+            srdarg.innerHTML = (this.rule.type === "Move Piece to Coordinates") ? "Y Coordinate" : "Y Movement:";
             if (!scriptingRuleChild(this.rule.moveY, "Number")) {
                 srdarg.innerHTML += " "
                 srdarg2 = document.createElement("input");
@@ -1399,6 +1399,11 @@ else if (this.rule.type === "Create Tile Sprite") {
         }
     }
 
+    getTrigger() {
+        if (this.top === true) return this.rule.trigger;
+        else return this.top;
+    }
+
     createTypeSelect() {
         let select = document.createElement("select");
         let type;
@@ -1511,14 +1516,14 @@ function stringifyBGBObject(obj) {
 }
 
 let SRF_AllRuleTypes = [
-    "Value", "Argument", "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
+    "Value", "Argument", "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
     "Add Piece", "Change Turn Phase", "End Game", "Change Tile Sprite", "Change Piece Sprite", "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
     "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "All Pieces", "All Tiles", "Object ID", "Caller", "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type",
     "Choose Tile Type", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "if-then-else", "Return at End",
     "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Concatenate Strings", "Character of String",
     "!", "abs", "sign", "Create an Array", "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index",
-    "Slice of String", "Slice of Array", "Other Caller", "Select Object", "Deselect Object", "Selected Objects"
+    "Slice of String", "Slice of Array", "Other Caller", "Select Object", "Deselect Object", "Selected Objects", "Clear Selected Objects"
 ]
 
 // These can go in for any scripting rule argument since we don't know what type they'll return
@@ -1579,9 +1584,9 @@ let SRF_RType_ArrayOfTiles = [
 ]
 // These are actions to perform, not things that return something (they typically return true, though)
 let SRF_RType_Action = [
-    "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type", "Add Piece", "Change Turn Phase",
+    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type", "Add Piece", "Change Turn Phase",
     "End Game", "Change Tile Sprite", "Change Piece Sprite", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "Repeat While",
-    "Remove Last Element of Array", "Add to Array", "Select Object", "Deselect Object"
+    "Remove Last Element of Array", "Add to Array", "Select Object", "Deselect Object", "Clear Selected Objects"
 ]
 // Any scripting rule type that does return something, i.e. is not an action
 let SRF_RType_Returns = SRF_AllRuleTypes.filter(e => (SRF_RType_Action.indexOf(e) === -1));
@@ -1590,8 +1595,8 @@ let SRF_RGroup_Basics = [
     "Value", "Argument", "if-then-else", "Return at End"
 ]
 let SRF_RGroup_Actions = [
-    "Remove Piece", "Move Piece", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
-    "Add Piece", "Change Turn Phase", "End Game", "Change Tile Sprite", "Change Piece Sprite", "Select Object", "Deselect Object"
+    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
+    "Add Piece", "Change Turn Phase", "End Game", "Change Tile Sprite", "Change Piece Sprite", "Select Object", "Deselect Object", "Clear Selected Objects"
 ]
 let SRF_RGroup_Reporters = [
     "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
