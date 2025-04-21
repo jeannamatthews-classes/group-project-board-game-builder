@@ -156,9 +156,9 @@ class ScriptingRule {
             if (booleanOperators.indexOf(type) != -1) typeDefault = new ScriptingRule("None", "Value", true);
             else if (stringOperators.indexOf(type) != -1) typeDefault = new ScriptingRule("None", "Value", "");
             else typeDefault = new ScriptingRule("None", "Value", 0);
-            if (args.length <= 0) args.push(typeDefault);
+            if (args.length <= 0) args.push(typeDefault.clone());
             this.leftArg = args[0];
-            if (args.length <= 1) args.push((type === "Character of String") ? new ScriptingRule("None", "Value", 0) : typeDefault);
+            if (args.length <= 1) args.push((type === "Character of String") ? new ScriptingRule("None", "Value", 0) : typeDefault.clone());
             this.rightArg = args[1];
         }
         else if (oneArgOperators.indexOf(type) != -1) {
