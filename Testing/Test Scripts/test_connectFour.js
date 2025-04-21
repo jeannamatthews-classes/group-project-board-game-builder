@@ -153,7 +153,7 @@ let typeTileClick = new TileType("Clickable Tile", [
                                     new ScriptingRule("None", "||",
                                         new ScriptingRule("None", "||",
                                             new ScriptingRule("None", "<",
-                                                new ScriptingRule("None", "Return Variable of Rule", "Examined X"),
+                                                new ScriptingRule("None", "Return Variable of Rule", "Examined X"), //id WzzMINWS X IS OUT OF BOUNDS
                                                 new ScriptingRule("None", "Value", 0)
                                             ),
                                             new ScriptingRule("None", ">=",

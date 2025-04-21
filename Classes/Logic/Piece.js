@@ -9,6 +9,7 @@ class Piece {
     name = '';
 
     constructor(typeIDs, xStart, yStart, owner, sprite, id = undefined) {
+        console.log(sprite)
         this.types = typeIDs;
         this.objectID = (id !== undefined) ? id : assignObjectID();
         this.xCoordinate = xStart;

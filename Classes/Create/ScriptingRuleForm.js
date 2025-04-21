@@ -739,7 +739,7 @@ else if (this.rule.type === "Create Tile Sprite") {
         preview.style.verticalAlign = "middle";
         preview.style.margin = "0 8px";
         preview.style.background = "#f0f0f0";
-
+        this.rule.imageName = spriteNames[currentIndex];
         const renderPreview = (shouldModify = true) => {
             const name = spriteNames[currentIndex];
             this.rule.imageName = name;

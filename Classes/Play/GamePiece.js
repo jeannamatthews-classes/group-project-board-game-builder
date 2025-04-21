@@ -1,5 +1,7 @@
 class GamePiece {
     constructor(logicalPiece) {
+
+        console.log(logicalPiece)
         this.logical = logicalPiece;
         this.container = document.createElement('div');
 

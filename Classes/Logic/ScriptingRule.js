@@ -97,7 +97,8 @@ class ScriptingRule {
             if (this.object === null) this.object = undefined;
         }
         else if (this.type === "Create Piece Sprite") {
-            this.imageName = args[0] ?? "square";
+            console.log("YOYOYOYOYOYO", args)
+            this.imageName = args[0] ?? "circle";
             this.fillColor = args[1] ?? "#cccccc";
             this.strokeColor = args[2] ?? "#000000";
             this.text = args[3] ?? "";
@@ -205,9 +206,6 @@ class ScriptingRule {
     }
 
     run(caller, ...args) {
-            console.log("RUNNING", this.type, this.variables);
-
-        
 
         console.log(this.getConstructorArguments(), caller, args);
 
