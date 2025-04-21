@@ -773,7 +773,8 @@ class ScriptingRule {
     
         return args;
     }
-        saveCode() {
+    
+    saveCode() {
         const serialize = (value) => {
             if (value instanceof ScriptingRule) return value.saveCode();
             if (Array.isArray(value)) return value.map(serialize);
@@ -784,14 +785,14 @@ class ScriptingRule {
             trigger: this.trigger,
             type: this.type,
             args: this.getConstructorArguments().slice(2).map(serialize),
-            variables: this.variables.map(([name, value]) => [name, value instanceof ScriptingRule ? value.saveCode() : value])
+            variables: this.variables.map(([name, value]) => [name, serialize(value)])
         };
     }
-    clone(){
-        let saveCode = this.saveCode();
-        let newScriptingRule = ScriptingRule.loadCode(saveCode)
-        return newScriptingRule
+    
+    clone() {
+        return ScriptingRule.loadCode(this.saveCode());
     }
+    
     static loadCode(data) {
         const deserialize = (val) => {
             if (val && typeof val === 'object' && val.type && Array.isArray(val.args)) {
@@ -804,10 +805,11 @@ class ScriptingRule {
     
         const args = Array.isArray(data.args) ? data.args.map(deserialize) : [];
         const rule = new ScriptingRule(data.trigger, data.type, ...args);
+    
         rule.variables = Array.isArray(data.variables)
-    ? data.variables.map(([name, value]) => [name, value instanceof ScriptingRule ? value.clone() : value])
-    : [];
-
+            ? data.variables.map(([name, value]) => [name, deserialize(value)])
+            : [];
+    
         return rule;
     }
     

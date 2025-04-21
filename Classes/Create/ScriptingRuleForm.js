@@ -12,7 +12,7 @@ class ScriptingRuleForm {
 
 
     constructor(rule, top = true, callerType = "None", zebraDark = false, parentType = "None", name = undefined, ruleID = undefined) {
-        this.rule = rule.clone();
+        this.rule = rule;
         this.top = top;
         this.callerType = callerType;
         this.zebraDark = zebraDark;
@@ -65,7 +65,7 @@ class ScriptingRuleForm {
             const copyBtn = document.createElement("button");
             copyBtn.textContent = "📋 Copy";
             copyBtn.onclick = () => {
-                lastCopiedScriptingRule = this.cloneScriptingRule(this.rule);
+                lastCopiedScriptingRule = this.rule.clone();
 
                 console.log("Copied scripting rule:", lastCopiedScriptingRule);
             };
