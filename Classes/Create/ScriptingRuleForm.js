@@ -12,7 +12,7 @@ class ScriptingRuleForm {
 
 
     constructor(rule, top = true, callerType = "None", zebraDark = false, parentType = "None", name = undefined, ruleID = undefined) {
-        this.rule = rule;
+        this.rule = rule.clone();
         this.top = top;
         this.callerType = callerType;
         this.zebraDark = zebraDark;
@@ -76,14 +76,13 @@ class ScriptingRuleForm {
             pasteBtn.disabled = !lastCopiedScriptingRule;
             pasteBtn.onclick = () => {
                 if (!lastCopiedScriptingRule) return;
-                this.rule = this.cloneScriptingRule(lastCopiedScriptingRule);
+                this.rule = lastCopiedScriptingRule.clone();
+                this.childrenForms = [];
 
                 this.div = this.createDIV(); // Rebuild the visual form
-                this.div = this.createDIV();
 
                 // Clear out the container and re-add the new one
                 ruleContentContainer.innerHTML = '';
-                ruleContentContainer.appendChild(this.div);
                 ruleContentContainer.appendChild(this.div);
                 console.log("Pasted rule:", this.rule);
             };
@@ -1469,6 +1468,7 @@ else if (this.rule.type === "Create Tile Sprite") {
         })
         return select;
     }
+    /*
     cloneScriptingRule(rule) {
         const clone = new ScriptingRule(rule.trigger, rule.type, null);
     
@@ -1485,7 +1485,10 @@ else if (this.rule.type === "Create Tile Sprite") {
         }
     
         return clone;
-    }
+    }*/
+        cloneScriptingRule(rule) {
+            return rule.clone();
+        }
     
     
 }

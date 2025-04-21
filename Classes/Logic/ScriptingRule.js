@@ -30,33 +30,33 @@ class ScriptingRule {
 
         // Actions
         else if (this.type === "Move Piece" || this.type === "Move Piece to Coordinates") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.moveX = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.moveY = args[1];
         }
         else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.playerID = args[0];
         }
         else if (this.type === "Add Type") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Array Element at Index", new ScriptingRule("None", "Object Types"), new ScriptingRule("None", "Value", 0)));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Array Element at Index", new ScriptingRule("None", "Object Types"), new ScriptingRule("None", "Value", 0).clone()));
             this.typeToEdit = args[0];
             if (args.length <= 1) args.push(new ScriptingRule("None", "Value", -1));
             this.index = args[1];
         }
         else if (this.type === "Remove Type") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Array Element at Index", new ScriptingRule("None", "Object Types"), new ScriptingRule("None", "Value", 0)));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Array Element at Index", new ScriptingRule("None", "Object Types"), new ScriptingRule("None", "Value", 0).clone()));
             this.typeToEdit = args[0];
         }
         else if (this.type === "Add Piece") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.newPieceTypes = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.newPieceX = args[1];
-            if (args.length <= 2) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 2) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.newPieceY = args[2];
-            if (args.length <= 3) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 3) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.newPieceOwner = args[3];
             if (args.length <= 4) args.push(new ScriptingRule("None", "Create Piece Sprite"));
             this.newPieceSprite = args[4];
@@ -67,7 +67,7 @@ class ScriptingRule {
             if (this.phase === null) this.phase = Infinity;
         }
         else if (this.type === "End Game") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.winner = args[0];
         }
         else if (this.type === "Change Piece Sprite") {
@@ -82,9 +82,9 @@ class ScriptingRule {
         
         // Reporters
         else if (this.type === "Tile at Coordinates") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.XCoordinate = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.YCoordinate = args[1];
         }
         else if (this.type === "Pieces on Tile") {
@@ -117,7 +117,7 @@ class ScriptingRule {
         else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule" || this.type === "Edit Global Variable") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
             if (args.length <= 0) args.push("Placeholder");
             this.variableName = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.variableValue = args[1];
             if (args.length <= 2) args.push(undefined);
             if (this.type === "Edit Variable of Object") this.object = args[2];
@@ -149,14 +149,14 @@ class ScriptingRule {
             let typeDefault;
             if (booleanOperators.indexOf(type) != -1) typeDefault = new ScriptingRule("None", "Value", true);
             else if (stringOperators.indexOf(type) != -1) typeDefault = new ScriptingRule("None", "Value", "");
-            else typeDefault = new ScriptingRule("None", "Value", 0);
+            else typeDefault = new ScriptingRule("None", "Value", 0).clone();
             if (args.length <= 0) args.push(typeDefault);
             this.leftArg = args[0];
-            if (args.length <= 1) args.push((type === "Character of String") ? new ScriptingRule("None", "Value", 0) : typeDefault);
+            if (args.length <= 1) args.push((type === "Character of String") ? new ScriptingRule("None", "Value", 0).clone() : typeDefault);
             this.rightArg = args[1];
         }
         else if (oneArgOperators.indexOf(type) != -1) {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.argument = args[0];
         }
 
@@ -171,32 +171,32 @@ class ScriptingRule {
         else if (this.type == "Array Index of Element" || this.type == "Add to Array") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.element = args[1];
         }
         else if (this.type == "Array Element at Index") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Create an Array"));
             this.array = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.index = args[1];
         }
         else if (this.type == "Slice of String" || this.type == "Slice of Array") {
             if (args.length <= 0) args.push(this.type == "Slice of String" ? new ScriptingRule("None", "Value", "") : new ScriptingRule("None", "Create an Array"));
             this.outer = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.leftIndex = args[1];
-            if (args.length <= 2) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 2) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.rightIndex = args[1];
         }
 
         else if (this.type == "Other Caller") {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Caller"));
             this.otherCaller = args[0];
-            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 1) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.otherScript = args[1];
         }
         else if (this.type == "Console Log") {
-            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0));
+            if (args.length <= 0) args.push(new ScriptingRule("None", "Value", 0).clone());
             this.toLog = args[0];
         }
     }
@@ -646,147 +646,131 @@ class ScriptingRule {
 
     // Gives this rule the same variables array as the other rule.
     portVariables(otherRule) {
-        this.variables = otherRule.variables;
+        this.variables = otherRule.variables.map(
+            ([name, value]) => [name, value instanceof ScriptingRule ? value.clone() : value]
+        );
         return this;
     }
+    
 
     // This is used for cloning.
     getConstructorArguments() {
+        const cloneArg = (arg) => {
+            if (arg instanceof ScriptingRule) return arg.clone();
+            if (Array.isArray(arg)) return arg.map(cloneArg);
+            return arg;
+        };
+    
         let args = [this.trigger, this.type];
-
-        if (this.type === "Value") { // This type is for ScriptingRules that aren't actually rules, just storing a value, so that .run can be run on them and they'll just return that value.
-            args.push(this.value);
+    
+        // Value & Argument types
+        if (this.type === "Value") {
+            args.push(cloneArg(this.value));
+        } else if (this.type === "Argument") {
+            args.push(cloneArg(this.index));
         }
-        else if (this.type === "Argument") { // This type returns one of the arguments given from the rule call: for example
-            args.push(this.index)
-        }
-
+    
         // Actions
         else if (this.type === "Move Piece" || this.type === "Move Piece to Coordinates") {
-            args.push(this.moveX)
-            args.push(this.moveY)
+            args.push(cloneArg(this.moveX), cloneArg(this.moveY));
+        } else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
+            args.push(cloneArg(this.playerID));
+        } else if (this.type === "Add Type") {
+            args.push(cloneArg(this.typeToEdit), cloneArg(this.index));
+        } else if (this.type === "Remove Type") {
+            args.push(cloneArg(this.typeToEdit));
+        } else if (this.type === "Add Piece") {
+            args.push(
+                cloneArg(this.newPieceTypes),
+                cloneArg(this.newPieceX),
+                cloneArg(this.newPieceY),
+                cloneArg(this.newPieceOwner),
+                cloneArg(this.newPieceSprite)
+            );
+        } else if (this.type === "Change Turn Phase") {
+            args.push(cloneArg(this.phase));
+        } else if (this.type === "End Game") {
+            args.push(cloneArg(this.winner));
+        } else if (this.type === "Change Piece Sprite") {
+            args.push(cloneArg(this.newPieceSprite));
+        } else if (this.type === "Change Tile Sprite") {
+            args.push(cloneArg(this.newTileSprite));
         }
-        else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
-            args.push(this.playerID)
-        }
-        else if (this.type === "Add Type") {
-            args.push(this.typeToEdit)
-            args.push(this.index)
-        }
-        else if (this.type === "Remove Type") {
-            args.push(this.typeToEdit)
-        }
-        else if (this.type === "Add Piece") {
-            args.push(this.newPieceTypes)
-            args.push(this.newPieceX)
-            args.push(this.newPieceY)
-            args.push(this.newPieceOwner)
-            args.push(this.newPieceSprite)
-        }
-        else if (this.type === "Change Turn Phase") {
-            args.push(this.phase)
-        }
-        else if (this.type === "End Game") {
-            args.push(this.winner)
-        }
-        else if (this.type === "Change Piece Sprite") {
-            args.push(this.newPieceSprite);
-        }
-        else if (this.type === "Change Tile Sprite") {
-            args.push(this.newTileSprite);
-        }
-        
+    
         // Reporters
         else if (this.type === "Tile at Coordinates") {
-            args.push(this.XCoordinate)
-            args.push(this.YCoordinate)
+            args.push(cloneArg(this.XCoordinate), cloneArg(this.YCoordinate));
+        } else if (this.type === "Pieces on Tile") {
+            args.push(cloneArg(this.tileToCheck));
+        } else if (["X Coordinate", "Y Coordinate", "Object Types", "Object ID", "Select Object", "Deselect Object"].includes(this.type)) {
+            args.push(cloneArg(this.object));
+        } else if (this.type === "Create Piece Sprite") {
+            args.push(
+                cloneArg(this.shape),
+                cloneArg(this.fillColor),
+                cloneArg(this.strokeColor),
+                cloneArg(this.text),
+                cloneArg(this.textColor)
+            );
+        } else if (this.type === "Create Tile Sprite") {
+            args.push(
+                cloneArg(this.fillColor),
+                cloneArg(this.text),
+                cloneArg(this.textColor)
+            );
+        } else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
+            args.push(cloneArg(this.index));
         }
-        else if (this.type === "Pieces on Tile") {
-            args.push(this.tileToCheck)
-        }
-        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID" || this.type === "Select Object" || this.type === "Deselect Object") {
-            args.push(this.object)
-        }
-        else if (this.type === "Create Piece Sprite") {
-            args.push(this.shape);
-            args.push(this.fillColor);
-            args.push(this.strokeColor);
-            args.push(this.text);
-            args.push(this.textColor);
-        }
-        else if (this.type === "Create Tile Sprite") {
-            args.push(this.fillColor);
-            args.push(this.text);
-            args.push(this.textColor);
-        }
-
-        else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
-            args.push(this.index);
-        }
-
+    
         // Control
-        else if (this.type === "Edit Variable of Object" || this.type === "Edit Variable of Rule" || this.type === "Edit Global Variable") { // Adds the variable to this rule if it's not already there, changes its value if it's already there
-            args.push(this.variableName)
-            args.push(this.variableValue)
-            if (this.type === "Edit Variable of Object") args.push(this.object)
+        else if (["Edit Variable of Object", "Edit Variable of Rule", "Edit Global Variable"].includes(this.type)) {
+            args.push(cloneArg(this.variableName), cloneArg(this.variableValue));
+            if (this.type === "Edit Variable of Object") {
+                args.push(cloneArg(this.object));
+            }
+        } else if (["Return Variable of Object", "Return Variable of Rule", "Return Global Variable"].includes(this.type)) {
+            args.push(cloneArg(this.variableName));
+            if (this.type === "Return Variable of Object") {
+                args.push(cloneArg(this.object));
+            }
+        } else if (this.type === "if-then-else") {
+            args.push(cloneArg(this.if), cloneArg(this.then), cloneArg(this.else));
+        } else if (this.type === "Return at End") {
+            args = args.concat(cloneArg(this.scriptsToRun));
+        } else if (this.type === "Repeat While") {
+            args.push(cloneArg(this.repeatCheck), cloneArg(this.repeatScript));
         }
-        else if (this.type === "Return Variable of Object" || this.type === "Return Variable of Rule" || this.type === "Return Global Variable") {
-            args.push(this.variableName)
-            if (this.type === "Return Variable of Object") args.push(this.object)
+    
+        // Operators
+        else if (twoArgOperators.includes(this.type)) {
+            args.push(cloneArg(this.leftArg), cloneArg(this.rightArg));
+        } else if (oneArgOperators.includes(this.type)) {
+            args.push(cloneArg(this.argument));
         }
-        else if (this.type === "if-then-else") {
-            args.push(this.if)
-            args.push(this.then)
-            args.push(this.else)
-        }
-        else if (this.type === "Return at End") {
-            args = args.concat(this.scriptsToRun)
-        }
-        else if (this.type == "Repeat While") {
-            args.push(this.repeatCheck)
-            args.push(this.repeatScript)
-        }
-        else if (twoArgOperators.indexOf(this.type) != -1) {
-            args.push(this.leftArg)
-            args.push(this.rightArg)
-        }
-        else if (oneArgOperators.indexOf(this.type) != -1) {
-            args.push(this.argument)
-        }
-
+    
         // Arrays
         else if (this.type === "Create an Array") {
-            args = args.concat(this.elements);
+            args = args.concat(cloneArg(this.elements));
+        } else if (["Array Length", "Remove Last Element of Array"].includes(this.type)) {
+            args.push(cloneArg(this.array));
+        } else if (["Array Index of Element", "Add to Array"].includes(this.type)) {
+            args.push(cloneArg(this.array), cloneArg(this.element));
+        } else if (this.type === "Array Element at Index") {
+            args.push(cloneArg(this.array), cloneArg(this.index));
+        } else if (this.type === "Slice of String" || this.type === "Slice of Array") {
+            args.push(cloneArg(this.outer), cloneArg(this.leftIndex), cloneArg(this.rightIndex));
         }
-        else if (this.type == "Array Length" || this.type == "Remove Last Element of Array") {
-            args.push(this.array)
+    
+        // Misc
+        else if (this.type === "Other Caller") {
+            args.push(cloneArg(this.otherCaller), cloneArg(this.otherScript));
+        } else if (this.type === "Console Log") {
+            args.push(cloneArg(this.toLog));
         }
-        else if (this.type == "Array Index of Element" || this.type == "Add to Array") {
-            args.push(this.array)
-            args.push(this.element)
-        }
-        else if (this.type == "Array Element at Index") {
-            args.push(this.array)
-            args.push(this.index)
-        }
-        else if (this.type == "Slice of String" || this.type == "Slice of Array") {
-            args.push(this.outer)
-            args.push(this.leftIndex)
-            args.push(this.rightIndex)
-        }
-
-        else if (this.type == "Other Caller") {
-            args.push(this.otherCaller)
-            args.push(this.otherScript)
-        }
-        else if (this.type == "Console Log") {
-            args.push(this.toLog)
-        }
-
+    
         return args;
     }
-
-    saveCode() {
+        saveCode() {
         const serialize = (value) => {
             if (value instanceof ScriptingRule) return value.saveCode();
             if (Array.isArray(value)) return value.map(serialize);
@@ -797,7 +781,7 @@ class ScriptingRule {
             trigger: this.trigger,
             type: this.type,
             args: this.getConstructorArguments().slice(2).map(serialize),
-            variables: this.variables.map(([name, value]) => [name, value])
+            variables: this.variables.map(([name, value]) => [name, value instanceof ScriptingRule ? value.saveCode() : value])
         };
     }
     clone(){
@@ -817,7 +801,10 @@ class ScriptingRule {
     
         const args = Array.isArray(data.args) ? data.args.map(deserialize) : [];
         const rule = new ScriptingRule(data.trigger, data.type, ...args);
-        rule.variables = Array.isArray(data.variables) ? data.variables : [];
+        rule.variables = Array.isArray(data.variables)
+    ? data.variables.map(([name, value]) => [name, value instanceof ScriptingRule ? value.clone() : value])
+    : [];
+
         return rule;
     }
     
