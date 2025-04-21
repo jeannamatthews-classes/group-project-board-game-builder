@@ -127,8 +127,103 @@ function startGameScripts() {
     return true;
 }
 
+function showEndGameWindow(winner) {
+    if (document.getElementById("endGameOverlay")) return;
+
+    // Inject animation styles once
+    if (!document.getElementById("endGameAnimationStyles")) {
+        const style = document.createElement("style");
+        style.id = "endGameAnimationStyles";
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            #endGameOverlay {
+                animation: fadeIn 0.4s ease-out;
+            }
+
+            .end-game-wrapper {
+                animation: slideUp 0.6s ease-out;
+            }
+
+            .btn-load:hover {
+                background-color: #4ec94e;
+                transform: scale(1.05);
+                transition: 0.2s ease-in-out;
+            }
+
+            .btn-load:active {
+                transform: scale(0.95);
+                transition: 0.1s;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    const overlay = document.createElement("div");
+    overlay.id = "endGameOverlay";
+    overlay.style.position = "fixed";
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.zIndex = 9999;
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("wrapper", "end-game-wrapper");
+    wrapper.style.backgroundColor = "#d0d0ff";
+    wrapper.style.border = "4px solid black";
+    wrapper.style.boxShadow = "5px 5px black";
+    wrapper.style.padding = "40px";
+    wrapper.style.textAlign = "center";
+    wrapper.style.fontFamily = "'Pixelify Sans', sans-serif";
+    wrapper.style.minWidth = "300px";
+
+    const gameOverTitle = document.createElement("h1");
+    gameOverTitle.textContent = "Game Over";
+    wrapper.appendChild(gameOverTitle);
+
+    const resultText = document.createElement("p");
+    resultText.style.fontSize = "28px";
+    resultText.style.marginTop = "20px";
+    resultText.textContent = winner > 0 ? `WINNER: Player ${winner}` : `DRAW`;
+    wrapper.appendChild(resultText);
+
+    const playAgainBtn = document.createElement("button");
+    playAgainBtn.classList.add("btn-load");
+    playAgainBtn.textContent = "Play Again";
+    playAgainBtn.style.marginTop = "30px";
+    playAgainBtn.onclick = () => {
+        playAgain(); // <- Your restart logic
+        overlay.remove();
+    };
+    wrapper.appendChild(playAgainBtn);
+
+    overlay.appendChild(wrapper);
+    document.body.appendChild(overlay);
+}
+
+
 function endGame(winner) {
-    if (!gameInProgress()) return true;
+    if (!gameInProgress()){ 
+        showEndGameWindow(winner); return true};
     let scriptsToExecute = [];
     for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
         for (let t of p.getTypeObjects()) {
@@ -142,12 +237,14 @@ function endGame(winner) {
         scriptResult = scriptsToExecute[s][0].run(...scriptsToExecute[s].slice(1));
         console.log(scriptResult);
         if (scriptResult === false) {
+            showEndGameWindow(winner);
             return false;
         }
     }
     activeGameState.turnNumber = Infinity;
     activeGameState.playerTurn = winner;
     activeGameState.turnPhase = Infinity;
+    showEndGameWindow(winner);
     return true;
 }
 

@@ -120,8 +120,15 @@ function getNumPlayers(){
     
 }
 
+
 function initializeElements()
-{
+{ 
+    board = null;
+    buttons = [];
+    logical_pieces = []
+    logical_board = null;
+    globalViewer = null;
+
     logical_board = Board.loadCode(game.board)
     board = new GameBoard(logical_board);
     game.pieces.forEach(p => {
@@ -141,6 +148,10 @@ function initializeElements()
     game.globalScripts.forEach(gs => globalScripts.push(ScriptingRule.loadCode(gs)) ) 
     globalViewer = new GameGlobalVariables(activeGameState.globalVariables, game.globalLayout);
     startGameScripts();
-    board.update();
+    updateUI();
 
+}
+
+function playAgain(){
+    initializeElements();
 }

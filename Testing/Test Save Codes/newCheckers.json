@@ -3046,9 +3046,9 @@
             "containerHeight": 36.80555555555556,
             "containerTop": 57.63744354248047,
             "containerLeft": 0.51513671875,
-            "borderColor": "#ff0000",
-            "borderWidth": "2px",
-            "backgroundColor": "#ffe0e0",
+            "borderColor": "#ffffff",
+            "borderWidth": 0,
+            "backgroundColor": "#ffffff",
             "clickScripts": [
                 {
                     "trigger": "None",
