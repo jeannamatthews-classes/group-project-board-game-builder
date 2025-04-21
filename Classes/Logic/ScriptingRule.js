@@ -357,35 +357,35 @@ class ScriptingRule {
         }
         else if (this.type === "Return Variable of Rule") {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
-            let index = this.variables.map(x => x[0]).indexOf(variableName);
+            let index = this.variables.map(x => x.name).indexOf(variableName);
             if (index === -1) {
                 console.log("what")
                 return undefined;
             }
             else {
-                return this.variables[index][1];
+                return this.variables[index].value;
             }
         }
         else if (this.type === "Return Variable of Object") {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
             let object = caller;
             if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
-            let index = object.publicVars.map(x => x[0]).indexOf(variableName);
+            let index = object.publicVars.map(x => x.name).indexOf(variableName);
             if (index === -1) {
                 return undefined;
             }
             else {
-                return object.publicVars[index][1];
+                return object.publicVars[index].value;
             }
         }
         else if (this.type === "Return Global Variable") {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
-            let index = activeGameState.globalVariables.map(x => x[0]).indexOf(variableName);
+            let index = activeGameState.globalVariables.map(x => x.name).indexOf(variableName);
             if (index === -1) {
                 return undefined;
             }
             else {
-                return activeGameState.globalVariables[index][1];
+                return activeGameState.globalVariables[index].value;
             }
         }
         else if (this.type === "Board Width") {
@@ -477,13 +477,13 @@ class ScriptingRule {
         else if (this.type === "Edit Variable of Rule") {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
             let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
-            let index = this.variables.map(x => x[0]).indexOf(variableName);
+            let index = this.variables.map(x => x.name).indexOf(variableName);
             if (index === -1) {
                 console.log("HEY", variableName)
-                this.variables.push([variableName, variableValue]);
+                this.variables.push({name: variableName, value: variableValue, display: false});
             }
             else {
-                this.variables[index][1] = variableValue;
+                this.variables[index].value = variableValue;
             }
         }
         else if (this.type === "Edit Variable of Object") { // Player variables, such as score, haven't been implemented yet, but this will probably be used for them too
@@ -491,23 +491,23 @@ class ScriptingRule {
             let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
             let object = caller;
             if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
-            let index = object.publicVars.map(x => x[0]).indexOf(variableName);
+            let index = object.publicVars.map(x => x.name).indexOf(variableName);
             if (index === -1) {
-                object.publicVars.push([variableName, variableValue]);
+                object.publicVars.push({name: variableName, value: variableValue, display: false});
             }
             else {
-                object.publicVars[index][1] = variableValue;
+                object.publicVars[index].value = variableValue;
             }
         }
         else if (this.type === "Edit Global Variable") {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
             let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
-            let index = activeGameState.globalVariables.map(x => x[0]).indexOf(variableName);
+            let index = activeGameState.globalVariables.map(x => x.name).indexOf(variableName);
             if (index === -1) {
-                activeGameState.globalVariables.push([variableName, variableValue]);
+                activeGameState.globalVariables.push({name: variableName, value: variableValue, display: false});
             }
             else {
-                activeGameState.globalVariables[index][1] = variableValue;
+                activeGameState.globalVariables[index].value = variableValue;
             }
         }
         else if (this.type === "if-then-else") {
@@ -790,7 +790,7 @@ class ScriptingRule {
             trigger: this.trigger,
             type: this.type,
             args: this.getConstructorArguments().slice(2).map(serialize),
-            variables: this.variables.map(([name, value]) => [name, serialize(value)])
+            variables: this.variables.map((vari) => [vari.name, serialize(vari.value)])
         };
     }
     
@@ -812,7 +812,9 @@ class ScriptingRule {
         const rule = new ScriptingRule(data.trigger, data.type, ...args);
     
         rule.variables = Array.isArray(data.variables)
-            ? data.variables.map(([name, value]) => [name, deserialize(value)])
+            ? data.variables.map(([vName, vValue]) => function(){
+                return {name: vName, value: deserialize(vValue)};
+            }())
             : [];
     
         return rule;
