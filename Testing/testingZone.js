@@ -1,6 +1,6 @@
 if (activeGameState === undefined) activeGameState = new GameState(new Board("Square", 1, 1), [], 2);
 let board = undefined; let globalViewer = undefined; // These variables are used in the real gameplay UI, so they need to be defined here so gameStateValid and gameStateRevert work but I don't care to use them
-gameStateValid();
+startGameScripts();
 let clickingPieces = true;
 generateTestingGrid(); displayTestingGrid();
 document.getElementById("clickChange").addEventListener("click", function(){

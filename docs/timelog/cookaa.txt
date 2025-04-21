@@ -81,4 +81,5 @@ April 19: Spent around 35 minutes adding save code method equivalents to my test
 April 20: Spent around 2 hours and 10 minutes fixing various bugs that gameplay UI updates have created,
 creating save codes for my testing examples, and making it so global variables are now stored within the game state.
 
-April 21: Spent around 30 minutes updating the way variables are stored to match the way the editors work with them.
+April 21: Spent around 50 minutes updating the way variables are stored to match the way the editors work with them,
+and adding Start Game trigger to scripting rules

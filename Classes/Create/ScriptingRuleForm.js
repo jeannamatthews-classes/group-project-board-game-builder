@@ -159,6 +159,12 @@ class ScriptingRuleForm {
             }
             if (true) {
                 srdtriggeroption = document.createElement("option");
+                srdtriggeroption.setAttribute("value", "Start Game");
+                srdtriggeroption.innerHTML = "When the game starts";
+                srdtriggerselect.appendChild(srdtriggeroption);
+            }
+            if (true) {
+                srdtriggeroption = document.createElement("option");
                 srdtriggeroption.setAttribute("value", "Start Turn");
                 srdtriggeroption.innerHTML = "When a turn starts";
                 srdtriggerselect.appendChild(srdtriggeroption);

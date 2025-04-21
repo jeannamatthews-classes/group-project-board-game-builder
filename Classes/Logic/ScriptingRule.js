@@ -650,6 +650,8 @@ class ScriptingRule {
     "End Turn": Triggers at the end of a turn. No arguments.
     "Start Turn": Triggers at the start of a turn. No arguments.
     "Object Clicked": Triggers when this object is clicked. No arguments.
+    "Start Game": Triggers at the start of the game. No arguments.
+    "End Game": Triggers when the game ends. No arguments.
     */
 
     // Gives this rule the same variables array as the other rule.
