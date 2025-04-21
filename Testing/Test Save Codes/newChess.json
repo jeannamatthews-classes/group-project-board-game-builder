@@ -1259,7 +1259,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "imageName": "queen",
+                "imageName": "king",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "",
@@ -1279,7 +1279,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "imageName": "king",
+                "imageName": "queen",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "",
@@ -1424,7 +1424,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "imageName": "queen",
+                "imageName": "king",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "",
@@ -1444,7 +1444,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "imageName": "king",
+                "imageName": "queen",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "",
@@ -2209,7 +2209,7 @@
                                             "trigger": "None",
                                             "type": "Create Piece Sprite",
                                             "args": [
-                                                "queen",
+                                                "king",
                                                 "#dddddd",
                                                 "#222",
                                                 "",
@@ -2561,7 +2561,7 @@
                                             "trigger": "None",
                                             "type": "Create Piece Sprite",
                                             "args": [
-                                                "queen",
+                                                "king",
                                                 "#222222",
                                                 "#ddd",
                                                 "Queen",
