@@ -292,7 +292,7 @@ for (let y = 0; y < activeGameState.board.tileArray.length; y++) {
         activeGameState.board.tileArray[y][x].types.push(7);
     }
 }
-otherGlobalVariables.push(["Red Pieces Remaining", 12], ["Black Pieces Remaining", 12])
+activeGameState.globalVariables.push(["Red Pieces Remaining", 12], ["Black Pieces Remaining", 12])
 let endTurnButton = new Button( // Shows up to let you end your turn if you've captured at least once
     [
         new ScriptingRule("None", "Change Turn Phase", Infinity)

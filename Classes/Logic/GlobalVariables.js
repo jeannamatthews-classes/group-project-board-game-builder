@@ -3,7 +3,6 @@ let activeGameState; // The game state currently being edited
 let tileTypesList = []; // An array of the created tile types
 let pieceTypesList = []; // An array of the created piece types
 let buttonsList = []; // An array of the created buttons
-let otherGlobalVariables = [];
 let globalScripts = [];
 
 let nextObjectID = 0;
@@ -58,48 +57,29 @@ function assignRuleID() {
 
 function gameStateValid() {
     currentGameState = activeGameState.clone();
-    // updateUI();
+    updateUI();
 }
 
 function gameStateRevert() {
     activeGameState = currentGameState.clone();
-    // updateUI();
+    updateUI();
 }
 
 function updateUI(){
-    board.update();
-    globalViewer.refresh();
+    if (board !== undefined && globalViewer !== undefined) {
+        board.update();
+        globalViewer.refresh();
+    }
 }
 
 // A variant of structuredClone that will preserve types like Pieces and Tiles.
-// NOTE TO CODERS: If you ever change the arguments to a constructor of one of the classes this project defines, make the appropriate change here too!
-/*
+// Object-specific clone methods handle most of this but we still need this for arrays
 function BGBStructuredClone(argument) {
     if (typeof argument !== "object") return argument; // primitive types are already cloned
     if (Array.isArray(argument)) return argument.map(BGBStructuredClone); // Copy each entry of the array
-    if (argument instanceof ScriptingRule) {
-        let result = new ScriptingRule(...argument.getConstructorArguments());
-        return result;
-    }
-    if (argument instanceof GameState) return new GameState(BGBStructuredClone(argument.board), BGBStructuredClone(argument.pieceArray), argument.playerAmount, argument.turnNumber, argument.playerTurn, argument.turnPhase, BGBStructuredClone(argument.selectedObjects));
-    if (argument instanceof Board) {
-        let result = new Board(argument.boardShape, argument.width, argument.height);
-        result.tileArray = BGBStructuredClone(argument.tileArray);
-        return result;
-    }
-    if (argument instanceof TileType) return new TileType(argument.typeName, BGBStructuredClone(argument.scripts), argument.typeID);
-    if (argument instanceof Tile) return new Tile(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
-    if (argument instanceof PieceType) return new PieceType(argument.typeName, BGBStructuredClone(argument.scripts), argument.typeID);
-    if (argument instanceof Piece) return new Piece(BGBStructuredClone(argument.types), argument.xCoordinate, argument.yCoordinate, argument.playerOwnerID, BGBStructuredClone(argument.sprite), argument.objectID);
-    if (argument instanceof Button) {
-        let result = new Button(BGBStructuredClone(argument.clickScripts), BGBStructuredClone(argument.visibleRules), argument.color, argument.textColor, argument.text, argument.width, argument.length);
-        result.name = argument.name;
-    }
-    if (argument instanceof ScriptingRuleForm) return new ScriptingRuleForm(BGBStructuredClone(argument.rule), argument.top, argument.callerType, argument.zebraDark, argument.parentType, argument.name, argument.ruleID);
+    if (argument.hasOwnProperty("clone")) return argument.clone();
     return structuredClone(argument); // Sprites are non-instance objects, so we just call the usual structuredClone on them
 }
-    */
-// I don't think we need this because all objects have their own clone function. 
 
 // Checks if two things are equal, including working on types like Pieces and Tiles.
 function BGBEquals(leftArg, rightArg) {

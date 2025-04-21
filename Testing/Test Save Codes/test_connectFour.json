@@ -1066,7 +1066,7 @@
                                                     "trigger": "None",
                                                     "type": "Create Piece Sprite",
                                                     "args": [
-                                                        "square",
+                                                        null,
                                                         "#ff4040",
                                                         "#000000",
                                                         "",
@@ -1078,7 +1078,7 @@
                                                     "trigger": "None",
                                                     "type": "Create Piece Sprite",
                                                     "args": [
-                                                        "square",
+                                                        null,
                                                         "#ffff40",
                                                         "#000000",
                                                         "",

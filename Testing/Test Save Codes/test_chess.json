@@ -1069,7 +1069,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "Rook",
@@ -1089,7 +1089,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "Knight",
@@ -1110,7 +1110,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "Bishop",
@@ -1131,7 +1131,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "Queen",
@@ -1151,7 +1151,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "King",
@@ -1172,7 +1172,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "Bishop",
@@ -1192,7 +1192,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "Knight",
@@ -1213,7 +1213,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "Rook",
@@ -1234,7 +1234,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Rook",
@@ -1254,7 +1254,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Knight",
@@ -1275,7 +1275,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Bishop",
@@ -1296,7 +1296,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Queen",
@@ -1316,7 +1316,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "King",
@@ -1337,7 +1337,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Bishop",
@@ -1357,7 +1357,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Knight",
@@ -1378,7 +1378,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Rook",
@@ -1398,7 +1398,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1418,7 +1418,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1438,7 +1438,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1458,7 +1458,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1478,7 +1478,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1498,7 +1498,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1518,7 +1518,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1538,7 +1538,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ddd",
                 "strokeColor": "#222",
                 "text": "White Pawn",
@@ -1558,7 +1558,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -1578,7 +1578,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -1598,7 +1598,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -1618,7 +1618,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -1638,7 +1638,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -1658,7 +1658,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -1678,7 +1678,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -1698,7 +1698,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#222",
                 "strokeColor": "#ddd",
                 "text": "Black Pawn",
@@ -2081,7 +2081,7 @@
                                             "trigger": "None",
                                             "type": "Create Piece Sprite",
                                             "args": [
-                                                "square",
+                                                null,
                                                 "#ddd",
                                                 "#222",
                                                 "Queen",
@@ -2433,7 +2433,7 @@
                                             "trigger": "None",
                                             "type": "Create Piece Sprite",
                                             "args": [
-                                                "square",
+                                                null,
                                                 "#222",
                                                 "#ddd",
                                                 "Queen",

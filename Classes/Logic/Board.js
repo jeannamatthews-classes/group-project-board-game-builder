@@ -54,6 +54,7 @@ class Board {
             this.tileArray = ta;
         }
         else {
+            console.log(boardShape);
             throw new Error("Invalid board shape");
         }
     }

@@ -19,7 +19,7 @@ class TileType {
         return {
             typeID: this.typeID,
             typeName: this.typeName,
-            publicVars: this.publicVars,
+            publicVars: BGBStructuredClone(this.publicVars),
             scripts: this.scripts.map(s => s.saveCode ? s.saveCode() : null)
         };
     }

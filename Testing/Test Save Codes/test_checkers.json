@@ -1068,7 +1068,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1088,7 +1088,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1108,7 +1108,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1128,7 +1128,7 @@
             "yCoordinate": 7,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1148,7 +1148,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1168,7 +1168,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1188,7 +1188,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1208,7 +1208,7 @@
             "yCoordinate": 6,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1228,7 +1228,7 @@
             "yCoordinate": 5,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1248,7 +1248,7 @@
             "yCoordinate": 5,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1268,7 +1268,7 @@
             "yCoordinate": 5,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1288,7 +1288,7 @@
             "yCoordinate": 5,
             "playerOwnerID": 1,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#ff0000",
                 "strokeColor": "#000",
                 "text": "Regular Red",
@@ -1308,7 +1308,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1328,7 +1328,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1348,7 +1348,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1368,7 +1368,7 @@
             "yCoordinate": 0,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1388,7 +1388,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1408,7 +1408,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1428,7 +1428,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1448,7 +1448,7 @@
             "yCoordinate": 1,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1468,7 +1468,7 @@
             "yCoordinate": 2,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1488,7 +1488,7 @@
             "yCoordinate": 2,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1508,7 +1508,7 @@
             "yCoordinate": 2,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1528,7 +1528,7 @@
             "yCoordinate": 2,
             "playerOwnerID": 2,
             "sprite": {
-                "shape": "square",
+                "imageName": "square",
                 "fillColor": "#000000",
                 "strokeColor": "#fff",
                 "text": "Regular Black",
@@ -1714,7 +1714,7 @@
                                             "trigger": "None",
                                             "type": "Create Piece Sprite",
                                             "args": [
-                                                "square",
+                                                null,
                                                 "#ff0000",
                                                 "#000000",
                                                 "Red King",
@@ -1869,7 +1869,7 @@
                                             "trigger": "None",
                                             "type": "Create Piece Sprite",
                                             "args": [
-                                                "square",
+                                                null,
                                                 "#000000",
                                                 "#ffffff",
                                                 "Black King",

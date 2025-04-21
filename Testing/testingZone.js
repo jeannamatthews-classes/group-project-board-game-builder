@@ -1,7 +1,12 @@
-if (activeGameState === undefined) activeGameState = new GameState(new Board("Square", 1, 1), [], 2)
+if (activeGameState === undefined) activeGameState = new GameState(new Board("Square", 1, 1), [], 2);
+let board = undefined; let globalViewer = undefined; // These variables are used in the real gameplay UI, so they need to be defined here so gameStateValid and gameStateRevert work but I don't care to use them
 gameStateValid();
 let clickingPieces = true;
 generateTestingGrid(); displayTestingGrid();
+document.getElementById("clickChange").addEventListener("click", function(){
+    clickingPieces = !clickingPieces;
+    displayTestingGrid();
+});
 
 
 // The code below was copied from previous projects of mine and edited
@@ -65,10 +70,6 @@ function generateTestingGrid() {
         });
         document.getElementById("buttonsBox").appendChild(buttonH);
     }
-    document.getElementById("clickChange").addEventListener("click", function(){
-        clickingPieces = !clickingPieces;
-        displayTestingGrid();
-    });
 }
 
 function displayTestingGrid() {
@@ -110,7 +111,7 @@ function saveCode() {
         pieceTypes: pieceTypesList.map(type => type.saveCode()),
         tileTypes: tileTypesList.map(type => type.saveCode()),
         buttons: buttonsList.map(button => button.saveCode()),
-        globalVariables: otherGlobalVariables,
+        globalVariables: activeGameState.globalVariables,
         globalScripts: globalScripts.map(rule => rule.saveCode()),
         inventoryLayout: {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'},
         globalLayout: {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)', displayVariables:[]}
@@ -149,7 +150,7 @@ function loadGame() {
                 for (let p of game.pieces) {
                     activeGameState.pieceArray.push(Piece.loadCode(p))
                 }
-                otherGlobalVariables = game.globalVariables;
+                activeGameState.globalVariables = game.globalVariables;
                 pieceTypesList = [];
                 tileTypesList = [];
                 buttonsList = [];
@@ -161,7 +162,7 @@ function loadGame() {
                     pieceTypesList.push(PieceType.loadCode(t))
                 }
                 for (let b of game.buttons) {
-                    pieceTypesList.push(Button.loadCode(b))
+                    buttonsList.push(Button.loadCode(b))
                 }
                 for (let s of game.globalScripts) {
                     globalScripts.push(ScriptingRule.loadCode(s))
