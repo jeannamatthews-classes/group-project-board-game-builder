@@ -56,6 +56,9 @@ class GameButton {
         this.button.textContent = s.text;
     }
 
+    update(){
+        this.refresh();
+    }
     getElement() {
         return this.container.getElement();
     }

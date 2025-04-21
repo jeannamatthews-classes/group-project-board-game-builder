@@ -68,7 +68,8 @@ function gameStateRevert() {
 function updateUI(){
     if (board !== undefined && globalViewer !== undefined) {
         board.update();
-        globalViewer.refresh();
+        globalViewer.update();
+        buttons.forEach(b=>b.update());
     }
 }
 
