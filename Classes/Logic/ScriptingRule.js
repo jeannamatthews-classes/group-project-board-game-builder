@@ -97,7 +97,6 @@ class ScriptingRule {
             if (this.object === null) this.object = undefined;
         }
         else if (this.type === "Create Piece Sprite") {
-            console.log("YOYOYOYOYOYO", args)
             this.imageName = args[0] ?? "circle";
             this.fillColor = args[1] ?? "#cccccc";
             this.strokeColor = args[2] ?? "#000000";
@@ -663,123 +662,87 @@ class ScriptingRule {
 
     // This is used for cloning.
     getConstructorArguments() {
-        const cloneArg = (arg) => {
-            if (arg instanceof ScriptingRule) return arg.clone();
-            if (Array.isArray(arg)) return arg.map(cloneArg);
-            return arg;
-        };
-    
         let args = [this.trigger, this.type];
     
-        // Value & Argument types
         if (this.type === "Value") {
-            args.push(cloneArg(this.value));
+            args.push(this.value);
         } else if (this.type === "Argument") {
-            args.push(cloneArg(this.index));
-        }
-    
-        // Actions
-        else if (this.type === "Move Piece" || this.type === "Move Piece to Coordinates") {
-            args.push(cloneArg(this.moveX), cloneArg(this.moveY));
+            args.push(this.index);
+        } else if (this.type === "Move Piece" || this.type === "Move Piece to Coordinates") {
+            args.push(this.moveX, this.moveY);
         } else if (this.type === "Change Piece Owner" || this.type === "Move Piece to Inventory") {
-            args.push(cloneArg(this.playerID));
+            args.push(this.playerID);
         } else if (this.type === "Add Type") {
-            args.push(cloneArg(this.typeToEdit), cloneArg(this.index));
+            args.push(this.typeToEdit, this.index);
         } else if (this.type === "Remove Type") {
-            args.push(cloneArg(this.typeToEdit));
+            args.push(this.typeToEdit);
         } else if (this.type === "Add Piece") {
             args.push(
-                cloneArg(this.newPieceTypes),
-                cloneArg(this.newPieceX),
-                cloneArg(this.newPieceY),
-                cloneArg(this.newPieceOwner),
-                cloneArg(this.newPieceSprite)
+                this.newPieceTypes,
+                this.newPieceX,
+                this.newPieceY,
+                this.newPieceOwner,
+                this.newPieceSprite
             );
         } else if (this.type === "Change Turn Phase") {
-            args.push(cloneArg(this.phase));
+            args.push(this.phase);
         } else if (this.type === "End Game") {
-            args.push(cloneArg(this.winner));
+            args.push(this.winner);
         } else if (this.type === "Change Piece Sprite") {
-            args.push(cloneArg(this.newPieceSprite));
+            args.push(this.newPieceSprite);
         } else if (this.type === "Change Tile Sprite") {
-            args.push(cloneArg(this.newTileSprite));
-        }
-    
-        // Reporters
-        else if (this.type === "Tile at Coordinates") {
-            args.push(cloneArg(this.XCoordinate), cloneArg(this.YCoordinate));
+            args.push(this.newTileSprite);
+        } else if (this.type === "Tile at Coordinates") {
+            args.push(this.XCoordinate, this.YCoordinate);
         } else if (this.type === "Pieces on Tile") {
-            args.push(cloneArg(this.tileToCheck));
+            args.push(this.tileToCheck);
         } else if (["X Coordinate", "Y Coordinate", "Object Types", "Object ID", "Select Object", "Deselect Object"].includes(this.type)) {
-            args.push(cloneArg(this.object));
+            args.push(this.object);
         } else if (this.type === "Create Piece Sprite") {
-            args.push(
-                cloneArg(this.imageName),
-                cloneArg(this.fillColor),
-                cloneArg(this.strokeColor),
-                cloneArg(this.text),
-                cloneArg(this.textColor)
-            );
+            args.push(this.imageName, this.fillColor, this.strokeColor, this.text, this.textColor);
         } else if (this.type === "Create Tile Sprite") {
-            args.push(
-                cloneArg(this.imageName),
-                cloneArg(this.imageColor),
-                cloneArg(this.fillColor),
-                cloneArg(this.text),
-                cloneArg(this.textColor)
-            );
+            args.push(this.imageName, this.imageColor, this.fillColor, this.text, this.textColor);
         } else if (this.type === "Choose Piece Type" || this.type === "Choose Tile Type") {
-            args.push(cloneArg(this.index));
-        }
-    
-        // Control
-        else if (["Edit Variable of Object", "Edit Variable of Rule", "Edit Global Variable"].includes(this.type)) {
-            args.push(cloneArg(this.variableName), cloneArg(this.variableValue));
+            args.push(this.index);
+        } else if (["Edit Variable of Object", "Edit Variable of Rule", "Edit Global Variable"].includes(this.type)) {
+            args.push(this.variableName, this.variableValue);
             if (this.type === "Edit Variable of Object") {
-                args.push(cloneArg(this.object));
+                args.push(this.object);
             }
         } else if (["Return Variable of Object", "Return Variable of Rule", "Return Global Variable"].includes(this.type)) {
-            args.push(cloneArg(this.variableName));
+            args.push(this.variableName);
             if (this.type === "Return Variable of Object") {
-                args.push(cloneArg(this.object));
+                args.push(this.object);
             }
         } else if (this.type === "if-then-else") {
-            args.push(cloneArg(this.if), cloneArg(this.then), cloneArg(this.else));
+            args.push(this.if, this.then, this.else);
         } else if (this.type === "Return at End") {
-            args = args.concat(cloneArg(this.scriptsToRun));
+            args = args.concat(this.scriptsToRun);
         } else if (this.type === "Repeat While") {
-            args.push(cloneArg(this.repeatCheck), cloneArg(this.repeatScript));
-        }
-    
-        // Operators
-        else if (twoArgOperators.includes(this.type)) {
-            args.push(cloneArg(this.leftArg), cloneArg(this.rightArg));
+            args.push(this.repeatCheck, this.repeatScript);
+        } else if (twoArgOperators.includes(this.type)) {
+            args.push(this.leftArg, this.rightArg);
         } else if (oneArgOperators.includes(this.type)) {
-            args.push(cloneArg(this.argument));
-        }
-    
-        // Arrays
-        else if (this.type === "Create an Array") {
-            args = args.concat(cloneArg(this.elements));
+            args.push(this.argument);
+        } else if (this.type === "Create an Array") {
+            args = args.concat(this.elements);
         } else if (["Array Length", "Remove Last Element of Array"].includes(this.type)) {
-            args.push(cloneArg(this.array));
+            args.push(this.array);
         } else if (["Array Index of Element", "Add to Array"].includes(this.type)) {
-            args.push(cloneArg(this.array), cloneArg(this.element));
+            args.push(this.array, this.element);
         } else if (this.type === "Array Element at Index") {
-            args.push(cloneArg(this.array), cloneArg(this.index));
+            args.push(this.array, this.index);
         } else if (this.type === "Slice of String" || this.type === "Slice of Array") {
-            args.push(cloneArg(this.outer), cloneArg(this.leftIndex), cloneArg(this.rightIndex));
-        }
-    
-        // Misc
-        else if (this.type === "Other Caller") {
-            args.push(cloneArg(this.otherCaller), cloneArg(this.otherScript));
+            args.push(this.outer, this.leftIndex, this.rightIndex);
+        } else if (this.type === "Other Caller") {
+            args.push(this.otherCaller, this.otherScript);
         } else if (this.type === "Console Log") {
-            args.push(cloneArg(this.toLog));
+            args.push(this.toLog);
         }
     
         return args;
     }
+    
     
     saveCode() {
         const serialize = (value) => {
