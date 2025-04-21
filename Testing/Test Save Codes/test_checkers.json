@@ -5,10 +5,10 @@
         "boardShape": "Square",
         "width": 8,
         "height": 8,
-        "containerWidth": -1,
-        "containerHeight": -1,
-        "containerTop": -1,
-        "containerLeft": -1,
+        "containerWidth": 72.4609375,
+        "containerHeight": 100,
+        "containerTop": 0,
+        "containerLeft": 27.473958333333332,
         "borderColor": "rgba(0, 0, 0, 0.9)",
         "borderWidth": "2px",
         "backgroundColor": "rgba(255, 255, 255, 0.9)",
@@ -2914,10 +2914,10 @@
     "buttons": [
         {
             "name": "",
-            "containerWidth": -1,
-            "containerHeight": -1,
-            "containerTop": -1,
-            "containerLeft": -1,
+            "containerWidth": 27.278645833333332,
+            "containerHeight": 44.97534941801782,
+            "containerTop": 55.02465058198218,
+            "containerLeft": 0,
             "borderColor": "black",
             "borderWidth": "2px",
             "backgroundColor": "white",
@@ -2964,33 +2964,38 @@
         }
     ],
     "globalVariables": [
-        [
-            "Red Pieces Remaining",
-            12
-        ],
-        [
-            "Black Pieces Remaining",
-            12
-        ]
+        {
+            "name": "Red Pieces Remaining",
+            "value": 12,
+            "display": false
+        },
+        {
+            "name": "Black Pieces Remaining",
+            "value": 12,
+            "display": false
+        }
     ],
     "globalScripts": [],
     "inventoryLayout": {
-        "containerWidth": -1,
-        "containerHeight": -1,
-        "containerTop": -1,
-        "containerLeft": -1,
+        "containerWidth": 24.674479166666664,
+        "containerHeight": 54.891921686479805,
+        "containerTop": 0,
+        "containerLeft": 0,
         "borderColor": "rgba(0, 0, 0, 0.9)",
         "borderWidth": "2px",
         "backgroundColor": "rgba(255, 255, 255, 0.9)"
     },
     "globalLayout": {
-        "containerWidth": -1,
-        "containerHeight": -1,
-        "containerTop": -1,
-        "containerLeft": -1,
+        "containerWidth": 27.018229166666668,
+        "containerHeight": 54.891921686479805,
+        "containerTop": 0,
+        "containerLeft": 0,
         "borderColor": "rgba(0, 0, 0, 0.9)",
         "borderWidth": "2px",
         "backgroundColor": "rgba(255, 255, 255, 0.9)",
-        "displayVariables": []
+        "displayVariables": [
+            "Red Pieces Remaining",
+            "Black Pieces Remaining"
+        ]
     }
 }
