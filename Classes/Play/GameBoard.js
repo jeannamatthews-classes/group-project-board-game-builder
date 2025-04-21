@@ -123,11 +123,13 @@ class GameBoard {
     }
 
     update(){
+        console.log(this.tiles)
         this.logical = activeGameState.board; 
         let flatTiles = this.tiles.flat();
         flatTiles.forEach(tile => tile.update());
         activeGameState.pieceArray.forEach(p=> {
             if(p.xCoordinate != -1 && p.yCoordinate !=-1)
+                console.log(p.yCoordinate)
             this.tiles[p.yCoordinate][p.xCoordinate].addPiece(p) //top and left format.
         })
 
