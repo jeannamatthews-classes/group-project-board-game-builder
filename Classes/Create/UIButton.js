@@ -143,7 +143,6 @@ class UIButton {
         };
 
         const textInput = document.createElement('input');
-        textInput.maxLength = 12;
         textInput.value = this.button.sprite.text;
         textInput.oninput = () => {
             this.button.sprite.text = textInput.value;
