@@ -358,7 +358,6 @@ class ScriptingRule {
             let variableName = (this.variableName instanceof ScriptingRule) ? this.variableName.portVariables(this).run(caller, ...args) : this.variableName;
             let index = this.variables.map(x => x.name).indexOf(variableName);
             if (index === -1) {
-                console.log("what")
                 return undefined;
             }
             else {
@@ -478,7 +477,6 @@ class ScriptingRule {
             let variableValue = (this.variableValue instanceof ScriptingRule) ? this.variableValue.portVariables(this).run(caller, ...args) : this.variableValue;
             let index = this.variables.map(x => x.name).indexOf(variableName);
             if (index === -1) {
-                console.log("HEY", variableName)
                 this.variables.push({name: variableName, value: variableValue, display: false});
             }
             else {

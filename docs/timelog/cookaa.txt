@@ -82,5 +82,7 @@ April 20: Spent around 2 hours and 10 minutes (of useful time, at least. I think
 fixing various bugs that gameplay UI updates have created, creating save codes for my testing examples,
 and making it so global variables are now stored within the game state.
 
-April 21: Spent around 1 hour and 30 minutes (also probably an underestimate) updating the way variables are stored to match the way the editors work with them,
-adding Start Game trigger to scripting rules, and fixing some scripting rule form bugs.
+April 21: Spent around 2 hours and 30 minutes (also probably an underestimate) updating the way variables are stored to match the way the editors work with them,
+adding Start Game trigger to scripting rules, fixing some scripting rule form bugs, and creating a "connect 4 with gravity changes"
+example game. Also, group meeting for 1 hour and 25 minutes, in which we updated the GANTT chart, discussed our plans for the demo presentation,
+had a couple more bugs fixed, and made some plans for things we want to add after the demo.

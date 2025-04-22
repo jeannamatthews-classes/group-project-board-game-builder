@@ -1,0 +1,1 @@
+Sophia has created most of the gameplay UI now, allowing us to properly test our example games in their finalized forms and start fixing bugs that have been added over the course of the updates. We're mostly working on finishing touches and testing for the MVP.
