@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to The Board Game Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geo:ital@0;1&family=Handjet:wght@100..900&family=Iceberg&family=Pixelify+Sans:wght@400..700&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f9ff;
+      font-family: "VT323", monospace;
+      font-size: 18px;
+      margin: 0;
+      padding: 10vw;
+      color: #222;
+    }
+
+    .container {
+      margin: auto;
+      padding: 5vw;
+    }
+
+    h1 {
+      font-family: "Pixelify Sans", sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-family: "Geo", sans-serif;
+      font-size: 2rem;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 4px;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .image-wrapper {
+      margin: auto;
+      object-fit: contain;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border: 2px dashed #777;
+      background-color: #ccc;
+    }
+
+    .caption {
+      font-style: italic;
+      text-align: center;
+      font-size: 0.95rem;
+      margin-top: 8px;
+      margin-bottom: 30px;
+    }
+
+    .iceberg-regular {
+      font-family: "Iceberg", sans-serif;
+    }
+    .image-wrapper {
+  margin: auto;
+  width: 100%;
+  height: 400px; /* Increased height */
+  overflow: hidden;
+}
+
+
+.image-wrapper {
+  width: 70vw;
+  height: 43.75vw;
+  aspect-ratio: 1.6; /* Maintains 2880x1800 ratio */
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  overflow:hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit:contain;
+  display: block;
+}
+.caption {
+  font-style: italic;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+.center {
+    margin: auto;
+    text-align:center;
+}
+.home-top-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #e0e0ff;
+  border: 2px solid #555;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #222;
+  font-family: "Geo", sans-serif;
+  z-index: 1000;
+  box-shadow: 2px 2px #999;
+}
+.home-top-btn:hover {
+  background-color: #c0c0ff;
+}
+
+.home-cta-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.home-cta-btn {
+  padding: 12px 24px;
+  background-color: #001f4d;
+  color: white;
+  font-size: 1.2rem;
+  font-family: "Pixelify Sans", sans-serif;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 4px 4px #444;
+  transition: transform 0.2s ease;
+}
+.home-cta-btn:hover {
+  transform: scale(1.05);
+  background-color: #003399;
+}
+
+
+
+  </style>
+</head>
+<body>
+    <a href="index.html" class="home-top-btn">🏠 Home</a>
+
+  <div class="container">
+    <h1>Welcome to The Board Game Builder</h1>
+
+    <p class = 'center'><span >This program allows you to create your own board game using the provided set of powerful, flexible editors.</span></p>
+
+    <div class="image-wrapper">
+      <img src="images/help/index.png" alt="Home Menu Screenshot">
+    </div>
+    <div class="caption">Home menu. Create a game or play one you've already made!</div>
+
+    <h2>Create Menu</h2>
+    <p>To start building, click the <strong>Create</strong> button on the home menu screen. This will bring you to the Create Menu, where you can define the basics of your game state.</p>
+    <p>Determine your board <strong>shape, width, and height</strong>, as well as how many players your game will have.</p>
+
+    <div class="image-wrapper">
+      <img src="images/help/boardmaker.png" alt="Create Menu Screenshot">
+    </div>
+    <div class="caption">The create menu where you shape your board and set up your game state.</div>
+
+    <h2>The Editors</h2>
+    <p>Click the edit button to toggle the <strong>Global</strong>, <strong>Board</strong>, <strong>Piece</strong>, <strong>Type</strong>, and <strong>Button</strong> editors. This is where you group logic and visuals into named components you can reuse across the board.</p>
+    <p>Add pieces, buttons, and types, as well as global variables and scripts. Click on components in the editors such as tiles and pieces to open their individual editors.</p>
+
+    <div class="image-wrapper">
+      <img src="images/help/editors.png" alt="Editor Screenshot">
+    </div>
+    <div class="caption">Use the editors to define and apply types.</div>
+
+    <h2>Scripting Rules Editor</h2>
+    <p>Once you've laid the groundwork, you can write scripting rules for your game elements using a simple <em>if-then-else</em> pseudo language. Each rule corresponds to an action or condition tied to objects like tiles, buttons, or pieces.</p>
+    <p>Add these rules to types, buttons, or global scripts. Then add types to pieces and tiles to define game logic, player interactions, and outcomes, giving you complete control over your game's behavior.</p>
+
+    <div class="image-wrapper">
+      <img src="images/help/rules.png" alt="Scripting Rules Screenshot">
+    </div>
+    <div class="caption">Editor for creating and customizing scripting rules.</div>
+
+    <h2>The Layout Menu</h2>
+    <p>After defining your types, use the preview icon to arrange the layout of active components like the board, buttons, globals, and inventories</p>
+    <p>Toggle, resize, and relocate layout windows. Or open window settings to set <strong>border color, border width, and background color</strong> to decorate your setup.</p>
+
+    <div class="image-wrapper">
+      <img src="images/help/layout.png" alt="Layout Menu Screenshot">
+    </div>
+    <div class="caption">Final placement of game pieces and elements.</div>
+
+    <h2>Gameplay</h2>
+    <p>Once everything is ready, and you've saved your game file, head back to the main menu and click <strong>Play</strong>. You'll be prompted to upload the saved <code>.json</code> save code.</p>
+    <p>The game will play according to the rules you defined. Once a win condition is met, the Game Over screen will appear with the winner and an option to play again.</p>
+
+    <div class="image-wrapper">
+      <img src="images/help/gameplay.png" alt="Gameplay Screenshot">
+    </div>
+    <div class="caption">Playing a finished custom board game.</div>
+
+    <p class="iceberg-regular" style="font-size: 1.4rem; margin-top: 60px;">Ready to start? Hit <strong>Create</strong> and build your game, now!</p>
+    <div class="home-cta-wrap">
+        <button onclick="location.href='index.html'" class="home-cta-btn">← Back to Home</button>
+      </div>
+        
+</div>
+</body>
+</html>

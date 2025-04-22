@@ -218,3 +218,8 @@ Fixed some scripting rule bugs regarding sprites.
 Fixed the preview / layout button. 
 
 More bugfixes
+
+
+April 22 - Right before the demo, I spent an hour or so finishing up any little edits to the UI.
+I fixed up the Create game initial start buttons to match therest of the UI stuff.
+And I took Aaron's help text and made it into a nice little HTML page using screenshots that I edited in Canva. 

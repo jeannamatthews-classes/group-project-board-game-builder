@@ -442,7 +442,6 @@ function loadGame() {
 window.addEventListener('DOMContentLoaded', () => {
     showStartMenu();
 });
-
 function showStartMenu() {
     const main = document.getElementById('main-screen');
     main.innerHTML = '';
@@ -454,24 +453,27 @@ function showStartMenu() {
     wrapper.style.gap = '30px';
     wrapper.style.height = '100vh';
 
+    // Shared styling for both buttons
+    const pixelButtonStyle = {
+        padding: '20px 40px',
+        fontSize: '24px',
+        border: '4px solid black',
+        backgroundColor: '#ffdd57',
+        boxShadow: '5px 5px black',
+        cursor: 'pointer',
+        textTransform: 'uppercase',
+        fontFamily: '"Pixelify Sans", sans-serif',
+    };
+
     const newGameBtn = document.createElement('button');
     newGameBtn.textContent = 'New Game';
-    newGameBtn.style.padding = '16px 32px';
-    newGameBtn.style.fontSize = '18px';
-    newGameBtn.style.border = 'none';
-    newGameBtn.style.borderRadius = '8px';
-    newGameBtn.style.cursor = 'pointer';
-    newGameBtn.style.backgroundColor = '#dcdcdc';
+    Object.assign(newGameBtn.style, pixelButtonStyle);
     newGameBtn.addEventListener('click', () => newGame());
 
     const loadGameBtn = document.createElement('button');
     loadGameBtn.textContent = 'Load Game';
-    loadGameBtn.style.padding = '16px 32px';
-    loadGameBtn.style.fontSize = '18px';
-    loadGameBtn.style.border = 'none';
-    loadGameBtn.style.borderRadius = '8px';
-    loadGameBtn.style.cursor = 'pointer';
-    loadGameBtn.style.backgroundColor = '#dcdcdc';
+    Object.assign(loadGameBtn.style, pixelButtonStyle);
+    loadGameBtn.style.backgroundColor = '#6aff6a'; // Optional: different color for variety
     loadGameBtn.addEventListener('click', () => loadGame());
 
     wrapper.appendChild(newGameBtn);

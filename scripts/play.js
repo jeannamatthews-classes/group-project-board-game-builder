@@ -33,6 +33,7 @@ document.getElementById('jsonInput').addEventListener('change', function (event)
             game = JSON.parse(e.target.result);
             console.log("Game data loaded:", game);
             document.getElementById("start-buttons").remove(); 
+            document.body.innerHTML = "";
             getNumPlayers();
 
             
