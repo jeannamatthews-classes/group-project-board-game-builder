@@ -146,7 +146,7 @@ function initializeElements()
     })
     game.globalVariables.forEach(gv => activeGameState.globalVariables.push(gv)) 
     game.globalScripts.forEach(gs => globalScripts.push(ScriptingRule.loadCode(gs)) ) 
-    globalViewer = new GameGlobalVariables(activeGameState.globalVariables, game.globalLayout);
+    globalViewer = new GameGlobalVariables(game.globalLayout);
     startGameScripts();
     updateUI();
 

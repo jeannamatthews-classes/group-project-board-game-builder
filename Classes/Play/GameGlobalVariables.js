@@ -1,6 +1,5 @@
 class GameGlobalVariables {
-    constructor(logicalGlobals, layoutInfo) {
-        this.logicalGlobals = logicalGlobals;
+    constructor(layoutInfo) {
         this.layoutInfo = layoutInfo;
         this.container = new GameElementContainer({ ...layoutInfo });
 
@@ -36,7 +35,7 @@ class GameGlobalVariables {
         this.displayedVars.forEach(name => {
             if (coreVars.some(v => v.name === name)) return; // Skip if already shown
 
-            const match = this.logicalGlobals.find(v => v.name === name);
+            const match = activeGameState.globalVariables.find(v => v.name === name);
             if (match) {
                 const row = document.createElement('div');
                 row.textContent = `${match.name}: ${match.value}`;

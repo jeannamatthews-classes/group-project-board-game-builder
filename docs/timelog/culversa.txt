@@ -214,6 +214,7 @@ Very simple....
 Need to do more testing.
 Committed fixes to github. 
 
-
 Fixed some scripting rule bugs regarding sprites.
 Fixed the preview / layout button. 
+
+More bugfixes
