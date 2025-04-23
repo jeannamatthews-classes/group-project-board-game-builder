@@ -86,3 +86,5 @@ April 21: Spent around 2 hours and 30 minutes (also probably an underestimate) u
 adding Start Game trigger to scripting rules, fixing some scripting rule form bugs, and creating a "connect 4 with gravity changes"
 example game. Also, group meeting for 1 hour and 25 minutes, in which we updated the GANTT chart, discussed our plans for the demo presentation,
 had a couple more bugs fixed, and made some plans for things we want to add after the demo.
+
+April 23: Spent around 15 minutes adding the ability for reporters of object data (like coordinates of a piece) to report on objects other than the caller.

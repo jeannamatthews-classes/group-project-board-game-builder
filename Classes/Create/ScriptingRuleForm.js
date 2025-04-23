@@ -554,16 +554,12 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
         }
-
-        // Change Piece Sprite
         else if (this.rule.type === "Change Piece Sprite") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "New Piece Sprite:";
             srdiv.appendChild(srdarg);
             scriptingRuleChild(this.rule.newPieceSprite, "PieceSprite");
         }
-
-        // Change Tile Sprite
         else if (this.rule.type === "Change Tile Sprite") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "New Tile Sprite:";
@@ -620,215 +616,206 @@ class ScriptingRuleForm {
                 srdarg.innerHTML += " Caller";
                 srdiv.appendChild(srdarg);
             }
-            // Add option to switch object here
-        }
-
-                // Create Piece Sprite
-                else if (this.rule.type === "Create Piece Sprite") {
-                    // --- Image Name (with SVG preview + arrows) ---
-                    srdarg = document.createElement("p");
-                    srdarg.innerHTML = "Sprite:";
-                
-                    if (!scriptingRuleChild(this.rule.imageName, "String")) {
-                        const spriteNames = Object.keys(SPRITE_LIBRARY);
-                        let currentIndex = spriteNames.indexOf(this.rule.imageName);
-                        if (currentIndex === -1) currentIndex = 0;
-                
-                        const preview = document.createElement("div");
-                        preview.style.width = "40px";
-                        preview.style.height = "40px";
-                        preview.style.display = "inline-block";
-                        preview.style.verticalAlign = "middle";
-                        preview.style.margin = "0 8px";
-                        preview.style.background = "#f0f0f0";
-                
-                        const renderPreview = (shouldModify = true) => {
-                            const name = spriteNames[currentIndex];
-                            this.rule.imageName = name;
-                            preview.innerHTML = SPRITE_LIBRARY[name] || "";
-                            const svg = preview.querySelector("svg");
-                            if (svg) {
-                                svg.setAttribute("width", "100%");
-                                svg.setAttribute("height", "100%");
-                                svg.querySelectorAll("[fill]").forEach(el => {
-                                    el.setAttribute("fill", this.rule.fillColor || "#000");
-                                });
-                            }
-                        
-                            if (shouldModify) form.modifyDIV(); // Only trigger if called from arrows
-                        };
-                        
-                
-                        const leftBtn = document.createElement("button");
-                        leftBtn.textContent = "◀";
-                        leftBtn.onclick = () => {
-                            currentIndex = (currentIndex - 1 + spriteNames.length) % spriteNames.length;
-                            renderPreview(true);
-                        };
-                
-                        const rightBtn = document.createElement("button");
-                        rightBtn.textContent = "▶";
-                        rightBtn.onclick = () => {
-                            currentIndex = (currentIndex + 1) % spriteNames.length;
-                            renderPreview(true);
-                        };
-                
-                        srdarg.appendChild(leftBtn);
-                        srdarg.appendChild(preview);
-                        srdarg.appendChild(rightBtn);
-                        srdiv.appendChild(srdarg);
-                
-                        renderPreview(false); // prevent modifyDIV on first load
-
-                    }
-                
-                    // --- Fill Color ---
-                    srdarg = document.createElement("p");
-                    srdarg.innerHTML = "Fill Color:";
-                    if (!scriptingRuleChild(this.rule.fillColor, "String")) {
-                        srdarg2 = document.createElement("input");
-                        srdarg2.type = "color";
-                        srdarg2.value = this.rule.fillColor;
-                        srdarg2.addEventListener("input", function () {
-                            form.rule.fillColor = this.value;
-                            form.modifyDIV();
-                        });
-                        srdarg.appendChild(srdarg2);
-                        srdiv.appendChild(srdarg);
-                    }
-                
-                    // --- Text ---
-                    srdarg = document.createElement("p");
-                    srdarg.innerHTML = "Text:";
-                    if (!scriptingRuleChild(this.rule.text, "String")) {
-                        srdarg2 = document.createElement("input");
-                        srdarg2.value = this.rule.text;
-                        srdarg2.addEventListener("input", function () {
-                            form.rule.text = this.value;
-                            form.modifyDIV();
-                        });
-                        srdarg.appendChild(srdarg2);
-                        srdiv.appendChild(srdarg);
-                    }
-                
-                    // --- Text Color ---
-                    srdarg = document.createElement("p");
-                    srdarg.innerHTML = "Text Color:";
-                    if (!scriptingRuleChild(this.rule.textColor, "String")) {
-                        srdarg2 = document.createElement("input");
-                        srdarg2.type = "color";
-                        srdarg2.value = this.rule.textColor;
-                        srdarg2.addEventListener("input", function () {
-                            form.rule.textColor = this.value;
-                            form.modifyDIV();
-                        });
-                        srdarg.appendChild(srdarg2);
-                        srdiv.appendChild(srdarg);
-                    }
-                }
-                
-// --- Create Tile Sprite ---
-else if (this.rule.type === "Create Tile Sprite") {
-    // --- Image Name (with SVG preview + arrows) ---
-    srdarg = document.createElement("p");
-    srdarg.innerHTML = "Sprite:";
-
-    if (!scriptingRuleChild(this.rule.imageName, "String")) {
-        const spriteNames = Object.keys(SPRITE_LIBRARY);
-        let currentIndex = spriteNames.indexOf(this.rule.imageName);
-        if (currentIndex === -1) currentIndex = 0;
-
-        const preview = document.createElement("div");
-        preview.style.width = "40px";
-        preview.style.height = "40px";
-        preview.style.display = "inline-block";
-        preview.style.verticalAlign = "middle";
-        preview.style.margin = "0 8px";
-        preview.style.background = "#f0f0f0";
-        this.rule.imageName = spriteNames[currentIndex];
-        const renderPreview = (shouldModify = true) => {
-            const name = spriteNames[currentIndex];
-            this.rule.imageName = name;
-            preview.innerHTML = SPRITE_LIBRARY[name] || "";
-            const svg = preview.querySelector("svg");
-            if (svg) {
-                svg.setAttribute("width", "100%");
-                svg.setAttribute("height", "100%");
-                svg.querySelectorAll("[fill]").forEach(el => {
-                    el.setAttribute("fill", this.rule.fillColor || "#000");
-                });
+            srdarg = document.createElement("button");
+            srdarg.classList.add("SRFButton");
+            if (this.rule.object instanceof ScriptingRule) {
+                srdarg.innerHTML = "Default to Caller";
             }
-            if (shouldModify) form.modifyDIV();
-        };
-
-        const leftBtn = document.createElement("button");
-        leftBtn.textContent = "◀";
-        leftBtn.onclick = () => {
-            currentIndex = (currentIndex - 1 + spriteNames.length) % spriteNames.length;
-            renderPreview(true);
-        };
-
-        const rightBtn = document.createElement("button");
-        rightBtn.textContent = "▶";
-        rightBtn.onclick = () => {
-            currentIndex = (currentIndex + 1) % spriteNames.length;
-            renderPreview(true);
-        };
-
-        srdarg.appendChild(leftBtn);
-        srdarg.appendChild(preview);
-        srdarg.appendChild(rightBtn);
-        srdiv.appendChild(srdarg);
-
-        renderPreview(false); // Initial render without triggering form refresh
-    }
-
-    // --- Fill Color ---
-    srdarg = document.createElement("p");
-    srdarg.innerHTML = "Fill Color:";
-    if (!scriptingRuleChild(this.rule.fillColor, "String")) {
-        srdarg2 = document.createElement("input");
-        srdarg2.type = "color";
-        srdarg2.value = this.rule.fillColor;
-        srdarg2.addEventListener("input", function () {
-            form.rule.fillColor = this.value;
-            form.modifyDIV();
-        });
-        srdarg.appendChild(srdarg2);
-        srdiv.appendChild(srdarg);
-    }
-
-    // --- Text ---
-    srdarg = document.createElement("p");
-    srdarg.innerHTML = "Text:";
-    if (!scriptingRuleChild(this.rule.text, "String")) {
-        srdarg2 = document.createElement("input");
-        srdarg2.value = this.rule.text;
-        srdarg2.addEventListener("input", function () {
-            form.rule.text = this.value;
-            form.modifyDIV();
-        });
-        srdarg.appendChild(srdarg2);
-        srdiv.appendChild(srdarg);
-    }
-
-    // --- Text Color ---
-    srdarg = document.createElement("p");
-    srdarg.innerHTML = "Text Color:";
-    if (!scriptingRuleChild(this.rule.textColor, "String")) {
-        srdarg2 = document.createElement("input");
-        srdarg2.type = "color";
-        srdarg2.value = this.rule.textColor;
-        srdarg2.addEventListener("input", function () {
-            form.rule.textColor = this.value;
-            form.modifyDIV();
-        });
-        srdarg.appendChild(srdarg2);
-        srdiv.appendChild(srdarg);
-    }
-}
-
+            else {
+                srdarg.innerHTML = "Use Scripting Rule for Object";
+            }
+            srdarg.addEventListener("click", function(){
+                if (form.rule.object instanceof ScriptingRule) {
+                    form.rule.object = undefined;
+                }
+                else {
+                    form.rule.object = new ScriptingRule("None", "Caller");
+                }
+                form.modifyDIV();
+            });
+            srdiv.appendChild(srdarg);
+        }
+        else if (this.rule.type === "Create Piece Sprite") {
+            // --- Image Name (with SVG preview + arrows) ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Sprite:";
+            if (!scriptingRuleChild(this.rule.imageName, "String")) {
+                const spriteNames = Object.keys(SPRITE_LIBRARY);
+                let currentIndex = spriteNames.indexOf(this.rule.imageName);
+                if (currentIndex === -1) currentIndex = 0;
         
+                const preview = document.createElement("div");
+                preview.style.width = "40px";
+                preview.style.height = "40px";
+                preview.style.display = "inline-block";
+                preview.style.verticalAlign = "middle";
+                preview.style.margin = "0 8px";
+                preview.style.background = "#f0f0f0";
+                const renderPreview = (shouldModify = true) => {
+                    const name = spriteNames[currentIndex];
+                    this.rule.imageName = name;
+                    preview.innerHTML = SPRITE_LIBRARY[name] || "";
+                    const svg = preview.querySelector("svg");
+                    if (svg) {
+                        svg.setAttribute("width", "100%");
+                        svg.setAttribute("height", "100%");
+                        svg.querySelectorAll("[fill]").forEach(el => {
+                            el.setAttribute("fill", this.rule.fillColor || "#000");
+                        });
+                    }
+                
+                    if (shouldModify) form.modifyDIV(); // Only trigger if called from arrows
+                };
+                const leftBtn = document.createElement("button");
+                leftBtn.textContent = "◀";
+                leftBtn.onclick = () => {
+                    currentIndex = (currentIndex - 1 + spriteNames.length) % spriteNames.length;
+                    renderPreview(true);
+                };
+                const rightBtn = document.createElement("button");
+                rightBtn.textContent = "▶";
+                rightBtn.onclick = () => {
+                    currentIndex = (currentIndex + 1) % spriteNames.length;
+                    renderPreview(true);
+                };
+                srdarg.appendChild(leftBtn);
+                srdarg.appendChild(preview);
+                srdarg.appendChild(rightBtn);
+                srdiv.appendChild(srdarg);
+                renderPreview(false); // prevent modifyDIV on first load
+            }
+            // --- Fill Color ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Fill Color:";
+            if (!scriptingRuleChild(this.rule.fillColor, "String")) {
+                srdarg2 = document.createElement("input");
+                srdarg2.type = "color";
+                srdarg2.value = this.rule.fillColor;
+                srdarg2.addEventListener("input", function () {
+                    form.rule.fillColor = this.value;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            // --- Text ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Text:";
+            if (!scriptingRuleChild(this.rule.text, "String")) {
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.text;
+                srdarg2.addEventListener("input", function () {
+                    form.rule.text = this.value;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            // --- Text Color ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Text Color:";
+            if (!scriptingRuleChild(this.rule.textColor, "String")) {
+                srdarg2 = document.createElement("input");
+                srdarg2.type = "color";
+                srdarg2.value = this.rule.textColor;
+                srdarg2.addEventListener("input", function () {
+                    form.rule.textColor = this.value;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+        }         
+        else if (this.rule.type === "Create Tile Sprite") {
+            // --- Image Name (with SVG preview + arrows) ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Sprite:";
+            if (!scriptingRuleChild(this.rule.imageName, "String")) {
+                const spriteNames = Object.keys(SPRITE_LIBRARY);
+                let currentIndex = spriteNames.indexOf(this.rule.imageName);
+                if (currentIndex === -1) currentIndex = 0;
+                const preview = document.createElement("div");
+                preview.style.width = "40px";
+                preview.style.height = "40px";
+                preview.style.display = "inline-block";
+                preview.style.verticalAlign = "middle";
+                preview.style.margin = "0 8px";
+                preview.style.background = "#f0f0f0";
+                this.rule.imageName = spriteNames[currentIndex];
+                const renderPreview = (shouldModify = true) => {
+                    const name = spriteNames[currentIndex];
+                    this.rule.imageName = name;
+                    preview.innerHTML = SPRITE_LIBRARY[name] || "";
+                    const svg = preview.querySelector("svg");
+                    if (svg) {
+                        svg.setAttribute("width", "100%");
+                        svg.setAttribute("height", "100%");
+                        svg.querySelectorAll("[fill]").forEach(el => {
+                            el.setAttribute("fill", this.rule.fillColor || "#000");
+                        });
+                    }
+                    if (shouldModify) form.modifyDIV();
+                };
+                const leftBtn = document.createElement("button");
+                leftBtn.textContent = "◀";
+                leftBtn.onclick = () => {
+                    currentIndex = (currentIndex - 1 + spriteNames.length) % spriteNames.length;
+                    renderPreview(true);
+                };
+                const rightBtn = document.createElement("button");
+                rightBtn.textContent = "▶";
+                rightBtn.onclick = () => {
+                    currentIndex = (currentIndex + 1) % spriteNames.length;
+                    renderPreview(true);
+                };
+                srdarg.appendChild(leftBtn);
+                srdarg.appendChild(preview);
+                srdarg.appendChild(rightBtn);
+                srdiv.appendChild(srdarg);
+                renderPreview(false); // Initial render without triggering form refresh
+            }
+            // --- Fill Color ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Fill Color:";
+            if (!scriptingRuleChild(this.rule.fillColor, "String")) {
+                srdarg2 = document.createElement("input");
+                srdarg2.type = "color";
+                srdarg2.value = this.rule.fillColor;
+                srdarg2.addEventListener("input", function () {
+                    form.rule.fillColor = this.value;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            // --- Text ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Text:";
+            if (!scriptingRuleChild(this.rule.text, "String")) {
+                srdarg2 = document.createElement("input");
+                srdarg2.value = this.rule.text;
+                srdarg2.addEventListener("input", function () {
+                    form.rule.text = this.value;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+            // --- Text Color ---
+            srdarg = document.createElement("p");
+            srdarg.innerHTML = "Text Color:";
+            if (!scriptingRuleChild(this.rule.textColor, "String")) {
+                srdarg2 = document.createElement("input");
+                srdarg2.type = "color";
+                srdarg2.value = this.rule.textColor;
+                srdarg2.addEventListener("input", function () {
+                    form.rule.textColor = this.value;
+                    form.modifyDIV();
+                });
+                srdarg.appendChild(srdarg2);
+                srdiv.appendChild(srdarg);
+            }
+        }
         else if (this.rule.type === "Choose Piece Type" || this.rule.type === "Choose Tile Type") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Type: ";
@@ -931,6 +918,24 @@ else if (this.rule.type === "Create Tile Sprite") {
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                if (this.rule.object instanceof ScriptingRule) {
+                    srdarg.innerHTML = "Default to Caller";
+                }
+                else {
+                    srdarg.innerHTML = "Use Scripting Rule for Object";
+                }
+                srdarg.addEventListener("click", function(){
+                    if (form.rule.object instanceof ScriptingRule) {
+                        form.rule.object = undefined;
+                    }
+                    else {
+                        form.rule.object = new ScriptingRule("None", "Caller");
+                    }
+                    form.modifyDIV();
+                });
+                srdiv.appendChild(srdarg);
             }
         }
         else if (this.rule.type === "Return Variable of Object" || this.rule.type === "Return Variable of Rule" || this.rule.type === "Return Global Variable") {
@@ -955,6 +960,24 @@ else if (this.rule.type === "Create Tile Sprite") {
                     srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
+                srdarg = document.createElement("button");
+                srdarg.classList.add("SRFButton");
+                if (this.rule.object instanceof ScriptingRule) {
+                    srdarg.innerHTML = "Default to Caller";
+                }
+                else {
+                    srdarg.innerHTML = "Use Scripting Rule for Object";
+                }
+                srdarg.addEventListener("click", function(){
+                    if (form.rule.object instanceof ScriptingRule) {
+                        form.rule.object = undefined;
+                    }
+                    else {
+                        form.rule.object = new ScriptingRule("None", "Caller");
+                    }
+                    form.modifyDIV();
+                });
+                srdiv.appendChild(srdarg);
             }
         }
         else if (this.rule.type === "if-then-else") {
