@@ -1,2 +1,59 @@
 We didn't have any written notes we made before the presentation, but we did have a meeting where we discussed our plans verbally.
-The most we agreed on was that Sophia would present the game creation and Aaron would present gameplay using the example games he had made.
+
+
+During our final meeting we also determined:
+Sophia would present the game creation and Aaron would present gameplay using the example games he had made.
+We would leave the old chess UI in to show versatility of the editor.
+We should show off the game editor mostly after loading in a pre-made game to save time.
+We could launch a netlify deploy, and send the files via email, so that we would not have connect our own devices.
+
+Points we wanted to cover:
+Index / Help pages. (brief)
+Sophia covers editors
+    - Show the element editor windows.
+    - Show how to use the toolbars.
+    - Show "hidden" features (right clicks)
+    - Show the Scripting Rules and briefly explain, triggers, "type" structures, and nesting of rules.
+    - Explain how rules are attached to types (or buttons / global scripts ) and how types are attached to pieces.
+    - Show how the layout editor can be used to toggle and arrange elements, as well as show global variables.
+    - Planned to show more about how individual sprites could be edited, but we never got around to this. 
+Aaron covers Gameplay UI 
+    - Use the old chess game to demonstrate how text, colors, and basic shapes can be used to generalize our BGB to other games.
+    - Use NEW chess game to demonstrate pieces with different rules for movement, piece capture, and how we handle checkmates right now.
+    - Use the checkers game to demonstrate button visibility rules + manual turn end. 
+    - Use TicTacToe/Connect4 to show how pieces (with sprites) can be added to the game dynamically through scripting.
+    - Use Connect4 to show simulated gravity mechanics, and to be the "base game" one can modify.
+    - Use the Connect4 with 4 gravity modes to show that new games and game variants can be accomplished through the editor.
+    - Show at some point how games can be restarted.
+
+    - We were also planning to use Chess/Checkers to show how Sprites can be changed dynamically (pawn to queen, checker piece to king piece), but we didn't get to this.
+
+We thought about showing JSON file looked like, too, but the class computer didn't have any convenient way of opening them, so we didn't end up doing this.
+
+We also created a list of our future plans for this project.
+We didn't explicitly plan for this to be part of the presentation, but we hoped it might help us answer certain questions people might have.
+
+Here is the list:
+
+    Before Semester Ends:
+    Editing board size during game creation
+    Make a couple more example games
+
+    After Semester Ends
+    Add more sprites (enter SVGs? Let users combine multiple existing sprites?)
+    Collapsible scripting rules, copy layers of scripting rules (add layers to scripting rule layers?)
+    Hex and triangle boards
+    Various UI updates (change border colors of tiles?)
+    “Title screens” that show up after loading a game but before starting it (so there can be a written explanation of that game’s rules) and/or just having a written rules paragraph that can be shown on the screen during gameplay
+    Allow saving and loading in-progress games
+    Fix it so board resizes properly with window in gameplay
+
+    Post-Release
+    Player inventories
+    Secrecy (display variables for pieces and tiles)
+    Popup events
+    LAN Hosting
+    Local server hosting????? (far future plan?) 
+    - the latter would increase the effort gap between using our software and just making your own from scratch. However, it's a far future plan for now.
+
+
