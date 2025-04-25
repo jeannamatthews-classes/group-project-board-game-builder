@@ -1,0 +1,4746 @@
+{
+  "minPlayers": 1,
+  "maxPlayers": 2,
+  "board": {
+    "boardShape": "Square",
+    "width": 10,
+    "height": 8,
+    "containerWidth": -1,
+    "containerHeight": -1,
+    "containerTop": -1,
+    "containerLeft": -1,
+    "borderColor": "rgba(0, 0, 0, 0.9)",
+    "borderWidth": "2px",
+    "backgroundColor": "rgba(255, 255, 255, 0.9)",
+    "tileArray": [
+      [
+        {
+          "objectID": 0,
+          "xCoordinate": 0,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 1,
+          "xCoordinate": 1,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 2,
+          "xCoordinate": 2,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 3,
+          "xCoordinate": 3,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 4,
+          "xCoordinate": 4,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 5,
+          "xCoordinate": 5,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 6,
+          "xCoordinate": 6,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 7,
+          "xCoordinate": 7,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 8,
+          "xCoordinate": 8,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 9,
+          "xCoordinate": 9,
+          "yCoordinate": 0,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ],
+      [
+        {
+          "objectID": 10,
+          "xCoordinate": 0,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 11,
+          "xCoordinate": 1,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 12,
+          "xCoordinate": 2,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 13,
+          "xCoordinate": 3,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 14,
+          "xCoordinate": 4,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 15,
+          "xCoordinate": 5,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 16,
+          "xCoordinate": 6,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 17,
+          "xCoordinate": 7,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 18,
+          "xCoordinate": 8,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 19,
+          "xCoordinate": 9,
+          "yCoordinate": 1,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ],
+      [
+        {
+          "objectID": 20,
+          "xCoordinate": 0,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 21,
+          "xCoordinate": 1,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 22,
+          "xCoordinate": 2,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 23,
+          "xCoordinate": 3,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 24,
+          "xCoordinate": 4,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 25,
+          "xCoordinate": 5,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 26,
+          "xCoordinate": 6,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 27,
+          "xCoordinate": 7,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 28,
+          "xCoordinate": 8,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 29,
+          "xCoordinate": 9,
+          "yCoordinate": 2,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ],
+      [
+        {
+          "objectID": 30,
+          "xCoordinate": 0,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 31,
+          "xCoordinate": 1,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 32,
+          "xCoordinate": 2,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 33,
+          "xCoordinate": 3,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 34,
+          "xCoordinate": 4,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#ff0000",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12,
+            13
+          ]
+        },
+        {
+          "objectID": 35,
+          "xCoordinate": 5,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 36,
+          "xCoordinate": 6,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 37,
+          "xCoordinate": 7,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#ff0000",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12,
+            13
+          ]
+        },
+        {
+          "objectID": 38,
+          "xCoordinate": 8,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 39,
+          "xCoordinate": 9,
+          "yCoordinate": 3,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ],
+      [
+        {
+          "objectID": 40,
+          "xCoordinate": 0,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 41,
+          "xCoordinate": 1,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#ff0000",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12,
+            13
+          ]
+        },
+        {
+          "objectID": 42,
+          "xCoordinate": 2,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 43,
+          "xCoordinate": 3,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 44,
+          "xCoordinate": 4,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 45,
+          "xCoordinate": 5,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 46,
+          "xCoordinate": 6,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 47,
+          "xCoordinate": 7,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 48,
+          "xCoordinate": 8,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 49,
+          "xCoordinate": 9,
+          "yCoordinate": 4,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ],
+      [
+        {
+          "objectID": 50,
+          "xCoordinate": 0,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 51,
+          "xCoordinate": 1,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 52,
+          "xCoordinate": 2,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 53,
+          "xCoordinate": 3,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 54,
+          "xCoordinate": 4,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 55,
+          "xCoordinate": 5,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 56,
+          "xCoordinate": 6,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 57,
+          "xCoordinate": 7,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#ff0000",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            13,
+            12
+          ]
+        },
+        {
+          "objectID": 58,
+          "xCoordinate": 8,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 59,
+          "xCoordinate": 9,
+          "yCoordinate": 5,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ],
+      [
+        {
+          "objectID": 60,
+          "xCoordinate": 0,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 61,
+          "xCoordinate": 1,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 62,
+          "xCoordinate": 2,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 63,
+          "xCoordinate": 3,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 64,
+          "xCoordinate": 4,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 65,
+          "xCoordinate": 5,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 66,
+          "xCoordinate": 6,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 67,
+          "xCoordinate": 7,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 68,
+          "xCoordinate": 8,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 69,
+          "xCoordinate": 9,
+          "yCoordinate": 6,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ],
+      [
+        {
+          "objectID": 70,
+          "xCoordinate": 0,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 71,
+          "xCoordinate": 1,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 72,
+          "xCoordinate": 2,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 73,
+          "xCoordinate": 3,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 74,
+          "xCoordinate": 4,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 75,
+          "xCoordinate": 5,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 76,
+          "xCoordinate": 6,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 77,
+          "xCoordinate": 7,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 78,
+          "xCoordinate": 8,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#7d6c64",
+            "text": "",
+            "textColor": "#000000",
+            "imageName": null,
+            "imageColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        },
+        {
+          "objectID": 79,
+          "xCoordinate": 9,
+          "yCoordinate": 7,
+          "playerOwnerID": -1,
+          "enabled": true,
+          "publicVars": [],
+          "sprite": {
+            "fillColor": "#b0a282",
+            "text": "",
+            "textColor": "#000000"
+          },
+          "types": [
+            12
+          ]
+        }
+      ]
+    ]
+  },
+  "pieces": [
+    {
+      "types": [
+        "1",
+        "11",
+        "9",
+        "2",
+        "14"
+      ],
+      "objectID": 80,
+      "xCoordinate": 2,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn"
+    },
+    {
+      "types": [
+        "1",
+        "11",
+        "9",
+        "14",
+        "2"
+      ],
+      "objectID": 81,
+      "xCoordinate": 7,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn 2"
+    },
+    {
+      "types": [
+        "1",
+        "11",
+        "9",
+        "2",
+        "14"
+      ],
+      "objectID": 82,
+      "xCoordinate": 3,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn 3"
+    },
+    {
+      "types": [
+        "11",
+        "9",
+        "1",
+        "2",
+        "14"
+      ],
+      "objectID": 83,
+      "xCoordinate": 6,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn 4"
+    },
+    {
+      "types": [
+        "8",
+        "9",
+        "1",
+        "11",
+        "14"
+      ],
+      "objectID": 84,
+      "xCoordinate": 5,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "queen",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "King 1"
+    },
+    {
+      "types": [
+        "1",
+        "9",
+        "10",
+        "7",
+        "11"
+      ],
+      "objectID": 85,
+      "xCoordinate": 4,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "star",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Custom 1"
+    },
+    {
+      "types": [
+        "1",
+        "11",
+        "4",
+        "10",
+        "9",
+        "14"
+      ],
+      "objectID": 86,
+      "xCoordinate": 0,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "rook",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Rook 1"
+    },
+    {
+      "types": [
+        "1",
+        "11",
+        "10",
+        "9",
+        "4",
+        "14"
+      ],
+      "objectID": 90,
+      "xCoordinate": 9,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "rook",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Rook 1 Copy"
+    },
+    {
+      "types": [
+        "1",
+        "5",
+        "11",
+        "9",
+        "14"
+      ],
+      "objectID": 88,
+      "xCoordinate": 1,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "knight",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Knight 2"
+    },
+    {
+      "types": [
+        "9",
+        "11",
+        "1",
+        "5",
+        "14"
+      ],
+      "objectID": 91,
+      "xCoordinate": 8,
+      "yCoordinate": 0,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "knight",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Knight 2 Copy"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 89,
+      "xCoordinate": 0,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 110,
+      "xCoordinate": 4,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5"
+    },
+    {
+      "types": [
+        "0",
+        "10",
+        "11",
+        "9",
+        "7"
+      ],
+      "objectID": 111,
+      "xCoordinate": 4,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "star",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Custom 1 Copy"
+    },
+    {
+      "types": [
+        "0",
+        "8",
+        "11",
+        "9",
+        "14"
+      ],
+      "objectID": 112,
+      "xCoordinate": 5,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "queen",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "King 1 Copy"
+    },
+    {
+      "types": [
+        "0",
+        "11",
+        "10",
+        "9",
+        "4",
+        "14"
+      ],
+      "objectID": 113,
+      "xCoordinate": 0,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "rook",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Rook 2"
+    },
+    {
+      "types": [
+        "0",
+        "11",
+        "10",
+        "9",
+        "4",
+        "14"
+      ],
+      "objectID": 114,
+      "xCoordinate": 9,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "rook",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Rook 2 Copy"
+    },
+    {
+      "types": [
+        "0",
+        "11",
+        "9",
+        "5",
+        "14"
+      ],
+      "objectID": 115,
+      "xCoordinate": 1,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "knight",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Knight 3"
+    },
+    {
+      "types": [
+        "0",
+        "11",
+        "9",
+        "14",
+        "3"
+      ],
+      "objectID": 116,
+      "xCoordinate": 2,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn 5"
+    },
+    {
+      "types": [
+        "0",
+        "9",
+        "11",
+        "5",
+        "14"
+      ],
+      "objectID": 117,
+      "xCoordinate": 8,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "knight",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Knight 3 Copy"
+    },
+    {
+      "types": [
+        "11",
+        "0",
+        "9",
+        "14",
+        "3"
+      ],
+      "objectID": 118,
+      "xCoordinate": 3,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn 5 Copy"
+    },
+    {
+      "types": [
+        "0",
+        "11",
+        "9",
+        "14",
+        "3"
+      ],
+      "objectID": 119,
+      "xCoordinate": 6,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn 5 Copy 1"
+    },
+    {
+      "types": [
+        "0",
+        "11",
+        "9",
+        "14",
+        "3"
+      ],
+      "objectID": 120,
+      "xCoordinate": 7,
+      "yCoordinate": 7,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "pawn",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Pawn 5 Copy 2"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 121,
+      "xCoordinate": 1,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 122,
+      "xCoordinate": 2,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 1"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 123,
+      "xCoordinate": 3,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 2"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 124,
+      "xCoordinate": 4,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 3"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 125,
+      "xCoordinate": 5,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 4"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 126,
+      "xCoordinate": 6,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 5"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 127,
+      "xCoordinate": 7,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 6"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 128,
+      "xCoordinate": 8,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 7"
+    },
+    {
+      "types": [
+        "10",
+        "11",
+        "9",
+        "1",
+        "6",
+        "14"
+      ],
+      "objectID": 129,
+      "xCoordinate": 9,
+      "yCoordinate": 1,
+      "playerOwnerID": 1,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#000000",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 1 Copy 8"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 130,
+      "xCoordinate": 0,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 131,
+      "xCoordinate": 1,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 1"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 132,
+      "xCoordinate": 2,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 2"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 133,
+      "xCoordinate": 3,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 3"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 134,
+      "xCoordinate": 5,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 4"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 135,
+      "xCoordinate": 6,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 5"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 136,
+      "xCoordinate": 7,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 6"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 137,
+      "xCoordinate": 8,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 7"
+    },
+    {
+      "types": [
+        "11",
+        "10",
+        "0",
+        "9",
+        "6",
+        "14"
+      ],
+      "objectID": 138,
+      "xCoordinate": 9,
+      "yCoordinate": 6,
+      "playerOwnerID": 0,
+      "sprite": {
+        "imageName": "bishop",
+        "fillColor": "#1605ff",
+        "text": "",
+        "textColor": "#000000"
+      },
+      "name": "Bishop 2 Copy Copy Copy 5 Copy 8"
+    }
+  ],
+  "pieceTypes": [
+    {
+      "typeID": 0,
+      "typeName": "White",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Object Clicked",
+          "type": "==",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "Player Turn",
+              "args": [],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                1
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 1,
+      "typeName": "Black",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Object Clicked",
+          "type": "==",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "Player Turn",
+              "args": [],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                2
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 2,
+      "typeName": "White Pawn",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "||",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "&&",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Array Length",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Pieces on Tile",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Tile Here",
+                                  "args": [],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            1
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "&&",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "abs",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Argument",
+                                  "args": [
+                                    0
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Array Length",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Pieces on Tile",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Tile Here",
+                                  "args": [],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            2
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                false
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        },
+        {
+          "trigger": "Piece Lands on Tile",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "==",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Y Coordinate",
+                  "args": [
+                    null
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    7
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Return at End",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Remove Type",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Array Element at Index",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Object Types",
+                          "args": [
+                            null
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            1
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Add Type",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Choose Piece Type",
+                      "args": [
+                        7
+                      ],
+                      "variables": []
+                    },
+                    1
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Change Piece Sprite",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Create Piece Sprite",
+                      "args": [
+                        "queen",
+                        "#dddddd",
+                        "#222",
+                        "",
+                        "#222"
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    true
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 3,
+      "typeName": "Black Pawn",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "||",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "&&",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                -1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Array Length",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Pieces on Tile",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Tile Here",
+                                  "args": [],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            1
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "&&",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "abs",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Argument",
+                                  "args": [
+                                    0
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                -1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Array Length",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Pieces on Tile",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Tile Here",
+                                  "args": [],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            2
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                false
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        },
+        {
+          "trigger": "Piece Lands on Tile",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "==",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Y Coordinate",
+                  "args": [
+                    null
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    0
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Return at End",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Remove Type",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Array Element at Index",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Object Types",
+                          "args": [
+                            null
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            1
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Add Type",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Choose Piece Type",
+                      "args": [
+                        7
+                      ],
+                      "variables": []
+                    },
+                    1
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Change Piece Sprite",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Create Piece Sprite",
+                      "args": [
+                        "queen",
+                        "#222222",
+                        "#ddd",
+                        "Queen",
+                        "#ddd"
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    true
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 4,
+      "typeName": "Rook",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "!=",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "==",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Argument",
+                      "args": [
+                        0
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Value",
+                      "args": [
+                        0
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "==",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Argument",
+                      "args": [
+                        1
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Value",
+                      "args": [
+                        0
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                false
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 5,
+      "typeName": "Knight",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "||",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [ 0 ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [ 4 ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [ 1 ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [ 2 ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [ 0 ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [ 2 ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [ 1 ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [ 4 ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [ true ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [ false ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 6,
+      "typeName": "Bishop",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "&&",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "==",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "abs",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "abs",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            1
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "!=",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Argument",
+                      "args": [
+                        0
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Value",
+                      "args": [
+                        0
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                false
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 7,
+      "typeName": "Custom",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "||",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "!=",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            1
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "!=",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                false
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 8,
+      "typeName": "King",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "&&",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "<",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            2
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "<",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "abs",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Argument",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            2
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "||",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "!=",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "!=",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            1
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                false
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 9,
+      "typeName": "Capturing",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Lands on Tile",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "==",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Array Length",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Pieces on Tile",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Argument",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    1
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Return at End",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Change Turn Phase",
+                  "args": [
+                    null
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    true
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "if-then-else",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Array Length",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Pieces on Tile",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Argument",
+                                  "args": [
+                                    0
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            2
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "!=",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Array Element at Index",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Object Types",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Array Element at Index",
+                                  "args": [
+                                    {
+                                      "trigger": "None",
+                                      "type": "Pieces on Tile",
+                                      "args": [
+                                        {
+                                          "trigger": "None",
+                                          "type": "Argument",
+                                          "args": [
+                                            0
+                                          ],
+                                          "variables": []
+                                        }
+                                      ],
+                                      "variables": []
+                                    },
+                                    {
+                                      "trigger": "None",
+                                      "type": "Value",
+                                      "args": [
+                                        1
+                                      ],
+                                      "variables": []
+                                    }
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Array Element at Index",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Object Types",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Caller",
+                                  "args": [],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Return at End",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Edit Variable of Rule",
+                      "args": [
+                        "Other Piece",
+                        {
+                          "trigger": "None",
+                          "type": "Array Element at Index",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Pieces on Tile",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Argument",
+                                  "args": [
+                                    0
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                1
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Other Caller",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Return Variable of Rule",
+                          "args": [
+                            "Other Piece"
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Remove Piece",
+                          "args": [],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "if-then-else",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Array Element at Index",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Object Types",
+                                  "args": [
+                                    {
+                                      "trigger": "None",
+                                      "type": "Return Variable of Rule",
+                                      "args": [
+                                        "Other Piece"
+                                      ],
+                                      "variables": []
+                                    }
+                                  ],
+                                  "variables": []
+                                },
+                                {
+                                  "trigger": "None",
+                                  "type": "Value",
+                                  "args": [
+                                    1
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Choose Piece Type",
+                              "args": [
+                                8
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "End Game",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Player Turn",
+                              "args": [],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            true
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Change Turn Phase",
+                      "args": [
+                        null
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Value",
+                      "args": [
+                        true
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    false
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 10,
+      "typeName": "No Jumps",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Piece Moves",
+          "type": "Return at End",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "Edit Variable of Rule",
+              "args": [
+                "X Remaining",
+                {
+                  "trigger": "None",
+                  "type": "*",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Argument",
+                      "args": [
+                        0
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Value",
+                      "args": [
+                        -1
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Edit Variable of Rule",
+              "args": [
+                "Y Remaining",
+                {
+                  "trigger": "None",
+                  "type": "*",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Argument",
+                      "args": [
+                        1
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Value",
+                      "args": [
+                        -1
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Edit Variable of Rule",
+              "args": [
+                "X Coordinate",
+                {
+                  "trigger": "None",
+                  "type": "X Coordinate",
+                  "args": [
+                    null
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Edit Variable of Rule",
+              "args": [
+                "Y Coordinate",
+                {
+                  "trigger": "None",
+                  "type": "Y Coordinate",
+                  "args": [
+                    null
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Edit Variable of Rule",
+              "args": [
+                "Return Value",
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    true
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Repeat While",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "&&",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "||",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "!=",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "X Remaining"
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "!=",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "Y Remaining"
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "==",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Return Variable of Rule",
+                          "args": [
+                            "Return Value"
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            true
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Return at End",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Edit Variable of Rule",
+                      "args": [
+                        "X Coordinate",
+                        {
+                          "trigger": "None",
+                          "type": "+",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "X Coordinate"
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "sign",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Return Variable of Rule",
+                                  "args": [
+                                    "X Remaining"
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Edit Variable of Rule",
+                      "args": [
+                        "X Remaining",
+                        {
+                          "trigger": "None",
+                          "type": "-",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "X Remaining"
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "sign",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Return Variable of Rule",
+                                  "args": [
+                                    "X Remaining"
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Edit Variable of Rule",
+                      "args": [
+                        "Y Coordinate",
+                        {
+                          "trigger": "None",
+                          "type": "+",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "Y Coordinate"
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "sign",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Return Variable of Rule",
+                                  "args": [
+                                    "Y Remaining"
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Edit Variable of Rule",
+                      "args": [
+                        "Y Remaining",
+                        {
+                          "trigger": "None",
+                          "type": "-",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "Y Remaining"
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "sign",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Return Variable of Rule",
+                                  "args": [
+                                    "Y Remaining"
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Edit Variable of Rule",
+                      "args": [
+                        "Return Value",
+                        {
+                          "trigger": "None",
+                          "type": "==",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Array Length",
+                              "args": [
+                                {
+                                  "trigger": "None",
+                                  "type": "Pieces on Tile",
+                                  "args": [
+                                    {
+                                      "trigger": "None",
+                                      "type": "Tile at Coordinates",
+                                      "args": [
+                                        {
+                                          "trigger": "None",
+                                          "type": "Return Variable of Rule",
+                                          "args": [
+                                            "X Coordinate"
+                                          ],
+                                          "variables": []
+                                        },
+                                        {
+                                          "trigger": "None",
+                                          "type": "Return Variable of Rule",
+                                          "args": [
+                                            "Y Coordinate"
+                                          ],
+                                          "variables": []
+                                        }
+                                      ],
+                                      "variables": []
+                                    }
+                                  ],
+                                  "variables": []
+                                }
+                              ],
+                              "variables": []
+                            },
+                            {
+                              "trigger": "None",
+                              "type": "Value",
+                              "args": [
+                                0
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Return Variable of Rule",
+              "args": [
+                "Return Value"
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 11,
+      "typeName": "Clickable Piece",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Object Clicked",
+          "type": "Return at End",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "Clear Selected Objects",
+              "args": [],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Select Object",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Caller",
+                  "args": [],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Change Turn Phase",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    1
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [
+                true
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 14,
+      "typeName": "Bombable",
+      "publicVars": [],
+      "scripts": []
+    }
+  ],
+  "tileTypes": [
+    {
+      "typeID": 12,
+      "typeName": "Clickable Tile",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Object Clicked",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "==",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Array Length",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Selected Objects",
+                      "args": [],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    1
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Return at End",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Edit Variable of Rule",
+                  "args": [
+                    "Tile",
+                    {
+                      "trigger": "None",
+                      "type": "Caller",
+                      "args": [],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Other Caller",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Array Element at Index",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "Selected Objects",
+                          "args": [],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Value",
+                          "args": [
+                            0
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    },
+                    {
+                      "trigger": "None",
+                      "type": "Move Piece to Coordinates",
+                      "args": [
+                        {
+                          "trigger": "None",
+                          "type": "X Coordinate",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "Tile"
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        },
+                        {
+                          "trigger": "None",
+                          "type": "Y Coordinate",
+                          "args": [
+                            {
+                              "trigger": "None",
+                              "type": "Return Variable of Rule",
+                              "args": [
+                                "Tile"
+                              ],
+                              "variables": []
+                            }
+                          ],
+                          "variables": []
+                        }
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Return at End",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Clear Selected Objects",
+                  "args": [],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Change Turn Phase",
+                  "args": [
+                    {
+                      "trigger": "None",
+                      "type": "Value",
+                      "args": [
+                        0
+                      ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [
+                    true
+                  ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    },
+    {
+      "typeID": 13,
+      "typeName": "Bomb",
+      "publicVars": [],
+      "scripts": [
+        {
+          "trigger": "Tile is Landed On",
+          "type": "if-then-else",
+          "args": [
+            {
+              "trigger": "None",
+              "type": "==",
+              "args": [
+                {
+                  "trigger": "None",
+                  "type": "Choose Piece Type",
+                  "args": [
+                    14,
+                    {
+                      "trigger": "None",
+                      "type": "Argument",
+                      "args": [ 0 ],
+                      "variables": []
+                    }
+                  ],
+                  "variables": []
+                },
+                {
+                  "trigger": "None",
+                  "type": "Value",
+                  "args": [ 1 ],
+                  "variables": []
+                }
+              ],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Remove Piece",
+              "args": [],
+              "variables": []
+            },
+            {
+              "trigger": "None",
+              "type": "Value",
+              "args": [ null ],
+              "variables": []
+            }
+          ],
+          "variables": []
+        }
+      ]
+    }
+  ],
+    "buttons": [],
+    "globalVariables": [],
+    "globalScripts": [],
+    "inventoryLayout": {
+        "containerWidth": -1,
+        "containerHeight": -1,
+        "containerTop": -1,
+        "containerLeft": -1,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)"
+    },
+    "globalLayout": {
+        "containerWidth": -1,
+        "containerHeight": -1,
+        "containerTop": -1,
+        "containerLeft": -1,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)",
+        "displayVariables": []
+    }
+}
