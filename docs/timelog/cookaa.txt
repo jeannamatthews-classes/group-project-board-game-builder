@@ -90,3 +90,5 @@ had a couple more bugs fixed, and made some plans for things we want to add afte
 April 23: Spent around 15 minutes adding the ability for reporters of object data (like coordinates of a piece) to report on objects other than the caller.
 
 April 24: Spent around 20 minutes adding the presentations and manuals folders to the docs folder.
+
+April 26: Spent around 40 minutes adding copy/paste at every level of a scripting rule form.

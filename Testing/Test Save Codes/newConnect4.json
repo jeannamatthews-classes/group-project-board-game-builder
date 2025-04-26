@@ -1031,21 +1031,6 @@
                                 },
                                 {
                                     "trigger": "None",
-                                    "type": "Console Log",
-                                    "args": [
-                                        {
-                                            "trigger": "None",
-                                            "type": "Return Variable of Rule",
-                                            "args": [
-                                                "Column Y"
-                                            ],
-                                            "variables": []
-                                        }
-                                    ],
-                                    "variables": []
-                                },
-                                {
-                                    "trigger": "None",
                                     "type": "Add Piece",
                                     "args": [
                                         {

@@ -1,14 +1,16 @@
-var lastCopiedScriptingRule = null; 
+var lastCopiedScriptingRule = null;
+var ruleContentContainer;
 
 class ScriptingRuleForm {
     rule;
-    top; // true if this is a top-level script, otherwise stores the trigger of the topmost rule
+    top; // true if this is a top-level script, otherwise stores the topmost rule
     zebraDark = false;
     callerType = "None";
     parentType = "None";
     container;
     childrenForms = [];
     window = null;
+    validTypesArray = [];
 
 
     constructor(rule, top = true, callerType = "None", zebraDark = false, parentType = "None", name = undefined, ruleID = undefined) {
@@ -51,47 +53,47 @@ class ScriptingRuleForm {
         content.style.gap = "8px";
         content.style.padding = "8px";
 
-        const ruleContentContainer = document.createElement("div");
+        ruleContentContainer = document.createElement("div");
         ruleContentContainer.appendChild(this.div);
         content.appendChild(ruleContentContainer);
 
 
-        if(this.top === true){
-            const actionsRow = document.createElement("div");
-            actionsRow.style.display = "flex";
-            actionsRow.style.gap = "8px";
+        // if(this.top === true){
+        //     const actionsRow = document.createElement("div");
+        //     actionsRow.style.display = "flex";
+        //     actionsRow.style.gap = "8px";
 
-            // Copy Button
-            const copyBtn = document.createElement("button");
-            copyBtn.textContent = "📋 Copy";
-            copyBtn.onclick = () => {
-                lastCopiedScriptingRule = this.rule.clone();
+        //     // Copy Button
+        //     const copyBtn = document.createElement("button");
+        //     copyBtn.textContent = "📋 Copy";
+        //     copyBtn.onclick = () => {
+        //         lastCopiedScriptingRule = this.rule.clone();
 
-                console.log("Copied scripting rule:", lastCopiedScriptingRule);
-            };
+        //         console.log("Copied scripting rule:", lastCopiedScriptingRule);
+        //     };
 
-            // Paste Button
-            const pasteBtn = document.createElement("button");
-            pasteBtn.textContent = "📄 Paste";
-            pasteBtn.disabled = !lastCopiedScriptingRule;
-            pasteBtn.onclick = () => {
-                if (!lastCopiedScriptingRule) return;
-                this.rule = lastCopiedScriptingRule.clone();
-                this.childrenForms = [];
+        //     // Paste Button
+        //     const pasteBtn = document.createElement("button");
+        //     pasteBtn.textContent = "📄 Paste";
+        //     pasteBtn.disabled = !lastCopiedScriptingRule;
+        //     pasteBtn.onclick = () => {
+        //         if (!lastCopiedScriptingRule) return;
+        //         this.rule = lastCopiedScriptingRule.clone();
+        //         this.childrenForms = [];
 
-                this.div = this.createDIV(); // Rebuild the visual form
+        //         this.div = this.createDIV(); // Rebuild the visual form
 
-                // Clear out the container and re-add the new one
-                ruleContentContainer.innerHTML = '';
-                ruleContentContainer.appendChild(this.div);
-                console.log("Pasted rule:", this.rule);
-            };
+        //         // Clear out the container and re-add the new one
+        //         ruleContentContainer.innerHTML = '';
+        //         ruleContentContainer.appendChild(this.div);
+        //         console.log("Pasted rule:", this.rule);
+        //     };
 
-            actionsRow.appendChild(copyBtn);
-            actionsRow.appendChild(pasteBtn);
-            content.appendChild(actionsRow);
+        //     actionsRow.appendChild(copyBtn);
+        //     actionsRow.appendChild(pasteBtn);
+        //     content.appendChild(actionsRow);
 
-        }
+        // }
         win.appendContent(content);
         this.window = win;
         win.onMouseDown = () => {
@@ -207,9 +209,9 @@ class ScriptingRuleForm {
         let scriptingRuleChild = function(argToCheck, parentType = "None") {
             if (argToCheck instanceof ScriptingRule) {
                 srdiv.appendChild(srdarg);
-                let newForm = new ScriptingRuleForm(argToCheck, form.getTrigger(), form.callerType, !form.zebraDark, parentType);
+                let newForm = new ScriptingRuleForm(argToCheck, form.getTop(), form.callerType, !form.zebraDark, parentType);
                 form.childrenForms.push(newForm);
-                console.log(newForm);
+                // console.log(newForm);
                 srdiv.appendChild(newForm.div);
                 return true;
             }
@@ -307,7 +309,6 @@ class ScriptingRuleForm {
             }
             srdarg2.value = this.rule.index;
             srdarg2.addEventListener("change", function(){
-                console.log(Number(this.value));
                 form.rule.index = Number(this.value);
                 form.modifyDIV();
             })
@@ -915,7 +916,6 @@ class ScriptingRuleForm {
                 srdarg.innerHTML = "Object:";
                 if (!scriptingRuleChild(this.rule.object, "Object")) {
                     srdarg.innerHTML += " Caller";
-                    srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
                 srdarg = document.createElement("button");
@@ -957,7 +957,6 @@ class ScriptingRuleForm {
                 srdarg.innerHTML = "Object:";
                 if (!scriptingRuleChild(this.rule.object, "Object")) {
                     srdarg.innerHTML += " Caller";
-                    srdarg.appendChild(srdarg2);
                     srdiv.appendChild(srdarg);
                 }
                 srdarg = document.createElement("button");
@@ -1258,8 +1257,6 @@ class ScriptingRuleForm {
         }
 
         // Arrays
-        // I'm assuming for now that arrays are always generated via scripting rules.
-        // Should probably add a "create new array" rule later.
         else if (this.rule.type === "Create an Array") {
             for (let e = 0; e < this.rule.elements.length; e++) {
                 srdarg = document.createElement("p");
@@ -1420,10 +1417,49 @@ class ScriptingRuleForm {
             srdarg.innerHTML = "Log the Result of";
             scriptingRuleChild(this.rule.toLog, "None");
         }
+
+        const actionsRow = document.createElement("div");
+        actionsRow.style.display = "flex";
+        actionsRow.style.gap = "8px";
+
+        const copyBtn = document.createElement("button");
+        copyBtn.textContent = "📋 Copy";
+        copyBtn.onclick = () => {
+            lastCopiedScriptingRule = this.rule.clone();
+            form.getTop().modifyDIV(); // This needs to be done to update the paste buttons
+
+            console.log("Copied scripting rule:", lastCopiedScriptingRule);
+        };
+
+        // Paste Button
+        const pasteBtn = document.createElement("button");
+        pasteBtn.textContent = "📄 Paste";
+        pasteBtn.disabled = (!lastCopiedScriptingRule || this.validTypesArray.indexOf(lastCopiedScriptingRule.type) == -1) ;
+        pasteBtn.onclick = () => {
+            if (!lastCopiedScriptingRule || form.validTypesArray.indexOf(lastCopiedScriptingRule.type) == -1) return;
+            Object.assign(form.rule, lastCopiedScriptingRule.clone());
+            form.childrenForms = [];
+
+            form.getTop().modifyDIV(); // Rebuild the visual form
+
+            // // Clear out the container and re-add the new one
+            // ruleContentContainer.innerHTML = '';
+            // ruleContentContainer.appendChild(form.getTop().div);
+            console.log("Pasted rule:", form.rule);
+        };
+
+        actionsRow.appendChild(copyBtn);
+        actionsRow.appendChild(pasteBtn);
+        srdiv.appendChild(actionsRow);
     }
 
     getTrigger() {
         if (this.top === true) return this.rule.trigger;
+        else return this.top.rule.trigger;
+    }
+
+    getTop() {
+        if (this.top === true) return this;
         else return this.top;
     }
 
@@ -1493,6 +1529,7 @@ class ScriptingRuleForm {
             else if (SRF_RGroup_Arrays.indexOf(validTypesArray[t]) !== -1) groupArrays.appendChild(type);
             else groupOther.appendChild(type);
         }
+        this.validTypesArray = validTypesArray;
         
         select.value = this.rule.type;
         let form = this;
