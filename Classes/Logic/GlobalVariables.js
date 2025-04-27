@@ -110,15 +110,15 @@ function gameInProgress() {
 function startGameScripts() {
     if (!gameInProgress()) return true;
     let scriptsToExecuteStart = [];
+    for (let scriptToCheck of globalScripts) {
+        if (scriptToCheck.trigger === "Start Game") scriptsToExecuteStart.push([scriptToCheck, undefined]);
+    }
     for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
         for (let t of p.getTypeObjects()) {
             for (let scriptToCheck of t.scripts) {
                 if (scriptToCheck.trigger === "Start Game") scriptsToExecuteStart.push([scriptToCheck, p]);
             }
         }
-    }
-    for (let scriptToCheck of globalScripts) {
-        if (scriptToCheck.trigger === "Start Game") scriptsToExecuteStart.push([scriptToCheck, undefined]);
     }
     for (let s = 0; s < scriptsToExecuteStart.length; s++) {
         scriptsToExecuteStart[s][0].run(...scriptsToExecuteStart[s].slice(1)); // Ignore the return values here, start game scripts can't fail
@@ -255,6 +255,10 @@ function globalScriptCheck() {
         activeGameState.selectedObjects = []; // Selected objects are reset between turns
         let scriptsToExecuteEnd = [];
         let scriptsToExecuteStart = [];
+        for (let scriptToCheck of globalScripts) {
+            if (scriptToCheck.trigger === "End Turn") scriptsToExecuteEnd.push([scriptToCheck, undefined]);
+            if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteStart.push([scriptToCheck, undefined]);
+        }
         for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
             for (let t of p.getTypeObjects()) {
                 for (let scriptToCheck of t.scripts) {
@@ -262,10 +266,6 @@ function globalScriptCheck() {
                     if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteStart.push([scriptToCheck, p]);
                 }
             }
-        }
-        for (let scriptToCheck of globalScripts) {
-            if (scriptToCheck.trigger === "End Turn") scriptsToExecuteEnd.push([scriptToCheck, undefined]);
-            if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteStart.push([scriptToCheck, undefined]);
         }
         let scriptResult;
         for (let s = 0; s < scriptsToExecuteEnd.length; s++) {

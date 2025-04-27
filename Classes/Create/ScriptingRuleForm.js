@@ -610,7 +610,7 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
         }
-        else if (this.rule.type === "X Coordinate" || this.rule.type === "Y Coordinate" || this.rule.type === "Object Types" || this.rule.type === "Object ID" || this.rule.type === "Select Object" || this.rule.type === "Deselect Object") {
+        else if (this.rule.type === "X Coordinate" || this.rule.type === "Y Coordinate" || this.rule.type === "Piece Owner" || this.rule.type === "Object Types" || this.rule.type === "Object ID" || this.rule.type === "Select Object" || this.rule.type === "Deselect Object") {
             srdarg = document.createElement("p");
             srdarg.innerHTML = "Object:";
             if (!scriptingRuleChild(this.rule.object, "Object")) {
@@ -952,7 +952,7 @@ class ScriptingRuleForm {
                 srdarg.appendChild(srdarg2);
                 srdiv.appendChild(srdarg);
             }
-            if (this.rule.type === "Edit Variable of Object") {
+            if (this.rule.type === "Return Variable of Object") {
                 srdarg = document.createElement("p");
                 srdarg.innerHTML = "Object:";
                 if (!scriptingRuleChild(this.rule.object, "Object")) {
@@ -1513,8 +1513,7 @@ class ScriptingRuleForm {
         for (let t = 0; t < validTypesArray.length; t++) {
             type = document.createElement("option");
             type.setAttribute("value", validTypesArray[t]);
-            if (validTypesArray[t] === "Caller") type.innerHTML = "Owner of this Rule";
-            else if (validTypesArray[t] === "Create Tile Sprite") type.innerHTML = "New Tile Sprite";
+            if (validTypesArray[t] === "Create Tile Sprite") type.innerHTML = "New Tile Sprite";
             else if (validTypesArray[t] === "Create Piece Sprite") type.innerHTML = "New Piece Sprite";
             else if (validTypesArray[t] === "&&") type.innerHTML = "AND";
             else if (validTypesArray[t] === "||") type.innerHTML = "OR";
@@ -1576,13 +1575,13 @@ function stringifyBGBObject(obj) {
 }
 
 let SRF_AllRuleTypes = [
-    "Value", "Argument", "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
-    "Add Piece", "Change Turn Phase", "End Game", "Change Tile Sprite", "Change Piece Sprite", "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
+    "Value", "Argument", "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Add Type", "Remove Type",
+    "Add Piece", "Change Turn Phase", "End Game", "Change Tile Sprite", "Change Piece Sprite", "X Coordinate", "Y Coordinate", "Piece Owner", "Object Types", "Turn Number",
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
     "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "All Pieces", "All Tiles", "Object ID", "Caller", "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type",
     "Choose Tile Type", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "if-then-else", "Return at End",
-    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "Concatenate Strings", "Character of String",
-    "!", "abs", "sign", "Create an Array", "Array Length", "Remove Last Element of Array", "Array Index of Element", "Add to Array", "Array Element at Index",
+    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "!", "XOR", "+", "-", "*", "/", "%", "**", "abs", "sign", "Concatenate Strings", "Character of String",
+    "Create an Array", "Array Length", "Add to Array", "Remove Last Element of Array", "Array Element at Index", "Array Index of Element",
     "Slice of String", "Slice of Array", "Other Caller", "Select Object", "Deselect Object", "Selected Objects", "Clear Selected Objects"
 ]
 
@@ -1594,7 +1593,7 @@ let SRF_RType_Anywhere = [
 ]
 // Scripting rules of these types return numbers.
 let SRF_RType_Number = [
-    "X Coordinate", "Y Coordinate", "Turn Number", "Player Turn", "Turn Phase", "Board Width", "Board Height", "Object ID",
+    "X Coordinate", "Y Coordinate", "Piece Owner", "Turn Number", "Player Turn", "Turn Phase", "Board Width", "Board Height", "Object ID",
     "+", "-", "*", "/", "%", "**", "abs", "sign", "Array Length", "Array Index of Element"
 ]
 // Scripting rules of these types return booleans.
@@ -1644,7 +1643,7 @@ let SRF_RType_ArrayOfTiles = [
 ]
 // These are actions to perform, not things that return something (they typically return true, though)
 let SRF_RType_Action = [
-    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type", "Add Piece", "Change Turn Phase",
+    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Add Type", "Remove Type", "Add Piece", "Change Turn Phase",
     "End Game", "Change Tile Sprite", "Change Piece Sprite", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "Repeat While",
     "Remove Last Element of Array", "Add to Array", "Select Object", "Deselect Object", "Clear Selected Objects"
 ]
@@ -1655,11 +1654,11 @@ let SRF_RGroup_Basics = [
     "Value", "Argument", "if-then-else", "Return at End"
 ]
 let SRF_RGroup_Actions = [
-    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Move Piece to Inventory", "Add Type", "Remove Type",
+    "Remove Piece", "Move Piece", "Move Piece to Coordinates", "Change Piece Owner", "Add Type", "Remove Type",
     "Add Piece", "Change Turn Phase", "End Game", "Change Tile Sprite", "Change Piece Sprite", "Select Object", "Deselect Object", "Clear Selected Objects"
 ]
 let SRF_RGroup_Reporters = [
-    "X Coordinate", "Y Coordinate", "Object Types", "Turn Number",
+    "X Coordinate", "Y Coordinate", "Piece Owner", "Object Types", "Turn Number",
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
     "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "All Pieces", "All Tiles", "Object ID", "Caller",
     "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type", "Choose Tile Type", "Selected Objects"

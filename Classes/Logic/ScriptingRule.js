@@ -91,7 +91,7 @@ class ScriptingRule {
             if (args.length <= 0) args.push(new ScriptingRule("None", "Tile at Coordinates"));
             this.tileToCheck = args[0];
         }
-        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Object Types" || this.type === "Object ID" || this.type === "Select Object" || this.type === "Deselect Object") {
+        else if (this.type === "X Coordinate" || this.type === "Y Coordinate" || this.type === "Piece Owner" || this.type === "Object Types" || this.type === "Object ID" || this.type === "Select Object" || this.type === "Deselect Object") {
             if (args.length <= 0) args.push(undefined);
             this.object = args[0];
             if (this.object === null) this.object = undefined;
@@ -339,6 +339,11 @@ class ScriptingRule {
             let object = caller;
             if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
             return object.yCoordinate;
+        }
+        else if (this.type === "Piece Owner") {
+            let object = caller;
+            if (this.object !== undefined) object = (this.object instanceof ScriptingRule) ? this.object.portVariables(this).run(caller, ...args) : this.object;
+            return object.playerOwnerID;
         }
         else if (this.type === "Object Types") {
             let object = caller;
@@ -694,7 +699,7 @@ class ScriptingRule {
             args.push(this.XCoordinate, this.YCoordinate);
         } else if (this.type === "Pieces on Tile") {
             args.push(this.tileToCheck);
-        } else if (["X Coordinate", "Y Coordinate", "Object Types", "Object ID", "Select Object", "Deselect Object"].includes(this.type)) {
+        } else if (["X Coordinate", "Y Coordinate", "Piece Owner", "Object Types", "Object ID", "Select Object", "Deselect Object"].includes(this.type)) {
             args.push(this.object);
         } else if (this.type === "Create Piece Sprite") {
             args.push(this.imageName, this.fillColor, this.strokeColor, this.text, this.textColor);
