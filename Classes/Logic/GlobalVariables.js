@@ -107,26 +107,6 @@ function gameInProgress() {
     return Number.isFinite(activeGameState.turnNumber);
 }
 
-function startGameScripts() {
-    if (!gameInProgress()) return true;
-    let scriptsToExecuteStart = [];
-    for (let scriptToCheck of globalScripts) {
-        if (scriptToCheck.trigger === "Start Game") scriptsToExecuteStart.push([scriptToCheck, undefined]);
-    }
-    for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
-        for (let t of p.getTypeObjects()) {
-            for (let scriptToCheck of t.scripts) {
-                if (scriptToCheck.trigger === "Start Game") scriptsToExecuteStart.push([scriptToCheck, p]);
-            }
-        }
-    }
-    for (let s = 0; s < scriptsToExecuteStart.length; s++) {
-        scriptsToExecuteStart[s][0].run(...scriptsToExecuteStart[s].slice(1)); // Ignore the return values here, start game scripts can't fail
-    }
-    gameStateValid();
-    return true;
-}
-
 function showEndGameWindow(winner) {
     if (document.getElementById("endGameOverlay")) return;
 
@@ -220,6 +200,31 @@ function showEndGameWindow(winner) {
     document.body.appendChild(overlay);
 }
 
+function startGameScripts() {
+    if (!gameInProgress()) return true;
+    let scriptsToExecuteStart = [];
+    let scriptsToExecuteTurn = [];
+    for (let scriptToCheck of globalScripts) {
+        if (scriptToCheck.trigger === "Start Game") scriptsToExecuteStart.push([scriptToCheck, undefined]);
+        if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteTurn.push([scriptToCheck, undefined]);
+    }
+    for (let p of activeGameState.pieceArray.concat(activeGameState.board.tileArray.flat(1))) {
+        for (let t of p.getTypeObjects()) {
+            for (let scriptToCheck of t.scripts) {
+                if (scriptToCheck.trigger === "Start Game") scriptsToExecuteStart.push([scriptToCheck, p]);
+                if (scriptToCheck.trigger === "Start Turn") scriptsToExecuteTurn.push([scriptToCheck, p]);
+            }
+        }
+    }
+    for (let s = 0; s < scriptsToExecuteStart.length; s++) {
+        scriptsToExecuteStart[s][0].run(...scriptsToExecuteStart[s].slice(1)); // Ignore the return values here, start game scripts can't fail
+    }
+    for (let s = 0; s < scriptsToExecuteTurn.length; s++) {
+        scriptsToExecuteTurn[s][0].run(...scriptsToExecuteTurn[s].slice(1)); // Ignore the return values here, start game scripts can't fail
+    }
+    gameStateValid();
+    return true;
+}
 
 function endGame(winner) {
     if (!gameInProgress()){ 
@@ -281,7 +286,7 @@ function globalScriptCheck() {
             activeGameState.playerTurn = 1;
             activeGameState.turnNumber += 1;
         }
-        for (let s = 0; s < scriptsToExecuteEnd.length; s++) {
+        for (let s = 0; s < scriptsToExecuteStart.length; s++) {
             scriptResult = scriptsToExecuteStart[s][0].run(...scriptsToExecuteStart[s].slice(1));
             console.log(scriptResult);
             if (scriptResult === false) {

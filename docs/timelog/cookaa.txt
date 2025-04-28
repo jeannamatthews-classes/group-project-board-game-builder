@@ -93,3 +93,6 @@ April 24: Spent around 20 minutes adding the presentations and manuals folders t
 
 April 26: Spent around 40 minutes adding copy/paste at every level of a scripting rule form, and spent around 2 hour and 30
 minutes making part of the scripting rules help page.
+
+April 28: Spent around 1 hour adding error handling (i.e. declaring a move invalid when an undefined value pops up)
+to scripting rules.

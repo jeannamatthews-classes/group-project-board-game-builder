@@ -9,7 +9,6 @@ class Piece {
     name = '';
 
     constructor(typeIDs, xStart, yStart, owner, sprite, id = undefined) {
-        console.log(sprite)
         this.types = typeIDs;
         this.objectID = (id !== undefined) ? id : assignObjectID();
         this.xCoordinate = xStart;
@@ -45,15 +44,15 @@ class Piece {
 
         for (const type of this.getTypeObjects()) {
             for (const script of type.scripts || []) {
-                if (script.trigger === "Piece Moves") scriptsToExecute.push([script, this, xChange, yChange]);
-                else if (script.trigger === "Piece Lands on Tile") scriptsToExecute.push([script, this, tileLanded]);
+                if (script.trigger === "Piece Moves") scriptsToExecute.push([script, this, true, xChange, yChange]);
+                else if (script.trigger === "Piece Lands on Tile") scriptsToExecute.push([script, this, true, tileLanded]);
             }
         }
 
         for (const t of tileLanded.types || []) {
             const tileType = tileTypesList.find(pt => Number(pt.typeID) === Number(t))?.type;
             for (const script of tileType?.scripts || []) {
-                if (script.trigger === "Tile is Landed on") scriptsToExecute.push([script, tileLanded, this]);
+                if (script.trigger === "Tile is Landed on") scriptsToExecute.push([script, tileLanded, true, this]);
             }
         }
 
@@ -95,15 +94,12 @@ class Piece {
     }
 
     clickObject(topCall = true) {
-        console.log("got here")
         if (!gameInProgress()) return true;
-        console.log("got hERE")
         for (const type of this.getTypeObjects()) {
             console.log(type)
             for (const script of type.scripts || []) {
                 console.log(script)
                 if (script.trigger === "Object Clicked") {
-                    console.log("WHAT?????????AJDSF")
                     const result = script.run(this);
                     if (result === false) {
                         if (topCall) gameStateRevert();

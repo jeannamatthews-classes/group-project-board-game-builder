@@ -474,8 +474,6 @@
       <li>
         <strong>End Turn</strong> and <strong>Start Turn</strong> scripts run during the transition between turns.
         End Turn scripts run before the player turn switches, Start Turn scripts run after the player turn switches.
-        Start Turn scripts do not run at the start of the very first turn, since Start Game scripts run during that
-        time.
       </li>
       <li>
         <strong>End Game</strong> scripts run when the game ends, after the rest of the scripts on the game-ending
@@ -541,6 +539,13 @@
       they take the variable in that location with the argument string as its name and change its value to the argument
       value. If that rule/object/the global variables doesn't/don't already have a variable with that name, a variable with
       that name is created with that value.
+    </p>
+    <p>
+      This is probably a good place to note that, if a scripting rule ever tries to access some value that's not defined
+      (a Return Variable script on a variable name that hasn't been edited into existence yet, Array Element at Index on
+      an index after the array's end, reporters like coordinates when run in a global script rather than on an object,
+      Argument script called when the trigger type has no arguments, etc.), the move is declared invalid,
+      as if the top-level script had returned false.
     </p>
 
     <h2>Buttons</h2>
