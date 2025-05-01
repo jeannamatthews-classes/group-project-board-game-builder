@@ -16,3 +16,4 @@ April 10 for 1 hour 30 mins: Meeting with the team to talk about the RAPS presen
 April 17 for 1 hour: Met with Aaron and Jackson to talk about the gameplay UI, the demo for our project, and to update the GANTT chart
 April 19 for 2 hours: started working on a little bit of the Gameplay UI.
 April 21 for 1 hour 30 mins: had a meeting with the whole team where we discussed what to do for the demo, what were are going to do with the project after the demo and what we want to add.
+April 22 Demo date: Demo-ed the project in class with the entire team where we showed the game editor and some gameplay of different board games.
