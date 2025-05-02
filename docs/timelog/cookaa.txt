@@ -96,3 +96,5 @@ minutes making part of the scripting rules help page.
 
 April 28: Spent around 1 hour adding error handling (i.e. declaring a move invalid when an undefined value pops up)
 to scripting rules.
+
+May 2: Spent around 25 minutes? making changes to the docs subdirectories to fulfil Prof. Matthews's end-of-semester checklist.
