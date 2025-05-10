@@ -25,7 +25,7 @@ class UILayoutEditor {
 
         // Rebuild layout boxes live every time
         this.layoutBoxes.push(new UILayoutBox(boardEditor.board, 'Board'));
-        this.layoutBoxes.push(new UILayoutBox(playerInventories, 'Inventory'));
+        // this.layoutBoxes.push(new UILayoutBox(playerInventories, 'Inventory'));
 
         buttonEditor.buttons.forEach(b => {
             this.layoutBoxes.push(new UILayoutBox(b.button, `Button: ${b.button.name}`));
@@ -34,6 +34,8 @@ class UILayoutEditor {
         this.globalBox = new UILayoutBox(globals, 'Global Variables');
         this.addGlobalVariablesForm(this.globalBox);
         this.layoutBoxes.push(this.globalBox);
+
+        this.layoutBoxes.push(new UILayoutBox(titledesc, 'Title and Description'));
 
         this.container.innerHTML = '';
         this.layoutBoxes.forEach(box => this.container.appendChild(box.container));

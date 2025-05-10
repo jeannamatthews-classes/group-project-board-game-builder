@@ -2354,6 +2354,8 @@
     "buttons": [],
     "globalVariables": [],
     "globalScripts": [],
+    "title": "",
+    "descriptionParagraphs": [],
     "inventoryLayout": {
         "containerWidth": -1,
         "containerHeight": -1,
@@ -2372,5 +2374,14 @@
         "borderWidth": 7,
         "backgroundColor": "#cceeff",
         "displayVariables": []
+    },
+    "titledescLayout": {
+        "containerWidth": -1,
+        "containerHeight": -1,
+        "containerTop": -1,
+        "containerLeft": -1,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)"
     }
 }

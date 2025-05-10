@@ -10,6 +10,8 @@ var tileType;
 var minPlayersInput;
 var maxPlayersInput;
 var boardType;
+var title;
+var descriptionParagraphs;
 
 
 const boardTypeText = ["Square", "Hex", "Triangle"]
@@ -19,10 +21,12 @@ var pieceEditor;
 var typeEditor;
 var buttonEditor;
 var globalEditor;
+var titledescEditor;
 var minPlayers;
 var maxPlayers;
 var playerInventories;
 var globals;
+var titledesc;
 var layoutEditor;
 
 
@@ -41,16 +45,19 @@ function changeBoardType(direction){
 function submitBoard(){
     playerInventories = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
     globals = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)', displayVariables:[]}
+    titledesc = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
     boardEditor = new UIBoard(new Board(boardTypeText[boardType], parseInt(widthInput.value), parseInt(heightInput.value)))
     pieceEditor = new UIPieceEditor();
     typeEditor = new UITypeEditor();
     buttonEditor = new UIButtonEditor();
     globalEditor = new UIGlobalEditor();
+    titledescEditor = new UITitleDescEditor();
     minPlayers = parseInt(minPlayersInput.value);
     maxPlayers = parseInt(maxPlayersInput.value);    
     setUpButtons()
     typeEditor.window.close();
     buttonEditor.window.close();
+    titledescEditor.window.close();
     document.getElementById("main-screen").innerHTML = ''; 
 }
 
@@ -128,7 +135,8 @@ function setUpButtons(){
                         <div><strong>Pieces Editor</strong> <button onclick="openEditor('pieces')">Open</button></div>
                         <div><strong>Buttons Editor</strong> <button onclick="openEditor('buttons')">Open</button></div>
                         <div><strong>Types Editor</strong> <button onclick="openEditor('types')">Open</button></div>
-                        <div><strong>Global Editor</strong> <button onclick="openEditor('global')">Open</button></div>
+                        <div><strong>Global Data Editor</strong> <button onclick="openEditor('global')">Open</button></div>
+                        <div><strong>Title/Description Editor</strong> <button onclick="openEditor('titledesc')">Open</button></div>
                     </div>
                 `);
                 window.editorLauncherWindow = win;
@@ -226,6 +234,12 @@ function openEditor(type) {
             else
                 globalEditor.window.container.style.zIndex  = ++__windowZIndex;
             break;
+        case 'titledesc':
+            if (!titledescEditor.window)
+                titledescEditor.createWindow();
+            else
+                titledescEditor.window.container.style.zIndex  = ++__windowZIndex;
+            break;
     }
 }
 
@@ -244,8 +258,11 @@ function saveCode() {
         buttons: buttonEditor.buttons.map(buttonUI => buttonUI.button.saveCode()),
         globalVariables: globalEditor.globalVariables,
         globalScripts: globalEditor.globalScripts.map(scriptUI => scriptUI.form.rule.saveCode()),
+        title: titledescEditor.title,
+        descriptionParagraphs: titledescEditor.descriptionParagraphs,
         inventoryLayout: playerInventories,
-        globalLayout: globals
+        globalLayout: globals,
+        titledescLayout: titledesc
     };
 
     const json = JSON.stringify(game, null, 4);  // Pretty print for humans
@@ -360,6 +377,8 @@ function loadGame() {
                 game.inventoryLayout.containerWidth
                 playerInventories = {containerWidth: game.inventoryLayout.containerWidth, containerHeight: game.inventoryLayout.containerHeight, containerTop: game.inventoryLayout.containerTop, containerLeft:game.inventoryLayout.containerLeft, borderColor:game.inventoryLayout.borderColor, borderWidth:game.inventoryLayout.borderWidth, backgroundColor:game.inventoryLayout.backgroundColor}
                 globals = {containerWidth: game.globalLayout.containerWidth, containerHeight:  game.globalLayout.containerHeight, containerTop:  game.globalLayout.containerTop, containerLeft: game.globalLayout.containerLeft, borderColor: game.globalLayout.borderColor, borderWidth: game.globalLayout.borderWidth, backgroundColor: game.globalLayout.backgroundColor, displayVariables: game.globalLayout.displayVariables}
+                if (game.titledescLayout === undefined) titledesc = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
+                else titledesc = {containerWidth: game.titledescLayout.containerWidth, containerHeight:  game.titledescLayout.containerHeight, containerTop:  game.titledescLayout.containerTop, containerLeft: game.titledescLayout.containerLeft, borderColor: game.titledescLayout.borderColor, borderWidth: game.titledescLayout.borderWidth, backgroundColor: game.titledescLayout.backgroundColor}
                 boardEditor = new UIBoard(Board.loadCode(game.board));
                 nextObjectID = game.board.width * game.board.height;
                 pieceEditor = new UIPieceEditor();
@@ -419,9 +438,14 @@ function loadGame() {
                         nextRuleID = s.ruleID+1;
                 })
 
+                title = game.title;
+                descriptionParagraphs = game.descriptionParagraphs;
+                titledescEditor = new UITitleDescEditor(title, descriptionParagraphs);
+
                 setUpButtons()
                 typeEditor.window.close();
                 buttonEditor.window.close();
+                titledescEditor.window.close();
                 document.getElementById("main-screen").innerHTML = ''; 
 
                 
@@ -476,7 +500,13 @@ function showStartMenu() {
     loadGameBtn.style.backgroundColor = '#6aff6a'; // Optional: different color for variety
     loadGameBtn.addEventListener('click', () => loadGame());
 
+    const returnHomeBtn = document.createElement('a');
+    returnHomeBtn.href = "index.html";
+    returnHomeBtn.textContent = '🏠 Home';
+    returnHomeBtn.classList.add('home-top-btn');
+
     wrapper.appendChild(newGameBtn);
     wrapper.appendChild(loadGameBtn);
+    wrapper.appendChild(returnHomeBtn);
     main.appendChild(wrapper);
 }

@@ -16,7 +16,7 @@ var maxPlayers = -1;
 var playerAmount = -1;
 
 
-
+var titleViewer = null;
 
 
 document.getElementById('jsonInput').addEventListener('change', function (event) {
@@ -129,6 +129,7 @@ function initializeElements()
     logical_pieces = []
     logical_board = null;
     globalViewer = null;
+    titleViewer = null;
 
     logical_board = Board.loadCode(game.board)
     board = new GameBoard(logical_board);
@@ -148,6 +149,7 @@ function initializeElements()
     game.globalVariables.forEach(gv => activeGameState.globalVariables.push(gv)) 
     game.globalScripts.forEach(gs => globalScripts.push(ScriptingRule.loadCode(gs)) ) 
     globalViewer = new GameGlobalVariables(game.globalLayout);
+    titleViewer = new GameTitleDesc(game.titledescLayout, game.title, game.descriptionParagraphs);
     startGameScripts();
     updateUI();
 

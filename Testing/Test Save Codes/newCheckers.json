@@ -3104,6 +3104,8 @@
         }
     ],
     "globalScripts": [],
+    "title": "",
+    "descriptionParagraphs": [],
     "inventoryLayout": {
         "containerWidth": 24.674479166666664,
         "containerHeight": 54.891921686479805,
@@ -3125,5 +3127,14 @@
             "Red Pieces Remaining",
             "Black Pieces Remaining"
         ]
+    },
+    "titledescLayout": {
+        "containerWidth": -1,
+        "containerHeight": -1,
+        "containerTop": -1,
+        "containerLeft": -1,
+        "borderColor": "rgba(0, 0, 0, 0.9)",
+        "borderWidth": "2px",
+        "backgroundColor": "rgba(255, 255, 255, 0.9)"
     }
 }
