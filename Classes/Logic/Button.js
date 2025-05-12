@@ -35,19 +35,25 @@ class Button {
     }
 
     clickButton(topCall = true) {
-        let scriptResult;
-        for (let s = 0; s < this.clickScripts.length; s++) {
-            scriptResult = this.clickScripts[s].run();
-            console.log(scriptResult);
-            if (scriptResult === false) {
-                if (topCall) gameStateRevert();
-                return false;
-            }
+        if (this.specialButtonType === "In-Progress Save Code") {
+            gameSaveCode();
+            return true;
         }
-        scriptResult = globalScriptCheck();
-        if (scriptResult && topCall) gameStateValid();
-        else if (topCall) gameStateRevert();
-        return scriptResult;
+        else {
+            let scriptResult;
+            for (let s = 0; s < this.clickScripts.length; s++) {
+                scriptResult = this.clickScripts[s].run();
+                console.log(scriptResult);
+                if (scriptResult === false) {
+                    if (topCall) gameStateRevert();
+                    return false;
+                }
+            }
+            scriptResult = globalScriptCheck();
+            if (scriptResult && topCall) gameStateValid();
+            else if (topCall) gameStateRevert();
+            return scriptResult;
+        }
     }
 
     buttonVisible() {
@@ -73,7 +79,8 @@ class Button {
             visibleRules: this.visibleRules.map(script =>
                 script.saveCode()
             ),
-            sprite: this.sprite
+            sprite: this.sprite,
+            specialButtonType : this.specialButtonType ?? null
         };
     }
     clone(){
@@ -99,6 +106,7 @@ class Button {
             borderColor: "#000000",
             borderRadius: "5px",
         };
+        button.specialButtonType = code.specialButtonType ?? null;
     
         button.clickScripts = (code.clickScripts || []).map(data => {
             let newScript = ScriptingRule.loadCode(data);

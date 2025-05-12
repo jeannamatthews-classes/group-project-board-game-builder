@@ -51,4 +51,20 @@ class GameGlobalVariables {
     getElement() {
         return this.container.getElement();
     }
+
+    saveCode() {
+        return {
+            layoutInfo: this.layoutInfo
+        }
+    }
+
+    clone() {
+        return GameGlobalVariables.loadCode(this.saveCode());
+    }
+
+    static loadCode(code) {
+        const viewer = new GameGlobalVariables();
+        viewer.layoutInfo = code.layoutInfo ?? {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)', displayVariables:[]};
+        return viewer;
+    }
 }

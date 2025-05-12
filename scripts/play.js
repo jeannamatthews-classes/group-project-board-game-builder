@@ -1,4 +1,5 @@
 var game = null;
+var startGameState = null;
 
 var board = null;
 
@@ -34,7 +35,12 @@ document.getElementById('jsonInput').addEventListener('change', function (event)
             console.log("Game data loaded:", game);
             document.getElementById("start-buttons").remove(); 
             document.body.innerHTML = "";
-            getNumPlayers();
+            if (game.hasOwnProperty("startGameState")) {
+                loadInProgressGame(game);
+            }
+            else {
+                getNumPlayers();
+            }
 
             
 
@@ -122,7 +128,7 @@ function getNumPlayers(){
 }
 
 
-function initializeElements()
+function initializeElements(atStart = true)
 { 
     board = null;
     buttons = [];
@@ -139,6 +145,7 @@ function initializeElements()
     })
     currentGameState = new GameState(logical_board, logical_pieces, playerAmount)
     activeGameState = new GameState(Board.loadCode(game.board), game.pieces.map(p => Piece.loadCode(p)), playerAmount)
+    startGameState = activeGameState.clone();
     game.tileTypes.forEach(t => tileTypesList.push(TileType.loadCode(t))) ;
     game.pieceTypes.forEach(t => pieceTypesList.push(PieceType.loadCode(t))) ;
     game.buttons.forEach(b => {
@@ -150,11 +157,85 @@ function initializeElements()
     game.globalScripts.forEach(gs => globalScripts.push(ScriptingRule.loadCode(gs)) ) 
     globalViewer = new GameGlobalVariables(game.globalLayout);
     titleViewer = new GameTitleDesc(game.titledescLayout, game.title, game.descriptionParagraphs);
-    startGameScripts();
+    if (atStart) startGameScripts();
     updateUI();
 
 }
 
 function playAgain(){
     initializeElements();
+}
+
+function gameSaveCode() {
+    const inprogressGame = {
+        activeGameState: activeGameState.saveCode(),
+        startGameState: startGameState.saveCode(),
+        pieceTypesList: pieceTypesList.map(p => p.saveCode()),
+        tileTypesList: tileTypesList.map(t => t.saveCode()),
+        globalScripts: globalScripts.map(s => s.saveCode()),
+        buttonsList: buttonsList.map(b => b.saveCode()),
+        globalViewer: globalViewer.saveCode(),
+        titleViewer: titleViewer.saveCode(),
+    }
+
+    const json = JSON.stringify(inprogressGame, null, 4);  // Pretty print for humans
+    const blob = new Blob([json], { type: 'application/json' });
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    
+    const filename = prompt("Enter a filename for your game:", "myGame.json") || "game.json";
+    
+    a.download = filename.endsWith('.json') ? filename : filename + ".json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+function loadInProgressGame(inProgressGame) {
+    try {
+        
+        // Turn the in-progress game into a create save code so it can be initialized
+        game = {
+            board: inProgressGame.activeGameState.board,
+            pieces: inProgressGame.activeGameState.pieceArray,
+            pieceTypes: inProgressGame.pieceTypesList,
+            tileTypes: inProgressGame.tileTypesList,
+            buttons: inProgressGame.buttonsList,
+            globalVariables: inProgressGame.activeGameState.globalVariables,
+            globalScripts: inProgressGame.globalScripts,
+            title: inProgressGame.titleViewer.title,
+            descriptionParagraphs: inProgressGame.titleViewer.descriptionParagraphs,
+            globalLayout: inProgressGame.globalViewer.layoutInfo,
+            titledescLayout: inProgressGame.titleViewer.layoutInfo
+        }
+
+        initializeElements(false);
+        activeGameState.playerAmount = inProgressGame.activeGameState.playerAmount;
+        activeGameState.turnNumber = inProgressGame.activeGameState.turnNumber;
+        activeGameState.playerTurn = inProgressGame.activeGameState.playerTurn;
+        activeGameState.turnPhase = inProgressGame.activeGameState.turnPhase;
+        gameStateValid();
+
+        // Now turn the game into its starting settings so Play Again works
+        game = {
+            board: inProgressGame.startGameState.board,
+            pieces: inProgressGame.startGameState.pieceArray,
+            pieceTypes: inProgressGame.pieceTypesList,
+            tileTypes: inProgressGame.tileTypesList,
+            buttons: inProgressGame.buttonsList,
+            globalVariables: inProgressGame.startGameState.globalVariables,
+            globalScripts: inProgressGame.globalScripts,
+            title: inProgressGame.titleViewer.title,
+            descriptionParagraphs: inProgressGame.titleViewer.descriptionParagraphs,
+            globalLayout: inProgressGame.globalViewer.layoutInfo,
+            titledescLayout: inProgressGame.titleViewer.layoutInfo
+        }
+
+        updateUI();
+
+    } catch (err) {
+        alert("Error parsing JSON: " + err.message);
+        console.error(err); // ← logs full stack trace
+    }
 }

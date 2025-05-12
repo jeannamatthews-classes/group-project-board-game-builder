@@ -1,34 +1,34 @@
 class GameSaver {
     constructor({
         gameState,
+        startGameState,
         tileTypes,
         pieceTypes,
-        pieces,
-        tiles,
-        board,
-        scriptingRules,
-        buttons
+        globalScripts,
+        buttons,
+        globalLayout,
+        titledescLayout
     }) {
         this.gameState = gameState;
+        this.startGameState = startGameState;
         this.tileTypes = tileTypes;
         this.pieceTypes = pieceTypes;
-        this.pieces = pieces;
-        this.tiles = tiles;
-        this.board = board;
-        this.scriptingRules = scriptingRules;
+        this.globalScripts = globalScripts;
         this.buttons = buttons;
+        this.globalLayout = globalLayout;
+        this.titledescLayout = titledescLayout;
     }
 
     createSaveData() {
         return {
             gameState: this.gameState.saveCode(),
+            startGameState : this.startGameState.saveCode(),
             tileTypes: this.tileTypes.map(t => t.saveCode()),
             pieceTypes: this.pieceTypes.map(p => p.saveCode()),
-            pieces: this.pieces.map(p => p.saveCode()),
-            tiles: this.tiles.map(t => t.saveCode()),
-            board: this.board.saveCode(),
-            scriptingRules: this.scriptingRules.map(s => s.saveCode()),
+            globalScripts: this.globalScripts.map(s => s.saveCode()),
             buttons: this.buttons.map(b => b.saveCode()),
+            globalLayout: this.globalLayout.saveCode(),
+            titledescLayout: this.titledescLayout.saveCode(),
             metadata: {
                 version: "1.0",
                 savedAt: new Date().toISOString()

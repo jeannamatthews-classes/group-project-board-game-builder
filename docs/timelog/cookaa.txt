@@ -103,4 +103,4 @@ May 2: Spent around 25 minutes? making changes to the docs subdirectories to ful
 
 May 10: Spent around 2 hours adding a title/description box to the game creator that can then display during gameplay.
 
-May 12: Spent around 3.5 hours implementing hexagonal and triangular boards.
+May 12: Spent around 4.25 hours implementing hexagonal and triangular boards and saving of in-progress games.

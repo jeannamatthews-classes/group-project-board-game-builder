@@ -61,10 +61,11 @@ class UIButtonEditor {
         return name;
     }
     
-    addButton(logicalButton) {
+    addButton(logicalButton, frontHide = false) {
         const ui = new UIButton(logicalButton);
-        this.buttons.push(ui);
-        this.buttonContainer.appendChild(ui.container);
+        if (frontHide) this.buttons.unshift(ui);
+        else this.buttons.push(ui);
+        if (!frontHide) this.buttonContainer.appendChild(ui.container);
     }
 
     duplicateButton(ui) {

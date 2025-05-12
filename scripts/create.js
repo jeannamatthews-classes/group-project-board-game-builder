@@ -50,6 +50,17 @@ function submitBoard(){
     pieceEditor = new UIPieceEditor();
     typeEditor = new UITypeEditor();
     buttonEditor = new UIButtonEditor();
+    let saveCodeButton = new Button();
+    saveCodeButton.sprite = {
+        fillColor:  "#e7eed6",
+        text: "Save Game",
+        textColor: "#192203",
+        borderColor: "#000000",
+        borderRadius: "5px",
+    }
+    saveCodeButton.name = "Save Game";
+    saveCodeButton.specialButtonType = "In-Progress Save Code";
+    buttonEditor.addButton(saveCodeButton, true);
     globalEditor = new UIGlobalEditor();
     titledescEditor = new UITitleDescEditor();
     minPlayers = parseInt(minPlayersInput.value);
@@ -372,81 +383,98 @@ function loadGame() {
             try {
                 game = JSON.parse(e.target.result);
                 console.log("Game loaded:", game);
-                alert("Game file loaded successfully!");
+                if (game.hasOwnProperty("startGameState")) {
+                    alert("That's an in-progress game, which the editor can't work on!")
+                }
+                else {
+                    alert("Game file loaded successfully!");
                 
-                game.inventoryLayout.containerWidth
-                playerInventories = {containerWidth: game.inventoryLayout.containerWidth, containerHeight: game.inventoryLayout.containerHeight, containerTop: game.inventoryLayout.containerTop, containerLeft:game.inventoryLayout.containerLeft, borderColor:game.inventoryLayout.borderColor, borderWidth:game.inventoryLayout.borderWidth, backgroundColor:game.inventoryLayout.backgroundColor}
-                globals = {containerWidth: game.globalLayout.containerWidth, containerHeight:  game.globalLayout.containerHeight, containerTop:  game.globalLayout.containerTop, containerLeft: game.globalLayout.containerLeft, borderColor: game.globalLayout.borderColor, borderWidth: game.globalLayout.borderWidth, backgroundColor: game.globalLayout.backgroundColor, displayVariables: game.globalLayout.displayVariables}
-                if (game.titledescLayout === undefined) titledesc = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
-                else titledesc = {containerWidth: game.titledescLayout.containerWidth, containerHeight:  game.titledescLayout.containerHeight, containerTop:  game.titledescLayout.containerTop, containerLeft: game.titledescLayout.containerLeft, borderColor: game.titledescLayout.borderColor, borderWidth: game.titledescLayout.borderWidth, backgroundColor: game.titledescLayout.backgroundColor}
-                boardEditor = new UIBoard(Board.loadCode(game.board));
-                nextObjectID = game.board.width * game.board.height;
-                pieceEditor = new UIPieceEditor();
-                game.pieces.forEach( p => {
-                    let newPiece = Piece.loadCode(p);
-                    pieceEditor.addPiece(newPiece)
-                    if(newPiece.objectID >= nextObjectID)
-                        nextObjectID = newPiece.objectID+1
-                } );
-                minPlayers = game.minPlayers;
-                maxPlayers = game.maxPlayers;    
-                typeEditor = new UITypeEditor();
-                game.tileTypes.forEach(t => {
-                    let newType = TileType.loadCode(t);
-                    typeEditor.addType(newType)
-                    if(newType.typeID >= nextTypeID)
-                        nextTypeID = newType.typeID+1
-                    newType.scripts.forEach(s => {
-                        if(s.ruleID >= nextRuleID)
-                            nextRuleID = s.ruleID+1
+                    playerInventories = {containerWidth: game.inventoryLayout.containerWidth, containerHeight: game.inventoryLayout.containerHeight, containerTop: game.inventoryLayout.containerTop, containerLeft:game.inventoryLayout.containerLeft, borderColor:game.inventoryLayout.borderColor, borderWidth:game.inventoryLayout.borderWidth, backgroundColor:game.inventoryLayout.backgroundColor}
+                    globals = {containerWidth: game.globalLayout.containerWidth, containerHeight:  game.globalLayout.containerHeight, containerTop:  game.globalLayout.containerTop, containerLeft: game.globalLayout.containerLeft, borderColor: game.globalLayout.borderColor, borderWidth: game.globalLayout.borderWidth, backgroundColor: game.globalLayout.backgroundColor, displayVariables: game.globalLayout.displayVariables}
+                    if (game.titledescLayout === undefined) titledesc = {containerWidth: -1, containerHeight: -1, containerTop: -1, containerLeft:-1, borderColor:'rgba(0, 0, 0, 0.9)', borderWidth:'2px', backgroundColor:'rgba(255, 255, 255, 0.9)'}
+                    else titledesc = {containerWidth: game.titledescLayout.containerWidth, containerHeight:  game.titledescLayout.containerHeight, containerTop:  game.titledescLayout.containerTop, containerLeft: game.titledescLayout.containerLeft, borderColor: game.titledescLayout.borderColor, borderWidth: game.titledescLayout.borderWidth, backgroundColor: game.titledescLayout.backgroundColor}
+                    boardEditor = new UIBoard(Board.loadCode(game.board));
+                    nextObjectID = game.board.width * game.board.height;
+                    pieceEditor = new UIPieceEditor();
+                    game.pieces.forEach( p => {
+                        let newPiece = Piece.loadCode(p);
+                        pieceEditor.addPiece(newPiece)
+                        if(newPiece.objectID >= nextObjectID)
+                            nextObjectID = newPiece.objectID+1
+                    } );
+                    minPlayers = game.minPlayers;
+                    maxPlayers = game.maxPlayers;    
+                    typeEditor = new UITypeEditor();
+                    game.tileTypes.forEach(t => {
+                        let newType = TileType.loadCode(t);
+                        typeEditor.addType(newType)
+                        if(newType.typeID >= nextTypeID)
+                            nextTypeID = newType.typeID+1
+                        newType.scripts.forEach(s => {
+                            if(s.ruleID >= nextRuleID)
+                                nextRuleID = s.ruleID+1
 
-                    });
-                }) ;
-                game.pieceTypes.forEach(t => {
-                    let newType = PieceType.loadCode(t)
-                    typeEditor.addType(newType)
-                    if(newType.typeID >= nextTypeID)
-                        nextTypeID = newType.typeID+1
-                    newType.scripts.forEach(s => {
-                        if(s.ruleID >= nextRuleID)
-                            nextRuleID = s.ruleID+1;
-                    });
-                }) ;
-                
-                
+                        });
+                    }) ;
+                    game.pieceTypes.forEach(t => {
+                        let newType = PieceType.loadCode(t)
+                        typeEditor.addType(newType)
+                        if(newType.typeID >= nextTypeID)
+                            nextTypeID = newType.typeID+1
+                        newType.scripts.forEach(s => {
+                            if(s.ruleID >= nextRuleID)
+                                nextRuleID = s.ruleID+1;
+                        });
+                    }) ;
+                    
+                    
 
-                buttonEditor = new UIButtonEditor();
-                game.buttons.forEach(b =>{
-                    let newButton  = Button.loadCode(b)
-                    buttonEditor.addButton(newButton)
-                    newButton.clickScripts.forEach(s=>{
+                    buttonEditor = new UIButtonEditor();
+                    game.buttons.forEach(b =>{
+                        let newButton  = Button.loadCode(b)
+                        buttonEditor.addButton(newButton)
+                        newButton.clickScripts.forEach(s=>{
+                            if(s.ruleID >=nextRuleID)
+                                nextRuleID = s.ruleID+1;
+                        })
+                        newButton.visibleRules.forEach(s=>{
+                            if(s.ruleID >=nextRuleID)
+                                nextRuleID = s.ruleID+1;
+                        })
+                    });
+                    if (buttonEditor.buttons.length === 0 || buttonEditor.buttons[0].specialButtonType !== "In-Progress Save Code") {
+                        let saveCodeButton = new Button();
+                        saveCodeButton.sprite = {
+                            fillColor:  "#e7eed6",
+                            text: "Save Game",
+                            textColor: "#192203",
+                            borderColor: "#000000",
+                            borderRadius: "5px",
+                        }
+                        saveCodeButton.name = "Save Game";
+                        saveCodeButton.specialButtonType = "In-Progress Save Code";
+                        buttonEditor.addButton(saveCodeButton, true);
+                    }
+
+                    globalScripts = game.globalScripts.map(script => ScriptingRule.loadCode(script))
+                    globalEditor = new UIGlobalEditor(game.globalVariables,globalScripts);
+
+
+                    globalScripts.forEach(s =>{
                         if(s.ruleID >=nextRuleID)
                             nextRuleID = s.ruleID+1;
                     })
-                    newButton.visibleRules.forEach(s=>{
-                        if(s.ruleID >=nextRuleID)
-                            nextRuleID = s.ruleID+1;
-                    })
-                });
 
-                globalScripts = game.globalScripts.map(script => ScriptingRule.loadCode(script))
-                globalEditor = new UIGlobalEditor(game.globalVariables,globalScripts);
+                    title = game.title;
+                    descriptionParagraphs = game.descriptionParagraphs;
+                    titledescEditor = new UITitleDescEditor(title, descriptionParagraphs);
 
-
-                globalScripts.forEach(s =>{
-                    if(s.ruleID >=nextRuleID)
-                        nextRuleID = s.ruleID+1;
-                })
-
-                title = game.title;
-                descriptionParagraphs = game.descriptionParagraphs;
-                titledescEditor = new UITitleDescEditor(title, descriptionParagraphs);
-
-                setUpButtons()
-                typeEditor.window.close();
-                buttonEditor.window.close();
-                titledescEditor.window.close();
-                document.getElementById("main-screen").innerHTML = ''; 
+                    setUpButtons()
+                    typeEditor.window.close();
+                    buttonEditor.window.close();
+                    titledescEditor.window.close();
+                    document.getElementById("main-screen").innerHTML = ''; 
+                }
 
                 
             } catch (err) {
