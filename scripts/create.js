@@ -72,7 +72,7 @@ function validateInputs() {
     const minValid = minPlayersInput.checkValidity() && minPlayers >= 1;
     const maxValid = maxPlayersInput.checkValidity() && maxPlayers >= minPlayers;
 
-    doneButton.disabled = !(widthValid && heightValid && minValid && maxValid && boardType==0);
+    doneButton.disabled = !(widthValid && heightValid && minValid && maxValid);
 }
 
 

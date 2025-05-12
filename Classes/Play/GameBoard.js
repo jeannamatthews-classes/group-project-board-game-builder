@@ -28,19 +28,35 @@ class GameBoard {
             const bounds = containerEl.getBoundingClientRect();
             const pixelWidth = bounds.width;
             const pixelHeight = bounds.height;
+            let tileW, tileH, tileSize, totalBoardWidth, totalBoardHeight;
 
-            const tileW = pixelWidth / logicalBoard.width;
-            const tileH = pixelHeight / logicalBoard.height;
-            const tileSize = Math.floor(Math.min(tileW, tileH));
-
-            const totalBoardWidth = tileSize * logicalBoard.width;
-            const totalBoardHeight = tileSize * logicalBoard.height;
+            if (logicalBoard.boardShape === "Square") {
+                tileW = pixelWidth / logicalBoard.width;
+                tileH = pixelHeight / logicalBoard.height;
+                tileSize = Math.floor(Math.min(tileW, tileH));
+                totalBoardWidth = tileSize * logicalBoard.width;
+                totalBoardHeight = tileSize * logicalBoard.height;
+            }
+            else if (logicalBoard.boardShape === "Hex") {
+                tileW = pixelWidth / ((logicalBoard.width + logicalBoard.height / 2) * Math.sqrt(3)/2);
+                tileH = pixelHeight / (logicalBoard.height * 3/4);
+                tileSize = Math.floor(Math.min(tileW, tileH));
+                totalBoardWidth = tileSize * (logicalBoard.width + logicalBoard.height / 2) * Math.sqrt(3)/2;
+                totalBoardHeight = tileSize * logicalBoard.height * 3/4;
+            }
+            else if (logicalBoard.boardShape === "Triangle") {
+                tileW = pixelWidth / ((logicalBoard.width + logicalBoard.height) * Math.sqrt(3)/4);
+                tileH = pixelHeight / (logicalBoard.height * 3/4);
+                tileSize = Math.floor(Math.min(tileW, tileH));
+                totalBoardWidth = tileSize * (logicalBoard.width + logicalBoard.height) * Math.sqrt(3)/4;
+                totalBoardHeight = tileSize * logicalBoard.height * 3/4;
+            }
 
             this.tileGrid = document.createElement('div');
             this.tileGrid.style.position = 'absolute';
-            this.tileGrid.style.display = 'grid';
-            this.tileGrid.style.gridTemplateColumns = `repeat(${logicalBoard.width}, ${tileSize}px)`;
-            this.tileGrid.style.gridTemplateRows = `repeat(${logicalBoard.height}, ${tileSize}px)`;
+            this.tileGrid.style.display = 'block';
+            // this.tileGrid.style.gridTemplateColumns = `repeat(${logicalBoard.width}, ${tileSize}px)`;
+            // this.tileGrid.style.gridTemplateRows = `repeat(${logicalBoard.height}, ${tileSize}px)`;
             this.tileGrid.style.width = `${totalBoardWidth}px`;
             this.tileGrid.style.height = `${totalBoardHeight}px`;
 
@@ -54,9 +70,9 @@ class GameBoard {
             for (let y = 0; y < logicalBoard.tileArray.length; y++) {
                 for (let x = 0; x < logicalBoard.tileArray[y].length; x++) {
                     const tile = logicalBoard.tileArray[y][x];
-                    const gameTile = new GameTile(tile);
+                    const gameTile = new GameTile(tile, logicalBoard.boardShape, tileSize);
                     this.tiles[y][x] = gameTile;
-                    this.tileGrid.appendChild(gameTile.container);
+                    this.tileGrid.appendChild(gameTile.borderContainer);
                 }
             }
         

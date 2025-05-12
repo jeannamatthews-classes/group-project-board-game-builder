@@ -74,6 +74,16 @@ html, body {
     padding-right: 30%;
 }
 
+.hexagon-clip {
+    clip-path: polygon(50% 0%, 93.301% 25%, 93.301% 75%, 50% 100%, 6.699% 75%, 6.699% 25%);
+}
+.triangle-up-clip {
+    clip-path: polygon(50% 12.5%, 93.301% 87.5%, 6.699% 87.5%);
+}
+.triangle-down-clip {
+    clip-path: polygon(93.301% 12.5%, 50% 87.5%, 6.699% 12.5%);
+}
+
 
 .tile-type {
     width:50%;
@@ -157,12 +167,20 @@ transition: transform 0.2s ease;
     display: flex;
 }
 
-.tile {
+.tile-border {
     width: 40px;
     height: 40px;
-    border: 1px solid #000;
     box-sizing: border-box;
     position:relative;
+    background-color: #000000;
+}
+.tile-inner {
+    width: 38px;
+    height: 38px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 1px;
+    top: 1px;
 }
 
 .piece {

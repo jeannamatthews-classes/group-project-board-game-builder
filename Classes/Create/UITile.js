@@ -3,6 +3,7 @@ class UITile {
         this.tile = tile;
         this.board = board;
         this.container = null;
+        this.containerBorder = null;
         this.editorWindow = null;
         this.xOverlay = null;
         this.refreshEditorWindowContent = null;
@@ -10,11 +11,38 @@ class UITile {
     }
 
     createTile() {
+        const tileBorder = document.createElement('div');
+        tileBorder.classList.add('tile-border');
+        tileBorder.style.position = 'absolute';
+        if (this.board.board.boardShape === "Square") {
+            tileBorder.style.left = `${this.tile.xCoordinate * 40}px`;
+            tileBorder.style.top = `${this.tile.yCoordinate * 40}px`
+        }
+        if (this.board.board.boardShape === "Hex") {
+            tileBorder.classList.add('hexagon-clip');
+            tileBorder.style.left = `${(this.tile.xCoordinate + this.tile.yCoordinate / 2) * 34.641}px`;
+            tileBorder.style.top = `${this.tile.yCoordinate * 30}px`
+        }
+        else if (this.board.board.boardShape === "Triangle") {
+            if (this.tile.xCoordinate % 2 === 0) tileBorder.classList.add('triangle-down-clip');
+            else tileBorder.classList.add('triangle-up-clip');
+            tileBorder.style.left = `${(this.tile.xCoordinate + this.tile.yCoordinate) * 17.321}px`;
+            tileBorder.style.top = `${this.tile.yCoordinate * 30}px`
+        }
+        this.containerBorder = tileBorder;
+
         const tile = document.createElement('div');
-        tile.classList.add('tile');
+        tile.classList.add('tile-inner');
         tile.setAttribute('data-id', this.tile.objectID);
-        tile.style.position = 'relative';
+        if (this.board.board.boardShape === "Hex") {
+            tile.classList.add('hexagon-clip');
+        }
+        else if (this.board.board.boardShape === "Triangle") {
+            if (this.tile.xCoordinate % 2 === 0) tile.classList.add('triangle-down-clip');
+            else tile.classList.add('triangle-up-clip');
+        }
         this.container = tile;
+        this.containerBorder.appendChild(tile);
 
         const xOverlay = document.createElement('div');
         xOverlay.classList.add('tile-disabled-x');
@@ -64,7 +92,7 @@ class UITile {
     updateSprite(sprite = this.tile.sprite) {
         const el = this.container;
         el.innerHTML = ''; // Clear current content
-        el.style.position = 'relative';
+        el.style.position = 'absolute';
     
         // 1. Set background color
         el.style.backgroundColor = sprite.fillColor || '#ccc';
@@ -74,12 +102,28 @@ class UITile {
             const overlayWrapper = document.createElement('div');
             overlayWrapper.classList.add('tile-image');
             overlayWrapper.style.position = 'absolute';
-            overlayWrapper.style.top = '0';
-            overlayWrapper.style.left = '0';
-            overlayWrapper.style.width = '100%';
-            overlayWrapper.style.height = '100%';
             overlayWrapper.style.pointerEvents = 'none';
             overlayWrapper.style.zIndex = 1;
+
+            if (this.board.board.boardShape === "Square") {
+                overlayWrapper.style.top = '0';
+                overlayWrapper.style.left = '0';
+                overlayWrapper.style.width = '100%';
+                overlayWrapper.style.height = '100%';
+            }
+            else if (this.board.board.boardShape === "Hex") {
+                overlayWrapper.style.top = "10%";
+                overlayWrapper.style.left = '10%';
+                overlayWrapper.style.width = '80%';
+                overlayWrapper.style.height = '80%';
+            }
+            else if (this.board.board.boardShape === "Triangle") {
+                overlayWrapper.style.left = '30%';
+                if (this.tile.xCoordinate % 2 === 0) overlayWrapper.style.top = '12.5%';
+                else overlayWrapper.style.top = '37.5%';
+                overlayWrapper.style.width = '40%';
+                overlayWrapper.style.height = '40%';
+            }
     
             // Inject and tint SVG
             const temp = document.createElement('div');
@@ -139,19 +183,35 @@ class UITile {
         this.container.querySelectorAll('.piece-tile-wrapper')?.forEach(e => e.remove());
         if (piecesHere.length === 0) return;
 
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('piece-tile-wrapper');
-        wrapper.style.width = '100%';
-        wrapper.style.height = '100%';
-        wrapper.style.display = 'grid';
-        wrapper.style.position = 'absolute';
-        wrapper.style.top = '0';
-        wrapper.style.left = '0';
-        wrapper.style.zIndex = '5';
+        const pieceWrapper = document.createElement('div');
+        pieceWrapper.classList.add('piece-tile-wrapper');
+        pieceWrapper.style.display = 'grid';
+        pieceWrapper.style.position = 'absolute';
+        pieceWrapper.style.zIndex = '5';
+
+        if (this.board.board.boardShape === "Square") {
+            pieceWrapper.style.top = '0';
+            pieceWrapper.style.left = '0';
+            pieceWrapper.style.width = '100%';
+            pieceWrapper.style.height = '100%';
+        }
+        else if (this.board.board.boardShape === "Hex") {
+            pieceWrapper.style.top = '17.5%';
+            pieceWrapper.style.left = '17.5%';
+            pieceWrapper.style.width = '65%';
+            pieceWrapper.style.height = '65%';
+        }
+        else if (this.board.board.boardShape === "Triangle") {
+            pieceWrapper.style.left = '30%';
+            if (this.tile.xCoordinate % 2 === 0) pieceWrapper.style.top = '12.5%';
+            else pieceWrapper.style.top = '37.5%';
+            pieceWrapper.style.width = '40%';
+            pieceWrapper.style.height = '40%';
+        }
 
         const gridSize = Math.ceil(Math.sqrt(piecesHere.length));
-        wrapper.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-        wrapper.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+        pieceWrapper.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+        pieceWrapper.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
         piecesHere.forEach(uiPiece => {
             const el = uiPiece.boardContainer;
@@ -175,10 +235,10 @@ class UITile {
 
             newEl.style.width = '100%';
             newEl.style.height = '100%';
-            wrapper.appendChild(newEl);
+            pieceWrapper.appendChild(newEl);
         });
 
-        this.container.appendChild(wrapper);
+        this.container.appendChild(pieceWrapper);
     }
 
     showTileEditor() {

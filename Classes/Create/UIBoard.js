@@ -30,9 +30,9 @@ class UIBoard {
     createBoard() {
         const boardContainer = document.createElement('div');
         boardContainer.classList.add('board');
-        boardContainer.style.display = 'grid';
-        boardContainer.style.gridTemplateColumns = `repeat(${this.board.width}, 40px)`;
-        boardContainer.style.gridTemplateRows = `repeat(${this.board.height}, 40px)`;
+        boardContainer.style.display = 'block';
+        // boardContainer.style.gridTemplateColumns = `repeat(${this.board.width}, 40px)`;
+        // boardContainer.style.gridTemplateRows = `repeat(${this.board.height}, 40px)`;
         boardContainer.style.gap = '0px';
         boardContainer.style.position = 'absolute';
         boardContainer.style.transformOrigin = 'top left';
@@ -57,7 +57,7 @@ class UIBoard {
             for (let x = 0; x < this.board.width; x++) {
                 const tile = this.board.getTile(x, y);
                 const uiTile = new UITile(tile, this);
-                this.container.appendChild(uiTile.container);
+                this.container.appendChild(uiTile.containerBorder);
                 this.tiles[y][x] = uiTile;
             }
         }

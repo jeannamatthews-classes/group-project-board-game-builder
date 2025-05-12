@@ -12,51 +12,18 @@ class Board {
         this.borderColor = 'rgba(0, 0, 0, 0.9)';
         this.borderWidth = '2px';
         this.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-        this.boardShape = "Square";
+        this.boardShape = boardShape;
 
-        if (boardShape === "Square") {
-            this.width = width;
-            this.height = height;
-            let ta = [];
-            for (let y = 0; y < height; y++) {
-                ta.push([]);
-                for (let x = 0; x < width; x++) {
-                    ta[y].push(new Tile([], x, y));
-                }
+        this.width = width;
+        this.height = height;
+        let ta = [];
+        for (let y = 0; y < height; y++) {
+            ta.push([]);
+            for (let x = 0; x < width; x++) {
+                ta[y].push(new Tile([], x, y));
             }
-            this.tileArray = ta;
         }
-        else if (boardShape === "Hexagon") {
-            this.width = width;
-            this.height = height;
-            let ta = [];
-            for (let y = 0; y < height; y++) {
-                ta.push([]);
-                for (let x = 0; x < width; x++) {
-                    ta[y].push(new Tile([], x, y));
-                }
-                if (y < Math.floor((height - 1) / 2)) width++;
-                else if (y >= Math.ceil((height - 1) / 2)) width--;
-            }
-            this.tileArray = ta;
-        }
-        else if (boardShape === "Triangle") {
-            this.width = width;
-            this.height = height;
-            let ta = [];
-            for (let y = 0; y < height; y++) {
-                ta.push([]);
-                for (let x = 0; x < width; x++) {
-                    ta[y].push(new Tile([], x, y));
-                }
-                width += 2;
-            }
-            this.tileArray = ta;
-        }
-        else {
-            console.log(boardShape);
-            throw new Error("Invalid board shape");
-        }
+        this.tileArray = ta;
     }
 
     getTile(x, y) {
