@@ -513,10 +513,9 @@ function resizeBoard(boardShape, width, height, minP, maxP) {
     }
     for (let p = 0; p < pieceEditor.pieces.length; p++) {
         if (pieceEditor.pieces[p].piece.xCoordinate >= newBoard.width || pieceEditor.pieces[p].piece.yCoordinate >= newBoard.height) {
-            pieceEditor.deletePiece(pieceEditor.pieces[p]);
-            p--;
+            pieceEditor.pieces[p].piece.xCoordinate = -1; pieceEditor.pieces[p].piece.yCoordinate = -1; 
         }
-        else pieceEditor.pieces[p].objectID = newBoard.width * newBoard.height + p;
+        pieceEditor.pieces[p].objectID = newBoard.width * newBoard.height + p;
     }
     nextObjectID = newBoard.width * newBoard.height + pieceEditor.pieces.length;
     if (boardEditor.window) boardEditor.window.close();

@@ -105,4 +105,4 @@ May 10: Spent around 2 hours adding a title/description box to the game creator 
 
 May 12: Spent around 4.25 hours implementing hexagonal and triangular boards and saving of in-progress games.
 
-May 13: Spent around 1 hour and 20 minutes adding board resizing during (rather than just at the start of) game creation.
+May 13: Spent around 3 hours adding board resizing during (rather than just at the start of) game creation and making some final touch-ups.

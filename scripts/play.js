@@ -141,10 +141,10 @@ function initializeElements(atStart = true)
     board = new GameBoard(logical_board);
     game.pieces.forEach(p => {
         let logical_piece = Piece.loadCode(p)
-        logical_pieces.push(logical_piece)
+        if (logical_piece.xCoordinate >= 0 && logical_piece.yCoordinate >= 0) logical_pieces.push(logical_piece)
     })
     currentGameState = new GameState(logical_board, logical_pieces, playerAmount)
-    activeGameState = new GameState(Board.loadCode(game.board), game.pieces.map(p => Piece.loadCode(p)), playerAmount)
+    activeGameState = new GameState(Board.loadCode(game.board), game.pieces.map(p => Piece.loadCode(p)).filter(p => (p.xCoordinate >= 0 && p.yCoordinate >= 0)), playerAmount)
     startGameState = activeGameState.clone();
     game.tileTypes.forEach(t => tileTypesList.push(TileType.loadCode(t))) ;
     game.pieceTypes.forEach(t => pieceTypesList.push(PieceType.loadCode(t))) ;

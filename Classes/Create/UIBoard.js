@@ -96,8 +96,7 @@ class UIBoard {
               const toolbar = new Toolbar(toolbarArea, targetArea);
           
               toolbar.addTool("select", ["drag"]);
-              toolbar.addTool("zoom_in");
-              toolbar.addTool("zoom_out");
+              toolbar.addTool("zoom_in", ["zoom_out"]);
               toolbar.addTool("paint");
               toolbar.addTool("eyedropper");
               toolbar.addTool("disable");

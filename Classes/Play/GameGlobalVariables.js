@@ -27,7 +27,34 @@ class GameGlobalVariables {
 
         coreVars.forEach(v => {
             const row = document.createElement('div');
-            row.textContent = `${v.name}: ${v.value}`;
+            if (v.name === "playerAmount") {
+                row.textContent = `There are ${v.value} players.`;
+            }
+            else if (v.name === "turnNumber") {
+                if (v.value === Infinity) row.textContent = `The game is over.`;
+                else row.textContent = `${v.value - 1} turn cycles have elapsed.`;
+            }
+            else if (v.name === "playerTurn") {
+                if (activeGameState.turnNumber === Infinity) {
+                    if (v.value === 0) row.textContent = `It's a draw!`;
+                    else if (v.value === Infinity) row.textContent = `Everyone wins!`;
+                    else if (v.value < 0) row.textContent = `Player ${Math.abs(v.value)} loses!`
+                    else row.textContent = `Player ${v.value} wins!`
+                }
+                else row.textContent = `It is Player ${v.value}'s turn.`;
+            }
+            else if (v.name === "turnPhase") {
+                if (activeGameState.turnNumber === Infinity) {
+                    row.textContent = "";
+                }
+                else if (activeGameState.turnPhase === Infinity) {
+                    row.textContent = "The current turn is ending. (If you're seeing this text for more than a split-second, either this game is laggy or there's a bug with BlueTile)";
+                }
+                else {
+                    row.textContent = `Turn Phase: ${v.value}`;
+                }
+            }
+            else row.textContent = `${v.name}: ${v.value}`;
             this.displayBox.appendChild(row);
         });
 
