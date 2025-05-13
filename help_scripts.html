@@ -361,7 +361,8 @@
         <strong>AND</strong>, <strong>OR</strong>, and <strong>XOR</strong> take two boolean arguments and return
         a boolean. AND returns <em>true</em> if both of its arguments are <em>true</em>, OR returns <em>true</em>
         if at least one of its arguments is <em>true</em>, and XOR returns <em>true</em> if exactly one (i.e. one but not both)
-        of its arguments is <em>true</em>.
+        of its arguments is <em>true</em>. (In case this comes up, I'll note here that if the first argument to AND returns false
+        or the first argument to OR returns true, the second argument won't be evaluated at all, since it wouldn't change what the AND or OR would return)
       </li>
       <li>
         There are several math operators that take two arguments. <strong>+</strong> adds the two arguments,
@@ -373,6 +374,13 @@
       <li>
         <strong>abs</strong> returns the absolute value of a number. <strong>sign</strong> returns the sign of a number:
         1 if the number is positive, -1 if the number is negative, 0 if the number is zero.
+      </li>
+      <li>
+        <strong>Random Integer</strong> and <strong>Random Decimal</strong> generate a random number between the two given
+        bounds (inclusive, so if the bounds are 0 and 10, Random Integer could generate any integer between 0 and 10, including
+        0 or 10). The number will always be an integer for Random Integer. For Random Decimal, it's a random real number,
+        which most likely <em>won't</em> be an integer (though, for those who know what this means, remember how floating point
+        precision works!).
       </li>
       <li>
         <strong>Concatenate Strings</strong> takes two strings and combines them into a single string, so

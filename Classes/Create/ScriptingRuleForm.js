@@ -1030,7 +1030,9 @@ class ScriptingRuleForm {
             else if (["Concatenate Strings", "Character of Strings"].indexOf(this.rule.type) !== -1) argumentType = "String";
             else argumentType = "Number";
             srdarg = document.createElement("p");
-            srdarg.innerHTML = "Left Argument:";
+            if (this.rule.type === "Character of String") srdarg.innerHTML = "String:";
+            else if (this.rule.type === "Random Integer" || this.rule.type === "Random Decimal") srdarg.innerHTML = "Minimum:";
+            else srdarg.innerHTML = "Left Argument:";
             if (!scriptingRuleChild(this.rule.leftArg, argumentType)) {
                 if (typeof this.rule.leftArg === "number") {
                     srdarg.innerHTML += " "
@@ -1089,7 +1091,9 @@ class ScriptingRuleForm {
                 srdiv.appendChild(srdarg);
             }
             srdarg = document.createElement("p");
-            srdarg.innerHTML = "Right Argument:";
+            if (this.rule.type === "Character of String") srdarg.innerHTML = "Index:";
+            else if (this.rule.type === "Random Integer" || this.rule.type === "Random Decimal") srdarg.innerHTML = "Maximum:";
+            else srdarg.innerHTML = "Right Argument:";
             if (!scriptingRuleChild(this.rule.rightArg, argumentType)) {
                 if (typeof this.rule.rightArg === "number") {
                     srdarg.innerHTML += " "
@@ -1580,7 +1584,7 @@ let SRF_AllRuleTypes = [
     "Player Turn", "Turn Phase", "Return Variable of Rule", "Return Variable of Object", "Return Global Variable", "Board Width",
     "Board Height", "Tile at Coordinates", "Pieces on Tile", "Tile Here", "All Pieces", "All Tiles", "Object ID", "Caller", "Create Tile Sprite", "Create Piece Sprite", "Choose Piece Type",
     "Choose Tile Type", "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable", "if-then-else", "Return at End",
-    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "!", "XOR", "+", "-", "*", "/", "%", "**", "abs", "sign", "Concatenate Strings", "Character of String",
+    "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "!", "XOR", "+", "-", "*", "/", "%", "**", "abs", "sign", "Random Integer", "Random Decimal", "Concatenate Strings", "Character of String",
     "Create an Array", "Array Length", "Add to Array", "Remove Last Element of Array", "Array Element at Index", "Array Index of Element",
     "Slice of String", "Slice of Array", "Other Caller", "Select Object", "Deselect Object", "Selected Objects", "Clear Selected Objects"
 ]
@@ -1594,7 +1598,7 @@ let SRF_RType_Anywhere = [
 // Scripting rules of these types return numbers.
 let SRF_RType_Number = [
     "X Coordinate", "Y Coordinate", "Piece Owner", "Turn Number", "Player Turn", "Turn Phase", "Board Width", "Board Height", "Object ID",
-    "+", "-", "*", "/", "%", "**", "abs", "sign", "Array Length", "Array Index of Element"
+    "+", "-", "*", "/", "%", "**", "abs", "sign", "Random Integer", "Random Decimal", "Array Length", "Array Index of Element"
 ]
 // Scripting rules of these types return booleans.
 let SRF_RType_Boolean = [
@@ -1665,7 +1669,7 @@ let SRF_RGroup_Reporters = [
 ]
 let SRF_RGroup_Operators = [
     "Repeat While", "==", ">", "<", ">=", "<=", "!=", "&&", "||", "XOR", "+", "-", "*", "/", "%", "**", "!", "abs", "sign",
-    "Concatenate Strings", "Character of String", "Slice of String",
+    "Concatenate Strings", "Character of String", "Random Integer", "Random Decimal", "Slice of String",
     "Edit Variable of Rule", "Edit Variable of Object", "Edit Global Variable"
 ]
 let SRF_RGroup_Arrays = [

@@ -105,4 +105,7 @@ May 10: Spent around 2 hours adding a title/description box to the game creator 
 
 May 12: Spent around 4.25 hours implementing hexagonal and triangular boards and saving of in-progress games.
 
-May 13: Spent around 3 hours adding board resizing during (rather than just at the start of) game creation and making some final touch-ups.
+May 13: Spent around 3 hours and 20 minutes adding board resizing during (rather than just at the start of) game creation,
+adding credits and buttons to download the example games to the help page, adding random number scripts into the
+scripting rule form, and making some final touch-ups to the example games, the menu screens, and so on (including giving
+the project the name "BlueTile").
