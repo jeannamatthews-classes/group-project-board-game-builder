@@ -96,7 +96,8 @@ class UIBoard {
               const toolbar = new Toolbar(toolbarArea, targetArea);
           
               toolbar.addTool("select", ["drag"]);
-              toolbar.addTool("zoom_in", ["zoom_out"]);
+              toolbar.addTool("zoom_in");
+              toolbar.addTool("zoom_out");
               toolbar.addTool("paint");
               toolbar.addTool("eyedropper");
               toolbar.addTool("disable");
@@ -122,6 +123,17 @@ class UIBoard {
               });
       
               toolbar.container.appendChild(toggleBtn);
+
+              const resizeBtn = document.createElement('div');
+              resizeBtn.classList.add('toggle-button');
+              resizeBtn.style.backgroundImage = `url(images/board_resize.png)`;
+              resizeBtn.title = 'Toggle Piece Visibility';
+      
+              resizeBtn.addEventListener('click', () => {
+                openEditor("boardResize");
+              });
+      
+              toolbar.container.appendChild(resizeBtn);
       
       
               // --- SPRITE PREVIEW BOX ---

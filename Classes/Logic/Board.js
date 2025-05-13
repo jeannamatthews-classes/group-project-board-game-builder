@@ -12,6 +12,7 @@ class Board {
         this.borderColor = 'rgba(0, 0, 0, 0.9)';
         this.borderWidth = '2px';
         this.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+        
         this.boardShape = boardShape;
 
         this.width = width;

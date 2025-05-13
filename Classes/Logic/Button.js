@@ -57,6 +57,7 @@ class Button {
     }
 
     buttonVisible() {
+        if (this.containerWidth < 0 || this.containerHeight < 0) return false;
         for (let s = 0; s < this.visibleRules.length; s++) {
             if (!(this.visibleRules[s].run())) return false;
         }

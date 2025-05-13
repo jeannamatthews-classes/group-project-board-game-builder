@@ -71,7 +71,7 @@ class GameElementContainer {
             this.buildScrollbars();
         }
 
-        document.body.appendChild(this.container);
+        if (containerWidth >= 0 && containerHeight >= 0) document.body.appendChild(this.container);
     }
 
     buildScrollbars() {

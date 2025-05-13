@@ -22,6 +22,7 @@ var typeEditor;
 var buttonEditor;
 var globalEditor;
 var titledescEditor;
+var boardResizeEditor;
 var minPlayers;
 var maxPlayers;
 var playerInventories;
@@ -63,12 +64,14 @@ function submitBoard(){
     buttonEditor.addButton(saveCodeButton, true);
     globalEditor = new UIGlobalEditor();
     titledescEditor = new UITitleDescEditor();
+    boardResizeEditor = new UIBoardResizeEditor();
     minPlayers = parseInt(minPlayersInput.value);
     maxPlayers = parseInt(maxPlayersInput.value);    
     setUpButtons()
     typeEditor.window.close();
     buttonEditor.window.close();
     titledescEditor.window.close();
+    boardResizeEditor.window.close();
     document.getElementById("main-screen").innerHTML = ''; 
 }
 
@@ -250,6 +253,12 @@ function openEditor(type) {
                 titledescEditor.createWindow();
             else
                 titledescEditor.window.container.style.zIndex  = ++__windowZIndex;
+            break;
+        case 'boardResize':
+            if (!boardResizeEditor.window)
+                boardResizeEditor.createWindow();
+            else
+                boardResizeEditor.window.container.style.zIndex  = ++__windowZIndex;
             break;
     }
 }
@@ -442,7 +451,7 @@ function loadGame() {
                                 nextRuleID = s.ruleID+1;
                         })
                     });
-                    if (buttonEditor.buttons.length === 0 || buttonEditor.buttons[0].specialButtonType !== "In-Progress Save Code") {
+                    if (buttonEditor.buttons.length === 0 || buttonEditor.buttons[0].button.specialButtonType !== "In-Progress Save Code") {
                         let saveCodeButton = new Button();
                         saveCodeButton.sprite = {
                             fillColor:  "#e7eed6",
@@ -468,11 +477,13 @@ function loadGame() {
                     title = game.title;
                     descriptionParagraphs = game.descriptionParagraphs;
                     titledescEditor = new UITitleDescEditor(title, descriptionParagraphs);
+                    boardResizeEditor = new UIBoardResizeEditor();
 
                     setUpButtons()
                     typeEditor.window.close();
                     buttonEditor.window.close();
                     titledescEditor.window.close();
+                    boardResizeEditor.window.close();
                     document.getElementById("main-screen").innerHTML = ''; 
                 }
 
@@ -485,6 +496,40 @@ function loadGame() {
         reader.readAsText(file);
     });
     input.click();
+}
+
+function resizeBoard(boardShape, width, height, minP, maxP) {
+    let newBoard = new Board(boardShape, width, height);
+    let oldBoard = boardEditor.board;
+    for (let w = 0; w < Math.min(oldBoard.width, newBoard.width); w++) {
+        for (let h = 0; h < Math.min(oldBoard.height, newBoard.height); h++) {
+            newBoard.tileArray[h][w] = oldBoard.tileArray[h][w];
+        }
+    }
+    for (let w = 0; w < newBoard.width; w++) {
+        for (let h = 0; h < newBoard.height; h++) {
+            newBoard.tileArray[h][w].objectID = h * newBoard.width + w;
+        }
+    }
+    for (let p = 0; p < pieceEditor.pieces.length; p++) {
+        if (pieceEditor.pieces[p].piece.xCoordinate >= newBoard.width || pieceEditor.pieces[p].piece.yCoordinate >= newBoard.height) {
+            pieceEditor.deletePiece(pieceEditor.pieces[p]);
+            p--;
+        }
+        else pieceEditor.pieces[p].objectID = newBoard.width * newBoard.height + p;
+    }
+    nextObjectID = newBoard.width * newBoard.height + pieceEditor.pieces.length;
+    if (boardEditor.window) boardEditor.window.close();
+    newBoard.containerWidth = oldBoard.containerWidth;
+    newBoard.containerHeight = oldBoard.containerHeight;
+    newBoard.containerLeft = oldBoard.containerLeft;
+    newBoard.containerTop = oldBoard.containerTop;
+    newBoard.borderColor = oldBoard.borderColor;
+    newBoard.borderWidth = oldBoard.borderWidth;
+    newBoard.backgroundColor = oldBoard.backgroundColor;
+    boardEditor = new UIBoard(newBoard);
+    openEditor("board");
+    minPlayers = minP; maxPlayers = maxP;
 }
 
 
