@@ -183,7 +183,7 @@ function showEndGameWindow(winner) {
     const resultText = document.createElement("p");
     resultText.style.fontSize = "28px";
     resultText.style.marginTop = "20px";
-    resultText.textContent = winner > 0 ? `WINNER: Player ${winner}` : `DRAW`;
+    resultText.textContent = winner === 0 ? `DRAW` : (winner < 0 ? `LOSER: Player ${Math.abs(winner)}` : `WINNER: Player ${winner}`);
     wrapper.appendChild(resultText);
 
     const playAgainBtn = document.createElement("button");

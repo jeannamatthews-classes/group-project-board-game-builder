@@ -290,7 +290,7 @@
       <li>
         <strong>Remove Piece</strong>: Removes this piece from the board.
         As of the current version of this project, pieces only exist on the board, so this removes this piece from the game entirely.
-        Does nothing if the owner of this scripting rule is not a piece type, since tiles can't be removed from the board.
+        This script type, along with other ones that mention pieces, only work if they're called by a piece (i.e. the script's owner is a piece type).
       </li>
       <li>
         There are two script types that change a piece's position. <strong>Move Piece</strong>'s
@@ -361,7 +361,8 @@
         <strong>AND</strong>, <strong>OR</strong>, and <strong>XOR</strong> take two boolean arguments and return
         a boolean. AND returns <em>true</em> if both of its arguments are <em>true</em>, OR returns <em>true</em>
         if at least one of its arguments is <em>true</em>, and XOR returns <em>true</em> if exactly one (i.e. one but not both)
-        of its arguments is <em>true</em>. (In case this comes up, I'll note here that if the first argument to AND returns false
+        of its arguments is <em>true</em>. If its condition to return <em>true</em> is not satisfied, that operator returns <em>false</em>.
+        (In case this comes up, I'll note here that if the first argument to AND returns false
         or the first argument to OR returns true, the second argument won't be evaluated at all, since it wouldn't change what the AND or OR would return)
       </li>
       <li>
@@ -552,8 +553,9 @@
       This is probably a good place to note that, if a scripting rule ever tries to access some value that's not defined
       (a Return Variable script on a variable name that hasn't been edited into existence yet, Array Element at Index on
       an index after the array's end, reporters like coordinates when run in a global script rather than on an object,
-      Argument script called when the trigger type has no arguments, etc.), the move is declared invalid,
-      as if the top-level script had returned false.
+      Argument script called when the trigger type has no arguments, etc.) or asks an object to do something it can't do
+      (such as Remove Piece called by something that's not a piece / piece type),
+      the move is declared invalid, as if the top-level script had returned false.
     </p>
 
     <h2>Buttons</h2>
