@@ -9,6 +9,8 @@ This **Board Game Builder** is a tool that allows users to design and play custo
 
 This project aims to produce a **general-purpose game builder** where users define rules using a simple **"if this then that"** scripting language. Completed games are saved as **JSON files** that can be reloaded for future play. Unlike other board game builders online that provide only the graphics and physics simulations, our project will have enforceable rulesets rather than relying on the honor system.
 
+The project has been released on Aaron's personal website: https://mathcookie17.github.io/BlueTile-BGB/.
+
 ---
 
 ## Team
